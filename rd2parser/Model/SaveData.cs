@@ -93,7 +93,26 @@ public class SaveData : Node
         return _variableRegistry.Get(name);
     }
 
-    
+    public List<string> GetPropertyNames()
+    {
+        return _propertyRegistry.GetNames();
+    }
+
+    public List<string> GetVariableNames()
+    {
+        return _variableRegistry.GetNames();
+    }
+
+    public List<string> GetPropertyTypes()
+    {
+        return _propertyRegistry.GetTypes();
+    }
+
+    public List<string> GetVariableTypes()
+    {
+        return _variableRegistry.GetTypes();
+    }
+
     private List<UObject> ReadObjects(Reader r, SerializationContext ctx)
     {
         List<UObject> result = new();
@@ -134,7 +153,7 @@ public class SaveData : Node
         return result;
     }
 
-    private (PropertyBag?, byte[]?) ReadProperties(Reader r, SerializationContext ctx, Node? parent)
+    private static (PropertyBag?, byte[]?) ReadProperties(Reader r, SerializationContext ctx, Node? parent)
     {
         byte[]? extraData = null;
         uint len = r.Read<uint>();

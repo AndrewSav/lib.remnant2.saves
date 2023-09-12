@@ -8,6 +8,8 @@ internal class Program
     // TODO: blood moon?
     // TODO: show Cass Shop example
     // TODO: edit Cass Shop example
+    // TODO: README - do not expect read json to work as is
+    // TODO: Replace ApplicationException in library
     // TODO: Nuget
 
     private static void Main()

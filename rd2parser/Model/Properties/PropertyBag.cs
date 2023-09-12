@@ -15,13 +15,13 @@ public class PropertyBag : Node
     }
 
     [SetsRequiredMembers]
-    public PropertyBag(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    public PropertyBag(Reader r, SerializationContext ctx, Node? parent) : this(parent)
     {
         Properties = new();
         int i = 0;
         while (true)
         {
-            Property p = new(r, ctx, parent);
+            Property p = new(r, ctx, this);
             p.Path[^1].Index = i;
             if (p.Name.Name == "None")
             {

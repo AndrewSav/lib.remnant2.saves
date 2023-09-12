@@ -24,8 +24,8 @@ public class TextProperty : Node
         HistoryType = r.Read<byte>();
         Value = HistoryType switch
         {
-            0 => new TextPropertyData0(r, parent),
-            255 => new TextPropertyData255(r, parent),
+            0 => new TextPropertyData0(r, this),
+            255 => new TextPropertyData255(r, this),
             _ => throw new ApplicationException("unsupported history type"),
         };
     }

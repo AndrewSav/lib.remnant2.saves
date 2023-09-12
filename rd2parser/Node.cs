@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text;
+using Newtonsoft.Json;
 using rd2parser.Model;
 
 namespace rd2parser;
@@ -28,6 +29,22 @@ public abstract class Node
                 break;
             case FName:
                 break;
+        }
+    }
+
+    [JsonIgnore]
+    public string DisplayPath
+    {
+        get
+        {
+            StringBuilder sb = new();
+            foreach (Segment segment in Path)
+            {
+                string name = segment.Name == null ?"" : $"({segment.Name})";
+                string index = segment.Index == null ? "" : $"[{segment.Index}]";
+                sb.Append($"{segment.Type}{name}{index}.");
+            }
+            return sb.ToString()[..(sb.Length - 1)];
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿namespace rd2parser;
-public class ItemRegistry<T>
+public class ItemRegistry<T> where T : Node
 {
     private readonly Dictionary<string,List<T>> _registry = new ();
 
@@ -30,5 +30,47 @@ public class ItemRegistry<T>
             return null;
         }
         return new List<T>(_registry[name]);
+    }
+
+    public List<string> GetTypes()
+    {
+        List<string> type = new();
+        foreach (KeyValuePair<string, List<T>> registryItem in _registry)
+        {
+            foreach (T item in registryItem.Value)
+            {
+                foreach (Segment s in item.Path)
+                {
+                    if (!type.Contains(s.Type))
+                    {
+                        type.Add(s.Type);
+                    }
+                }
+            }
+        }
+        return type;
+    }
+
+    public List<string> GetNames()
+    {
+        List<string> name = new();
+
+        foreach (KeyValuePair<string, List<T>> registryItem in _registry)
+        {
+            foreach (T item in registryItem.Value)
+            {
+                foreach(Segment s in item.Path) 
+                { 
+                    if (s.Name != null)
+                    {
+                        if (!name.Contains(s.Name))
+                        {
+                            name.Add(s.Name);
+                        }
+                    }
+                }
+            }
+        }
+        return name;
     }
 }
