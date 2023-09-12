@@ -30,7 +30,7 @@ public class SaveData : Node
     }
 
     [SetsRequiredMembers]
-    public SaveData(Reader r, Node? parent = null, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true) :
+    public SaveData(Reader r, Node? parent = null, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true, SerializationContext? oldCtx = null) :
         base(parent, parent?.Path ?? new())
     {
         Path.Add(new(){Type = "SaveData"});
@@ -67,13 +67,20 @@ public class SaveData : Node
             {
                 throw new ApplicationException("unexpected object index");
             }
-            (Objects[objIndex].Properties, Objects[objIndex].ExtraPropertiesData) = ReadProperties(r, ctx);
+            (Objects[objIndex].Properties, Objects[objIndex].ExtraPropertiesData) = ReadProperties(r, ctx,Objects[objIndex]);
             Objects[objIndex].IsActor = r.Read<byte>();
             if (Objects[objIndex].IsActor != 0)
                 Objects[objIndex].Components = ReadComponents(r, ctx);
         }
+
         _propertyRegistry = ctx.PropertyRegistry;
         _variableRegistry = ctx.VariableRegistry;
+
+        if (oldCtx != null)
+        {
+            oldCtx.PropertyRegistry.Add(_propertyRegistry);
+            oldCtx.VariableRegistry.Add(_variableRegistry);
+        }
     }
 
     public List<Property>? GetProperty(string name)
@@ -95,7 +102,6 @@ public class SaveData : Node
         for (int i = 0; i < numUniqueObjects; i++)
         {
             UObject o = ReadObject(r, ctx, i);
-            o.Parent = this;
             result.Add(o);
         }
 
@@ -128,7 +134,7 @@ public class SaveData : Node
         return result;
     }
 
-    private (PropertyBag?, byte[]?) ReadProperties(Reader r, SerializationContext ctx)
+    private (PropertyBag?, byte[]?) ReadProperties(Reader r, SerializationContext ctx, Node? parent)
     {
         byte[]? extraData = null;
         uint len = r.Read<uint>();
@@ -136,7 +142,7 @@ public class SaveData : Node
         PropertyBag? result = null;
         if (len > 0)
         {
-            result = new PropertyBag(r,ctx, this);
+            result = new PropertyBag(r,ctx, parent);
             // After each property we can always observe either 4 ot 8 zeroes
             if (r.Position != (int)(start + len))
             {

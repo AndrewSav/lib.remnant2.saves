@@ -22,14 +22,14 @@ public class Actor : Node
 
     [SetsRequiredMembers]
 
-    public Actor(Reader r, Node? parent) : this(parent)
+    public Actor(Reader r, SerializationContext ctx, Node? parent) : this(parent)
     {
         HasTransform = r.Read<uint>();
         if (HasTransform != 0)
         {
             Transform = r.Read<FTransform>();
         }
-        Archive =  new SaveData(r,this, false, false);
+        Archive =  new SaveData(r,this, false, false, ctx);
     }
 
     public void WriteNonDynamic(Writer w)

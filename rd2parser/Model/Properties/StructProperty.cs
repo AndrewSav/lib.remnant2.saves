@@ -52,9 +52,9 @@ public class StructProperty : Node
 
         if (ctx.ClassPath == "/Game/_Core/Blueprints/Base/BP_RemnantSaveGameProfile")
         {
-            return new SaveData(persistenceReader, parent, true, false);
+            return new SaveData(persistenceReader, parent, true, false, ctx);
         }
-        return new PersistenceContainer(persistenceReader, parent);
+        return new PersistenceContainer(persistenceReader, ctx,parent);
     }
 
     public void Write(Writer w, SerializationContext ctx)

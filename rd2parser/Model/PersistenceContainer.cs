@@ -22,7 +22,7 @@ public class PersistenceContainer : Node
     }
 
     [SetsRequiredMembers]
-    public PersistenceContainer(Reader r, Node? parent) : this(parent)
+    public PersistenceContainer(Reader r, SerializationContext ctx, Node? parent) : this(parent)
     {
         Version = r.Read<uint>();
         int indexOffset = r.Read<int>();
@@ -51,7 +51,7 @@ public class PersistenceContainer : Node
             r.Position = info.Offset;
             byte[] actorBytes = r.ReadBytes(info.Size);
             Reader actorReader = new(actorBytes);
-            Actor a = new(actorReader, this);
+            Actor a = new(actorReader, ctx, this);
             a.Path[^1].Index = index;
             Actors.Add(new KeyValuePair<ulong, Actor>(info.UniqueID, a));
         }

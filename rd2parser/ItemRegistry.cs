@@ -12,6 +12,17 @@ public class ItemRegistry<T>
         _registry[name].Add(item);
     }
 
+    public void Add(ItemRegistry<T> registry)
+    {
+        foreach (KeyValuePair<string, List<T>> registryItem in registry._registry)
+        {
+            foreach (T item in registryItem.Value)
+            {
+                Add(registryItem.Key, item);
+            }
+        }
+    }
+
     public List<T>? Get(string name)
     {
         if (!_registry.ContainsKey(name))
