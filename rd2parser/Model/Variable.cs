@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace rd2parser.Model;
-public class Variable
+public class Variable : Node
 {
     public required FName Name;
     public required string Type;
@@ -19,11 +18,15 @@ public class Variable
 
     public Variable()
     {
+    }
 
+    public Variable(Node? parent,  string name) : base(parent, new List<Segment>(parent!.Path))
+    {
+        Path.Add(new() { Name = name, Type = "Variable" });
     }
 
     [SetsRequiredMembers]
-    public Variable(Reader r, SerializationContext ctx)
+    public Variable(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
         FName name = new(r, ctx.NamesTable);
         if (name.Name == "None")
@@ -32,6 +35,7 @@ public class Variable
         }
         byte enumVal = r.Read<byte>();
         Name = name;
+        Path.Add(new() { Name = Name.Name, Type = "Variable" });
         Type = _varTypeNames[enumVal];
     
         switch (Type)
@@ -51,6 +55,7 @@ public class Variable
             default:
                 throw new ApplicationException("unknown variable type");
         }
+        ctx.VariableRegistry.Add(Name.Name, this);
     }
 
     public void Write(Writer w, SerializationContext ctx)

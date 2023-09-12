@@ -1,10 +1,11 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using rd2parser.Model.Memory;
 
 namespace rd2parser.Model;
 
-public class PersistenceContainer
+public class PersistenceContainer : Node
 {
     public required uint Version;
     public required List<ulong> Destroyed;
@@ -15,8 +16,13 @@ public class PersistenceContainer
 
     }
 
+    public PersistenceContainer(Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    {
+        Path.Add(new() { Type = "PersistenceContainer" });
+    }
+
     [SetsRequiredMembers]
-    public PersistenceContainer(Reader r)
+    public PersistenceContainer(Reader r, Node? parent) : this(parent)
     {
         Version = r.Read<uint>();
         int indexOffset = r.Read<int>();
@@ -38,12 +44,16 @@ public class PersistenceContainer
         }
 
         Actors = new();
-        foreach (var info in actorInfo)
+        for (int index = 0; index < actorInfo.Count; index++)
         {
+            var info = actorInfo[index];
+            //TODO: parent
             r.Position = info.Offset;
             byte[] actorBytes = r.ReadBytes(info.Size);
             Reader actorReader = new(actorBytes);
-            Actors.Add(new KeyValuePair<ulong, Actor>(info.UniqueID, new Actor(actorReader)));
+            Actor a = new(actorReader, this);
+            a.Path[^1].Index = index;
+            Actors.Add(new KeyValuePair<ulong, Actor>(info.UniqueID, a));
         }
 
         r.Position = dynamicOffset;

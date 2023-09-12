@@ -1,11 +1,23 @@
-﻿using rd2parser.Model.Properties;
+﻿using System.Diagnostics.CodeAnalysis;
+using rd2parser.Model.Properties;
 
 namespace rd2parser.Model;
 
-public class Component
+public class Component : Node
 {
     public required string ComponentKey;
-    public List<KeyValuePair<string, Property>>? Properties;
+    public PropertyBag? Properties;
     public Variables? Variables;
     public byte[]? ExtraComponentsData;
+
+    public Component()
+    {
+    }
+
+    [SetsRequiredMembers]
+    public Component(Node? parent, string componentKey) : base(parent, new List<Segment>(parent!.Path))
+    {
+        ComponentKey = componentKey;
+        Path.Add(new() { Name = componentKey, Type = "Component" });
+    }
 }

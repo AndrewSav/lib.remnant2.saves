@@ -3,18 +3,24 @@ using rd2parser.Model.Properties;
 
 namespace rd2parser.Model;
 
-public class UObject
+public class UObject : Node
 {
     public byte WasLoadedByte;
     public string? ObjectPath;
     public UObjectLoadedData? LoadedData;
-    public List<KeyValuePair<string, Property>>? Properties;
+    public PropertyBag? Properties;
     public byte[]? ExtraPropertiesData;
     public List<Component>? Components;
     public byte IsActor;
-    //public int Index;
-    [JsonIgnore]
-    public List<UObject>? Parent;
+
+    public UObject()
+    {
+    }
+
+    public UObject(Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    {
+        Path.Add(new() { Type = "UObject" });
+    }
 
     public int ObjectIndex
     {
@@ -25,7 +31,7 @@ public class UObject
                 throw new InvalidOperationException("UObject has no parent");
             }
 
-            return Parent.FindIndex(x => x == this);
+            return (Parent as SaveData)!.Objects.FindIndex(x => x == this);
         } 
     }
 
@@ -42,9 +48,9 @@ public class UObject
     {
         get
         {
-            if (Properties is { Count: > 0 } && Properties[0].Key == "Key")
+            if (Properties is { Properties.Count: > 0 } && Properties.Properties[0].Key == "Key")
             {
-                return Properties[0].ToString();
+                return Properties.Properties[0].ToString();
             }
 
             return null;
@@ -57,12 +63,12 @@ public class UObject
     {
         get
         {
-            if (Properties is not { Count: > 1 })
+            if (Properties is not { Properties.Count: > 1 })
             {
                 return null;
             }
 
-            KeyValuePair<string, Property> property = Properties[1];
+            KeyValuePair<string, Property> property = Properties.Properties[1];
             if (property.Key != "Blob")
             {
                 return null;

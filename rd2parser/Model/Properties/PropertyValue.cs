@@ -10,7 +10,7 @@ public class PropertyValue
     public byte? NoRawByte;
 
     // This is also called from MapProperty and ArrayProperty constructor
-    public static PropertyValue ReadPropertyValue(Reader r, SerializationContext ctx, string type, bool isRaw = true)
+    public static PropertyValue ReadPropertyValue(Reader r, SerializationContext ctx, string type, Node? parent, bool isRaw = true)
     {
         return type switch
         {
@@ -25,14 +25,15 @@ public class PropertyValue
             "StrProperty" or "SoftClassPath" or "SoftObjectProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.ReadFString() },
             "BoolProperty" => new PropertyValue { Value = r.Read<byte>(), NoRawByte = isRaw ? null : r.Read<byte>() },
             "NameProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new FName(r, ctx.NamesTable) },
-            "ByteProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<byte>() : new ByteProperty(r, ctx) },
-            "StructProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<FGuid>() : new StructProperty(r, ctx) },
-            "ObjectProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new ObjectProperty(r, ctx) },
-            "EnumProperty" => new PropertyValue { NoRawByte = null, Value = new EnumProperty(r, ctx) },
+            
+            "ByteProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<byte>() : new ByteProperty(r, ctx, parent) },
+            "StructProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<FGuid>() : new StructProperty(r, ctx, parent) },
+            "ObjectProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new ObjectProperty(r, ctx, parent) },
+            "EnumProperty" => new PropertyValue { NoRawByte = null, Value = new EnumProperty(r, ctx, parent) },
             //if (isRaw) { throw new ApplicationException("Raw map properties are not supported"); }
-            "MapProperty" => new PropertyValue { NoRawByte = null, Value = new MapProperty(r, ctx) },
-            "TextProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r) },
-            "ArrayProperty" => new PropertyValue { NoRawByte = null, Value = ReadArrayProperty(r, ctx) },
+            "MapProperty" => new PropertyValue { NoRawByte = null, Value = new MapProperty(r, ctx, parent) },
+            "TextProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r, parent) },
+            "ArrayProperty" => new PropertyValue { NoRawByte = null, Value = ReadArrayProperty(r, ctx, parent) },
             _ => throw new ApplicationException($"unknown property type {type}"),
         };
     }
@@ -45,14 +46,14 @@ public class PropertyValue
         }
         return (T)Convert.ChangeType(value!, typeof(T), CultureInfo.InvariantCulture);
     }
-    private static object ReadArrayProperty(Reader r, SerializationContext ctx)
+    private static object ReadArrayProperty(Reader r, SerializationContext ctx, Node? parent)
     {
         FName elementType = new(r, ctx.NamesTable);
         byte unknown = r.Read<byte>();
         uint count = r.Read<uint>();
         return elementType.Name == "StructProperty"
-            ? new ArrayStructProperty(r, ctx, count, unknown,elementType)
-            : new ArrayProperty(r, ctx, count, unknown, elementType);
+            ? new ArrayStructProperty(r, ctx, count, unknown,elementType, parent)
+            : new ArrayProperty(r, ctx, count, unknown, elementType, parent);
     }
 
     public static void WritePropertyValue(Writer w, SerializationContext ctx, object? value, string type, byte? noRow = null)

@@ -1,4 +1,5 @@
 ﻿using rd2parser.Model;
+using rd2parser.Model.Properties;
 
 namespace rd2parser;
 
@@ -11,8 +12,12 @@ public class SerializationContext
     public required string? ClassPath;
     // This is used so we could populate ObjectProperty with object path for display purposes
     public List<UObject>? Objects;
-    private readonly Dictionary<string, int> _namesTableIndex = new();
 
+    public ItemRegistry<Property> PropertyRegistry = new();
+    public ItemRegistry<Variable> VariableRegistry = new();
+
+    private readonly Dictionary<string, int> _namesTableIndex = new();
+    
     public int GetNamesTableIndex(string name)
     {
         if (_namesTableIndex.TryGetValue(name, out int index))

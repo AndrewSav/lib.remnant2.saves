@@ -2,27 +2,34 @@
 
 namespace rd2parser.Model.Properties;
 
-public class ArrayProperty
+public class ArrayProperty : Node
 {
-    public required byte Unknown;
     public required FName ElementType;
     public required List<object?> Items;
+    public required byte Unknown;
 
-    public ArrayProperty()
+    public ArrayProperty(Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
-
+        Path.Add(new Segment { Type = "ArrayProperty" });
     }
 
     [SetsRequiredMembers]
-    public ArrayProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType)
+    public ArrayProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType,
+        Node? parent) : this(parent)
     {
         Unknown = unknown;
         ElementType = elementType;
         Items = new List<object?>();
         for (int i = 0; i < count; i++)
         {
-            Items.Add(PropertyValue.ReadPropertyValue(r, ctx, ElementType.Name).Value);
+            object o = PropertyValue.ReadPropertyValue(r, ctx, ElementType.Name, this).Value!;
+            AddIndexToChild(o, i);
+            Items.Add(o);
         }
+    }
+
+    public ArrayProperty()
+    {
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -30,9 +37,6 @@ public class ArrayProperty
         ElementType.Write(w, ctx);
         w.Write(Unknown);
         w.Write(Items.Count);
-        foreach (object? item in Items)
-        {
-            PropertyValue.WritePropertyValue(w,ctx,item,ElementType.Name);
-        }
+        foreach (object? item in Items) PropertyValue.WritePropertyValue(w, ctx, item, ElementType.Name);
     }
 }

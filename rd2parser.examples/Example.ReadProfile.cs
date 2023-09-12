@@ -13,9 +13,11 @@ internal partial class Example
 
         SaveFile sf = SaveFile.Read(path);
 
-        KeyValuePair<string, Property> charactersProp = sf.SaveData.Objects[0].Properties!.Single(x => x.Key == "Characters");
-        KeyValuePair<string, Property> activeProp = sf.SaveData.Objects[0].Properties!.Single(x => x.Key == "ActiveCharacterIndex");
-        //KeyValuePair<string, Property> awardedProp = sf.SaveData.Objects[0].Properties!.Single(x => x.Key == "AccountAwards");
+        //sf.GetProperty()
+
+        KeyValuePair<string, Property> charactersProp = sf.SaveData.Objects[0].Properties!.Properties.Single(x => x.Key == "Characters");
+        KeyValuePair<string, Property> activeProp = sf.SaveData.Objects[0].Properties!.Properties.Single(x => x.Key == "ActiveCharacterIndex");
+        //KeyValuePair<string, Property> awardedProp = sf.SaveData.Objects[0].Properties!.Properties.Single(x => x.Key == "AccountAwards");
 
         ArrayProperty ap = (charactersProp.Value.Value as ArrayProperty)!;
         List<ObjectProperty> op = ap.Items.Select(x => (ObjectProperty)x!).ToList();
@@ -38,15 +40,15 @@ internal partial class Example
             if (op[i].Object == null) continue;
 
             Console.WriteLine($"Your {numbers[charCount]} character (save slot {i}) has:");
-            Property traitRank = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "TraitRank").Value;
-            Property archetype = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "Archetype").Value;
-            Property secondaryArchetype = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "SecondaryArchetype").Value;
-            Property gender = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "Gender").Value;
-            Property characterType = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "CharacterType").Value;
-            Property characterData = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "CharacterData").Value;
-            Property powerLevel = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "PowerLevel").Value;
-            Property itemLevel = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "ItemLevel").Value;
-            Property lastSavedTraitPoints = op[i].Object!.Properties!.SingleOrDefault(x => x.Key == "LastSavedTraitPoints").Value;
+            Property traitRank = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "TraitRank").Value;
+            Property archetype = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "Archetype").Value;
+            Property secondaryArchetype = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "SecondaryArchetype").Value;
+            Property gender = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "Gender").Value;
+            Property characterType = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "CharacterType").Value;
+            Property characterData = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "CharacterData").Value;
+            Property powerLevel = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "PowerLevel").Value;
+            Property itemLevel = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "ItemLevel").Value;
+            Property lastSavedTraitPoints = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "LastSavedTraitPoints").Value;
             
             if (powerLevel != null)
             {
@@ -94,17 +96,17 @@ internal partial class Example
             SaveData inner = (SaveData)sp.Value!;
             UObject master =  inner.Objects.Single(x => x.Name == "Character_Master_Player_C");
             Component inventory = master.Components!.Single(x => x.ComponentKey == "Inventory");
-            Property items = inventory.Properties!.Single(x => x.Key == "Items").Value;
+            Property items = inventory.Properties!.Properties.Single(x => x.Key == "Items").Value;
             ArrayStructProperty asp = (ArrayStructProperty)items.Value!;
             Console.WriteLine("  You have following inventory:");
             
             foreach (object? o in asp.Items)
             {
-                List<KeyValuePair<string, Property>> itemProperties = (List<KeyValuePair<string, Property>>)o!;
+                PropertyBag itemProperties = (PropertyBag)o!;
 
-                var item = itemProperties.Single(x => x.Key == "ItemBP").Value;
-                var hidden = itemProperties.Single(x => x.Key == "Hidden").Value;
-                var slot = itemProperties.Single(x => x.Key == "EquipmentSlotIndex").Value;
+                var item = itemProperties.Properties.Single(x => x.Key == "ItemBP").Value;
+                var hidden = itemProperties.Properties.Single(x => x.Key == "Hidden").Value;
+                var slot = itemProperties.Properties.Single(x => x.Key == "EquipmentSlotIndex").Value;
 
                 if ((byte)hidden.Value! != 0)
                 {
@@ -122,18 +124,18 @@ internal partial class Example
             }
 
             Component traitsComponent = master.Components!.Single(x => x.ComponentKey == "Traits");
-            Property traits = traitsComponent.Properties!.Single(x => x.Key == "Traits").Value;
+            Property traits = traitsComponent.Properties!.Properties.Single(x => x.Key == "Traits").Value;
             ArrayStructProperty aspTraits = (ArrayStructProperty)traits.Value!;
             Console.WriteLine("  You have following Traits:");
 
             foreach (object? o in aspTraits.Items)
             {
-                List<KeyValuePair<string, Property>> traitProperties = (List<KeyValuePair<string, Property>>)o!;
+                PropertyBag traitProperties = (PropertyBag)o!;
 
-                var item = traitProperties.Single(x => x.Key == "TraitBP").Value;
-                var transient = traitProperties.Single(x => x.Key == "Transient").Value;
-                var slot = traitProperties.Single(x => x.Key == "SlotIndex").Value;
-                var level = traitProperties.Single(x => x.Key == "Level").Value;
+                var item = traitProperties.Properties.Single(x => x.Key == "TraitBP").Value;
+                var transient = traitProperties.Properties.Single(x => x.Key == "Transient").Value;
+                var slot = traitProperties.Properties.Single(x => x.Key == "SlotIndex").Value;
+                var level = traitProperties.Properties.Single(x => x.Key == "Level").Value;
 
                 if ((byte)transient.Value! != 0)
                 {

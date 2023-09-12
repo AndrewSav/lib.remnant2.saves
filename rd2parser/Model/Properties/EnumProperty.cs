@@ -2,20 +2,26 @@
 
 namespace rd2parser.Model.Properties;
 
-public class EnumProperty
+public class EnumProperty : Node
 {
     public required FName EnumType;
     public required byte Unknown;
     public required FName EnumValue;
 
+    public EnumProperty(Node? parent, string name) : base(parent, new List<Segment>(parent!.Path))
+    {
+        Path.Add(new() { Name = name, Type = "EnumProperty" });
+    }
+
     public EnumProperty()
     {
-
     }
+
     [SetsRequiredMembers]
-    public EnumProperty(Reader r, SerializationContext ctx)
+    public EnumProperty(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
         EnumType = new(r, ctx.NamesTable);
+        Path.Add(new() { Name = EnumType.Name, Type = "EnumProperty" });
         Unknown = r.Read<byte>();
         EnumValue = new(r, ctx.NamesTable);
     }

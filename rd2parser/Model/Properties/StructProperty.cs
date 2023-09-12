@@ -5,7 +5,7 @@ using rd2parser.IO;
 
 namespace rd2parser.Model.Properties;
 
-public class StructProperty
+public class StructProperty : Node
 {
     public required FName Type;
     public required FGuid Guid;
@@ -14,20 +14,24 @@ public class StructProperty
 
     public StructProperty()
     {
+    }
 
+    public StructProperty(Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    {
+        Path.Add(new() { Type = "StructProperty" });
     }
 
     [SetsRequiredMembers]
-    public StructProperty(Reader r, SerializationContext ctx)
+    public StructProperty(Reader r, SerializationContext ctx, Node? parent) : this(parent)
     {
         Type = new(r, ctx.NamesTable);
         Guid = r.Read<FGuid>();
         Unknown = r.Read<byte>();
-        Value = ReadStructPropertyValue(r, ctx, Type.Name);
+        Value = ReadStructPropertyValue(r, ctx, Type.Name, this);
     }
 
     // Also called by ArrayStructProperty constructor
-    public static object? ReadStructPropertyValue(Reader r, SerializationContext ctx, string type)
+    public static object? ReadStructPropertyValue(Reader r, SerializationContext ctx, string type, Node parent)
     {
         return type switch
         {
@@ -36,11 +40,11 @@ public class StructProperty
             "Guid" => r.Read<FGuid>(),
             "Vector" => r.Read<FVector>(),
             "DateTime" => new DateTime(r.Read<long>()),
-            "PersistenceBlob" => ReadPersistenceBlob(r, ctx),
-            _ => r.ReadProperties(ctx),
+            "PersistenceBlob" => ReadPersistenceBlob(r, ctx, parent),
+            _ => new PropertyBag(r,ctx, parent),
         };
     }
-    private static object ReadPersistenceBlob(ReaderBase r, SerializationContext ctx)
+    private static object ReadPersistenceBlob(ReaderBase r, SerializationContext ctx, Node parent)
     {
         int persistenceSize = r.Read<int>();
         byte[] bytes = r.ReadBytes(persistenceSize);
@@ -48,9 +52,9 @@ public class StructProperty
 
         if (ctx.ClassPath == "/Game/_Core/Blueprints/Base/BP_RemnantSaveGameProfile")
         {
-            return new SaveData(persistenceReader, true, false);
+            return new SaveData(persistenceReader, parent, true, false);
         }
-        return new PersistenceContainer(persistenceReader);
+        return new PersistenceContainer(persistenceReader, parent);
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -85,7 +89,7 @@ public class StructProperty
                 WritePersistenceBlob(w, ctx, value!);
                 break;
             default:
-                w.WriteProperties(ctx, (List<KeyValuePair<string, Property>>)value!);
+                ((PropertyBag)value!).Write(w,ctx);
                 break;
         }
     }

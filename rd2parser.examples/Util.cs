@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 
 namespace rd2parser.examples;
@@ -9,10 +8,11 @@ public class Utils
     private static readonly Guid SavedGamesGuid = new("4C5C32FF-BB9D-43b0-B5B4-2D72E54EAAA4");
 
     [DllImport("shell32.dll")]
-    static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken,
+    private static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags,
+        IntPtr hToken,
         out IntPtr pszPath);
 
-    static string GetSavePath()
+    private static string GetSavePath()
     {
         IntPtr path = IntPtr.Zero;
 

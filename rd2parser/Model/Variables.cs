@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 
 namespace rd2parser.Model;
 
-public class Variables
+public class Variables : Node
 {
     public required FName Name;
     public required ulong Unknown;
@@ -13,17 +12,24 @@ public class Variables
     {
     }
 
+    public Variables(Node? parent, string name) : base(parent, new List<Segment>(parent!.Path))
+    {
+        Path.Add(new() { Name = name, Type = "Variables" });
+    }
+
     [SetsRequiredMembers]
-    public Variables(Reader r, SerializationContext ctx)
+    public Variables(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
         Properties = new();
         Name = new FName(r, ctx.NamesTable);
+        Path.Add(new() { Name = Name.Name, Type = "Variables" });
         Unknown = r.Read<ulong>();
         int len = r.Read<int>();
 
         for (int i = 0; i < len; i++)
         {
-            Variable v = new(r, ctx);
+            Variable v = new(r, ctx,this);
+            v.Path[^1].Index = i;
             Properties.Add(new KeyValuePair<string, Variable>(v.Name.Name,v));
         }
     }

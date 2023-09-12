@@ -3,7 +3,7 @@ using rd2parser.Model.Memory;
 
 namespace rd2parser.Model.Properties;
 
-public class ArrayStructProperty
+public class ArrayStructProperty : Node
 {
     public required byte Unknown;
     public required FName OuterElementType;
@@ -17,13 +17,14 @@ public class ArrayStructProperty
     public required byte Unknown2;
     public required List<object?> Items;
 
-    public ArrayStructProperty()
+    public ArrayStructProperty(Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
-
+        Path.Add(new() { Type = "ArrayStructProperty" });
     }
 
+
     [SetsRequiredMembers]
-    public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType)
+    public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, Node? parent) : this(parent)
     {
         Unknown = unknown;
         OuterElementType = elementType;
@@ -40,8 +41,14 @@ public class ArrayStructProperty
 
         for (int i = 0; i < Count; i++)
         {
-            Items.Add(StructProperty.ReadStructPropertyValue(r, ctx, ElementType.Name));
+            object o = StructProperty.ReadStructPropertyValue(r, ctx, ElementType.Name, this)!;
+            AddIndexToChild(o,i);
+            Items.Add(o);
         }
+    }
+
+    public ArrayStructProperty()
+    {
     }
 
     public void Write(Writer w, SerializationContext ctx)

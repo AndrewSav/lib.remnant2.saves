@@ -2,21 +2,23 @@
 
 namespace rd2parser.Model.Properties;
 
-public class ByteProperty
+public class ByteProperty : Node
 {
     public required FName EnumName;
     public required byte Unknown;
     public required byte? EnumByte;
     public required FName? EnumValue;
 
-    public ByteProperty()
+    public ByteProperty(Node? parent, string name) : base(parent, new List<Segment>(parent!.Path))
     {
-
+        Path.Add(new() { Name = name, Type = "ByteProperty" });
     }
+
     [SetsRequiredMembers]
-    public ByteProperty(Reader r, SerializationContext ctx)
+    public ByteProperty(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
         EnumName = new(r, ctx.NamesTable);
+        Path.Add(new() { Name = EnumName.Name, Type = "ByteProperty" });
         Unknown = r.Read<byte>();
 
         if (EnumName.Name == "None")
@@ -27,6 +29,10 @@ public class ByteProperty
         {
             EnumValue = new(r, ctx.NamesTable);
         }
+    }
+
+    public ByteProperty()
+    {
     }
 
     public void Write(Writer w, SerializationContext ctx)

@@ -2,7 +2,7 @@
 
 namespace rd2parser.Model.Properties;
 
-public class Property
+public class Property : Node
 {
     public required FName Name;
     public uint? Index;
@@ -15,10 +15,15 @@ public class Property
     {
 
     }
+    public Property(Node? parent, string name) : base(parent, parent?.Path ?? new())
+    {
+        Path.Add(new() { Name = name, Type = "Property" });
+    }
     [SetsRequiredMembers]
-    public Property(Reader r, SerializationContext ctx)
+    public Property(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
         Name = new(r, ctx.NamesTable);
+        Path.Add(new() { Name = Name.Name, Type = "Property" });
         if (Name.Name == "None")
         {
             return;
@@ -35,10 +40,12 @@ public class Property
         //}
         //else
         //{
-        PropertyValue pv = PropertyValue.ReadPropertyValue(r, ctx, Type.Name, false);
+        PropertyValue pv = PropertyValue.ReadPropertyValue(r, ctx, Type.Name, this,false);
         NoRaw = pv.NoRawByte;
         Value = pv.Value;
         //}
+
+        ctx.PropertyRegistry.Add(Name.Name, this);
     }
 
     public override string? ToString()

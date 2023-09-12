@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using rd2parser.Model.Memory;
 
 namespace rd2parser.IO
 {

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using rd2parser.Model.Memory;
 using rd2parser.Model.Properties;
 
@@ -7,7 +8,7 @@ namespace rd2parser.Model;
 // The members order roughly correspond to the order of data in a save file
 // after objects offset object properties and components go, one set for
 // each object in the following objects table
-public class SaveData
+public class SaveData : Node
 {
     public PackageVersion? PackageVersion;
     public FTopLevelAssetPath? SaveGameClassPath;
@@ -17,13 +18,22 @@ public class SaveData
     public required List<UObject> Objects;
     public required List<string> NamesTable;
 
-    public SaveData()
+    [JsonIgnore]
+    private readonly ItemRegistry<Property> _propertyRegistry;
+    [JsonIgnore]
+    private readonly ItemRegistry<Variable> _variableRegistry;
+
+    public SaveData() :base(null, new())
     {
+        _propertyRegistry = new();
+        _variableRegistry = new();
     }
 
     [SetsRequiredMembers]
-    public SaveData(Reader r, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true)
+    public SaveData(Reader r, Node? parent = null, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true) :
+        base(parent, parent?.Path ?? new())
     {
+        Path.Add(new(){Type = "SaveData"});
         if (hasPackageVersion) PackageVersion = r.Read<PackageVersion>();
 
         if (hasTopLevelAssetPath) SaveGameClassPath = new FTopLevelAssetPath(r);
@@ -62,9 +72,22 @@ public class SaveData
             if (Objects[objIndex].IsActor != 0)
                 Objects[objIndex].Components = ReadComponents(r, ctx);
         }
+        _propertyRegistry = ctx.PropertyRegistry;
+        _variableRegistry = ctx.VariableRegistry;
     }
 
-    private static List<UObject> ReadObjects(Reader r, SerializationContext ctx)
+    public List<Property>? GetProperty(string name)
+    {
+        return _propertyRegistry.Get(name);
+    }
+
+    public List<Variable>? GetVariable(string name)
+    {
+        return _variableRegistry.Get(name);
+    }
+
+    
+    private List<UObject> ReadObjects(Reader r, SerializationContext ctx)
     {
         List<UObject> result = new();
         int numUniqueObjects = r.Read<int>();
@@ -72,41 +95,48 @@ public class SaveData
         for (int i = 0; i < numUniqueObjects; i++)
         {
             UObject o = ReadObject(r, ctx, i);
-            o.Parent = result;
+            o.Parent = this;
             result.Add(o);
         }
 
         return result;
     }
 
-    private static UObject ReadObject(Reader r, SerializationContext ctx, int objectId)
+    private UObject ReadObject(Reader r, SerializationContext ctx, int index)
     {
-        UObject result = new()
+        UObject result = new(this)
         {
             WasLoadedByte = r.Read<byte>(),
         };
+        result.Path[^1].Index = index;
         bool wasLoaded = result.WasLoadedByte != 0;
-        result.ObjectPath = wasLoaded && objectId == 0 && ctx.ClassPath != null ? ctx.ClassPath : r.ReadFString();
+        result.ObjectPath = wasLoaded && index == 0 && ctx.ClassPath != null ? ctx.ClassPath : r.ReadFString();
 
         if (!wasLoaded)
+        {
             result.LoadedData = new UObjectLoadedData
             {
                 Name = new(r, ctx.NamesTable),
                 OuterId = r.Read<uint>()
             };
+            if (!string.IsNullOrWhiteSpace(result.LoadedData.Name.Name))
+            {
+                result.Path[^1].Name = result.LoadedData.Name.Name;
+            }
+        }
 
         return result;
     }
 
-    private static (List<KeyValuePair<string, Property>>?, byte[]?) ReadProperties(Reader r, SerializationContext ctx)
+    private (PropertyBag?, byte[]?) ReadProperties(Reader r, SerializationContext ctx)
     {
         byte[]? extraData = null;
         uint len = r.Read<uint>();
         int start = r.Position;
-        List<KeyValuePair<string, Property>>? result = null;
+        PropertyBag? result = null;
         if (len > 0)
         {
-            result = r.ReadProperties(ctx);
+            result = new PropertyBag(r,ctx, this);
             // After each property we can always observe either 4 ot 8 zeroes
             if (r.Position != (int)(start + len))
             {
@@ -120,16 +150,15 @@ public class SaveData
         return (result, extraData);
     }
 
-    private static List<Component> ReadComponents(Reader r, SerializationContext ctx)
+    private List<Component> ReadComponents(Reader r, SerializationContext ctx)
     {
         List<Component> result = new();
         uint componentCount = r.Read<uint>();
         for (int i = 0; i < componentCount; i++)
         {
-            Component c = new()
-            {
-                ComponentKey = r.ReadFString() ?? throw new ApplicationException("unexpected null component key")
-            };
+            string componentKey = r.ReadFString() ?? throw new ApplicationException("unexpected null component key");
+            Component c = new(this, componentKey);
+            c.Path[^1].Index = i;
             int len = r.Read<int>();
 
             int start = r.Position;
@@ -141,10 +170,10 @@ public class SaveData
                 case "PersistenceKeys":
                 case "PersistanceKeys1":
                 case "PersistenceKeys1":
-                    c.Variables = new Variables(r, ctx);
+                    c.Variables = new Variables(r, ctx, this);
                     break;
                 default:
-                    c.Properties = r.ReadProperties(ctx);
+                    c.Properties = new PropertyBag(r, ctx, this);
                     break;
             }
 
@@ -200,7 +229,7 @@ public class SaveData
 
         foreach (var o in Objects)
         {
-            o.Parent = Objects;
+            o.Parent = this;
         }
 
         for (int i = 0; i < Objects.Count; i++)
@@ -263,7 +292,7 @@ public class SaveData
             return;
         }
         long startOffset = w.Position;
-        w.WriteProperties(ctx,o.Properties);
+        o.Properties.Write(w,ctx);
         if (o.ExtraPropertiesData != null)
         {
             w.WriteBytes(o.ExtraPropertiesData);
@@ -295,7 +324,7 @@ public class SaveData
                     c.Variables!.Write(w,ctx);
                     break;
                 default:
-                    w.WriteProperties(ctx,c.Properties!);
+                    c.Properties!.Write(w,ctx);
                     break;
             }
             if (c.ExtraComponentsData != null)
@@ -309,4 +338,5 @@ public class SaveData
             w.Position = endOffset;
         }
     }
+
 }

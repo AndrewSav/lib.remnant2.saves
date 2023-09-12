@@ -3,7 +3,7 @@ using rd2parser.Model.Memory;
 
 namespace rd2parser.Model;
 
-public class Actor
+public class Actor : Node
 {
     public required uint HasTransform;
     public FTransform? Transform;
@@ -14,17 +14,22 @@ public class Actor
     public Actor()
     {
     }
-    
+
+    public Actor(Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    {
+        Path.Add(new() { Type = "Actor" });
+    }
+
     [SetsRequiredMembers]
 
-    public Actor(Reader r)
+    public Actor(Reader r, Node? parent) : this(parent)
     {
         HasTransform = r.Read<uint>();
         if (HasTransform != 0)
         {
             Transform = r.Read<FTransform>();
         }
-        Archive =  new SaveData(r,false, false);
+        Archive =  new SaveData(r,this, false, false);
     }
 
     public void WriteNonDynamic(Writer w)

@@ -2,6 +2,7 @@
 using System.IO.Hashing;
 using rd2parser.Model.Memory;
 using rd2parser.Compression;
+using rd2parser.Model.Properties;
 
 namespace rd2parser.Model;
 public class SaveFile
@@ -44,5 +45,47 @@ public class SaveFile
         Writer w = new();
         data.Write(w);
         Archive.CompressSave(path, w.ToArray());
+    }
+
+    public List<Property>? GetProperties(string name)
+    {
+        return SaveData.GetProperty(name);
+    }
+
+    public List<Variable>? GetVariables(string name)
+    {
+        return SaveData.GetVariable(name);
+    }
+
+    public Property? GetProperty(string name)
+    {
+        List<Property>? l =  SaveData.GetProperty(name);
+        if (l == null)
+        {
+            return null;
+        }
+
+        if (l.Count == 1)
+        {
+            return l[0];
+        }
+
+        throw new InvalidOperationException("there are more than one property");
+    }
+
+    public Variable? GetVariable(string name)
+    {
+        List<Variable>? l = SaveData.GetVariable(name);
+        if (l == null)
+        {
+            return null;
+        }
+
+        if (l.Count == 1)
+        {
+            return l[0];
+        }
+
+        throw new InvalidOperationException("there are more than one variable");
     }
 }
