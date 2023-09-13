@@ -42,7 +42,7 @@ public class MapProperty : Node
         ValueType.Write(w, ctx);
         w.WriteBytes(Unknown);
         w.Write(Values.Count);
-        foreach (var keyValuePair in Values)
+        foreach (KeyValuePair<object, object> keyValuePair in Values)
         {
             PropertyValue.WritePropertyValue(w, ctx, keyValuePair.Key, KeyType.Name);
             PropertyValue.WritePropertyValue(w, ctx, keyValuePair.Value, ValueType.Name);

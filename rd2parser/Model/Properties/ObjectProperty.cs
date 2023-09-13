@@ -36,15 +36,9 @@ public class ObjectProperty : Node
     {
     }
 
-    // To make it easier to navigate in the debugger
-    public override string ToString()
+    public override string? ToString()
     {
-        if (ClassName == null)
-        {
-            return "null";
-        }
-
-        return $"{ClassName} (id:{ObjectIndex})";
+        return ClassName;
     }
 
     public void Write(Writer w, SerializationContext ctx)

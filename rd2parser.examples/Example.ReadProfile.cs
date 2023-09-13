@@ -21,7 +21,7 @@ internal partial class Example
 
         ArrayProperty ap = (charactersProp.Value.Value as ArrayProperty)!;
         List<ObjectProperty> op = ap.Items.Select(x => (ObjectProperty)x!).ToList();
-        var count = op.Count(x => x.Object != null);
+        int count = op.Count(x => x.Object != null);
         Console.WriteLine($"You have {count} characters");
 
         int activeIndex = (int)activeProp.Value.Value!;
@@ -49,7 +49,7 @@ internal partial class Example
             Property powerLevel = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "PowerLevel").Value;
             Property itemLevel = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "ItemLevel").Value;
             Property lastSavedTraitPoints = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "LastSavedTraitPoints").Value;
-            
+
             if (powerLevel != null)
             {
                 Console.WriteLine($"  Power level: {(int)powerLevel.Value!}");
@@ -99,14 +99,14 @@ internal partial class Example
             Property items = inventory.Properties!.Properties.Single(x => x.Key == "Items").Value;
             ArrayStructProperty asp = (ArrayStructProperty)items.Value!;
             Console.WriteLine("  You have following inventory:");
-            
+
             foreach (object? o in asp.Items)
             {
                 PropertyBag itemProperties = (PropertyBag)o!;
 
-                var item = itemProperties.Properties.Single(x => x.Key == "ItemBP").Value;
-                var hidden = itemProperties.Properties.Single(x => x.Key == "Hidden").Value;
-                var slot = itemProperties.Properties.Single(x => x.Key == "EquipmentSlotIndex").Value;
+                Property item = itemProperties.Properties.Single(x => x.Key == "ItemBP").Value;
+                Property hidden = itemProperties.Properties.Single(x => x.Key == "Hidden").Value;
+                Property slot = itemProperties.Properties.Single(x => x.Key == "EquipmentSlotIndex").Value;
 
                 if ((byte)hidden.Value! != 0)
                 {
@@ -132,10 +132,10 @@ internal partial class Example
             {
                 PropertyBag traitProperties = (PropertyBag)o!;
 
-                var item = traitProperties.Properties.Single(x => x.Key == "TraitBP").Value;
-                var transient = traitProperties.Properties.Single(x => x.Key == "Transient").Value;
-                var slot = traitProperties.Properties.Single(x => x.Key == "SlotIndex").Value;
-                var level = traitProperties.Properties.Single(x => x.Key == "Level").Value;
+                Property item = traitProperties.Properties.Single(x => x.Key == "TraitBP").Value;
+                Property transient = traitProperties.Properties.Single(x => x.Key == "Transient").Value;
+                Property slot = traitProperties.Properties.Single(x => x.Key == "SlotIndex").Value;
+                Property level = traitProperties.Properties.Single(x => x.Key == "Level").Value;
 
                 if ((byte)transient.Value! != 0)
                 {

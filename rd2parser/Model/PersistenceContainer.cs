@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using rd2parser.Model.Memory;
 
@@ -35,7 +34,7 @@ public class PersistenceContainer : Node
         {
             actorInfo.Add(r.Read<FInfo>());
         }
-        
+
         Destroyed = new();
         uint destroyedCount = r.Read<uint>();
         for (uint i = 0; i < destroyedCount; i++)
@@ -46,7 +45,7 @@ public class PersistenceContainer : Node
         Actors = new();
         for (int index = 0; index < actorInfo.Count; index++)
         {
-            var info = actorInfo[index];
+            FInfo info = actorInfo[index];
             //TODO: parent
             r.Position = info.Offset;
             byte[] actorBytes = r.ReadBytes(info.Size);
@@ -90,7 +89,7 @@ public class PersistenceContainer : Node
             Writer actorWriter = new();
             a.Value.WriteNonDynamic(actorWriter);
             byte []actorData = actorWriter.ToArray();
-            actorInfo.Add(new() 
+            actorInfo.Add(new()
             {
                 UniqueID = a.Key,
                 Offset = (int)w.Position,
@@ -102,12 +101,11 @@ public class PersistenceContainer : Node
         w.Write(Actors.Count(x => x.Value.DynamicData != null));
         foreach (KeyValuePair<ulong, Actor> a in Actors)
         {
-            if (a.Value.DynamicData == null) continue;
-            a.Value.DynamicData.Write(w);
+            a.Value.DynamicData?.Write(w);
         }
         int indexOffset = (int)w.Position;
         w.Write(actorInfo.Count);
-        foreach (var info in actorInfo)
+        foreach (FInfo info in actorInfo)
         {
             w.Write(info);
         }

@@ -26,7 +26,7 @@ public class TextProperty : Node
         {
             0 => new TextPropertyData0(r, this),
             255 => new TextPropertyData255(r, this),
-            _ => throw new ApplicationException("unsupported history type"),
+            _ => throw new ApplicationException("unsupported history type")
         };
     }
 
@@ -45,5 +45,15 @@ public class TextProperty : Node
             default:
                 throw new ApplicationException("unsupported history type");
         }
+    }
+
+    public override string? ToString()
+    {
+        return HistoryType switch
+        {
+            0 => ((TextPropertyData0)Value).SourceString,
+            255 => ((TextPropertyData255)Value).Value,
+            _ => throw new ApplicationException("unsupported history type")
+        };
     }
 }

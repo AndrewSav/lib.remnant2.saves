@@ -38,7 +38,7 @@ public class SaveData : Node
 
         if (hasTopLevelAssetPath) SaveGameClassPath = new FTopLevelAssetPath(r);
 
-        var oi = r.Read<OffsetInfo>();
+        OffsetInfo oi = r.Read<OffsetInfo>();
 
         NameTableOffset = oi.Names;
         Version = oi.Version;
@@ -76,11 +76,9 @@ public class SaveData : Node
         _propertyRegistry = ctx.PropertyRegistry;
         _variableRegistry = ctx.VariableRegistry;
 
-        if (oldCtx != null)
-        {
-            oldCtx.PropertyRegistry.Add(_propertyRegistry);
-            oldCtx.VariableRegistry.Add(_variableRegistry);
-        }
+        if (oldCtx == null) return;
+        oldCtx.PropertyRegistry.Add(_propertyRegistry);
+        oldCtx.VariableRegistry.Add(_variableRegistry);
     }
 
     public List<Property>? GetProperty(string name)
@@ -131,23 +129,21 @@ public class SaveData : Node
     {
         UObject result = new(this)
         {
-            WasLoadedByte = r.Read<byte>(),
+            WasLoadedByte = r.Read<byte>()
         };
         result.Path[^1].Index = index;
         bool wasLoaded = result.WasLoadedByte != 0;
         result.ObjectPath = wasLoaded && index == 0 && ctx.ClassPath != null ? ctx.ClassPath : r.ReadFString();
 
-        if (!wasLoaded)
+        if (wasLoaded) return result;
+        result.LoadedData = new UObjectLoadedData
         {
-            result.LoadedData = new UObjectLoadedData
-            {
-                Name = new(r, ctx.NamesTable),
-                OuterId = r.Read<uint>()
-            };
-            if (!string.IsNullOrWhiteSpace(result.LoadedData.Name.Name))
-            {
-                result.Path[^1].Name = result.LoadedData.Name.Name;
-            }
+            Name = new(r, ctx.NamesTable),
+            OuterId = r.Read<uint>()
+        };
+        if (!string.IsNullOrWhiteSpace(result.LoadedData.Name.Name))
+        {
+            result.Path[^1].Name = result.LoadedData.Name.Name;
         }
 
         return result;
@@ -159,18 +155,14 @@ public class SaveData : Node
         uint len = r.Read<uint>();
         int start = r.Position;
         PropertyBag? result = null;
-        if (len > 0)
-        {
-            result = new PropertyBag(r,ctx, parent);
-            // After each property we can always observe either 4 ot 8 zeroes
-            if (r.Position != (int)(start + len))
-            {
-                if (r.Position > (int)(start + len))
-                    throw new ApplicationException("ReadProperties read too much data unexpectedly");
+        if (len <= 0) return (result, extraData);
+        result = new PropertyBag(r,ctx, parent);
+        // After each property we can always observe either 4 ot 8 zeroes
+        if (r.Position == (int)(start + len)) return (result, extraData);
+        if (r.Position > (int)(start + len))
+            throw new ApplicationException("ReadProperties read too much data unexpectedly");
 
-                extraData = r.ReadBytes((int)(start + len) - r.Position);
-            }
-        }
+        extraData = r.ReadBytes((int)(start + len) - r.Position);
 
         return (result, extraData);
     }
@@ -252,14 +244,14 @@ public class SaveData : Node
             Objects = Objects
         };
 
-        foreach (var o in Objects)
+        foreach (UObject o in Objects)
         {
             o.Parent = this;
         }
 
         for (int i = 0; i < Objects.Count; i++)
         {
-            var o = Objects[i];
+            UObject o = Objects[i];
             w.Write(i);
             WriteProperties(w, ctx, o);
             w.Write(o.IsActor);
@@ -292,7 +284,7 @@ public class SaveData : Node
     private void WriteObjects(Writer w, SerializationContext ctx)
     {
         w.Write(Objects.Count);
-        foreach (var o in Objects)
+        foreach (UObject o in Objects)
         {
             w.Write(o.WasLoadedByte);
             if (o.WasLoadedByte == 0 || o.ObjectIndex != 0 || SaveGameClassPath == null)
@@ -300,11 +292,9 @@ public class SaveData : Node
                 w.WriteFString(o.ObjectPath);
             }
 
-            if (o is { WasLoadedByte: 0, LoadedData: not null })
-            {
-                o.LoadedData.Name.Write(w, ctx);
-                w.Write(o.LoadedData.OuterId);
-            }
+            if (o is not { WasLoadedByte: 0, LoadedData: not null }) continue;
+            o.LoadedData.Name.Write(w, ctx);
+            w.Write(o.LoadedData.OuterId);
         }
     }
 
@@ -328,7 +318,7 @@ public class SaveData : Node
         w.Write(len);
         w.Position = endOffset;
     }
-    
+
     private static void WriteComponents(Writer w, SerializationContext ctx, UObject o)
     {
         w.Write(o.Components!.Count);

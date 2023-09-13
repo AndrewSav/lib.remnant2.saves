@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
+
 
 namespace rd2parser.Model.Properties;
 
@@ -10,6 +12,8 @@ public class Property : Node
     public byte? NoRaw;
     public FName? Type;
     public object? Value;
+    [JsonIgnore]
+    public required PropertyBag Bag;
 
     public Property()
     {
@@ -20,8 +24,9 @@ public class Property : Node
         Path.Add(new() { Name = name, Type = "Property" });
     }
     [SetsRequiredMembers]
-    public Property(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    public Property(Reader r, SerializationContext ctx, PropertyBag parent) : base(parent, new List<Segment>(parent.Path))
     {
+        Bag = parent;
         Name = new(r, ctx.NamesTable);
         Path.Add(new() { Name = Name.Name, Type = "Property" });
         if (Name.Name == "None")
@@ -71,5 +76,19 @@ public class Property : Node
         //{
         PropertyValue.WritePropertyValue(w,ctx,Value!,Type.Name, NoRaw??0);
         //}
+    }
+    public List<T> GetItems<T>()
+    {
+        if (Type?.Name != "ArrayProperty")
+        {
+            throw new InvalidOperationException($"this method only works for ArrayProperty. Current type: '{Type?.Name}'");
+        }
+
+        return Value switch
+        {
+            ArrayProperty ap => ap.Items.Select(x => (T)x!).ToList(),
+            ArrayStructProperty asp => asp.Items.Select(x => (T)x!).ToList(),
+            _ => throw new InvalidOperationException("unexpected value type")
+        };
     }
 }

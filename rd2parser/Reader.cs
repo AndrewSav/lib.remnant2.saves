@@ -8,17 +8,19 @@ public class Reader : ReaderBase
     public Reader(byte[] buffer) : base(buffer)
     {
 
-    }    
+    }
 
     public string? ReadFString()
     {
         int len = Read<int>();
-        if (len == 0) 
-            return null;
-        if (len < 0)
+        switch (len)
         {
-            throw new ApplicationException("FString length is not positive");
+            case 0:
+                return null;
+            case < 0:
+                throw new ApplicationException("FString length is not positive");
         }
+
         if (len + Position > Size)
         {
             throw new ApplicationException("FString length is too large");

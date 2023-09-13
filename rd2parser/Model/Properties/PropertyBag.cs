@@ -5,6 +5,8 @@ public class PropertyBag : Node
 {
     public required List<KeyValuePair<string, Property>> Properties;
 
+    public static readonly PropertyBag Dummy = new() { Properties = new() };
+
     public PropertyBag()
     {
 
@@ -40,6 +42,15 @@ public class PropertyBag : Node
         }
 
         ushort index = (ushort)ctx.GetNamesTableIndex("None");
-        new Property(null, "None") { Name = new FName { Name = "None", Index = index, Number = null } }.Write(w, ctx);
+        new Property(null, "None") { Name = new FName { Name = "None", Index = index, Number = null }, Bag = Dummy }.Write(w, ctx);
+    }
+
+    public Property this[string s]
+    {
+        get
+        {
+            return Properties.Single(x=>x.Key == s).Value;
+
+        }
     }
 }

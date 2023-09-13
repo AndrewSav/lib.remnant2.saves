@@ -12,7 +12,7 @@ public class Archive
     public static byte[] DecompressSave(string saveFile)
     {
         ReaderBase r = new(File.ReadAllBytes(saveFile));
-        using var output = new MemoryStream();
+        using MemoryStream output = new MemoryStream();
 
         CompressedFileHeader fh = r.Read<CompressedFileHeader>();
         fh.DumpDebug();
@@ -27,13 +27,13 @@ public class Archive
             byte[] buffer = r.ReadBytes((int)header.CompressedSize1);
             header.Validate(r.IsEof, chunkCounter);
 
-            using var bufferStream = new MemoryStream(buffer);
-            using var decompressor = new ZLibStream(bufferStream, CompressionMode.Decompress);
+            using MemoryStream bufferStream = new MemoryStream(buffer);
+            using ZLibStream decompressor = new ZLibStream(bufferStream, CompressionMode.Decompress);
             decompressor.CopyTo(output);
             chunkCounter++;
         }
 
-        var span = new Span<byte>(output.GetBuffer());
+        Span<byte> span = new Span<byte>(output.GetBuffer());
         int saveSize = BinaryPrimitives.ReadInt32LittleEndian(span[8..]);
 
         if (saveSize + 12 != fh.DecompressedSize)
@@ -47,7 +47,7 @@ public class Archive
 
         BinaryPrimitives.WriteUInt32LittleEndian(span, fh.Crc32);
         BinaryPrimitives.WriteInt32LittleEndian(span[4..], fh.DecompressedSize);
-        BinaryPrimitives.WriteInt32LittleEndian(span[8..], fh.Version);        
+        BinaryPrimitives.WriteInt32LittleEndian(span[8..], fh.Version);
 
         Crc32 crc32 = new();
         output.Seek(4, SeekOrigin.Begin); // first 4 bytes are crc itself, so skip
@@ -70,7 +70,7 @@ public class Archive
         };
         w.Write(fh);
 
-        var span = new Span<byte>(data);
+        Span<byte> span = new Span<byte>(data);
         BinaryPrimitives.WriteInt32LittleEndian(span[8..], fh.DecompressedSize-12);
         int current = 8;
         while (current < data.Length)
@@ -88,7 +88,7 @@ public class Archive
             w.Write(header);
             long startOffset = w.Position;
             {
-                using var compressor = new ZLibStream(w.Stream, CompressionMode.Compress, true);
+                using ZLibStream compressor = new ZLibStream(w.Stream, CompressionMode.Compress, true);
                 compressor.Write(span[current..(current + decompressedSize)]);
             }
             long endOffset = w.Stream.Position;

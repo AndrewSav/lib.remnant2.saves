@@ -32,4 +32,9 @@ public class EnumProperty : Node
         w.Write(Unknown);
         EnumValue.Write(w, ctx);
     }
+
+    public override string ToString()
+    {
+        return EnumValue.ToString();
+    }
 }

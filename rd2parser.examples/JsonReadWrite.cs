@@ -9,7 +9,7 @@ public class JsonReadWrite
         JsonSerializer serializer = new()
         {
             Formatting = Formatting.Indented,
-            TypeNameHandling = TypeNameHandling.All,
+            TypeNameHandling = TypeNameHandling.All
         };
 
         using StreamWriter sw = new(path);

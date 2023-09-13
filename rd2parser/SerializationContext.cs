@@ -17,7 +17,7 @@ public class SerializationContext
     public ItemRegistry<Variable> VariableRegistry = new();
 
     private readonly Dictionary<string, int> _namesTableIndex = new();
-    
+
     public int GetNamesTableIndex(string name)
     {
         if (_namesTableIndex.TryGetValue(name, out int index))

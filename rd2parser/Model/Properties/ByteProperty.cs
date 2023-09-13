@@ -48,4 +48,9 @@ public class ByteProperty : Node
             EnumValue!.Write(w, ctx);
         }
     }
+
+    public override string? ToString()
+    {
+        return EnumName.Name == "None" ? EnumByte!.ToString() : EnumValue!.ToString();
+    }
 }

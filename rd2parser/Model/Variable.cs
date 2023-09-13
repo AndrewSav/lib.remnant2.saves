@@ -37,7 +37,7 @@ public class Variable : Node
         Name = name;
         Path.Add(new() { Name = Name.Name, Type = "Variable" });
         Type = _varTypeNames[enumVal];
-    
+
         switch (Type)
         {
             case "None":

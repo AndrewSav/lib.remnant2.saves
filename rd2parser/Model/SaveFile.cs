@@ -47,27 +47,79 @@ public class SaveFile
         Archive.CompressSave(path, w.ToArray());
     }
 
+    // Filter is "part,part,part,..."
+    // part is one of the following:
+    // - name
+    // - object=name
+    // - object=index
+    // - object=name:index
     private static List<T>? Filter<T>(List<T>? list, string? filter) where T : Node
     {
         if (list == null) return list;
         string f = filter ?? string.Empty;
         List<T> result = list;
+        Dictionary<T, List<Segment>> segments = list.ToDictionary(x=> x, x=>new List<Segment>(x.Path));
         foreach (string part in f.Split(','))
         {
             string p = part.Trim();
             string[] t = p.Split("=");
-            if (t.Length > 2) throw new ArgumentOutOfRangeException(nameof(filter));
-            if (t.Length == 1)
+            switch (t.Length)
             {
-                result = list.Where(x => x.Path.Any(y => y.Name == t[0])).ToList();
+                case > 2:
+                    throw new ArgumentOutOfRangeException(nameof(filter));
+                case 1:
+                {
+                    string name = t[0].Trim();
+                    if (string.IsNullOrWhiteSpace(name)) continue;
+                    result = RemoveUsedSegments(result,y => y.Name == name || y.Type == name);
+                    continue;
+                }
             }
-            bool isInt = uint.TryParse(t[1], out uint index);
+
+            bool isInt = uint.TryParse(t[1].Trim(), out uint index);
+            string type = t[0].Trim();
             if (isInt)
             {
-                result = list.Where(x => x.Path.Any(y => y.Type == t[0] && y.Index == index)).ToList();
-            } else
+                result = result.Where(x => segments[x].Any(y => y.Type == type && y.Index == index)).ToList();
+                result = RemoveUsedSegments(result, y => y.Type == type && y.Index == index);
+            }
+            else
             {
-                result = list.Where(x => x.Path.Any(y => y.Type == t[0] && y.Name == t[1])).ToList();
+                string name = t[1].Trim();
+                string[] ni = name.Split(":");
+                switch (ni.Length)
+                {
+                    case > 2:
+                        throw new ArgumentOutOfRangeException(nameof(filter));
+                    case 1:
+                        result = result.Where(x => segments[x].Any(y => y.Type == type && y.Name == name)).ToList();
+                        result = RemoveUsedSegments(result, y => y.Type == type && y.Name == name);
+                        continue;
+                }
+
+                name = ni[0].Trim();
+                if (!uint.TryParse(ni[1].Trim(), out index))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(filter));
+                }
+                result = result.Where(x => segments[x].Any(y => y.Type == type && y.Name == name && y.Index == index)).ToList();
+                result = RemoveUsedSegments(result,y => y.Type == type && y.Name == name && y.Index == index);
+            }
+
+            continue;
+
+            List<T> RemoveUsedSegments(List<T> r, Func<Segment, bool> func)
+            {
+                r = r.Where(x => segments[x].Any(func)).ToList();
+                foreach (T node in r)
+                {
+                    Segment? elem = segments[node].FirstOrDefault(func);
+                    if (elem != null)
+                    {
+                        segments[node].Remove(elem);
+                    }
+                }
+                return r;
             }
         }
 
@@ -79,6 +131,12 @@ public class SaveFile
         return Filter(SaveData.GetProperty(name),filter);
     }
 
+    public List<T>? GetProperties<T>(string name, string? filter = null)
+    {
+        List<Property>? list = Filter(SaveData.GetProperty(name), filter);
+        return list?.Select(x => (T)x.Value!).ToList();
+    }
+
     public List<Variable>? GetVariables(string name, string? filter = null)
     {
         return Filter(SaveData.GetVariable(name),filter);
@@ -86,8 +144,8 @@ public class SaveFile
 
     public Property? GetProperty(string name, string? filter = "")
     {
-        List<Property>? l = GetProperties(name, filter); ;
-        if (l == null)
+        List<Property>? l = GetProperties(name, filter);
+        if (l == null || l.Count == 0)
         {
             return null;
         }
@@ -103,7 +161,7 @@ public class SaveFile
     public Variable? GetVariable(string name, string? filter = "")
     {
         List<Variable>? l = GetVariables(name, filter);
-        if (l == null)
+        if (l == null || l.Count == 0)
         {
             return null;
         }

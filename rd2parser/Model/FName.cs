@@ -21,7 +21,7 @@ public class FName
         bool hasNumber = (i & hasNumberBit) != 0;
         if (hasNumber)
         {
-            Index = (ushort)(i & (~hasNumberBit));
+            Index = (ushort)(i & ~hasNumberBit);
             Number = r.Read<int>();
         }
         else
@@ -53,7 +53,7 @@ public class FName
         }
 
         w.Write(index);
-        
+
         if (Number != null)
         {
             w.Write(Number.Value);

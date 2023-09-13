@@ -25,7 +25,7 @@ public class PropertyValue
             "StrProperty" or "SoftClassPath" or "SoftObjectProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.ReadFString() },
             "BoolProperty" => new PropertyValue { Value = r.Read<byte>(), NoRawByte = isRaw ? null : r.Read<byte>() },
             "NameProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new FName(r, ctx.NamesTable) },
-            
+
             "ByteProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<byte>() : new ByteProperty(r, ctx, parent) },
             "StructProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<FGuid>() : new StructProperty(r, ctx, parent) },
             "ObjectProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new ObjectProperty(r, ctx, parent) },
@@ -34,7 +34,7 @@ public class PropertyValue
             "MapProperty" => new PropertyValue { NoRawByte = null, Value = new MapProperty(r, ctx, parent) },
             "TextProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r, parent) },
             "ArrayProperty" => new PropertyValue { NoRawByte = null, Value = ReadArrayProperty(r, ctx, parent) },
-            _ => throw new ApplicationException($"unknown property type {type}"),
+            _ => throw new ApplicationException($"unknown property type {type}")
         };
     }
 
@@ -61,7 +61,7 @@ public class PropertyValue
         switch (type)
         {
             case "IntProperty":
-                if (noRow != null) w.Write(noRow.Value); 
+                if (noRow != null) w.Write(noRow.Value);
                 w.Write(Get<int>(value));
                 break;
             case "Int16Property":

@@ -1,33 +1,31 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace rd2parser.IO
+namespace rd2parser.IO;
+
+public  class WriterBase
 {
-    public  class WriterBase
+    public void Write<T>(T value)
     {
-        private readonly MemoryStream _stream = new();
-        public void Write<T>(T value)
-        {
 
-            byte[] buf = new byte[Unsafe.SizeOf<T>()];
-            Unsafe.WriteUnaligned(ref buf[0], value);
-            WriteBytes(buf);
-        }
-        public void WriteBytes(byte[] value)
-        {
-            _stream.Write(new ReadOnlySpan<byte>(value));
-        }
-
-        public byte[] ToArray()
-        {
-            return _stream.ToArray();
-        }
-
-        public long Position
-        {
-            get => _stream.Position;
-            set => _stream.Position = value;
-        }
-
-        public MemoryStream Stream => _stream;
+        byte[] buf = new byte[Unsafe.SizeOf<T>()];
+        Unsafe.WriteUnaligned(ref buf[0], value);
+        WriteBytes(buf);
     }
+    public void WriteBytes(byte[] value)
+    {
+        Stream.Write(new ReadOnlySpan<byte>(value));
+    }
+
+    public byte[] ToArray()
+    {
+        return Stream.ToArray();
+    }
+
+    public long Position
+    {
+        get => Stream.Position;
+        set => Stream.Position = value;
+    }
+
+    public MemoryStream Stream { get; } = new();
 }

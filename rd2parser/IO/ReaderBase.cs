@@ -12,7 +12,7 @@ public class ReaderBase
     {
         _buffer = buffer;
     }
-        
+
     private readonly byte[] _buffer;
     private int _index;
     private readonly Tracker _tracker = new();
@@ -21,13 +21,13 @@ public class ReaderBase
     public int Position
     {
         get => _index;
-        set 
+        set
         {
             if (value < 0 || value > _buffer.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
-            _index = value; 
+            _index = value;
         }
     }
 

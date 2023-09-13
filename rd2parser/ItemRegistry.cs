@@ -25,11 +25,7 @@ public class ItemRegistry<T> where T : Node
 
     public List<T>? Get(string name)
     {
-        if (!_registry.ContainsKey(name))
-        {
-            return null;
-        }
-        return new List<T>(_registry[name]);
+        return !_registry.ContainsKey(name) ? null : new List<T>(_registry[name]);
     }
 
     public List<string> GetTypes()
@@ -59,8 +55,8 @@ public class ItemRegistry<T> where T : Node
         {
             foreach (T item in registryItem.Value)
             {
-                foreach(Segment s in item.Path) 
-                { 
+                foreach(Segment s in item.Path)
+                {
                     if (s.Name != null)
                     {
                         if (!name.Contains(s.Name))

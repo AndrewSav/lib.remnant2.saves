@@ -32,7 +32,7 @@ public class UObject : Node
             }
 
             return (Parent as SaveData)!.Objects.FindIndex(x => x == this);
-        } 
+        }
     }
 
     public string? Name => LoadedData?.Name.Name;
@@ -79,12 +79,7 @@ public class UObject : Node
                 return null;
             }
 
-            if (s.Value is not PersistenceContainer p)
-            {
-                return null;
-            }
-
-            return p.Children;
+            return s.Value is not PersistenceContainer p ? null : p.Children;
         }
     }
 

@@ -41,7 +41,7 @@ public class StructProperty : Node
             "Vector" => r.Read<FVector>(),
             "DateTime" => new DateTime(r.Read<long>()),
             "PersistenceBlob" => ReadPersistenceBlob(r, ctx, parent),
-            _ => new PropertyBag(r,ctx, parent),
+            _ => new PropertyBag(r,ctx, parent)
         };
     }
     private static object ReadPersistenceBlob(ReaderBase r, SerializationContext ctx, Node parent)
@@ -113,30 +113,20 @@ public class StructProperty : Node
 
     private static TimeSpan GetTimeSpan(object? value)
     {
-        if (value == null)
+        return value switch
         {
-            throw new ApplicationException("expected timestamp got null");
-        }
-
-        if (value is string timespan)
-        {
-            return TimeSpan.Parse(timespan, CultureInfo.InvariantCulture);
-        }
-
-        return (TimeSpan)value;
+            null => throw new ApplicationException("expected timestamp got null"),
+            string timespan => TimeSpan.Parse(timespan, CultureInfo.InvariantCulture),
+            _ => (TimeSpan)value
+        };
     }
     private static DateTime GetDateTime(object? value)
     {
-        if (value == null)
+        return value switch
         {
-            throw new ApplicationException("expected datetime got null");
-        }
-
-        if (value is string timespan)
-        {
-            return DateTime.Parse(timespan, CultureInfo.InvariantCulture);
-        }
-
-        return (DateTime)value;
+            null => throw new ApplicationException("expected datetime got null"),
+            string timespan => DateTime.Parse(timespan, CultureInfo.InvariantCulture),
+            _ => (DateTime)value
+        };
     }
 }
