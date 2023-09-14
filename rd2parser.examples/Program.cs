@@ -12,7 +12,6 @@ internal class Program
     // TODO: edit Cass Shop example
     // TODO: Replace ApplicationException in library
     // TODO: Nuget
-    // TODO: check lists copying
     // TODO: README - do not expect read json to work as is
     // TODO: README - how we (do not) handle errors
     // TODO: README - why navigation adapters may be imprecise
@@ -24,12 +23,9 @@ internal class Program
     // TODO: README - FIX UPS: ObjectProperty: UObject (write)
     // TODO: README - FIX UPS: Navigation
     // TODO: README - FIX UPS: Copying object will screw up navigation
-    // TODO: move UObject read/write code from SaveData to UObject & Components
-
-
+    
     private static void Main()
     {
-
         Tests.Run();
 
         Example.AddRing();

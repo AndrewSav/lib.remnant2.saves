@@ -28,14 +28,14 @@ internal class Tests
     {
         SaveFile sf = SaveFile.Read(path);
 
-        Writer w = new Writer();
+        Writer w = new();
         sf.SaveData.Write(w);
         byte[] decoded1 = w.ToArray();
 
         SaveFile.Write("test.DoOne",sf);
         sf = SaveFile.Read("test.DoOne");
 
-        w = new Writer();
+        w = new();
         sf.SaveData.Write(w);
         byte[] decoded2 = w.ToArray();
 
