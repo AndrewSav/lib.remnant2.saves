@@ -27,6 +27,7 @@ public class Property : Node
     [SetsRequiredMembers]
     public Property(Reader r, SerializationContext ctx, PropertyBag parent) : base(parent, new List<Segment>(parent.Path))
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         Name = new(r, ctx.NamesTable);
         Path.Add(new() { Name = Name.Name, Type = "Property" });
         if (Name.Name == "None")
@@ -60,6 +61,7 @@ public class Property : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         Name.Write(w, ctx);
         if (Name.Name == "None")
         {

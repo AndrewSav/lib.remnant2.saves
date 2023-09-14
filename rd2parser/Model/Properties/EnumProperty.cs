@@ -21,6 +21,7 @@ public class EnumProperty : Node
     [SetsRequiredMembers]
     public EnumProperty(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         EnumType = new(r, ctx.NamesTable);
         Path.Add(new() { Name = EnumType.Name, Type = "EnumProperty" });
         Unknown = r.Read<byte>();
@@ -33,6 +34,7 @@ public class EnumProperty : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         EnumType.Write(w, ctx);
         w.Write(Unknown);
         EnumValue.Write(w, ctx);

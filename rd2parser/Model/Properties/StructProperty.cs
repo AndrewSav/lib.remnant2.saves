@@ -25,6 +25,7 @@ public class StructProperty : Node
     [SetsRequiredMembers]
     public StructProperty(Reader r, SerializationContext ctx, Node? parent) : this(parent)
     {
+        ReadOffset = r.Position;
         Type = new(r, ctx.NamesTable);
         Guid = r.Read<FGuid>();
         Unknown = r.Read<byte>();
@@ -52,18 +53,20 @@ public class StructProperty : Node
     private static object ReadPersistenceBlob(ReaderBase r, SerializationContext ctx, Node parent)
     {
         int persistenceSize = r.Read<int>();
+        int containerOffset = r.Position;
         byte[] bytes = r.ReadBytes(persistenceSize);
         Reader persistenceReader = new(bytes);
 
         if (ctx.ClassPath == "/Game/_Core/Blueprints/Base/BP_RemnantSaveGameProfile")
         {
-            return new SaveData(persistenceReader, parent, true, false, ctx);
+            return new SaveData(persistenceReader, parent, true, false, ctx, containerOffset);
         }
-        return new PersistenceContainer(persistenceReader, ctx,parent);
+        return new PersistenceContainer(persistenceReader, ctx,parent, containerOffset);
     }
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position;
         Type.Write(w, ctx);
         w.Write(Guid);
         w.Write(Unknown);
@@ -104,11 +107,11 @@ public class StructProperty : Node
         Writer persistenceWriter = new();
         if (ctx.ClassPath == "/Game/_Core/Blueprints/Base/BP_RemnantSaveGameProfile")
         {
-            ((SaveData)value).Write(persistenceWriter);
+            ((SaveData)value).Write(persistenceWriter,(int)w.Position + ctx.ContainerOffset+4);
         }
         else
         {
-            ((PersistenceContainer)value).Write(persistenceWriter);
+            ((PersistenceContainer)value).Write(persistenceWriter, (int)w.Position + ctx.ContainerOffset+4);
         }
 
         byte[] data = persistenceWriter.ToArray();

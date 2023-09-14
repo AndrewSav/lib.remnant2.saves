@@ -29,6 +29,7 @@ public class Variable : Node
     [SetsRequiredMembers]
     public Variable(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         FName name = new(r, ctx.NamesTable);
         if (name.Name == "None")
         {
@@ -61,6 +62,7 @@ public class Variable : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         Name.Write(w,ctx);
         byte enumVal = (byte)_varTypeNames
             .Select((input, index) => new { index, input })

@@ -21,6 +21,7 @@ public class Variables : Node
     [SetsRequiredMembers]
     public Variables(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         Properties = new();
         Name = new FName(r, ctx.NamesTable);
         Path.Add(new() { Name = Name.Name, Type = "Variables" });
@@ -41,6 +42,7 @@ public class Variables : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         Name.Write(w, ctx);
         w.Write(Unknown);
         w.Write(Properties.Count);

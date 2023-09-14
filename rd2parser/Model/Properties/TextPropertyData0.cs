@@ -19,16 +19,18 @@ public class TextPropertyData0 : Node
     }
 
     [SetsRequiredMembers]
-    public TextPropertyData0(Reader r, Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    public TextPropertyData0(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         Namespace = r.ReadFString();
         Key = r.ReadFString();
         SourceString = r.ReadFString();
         Path.Add(new() { Name = Key, Type = "TextPropertyData0" });
     }
 
-    public void Write(Writer w)
+    public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         w.WriteFString(Namespace);
         w.WriteFString(Key);
         w.WriteFString(SourceString);

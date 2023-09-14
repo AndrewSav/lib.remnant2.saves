@@ -15,9 +15,10 @@ public class ArrayProperty : Node
     }
 
     [SetsRequiredMembers]
-    public ArrayProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType,
+    public ArrayProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, int readOffset,
         Node? parent) : this(parent)
     {
+        ReadOffset = readOffset;
         Unknown = unknown;
         if (Unknown != 0)
         {
@@ -39,6 +40,7 @@ public class ArrayProperty : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         ElementType.Write(w, ctx);
         w.Write(Unknown);
         w.Write(Items.Count);

@@ -33,7 +33,7 @@ public class PropertyValue
             "EnumProperty" => new PropertyValue { NoRawByte = null, Value = new EnumProperty(r, ctx, parent) },
             //if (isRaw) { throw new ApplicationException("Raw map properties are not supported"); }
             "MapProperty" => new PropertyValue { NoRawByte = null, Value = new MapProperty(r, ctx, parent) },
-            "TextProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r, parent) },
+            "TextProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r, ctx, parent) },
             "ArrayProperty" => new PropertyValue { NoRawByte = null, Value = ReadArrayProperty(r, ctx, parent) },
             _ => throw new ApplicationException($"unknown property type {type}")
         };
@@ -49,12 +49,13 @@ public class PropertyValue
     }
     private static object ReadArrayProperty(Reader r, SerializationContext ctx, Node? parent)
     {
+        int readOffset = r.Position + ctx.ContainerOffset;
         FName elementType = new(r, ctx.NamesTable);
         byte unknown = r.Read<byte>();
         uint count = r.Read<uint>();
         return elementType.Name == "StructProperty"
-            ? new ArrayStructProperty(r, ctx, count, unknown,elementType, parent)
-            : new ArrayProperty(r, ctx, count, unknown, elementType, parent);
+            ? new ArrayStructProperty(r, ctx, count, unknown,elementType, readOffset, parent)
+            : new ArrayProperty(r, ctx, count, unknown, elementType, readOffset, parent);
     }
 
     public static void WritePropertyValue(Writer w, SerializationContext ctx, object? value, string type, byte? noRow = null)
@@ -126,7 +127,7 @@ public class PropertyValue
                 break;
             case "TextProperty":
                 if (noRow != null) w.Write(noRow.Value);
-                ((TextProperty)value!).Write(w);
+                ((TextProperty)value!).Write(w, ctx);
                 break;
             case "ArrayProperty":
                 WriteArrayProperty(w, ctx, value!);

@@ -20,6 +20,7 @@ public class PropertyBag : Node
     [SetsRequiredMembers]
     public PropertyBag(Reader r, SerializationContext ctx, Node? parent) : this(parent)
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         Properties = new();
         int i = 0;
         while (true)
@@ -37,6 +38,7 @@ public class PropertyBag : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         foreach (KeyValuePair<string, Property> keyValuePair in Properties)
         {
             keyValuePair.Value.Write(w, ctx);

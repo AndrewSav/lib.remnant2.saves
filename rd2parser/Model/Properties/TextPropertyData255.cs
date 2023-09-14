@@ -18,8 +18,9 @@ public class TextPropertyData255 : Node
     }
 
     [SetsRequiredMembers]
-    public TextPropertyData255(Reader r, Node? parent) : this(parent)
+    public TextPropertyData255(Reader r, SerializationContext ctx, Node? parent) : this(parent)
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         Flag = r.Read<uint>();
         if (Flag != 0)
         {
@@ -27,8 +28,9 @@ public class TextPropertyData255 : Node
         }
     }
 
-    public void Write(Writer w)
+    public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         w.Write(Flag);
         if (Flag != 0)
         {

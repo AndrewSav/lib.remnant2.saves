@@ -18,6 +18,7 @@ public class ByteProperty : Node
     [SetsRequiredMembers]
     public ByteProperty(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         EnumName = new(r, ctx.NamesTable);
         Path.Add(new() { Name = EnumName.Name, Type = "ByteProperty" });
         Unknown = r.Read<byte>();
@@ -43,6 +44,7 @@ public class ByteProperty : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         EnumName.Write(w, ctx);
         w.Write(Unknown);
         if (EnumName.Name == "None")

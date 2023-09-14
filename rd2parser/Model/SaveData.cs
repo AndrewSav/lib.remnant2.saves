@@ -31,9 +31,10 @@ public class SaveData : Node
     }
 
     [SetsRequiredMembers]
-    public SaveData(Reader r, Node? parent = null, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true, SerializationContext? oldCtx = null) :
+    public SaveData(Reader r, Node? parent = null, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true, SerializationContext? oldCtx = null, int containerOffset = 0) :
         base(parent, parent?.Path ?? new())
     {
+        ReadOffset = r.Position + containerOffset;
         Path.Add(new(){Type = "SaveData"});
         if (hasPackageVersion) PackageVersion = r.Read<PackageVersion>();
 
@@ -54,7 +55,8 @@ public class SaveData : Node
         SerializationContext ctx = new()
         {
             NamesTable = NamesTable,
-            ClassPath = SaveGameClassPath?.Path
+            ClassPath = SaveGameClassPath?.Path,
+            ContainerOffset = containerOffset
         };
 
         maxPosition = int.Max(maxPosition, r.Position);
@@ -137,6 +139,7 @@ public class SaveData : Node
     {
         UObject result = new(this)
         {
+            ReadOffset = r.Position + ctx.ContainerOffset,
             WasLoadedByte = r.Read<byte>()
         };
         result.Path[^1].Index = index;
@@ -188,8 +191,12 @@ public class SaveData : Node
         uint componentCount = r.Read<uint>();
         for (int i = 0; i < componentCount; i++)
         {
+            int readOffset = r.Position + ctx.ContainerOffset;
             string componentKey = r.ReadFString() ?? throw new ApplicationException("unexpected null component key");
-            Component c = new(this, componentKey);
+            Component c = new(this, componentKey)
+            {
+                ReadOffset = readOffset
+            };
             c.Path[^1].Index = i;
             int len = r.Read<int>();
 
@@ -243,8 +250,9 @@ public class SaveData : Node
         return result;
     }
 
-    public void Write(Writer w)
+    public void Write(Writer w, int containerOffset = 0)
     {
+        WriteOffset = (int)w.Position + containerOffset;
         if (PackageVersion != null)
         {
             w.Write(PackageVersion.Value);
@@ -264,7 +272,8 @@ public class SaveData : Node
         {
             NamesTable = NamesTable,
             ClassPath = SaveGameClassPath?.Path,
-            Objects = Objects
+            Objects = Objects,
+            ContainerOffset = containerOffset
         };
 
         foreach (UObject o in Objects)
@@ -309,6 +318,7 @@ public class SaveData : Node
         w.Write(Objects.Count);
         foreach (UObject o in Objects)
         {
+            o.WriteOffset = (int)w.Position + ctx.ContainerOffset;
             w.Write(o.WasLoadedByte);
             if (o.WasLoadedByte == 0 || o.ObjectIndex != 0 || SaveGameClassPath == null)
             {
@@ -347,6 +357,7 @@ public class SaveData : Node
         w.Write(o.Components!.Count);
         foreach (Component c in o.Components)
         {
+            c.WriteOffset = (int)w.Position + ctx.ContainerOffset;
             w.WriteFString(c.ComponentKey);
             long lengthOffset = w.Position;
             w.Write(0); // we will patch this later

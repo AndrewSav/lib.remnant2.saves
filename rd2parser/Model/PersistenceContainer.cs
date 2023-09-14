@@ -22,8 +22,9 @@ public class PersistenceContainer : Node
     }
 
     [SetsRequiredMembers]
-    public PersistenceContainer(Reader r, SerializationContext ctx, Node? parent) : this(parent)
+    public PersistenceContainer(Reader r, SerializationContext ctx, Node? parent, int containerOffset) : this(parent)
     {
+        ReadOffset = r.Position + containerOffset;
         Version = r.Read<uint>();
         int indexOffset = r.Read<int>();
         int dynamicOffset = r.Read<int>();
@@ -50,7 +51,7 @@ public class PersistenceContainer : Node
             r.Position = info.Offset;
             byte[] actorBytes = r.ReadBytes(info.Size);
             Reader actorReader = new(actorBytes);
-            Actor a = new(actorReader, ctx, this);
+            Actor a = new(actorReader, ctx, this, info.Offset+ containerOffset);
             a.Path[^1].Index = index;
             Actors.Add(new KeyValuePair<ulong, Actor>(info.UniqueID, a));
         }
@@ -77,8 +78,9 @@ public class PersistenceContainer : Node
     [JsonIgnore]
     public List<UObject> FlattenChildren => Children.SelectMany(x => x.Values).ToList();
 
-    public void Write(Writer w)
+    public void Write(Writer w, int containerOffset)
     {
+        WriteOffset = (int)w.Position + containerOffset;
         w.Write(Version);
         long patchOffset = (int)w.Position;
         w.Write(0); // index offset, unknown yet, will patch later
@@ -87,7 +89,7 @@ public class PersistenceContainer : Node
         foreach (KeyValuePair<ulong, Actor> a in Actors)
         {
             Writer actorWriter = new();
-            a.Value.WriteNonDynamic(actorWriter);
+            a.Value.WriteNonDynamic(actorWriter, (int)w.Position+ containerOffset);
             byte []actorData = actorWriter.ToArray();
             actorInfo.Add(new()
             {

@@ -18,6 +18,7 @@ public class MapProperty : Node
     [SetsRequiredMembers]
     public MapProperty(Reader r, SerializationContext ctx, Node? parent) : this(parent)
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         Values = new List<KeyValuePair<object, object>>();
         KeyType = new(r, ctx.NamesTable);
         ValueType = new(r, ctx.NamesTable);
@@ -45,6 +46,7 @@ public class MapProperty : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         KeyType.Write(w, ctx);
         ValueType.Write(w, ctx);
         w.WriteBytes(Unknown);

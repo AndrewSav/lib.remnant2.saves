@@ -23,24 +23,26 @@ public class Actor : Node
 
     [SetsRequiredMembers]
 
-    public Actor(Reader r, SerializationContext ctx, Node? parent) : this(parent)
+    public Actor(Reader r, SerializationContext ctx, Node? parent, int containerOffset) : this(parent)
     {
+        ReadOffset = r.Position + containerOffset;
         HasTransform = r.Read<uint>();
         if (HasTransform != 0)
         {
             Transform = r.Read<FTransform>();
         }
-        Archive =  new SaveData(r,this, false, false, ctx);
+        Archive =  new SaveData(r,this, false, false, ctx, containerOffset);
     }
 
-    public void WriteNonDynamic(Writer w)
+    public void WriteNonDynamic(Writer w, int containerOffset)
     {
+        WriteOffset = (int)w.Position + containerOffset;
         w.Write(HasTransform);
         if (HasTransform != 0)
         {
             w.Write(Transform!.Value);
         }
-        Archive.Write(w);
+        Archive.Write(w, containerOffset);
     }
 
     public override IEnumerable<Node> GetChildren()

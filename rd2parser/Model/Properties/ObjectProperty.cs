@@ -19,6 +19,7 @@ public class ObjectProperty : Node
     [SetsRequiredMembers]
     public ObjectProperty(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
+        ReadOffset = r.Position + ctx.ContainerOffset;
         Path.Add(new() { Type = "ObjectProperty" });
         ObjectIndex = r.Read<int>();
         SetIndex(ObjectIndex, ctx.Objects!);
@@ -35,6 +36,7 @@ public class ObjectProperty : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         SetIndex(ObjectIndex, ctx.Objects!);
         w.Write(Object?.ObjectIndex ?? -1);
     }

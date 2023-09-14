@@ -51,6 +51,7 @@ public class SaveFile
     public static SaveFile Read(string path)
     {
         byte[] b = Archive.DecompressSave(path);
+        File.WriteAllBytes("debug.dec",b);
         Reader r = new(b);
         return new SaveFile(r);
     }
@@ -207,21 +208,18 @@ public class SaveFile
         return SaveData.GetVariableTypes();
     }
 
-    public int CountObjects()
+    public void VisitObjects(Action<Node> f)
     {
-        int i = 0;
-        Queue<Node> q = new Queue<Node>();
+        Queue<Node> q = new();
         q.Enqueue(SaveData);
         while (q.Count > 0)
         {
             Node n = q.Dequeue();
-            i++;
-            Console.WriteLine(n.DisplayPath);
+            f(n);
             foreach (Node c in n.GetChildren())
             {
                 q.Enqueue(c);
             }
         }
-        return i;
     }
 }

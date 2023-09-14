@@ -23,10 +23,10 @@ public class ArrayStructProperty : Node
         Path.Add(new() { Type = "ArrayStructProperty" });
     }
 
-
     [SetsRequiredMembers]
-    public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, Node? parent) : this(parent)
+    public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, int readOffset, Node? parent) : this(parent)
     {
+        ReadOffset = readOffset;
         Unknown = unknown;
         if (Unknown != 0)
         {
@@ -62,6 +62,7 @@ public class ArrayStructProperty : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         OuterElementType.Write(w, ctx);
         w.Write(Unknown);
         w.Write(Items.Count);
