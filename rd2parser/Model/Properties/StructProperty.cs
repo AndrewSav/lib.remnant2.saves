@@ -59,7 +59,7 @@ public class StructProperty : Node
 
         if (ctx.ClassPath == "/Game/_Core/Blueprints/Base/BP_RemnantSaveGameProfile")
         {
-            return new SaveData(persistenceReader, parent, true, false, ctx, containerOffset);
+            return new SaveData(persistenceReader, parent, true, false, ctx, containerOffset,ctx.Options);
         }
         return new PersistenceContainer(persistenceReader, ctx,parent, containerOffset);
     }

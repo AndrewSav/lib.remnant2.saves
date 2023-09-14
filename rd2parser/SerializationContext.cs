@@ -24,6 +24,8 @@ public class SerializationContext
     // to keep track of outermost file offsets
     public int ContainerOffset;
 
+    public Options? Options;
+
     // Caching NameTable entries for faster access
     private readonly Dictionary<string, int> _namesTableIndex = new();
 

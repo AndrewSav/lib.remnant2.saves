@@ -5,7 +5,6 @@ namespace rd2parser.examples;
 internal class Program
 {
 
-    // TODO: selected adv/campaign,
     // TODO: adv/campaign locations/events examples
     // TODO: blood moon?
     // TODO: show Cass Shop example
@@ -23,9 +22,11 @@ internal class Program
     // TODO: README - FIX UPS: ObjectProperty: UObject (write)
     // TODO: README - FIX UPS: Navigation
     // TODO: README - FIX UPS: Copying object will screw up navigation
-    
+    // TODO: README - ParseFowVisitedCoordinates
+
     private static void Main()
     {
+        Example.Campaign();
         Tests.Run();
 
         Example.AddRing();
@@ -33,5 +34,6 @@ internal class Program
         Example.EditScrapRaw();
         Example.ReadProfile();
         Example.Json();
+
     }
 }

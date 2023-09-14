@@ -31,7 +31,7 @@ public class Actor : Node
         {
             Transform = r.Read<FTransform>();
         }
-        Archive =  new SaveData(r,this, false, false, ctx, containerOffset);
+        Archive =  new SaveData(r,this, false, false, ctx, containerOffset,ctx.Options);
     }
 
     public void WriteNonDynamic(Writer w, int containerOffset)

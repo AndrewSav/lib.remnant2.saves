@@ -40,16 +40,16 @@ public class Property : Node
 
         // Just to make results a bit more compact
         // since we are usually not interested very much in these
-        //if (Name.Name == "FowVisitedCoordinates")
-        //{
-        //    Value = r.ReadBytes((int)Size + 19);
-        //}
-        //else
-        //{
-        PropertyValue pv = PropertyValue.ReadPropertyValue(r, ctx, Type.Name, this,false);
-        NoRaw = pv.NoRawByte;
-        Value = pv.Value;
-        //}
+        if (Name.Name == "FowVisitedCoordinates" && !(ctx.Options?.ParseFowVisitedCoordinates ?? false))
+        {
+            Value = r.ReadBytes((int)Size + 19);
+        }
+        else
+        {
+            PropertyValue pv = PropertyValue.ReadPropertyValue(r, ctx, Type.Name, this,false);
+            NoRaw = pv.NoRawByte;
+            Value = pv.Value;
+        }
 
         ctx.PropertyRegistry.Add(Name.Name, this);
     }
@@ -57,6 +57,26 @@ public class Property : Node
     public override string? ToString()
     {
         return Value?.ToString();
+    }
+
+    public T Get<T>()
+    {
+        return Value switch
+        {
+            T prop => prop,
+            StructProperty { Value: T inner } => inner,
+            _ => throw new InvalidOperationException("requested value is of a different type")
+        };
+    }
+
+    public T Get<T>(T @default)
+    {
+        return Value switch
+        {
+            T prop => prop,
+            StructProperty { Value: T inner } => inner,
+            _ => @default
+        };
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -71,18 +91,15 @@ public class Property : Node
         long sizeOffset = w.Position;
         w.Write(Size!.Value);
         w.Write(Index!.Value);
-        //if (Name.Name == "FowVisitedCoordinates")
-        //{
-        //    w.WriteBytes((byte[])Value!);
-        //}
-        //else
-        //{
         long startOffset = w.Position;
-        PropertyValue.WritePropertyValue(w,ctx,Value!,Type.Name, NoRaw??0);
-        //}
-
-        //ByteProperty
-
+        if (Name.Name == "FowVisitedCoordinates" && Value is byte[])
+        {
+            w.WriteBytes((byte[])Value!);
+        }
+        else
+        {
+            PropertyValue.WritePropertyValue(w,ctx,Value!,Type.Name, NoRaw??0);
+        }
 
         long endOffset = w.Position;
         uint newSize = (uint)(endOffset - startOffset);

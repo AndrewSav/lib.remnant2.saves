@@ -18,11 +18,11 @@ public class SaveFile
     }
 
     [SetsRequiredMembers]
-    public SaveFile(Reader r)
+    public SaveFile(Reader r, Options? opts = null)
     {
         r.ActivateTracker();
         FileHeader = r.Read<FileHeader>();
-        SaveData = new(r);
+        SaveData = new(r: r, opts: opts);
         SortedDictionary<int, AddressRange> d = r.GetTracker().GetRanges();
         if (d.Count > 1)
         {
@@ -48,12 +48,12 @@ public class SaveFile
         w.Write(FileHeader);
     }
 
-    public static SaveFile Read(string path)
+    public static SaveFile Read(string path, Options? opts = null)
     {
         byte[] b = Archive.DecompressSave(path);
         File.WriteAllBytes("debug.dec",b);
         Reader r = new(b);
-        return new SaveFile(r);
+        return new SaveFile(r,opts);
     }
     public static void Write(string path, SaveFile data)
     {

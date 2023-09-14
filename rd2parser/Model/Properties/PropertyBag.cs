@@ -57,6 +57,11 @@ public class PropertyBag : Node
         }
     }
 
+    public bool Contains(string s)
+    {
+        return Properties.Any(x => x.Key == s);
+    }
+
     public override Node Copy()
     {
         PropertyBag result = new()

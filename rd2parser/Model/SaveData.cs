@@ -32,7 +32,7 @@ public class SaveData : Node
     }
 
     [SetsRequiredMembers]
-    public SaveData(Reader r, Node? parent = null, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true, SerializationContext? oldCtx = null, int containerOffset = 0) :
+    public SaveData(Reader r, Node? parent = null, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true, SerializationContext? oldCtx = null, int containerOffset = 0, Options? opts = null) :
         base(parent, parent?.Path ?? new())
     {
         ReadOffset = r.Position + containerOffset;
@@ -64,7 +64,8 @@ public class SaveData : Node
         {
             NamesTable = NamesTable,
             ClassPath = SaveGameClassPath?.Path,
-            ContainerOffset = containerOffset
+            ContainerOffset = containerOffset,
+            Options = opts
         };
 
         maxPosition = int.Max(maxPosition, r.Position);

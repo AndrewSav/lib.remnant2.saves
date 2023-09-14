@@ -32,6 +32,8 @@ internal class Tests
         sf.SaveData.Write(w);
         byte[] decoded1 = w.ToArray();
 
+        string targetPath = Path.GetFileName(Path.ChangeExtension(path, "dec"));
+        File.WriteAllBytes(targetPath, decoded1);
         SaveFile.Write("test.DoOne",sf);
         sf = SaveFile.Read("test.DoOne");
 
