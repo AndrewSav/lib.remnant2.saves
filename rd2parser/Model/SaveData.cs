@@ -68,6 +68,7 @@ public class SaveData : Node
                 throw new ApplicationException("unexpected object index");
             }
             (Objects[objIndex].Properties, Objects[objIndex].ExtraPropertiesData) = ReadProperties(r, ctx,Objects[objIndex]);
+
             Objects[objIndex].IsActor = r.Read<byte>();
             if (Objects[objIndex].IsActor != 0)
                 Objects[objIndex].Components = ReadComponents(r, ctx);
@@ -187,10 +188,10 @@ public class SaveData : Node
                 case "PersistenceKeys":
                 case "PersistanceKeys1":
                 case "PersistenceKeys1":
-                    c.Variables = new Variables(r, ctx, this);
+                    c.Variables = new Variables(r, ctx, c);
                     break;
                 default:
-                    c.Properties = new PropertyBag(r, ctx, this);
+                    c.Properties = new PropertyBag(r, ctx, c);
                     break;
             }
 

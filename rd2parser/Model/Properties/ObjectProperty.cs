@@ -18,18 +18,9 @@ public class ObjectProperty : Node
     [SetsRequiredMembers]
     public ObjectProperty(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
+        Path.Add(new() { Type = "ObjectProperty" });
         ObjectIndex = r.Read<int>();
-        if (ObjectIndex != -1)
-        {
-            // This is never called before we read Objects and put it in the context
-            ClassName = ctx.Objects![ObjectIndex].ObjectPath;
-            Object = ctx.Objects![ObjectIndex];
-            Path.Add(new() { Name = ClassName, Type = "ObjectProperty" });
-        }
-        else
-        {
-            Path.Add(new() { Type = "ObjectProperty" });
-        }
+        SetIndex(ObjectIndex, ctx.Objects!);
     }
 
     public ObjectProperty()
@@ -43,10 +34,26 @@ public class ObjectProperty : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
-        if (Object == null && ObjectIndex != -1)
-        {
-            Object = ctx.Objects![ObjectIndex];
-        }
+        SetIndex(ObjectIndex, ctx.Objects!);
         w.Write(Object?.ObjectIndex ?? -1);
+    }
+
+    public void SetIndex(int index,List<UObject> objects )
+    {
+        if (index != -1)
+        {
+            ClassName = objects[index].ObjectPath;
+            Object = objects[index];
+            if (Parent != null) Path[^1].Name = ClassName;
+        }
+        else
+        {
+            if (Parent != null) Path[^1].Name = null;
+        }
+        ObjectIndex = index;
+    }
+    public void SetObject(UObject o)
+    {
+        SetIndex(o.ObjectIndex, o.SaveData.Objects);
     }
 }

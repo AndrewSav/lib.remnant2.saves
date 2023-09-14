@@ -46,7 +46,6 @@ public class PersistenceContainer : Node
         for (int index = 0; index < actorInfo.Count; index++)
         {
             FInfo info = actorInfo[index];
-            //TODO: parent
             r.Position = info.Offset;
             byte[] actorBytes = r.ReadBytes(info.Size);
             Reader actorReader = new(actorBytes);

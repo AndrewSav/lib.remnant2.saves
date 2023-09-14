@@ -12,6 +12,8 @@ public class UObject : Node
     public byte[]? ExtraPropertiesData;
     public List<Component>? Components;
     public byte IsActor;
+    [JsonIgnore]
+    public SaveData SaveData => (SaveData)Parent!;
 
     public UObject()
     {
@@ -87,4 +89,14 @@ public class UObject : Node
     [JsonIgnore]
     public List<UObject>? FlattenChildren => Children?.SelectMany(x => x.Values).ToList();
 
+    public override Node Copy()
+    {
+        UObject result = (UObject)MemberwiseClone();
+        result.Path = new(Path);
+        return result;
+    }
+    public UObject CopyObject()
+    {
+        return (UObject)Copy();
+    }
 }

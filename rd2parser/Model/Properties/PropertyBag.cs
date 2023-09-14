@@ -42,7 +42,7 @@ public class PropertyBag : Node
         }
 
         ushort index = (ushort)ctx.GetNamesTableIndex("None");
-        new Property(null, "None") { Name = new FName { Name = "None", Index = index, Number = null }, Bag = Dummy }.Write(w, ctx);
+        new Property(null, "None") { Name = new FName { Name = "None", Index = index, Number = null }}.Write(w, ctx);
     }
 
     public Property this[string s]
@@ -52,5 +52,31 @@ public class PropertyBag : Node
             return Properties.Single(x=>x.Key == s).Value;
 
         }
+    }
+
+    public override Node Copy()
+    {
+        PropertyBag result = new()
+        {
+            Properties = Properties.Select(x => new KeyValuePair<string, Property>(x.Key,(Property)x.Value.Copy())).ToList(),
+            Parent = Parent,
+            Path = new(Path)
+        };
+
+        foreach (KeyValuePair<string, Property> pair in result.Properties)
+        {
+            pair.Value.Parent = result;
+            if (pair.Value.Type?.Name == "ObjectProperty")
+            {
+                ObjectProperty op = (ObjectProperty)pair.Value.Value!;
+                pair.Value.Value = new ObjectProperty(pair.Value){ObjectIndex = op.ObjectIndex};
+            }
+        }
+
+        return result;
+    }
+    public  PropertyBag CopyPropertyBag()
+    {
+        return (PropertyBag)Copy();
     }
 }

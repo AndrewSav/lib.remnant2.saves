@@ -12,8 +12,9 @@ public class Property : Node
     public byte? NoRaw;
     public FName? Type;
     public object? Value;
+
     [JsonIgnore]
-    public required PropertyBag Bag;
+    public PropertyBag Bag => (PropertyBag)Parent!;
 
     public Property()
     {
@@ -26,7 +27,6 @@ public class Property : Node
     [SetsRequiredMembers]
     public Property(Reader r, SerializationContext ctx, PropertyBag parent) : base(parent, new List<Segment>(parent.Path))
     {
-        Bag = parent;
         Name = new(r, ctx.NamesTable);
         Path.Add(new() { Name = Name.Name, Type = "Property" });
         if (Name.Name == "None")
@@ -66,6 +66,7 @@ public class Property : Node
             return;
         }
         Type!.Write(w, ctx);
+        long sizeOffset = w.Position;
         w.Write(Size!.Value);
         w.Write(Index!.Value);
         //if (Name.Name == "FowVisitedCoordinates")
@@ -74,8 +75,34 @@ public class Property : Node
         //}
         //else
         //{
+        long startOffset = w.Position;
         PropertyValue.WritePropertyValue(w,ctx,Value!,Type.Name, NoRaw??0);
         //}
+
+        //ByteProperty
+
+
+        long endOffset = w.Position;
+        uint newSize = (uint)(endOffset - startOffset);
+
+        uint sizeAdjustment = 0;
+        if (Type.Name == "StructProperty")
+        {
+            sizeAdjustment = 19;
+        }
+        if (Type.Name == "ArrayProperty")
+        {
+            sizeAdjustment = 3;
+        }
+
+        if (sizeAdjustment != 0)
+        {
+            newSize -= sizeAdjustment;
+            Size = newSize;
+            w.Position = sizeOffset;
+            w.Write(Size!.Value);
+            w.Position = endOffset;
+        }
     }
     public List<T> GetItems<T>()
     {
@@ -90,5 +117,12 @@ public class Property : Node
             ArrayStructProperty asp => asp.Items.Select(x => (T)x!).ToList(),
             _ => throw new InvalidOperationException("unexpected value type")
         };
+    }
+
+    public override Node Copy()
+    {
+        Property result = (Property)MemberwiseClone();
+        result.Path = new(Path);
+        return result;
     }
 }

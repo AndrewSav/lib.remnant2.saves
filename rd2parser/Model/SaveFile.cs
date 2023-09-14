@@ -27,6 +27,8 @@ public class SaveFile
         w.Write(FileHeader);
         SaveData.Write(w);
         FileHeader.DecompressedSize = (int)w.Position;
+        w.Position = 0;
+        w.Write(FileHeader);
         Crc32 crc32 = new();
         crc32.Append(w.ToArray()[4..]);
         FileHeader.Crc32 = BitConverter.ToUInt32(crc32.GetCurrentHash(), 0);

@@ -58,14 +58,22 @@ public class ArrayStructProperty : Node
         w.Write(Items.Count);
         w.Write(NameIndex);
         w.Write(TypeIndex);
+        long sizeOffset = w.Position;
         w.Write(Size);
         w.Write(Index);
         ElementType.Write(w,ctx);
         w.Write(Guid);
         w.Write(Unknown2);
+        long startOffset = w.Position;
         foreach (object? item in Items)
         {
             StructProperty.WriteStructPropertyValue(w, ctx, ElementType.Name, item);
         }
+        long endOffset = w.Position;
+        uint newSize = (uint)(endOffset - startOffset);
+        Size = newSize;
+        w.Position = sizeOffset;
+        w.Write(Size);
+        w.Position = endOffset;
     }
 }

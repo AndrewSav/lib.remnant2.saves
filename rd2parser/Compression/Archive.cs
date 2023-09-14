@@ -90,6 +90,7 @@ public class Archive
             {
                 using ZLibStream compressor = new ZLibStream(w.Stream, CompressionMode.Compress, true);
                 compressor.Write(span[current..(current + decompressedSize)]);
+                compressor.Flush();
             }
             long endOffset = w.Stream.Position;
             long compressedSize = w.Stream.Position - startOffset;

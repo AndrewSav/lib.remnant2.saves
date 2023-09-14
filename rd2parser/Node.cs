@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 using rd2parser.Model;
+using rd2parser.Model.Properties;
 
 namespace rd2parser;
 public abstract class Node
@@ -42,9 +43,14 @@ public abstract class Node
             {
                 string name = segment.Name == null ?"" : $"({segment.Name})";
                 string index = segment.Index == null ? "" : $"[{segment.Index}]";
-                sb.Append($"{segment.Type}{name}{index}.");
+                sb.Append($"{index}{segment.Type}{name}.");
             }
             return sb.ToString()[..(sb.Length - 1)];
         }
+    }
+
+    public virtual Node Copy()
+    {
+        throw new NotImplementedException();
     }
 }
