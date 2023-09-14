@@ -59,4 +59,8 @@ public class ByteProperty : Node
     {
         return EnumName.Name == "None" ? EnumByte!.ToString() : EnumValue!.ToString();
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        yield break;
+    }
 }

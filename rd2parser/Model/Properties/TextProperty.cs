@@ -57,4 +57,9 @@ public class TextProperty : Node
             _ => throw new ApplicationException("unsupported history type")
         };
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        if (Value is Node node )
+            yield return node;
+    }
 }

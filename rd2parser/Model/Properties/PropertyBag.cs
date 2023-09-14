@@ -80,4 +80,11 @@ public class PropertyBag : Node
     {
         return (PropertyBag)Copy();
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        foreach (Property p in Properties.Select(x => x.Value))
+        {
+            yield return p;
+        }
+    }
 }

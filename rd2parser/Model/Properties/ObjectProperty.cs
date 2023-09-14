@@ -57,4 +57,8 @@ public class ObjectProperty : Node
     {
         SetIndex(o.ObjectIndex, o.SaveData.Objects);
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        yield break;
+    }
 }

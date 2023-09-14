@@ -49,4 +49,11 @@ public class Variables : Node
             keyValuePair.Value.Write(w, ctx);
         }
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        foreach (Variable v in Properties.Select(x => x.Value))
+        {
+            yield return v;
+        }
+    }
 }

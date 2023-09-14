@@ -121,4 +121,11 @@ public class PersistenceContainer : Node
         w.Write(dynamicOffset);
         w.Position = endOffset;
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        foreach (Actor a in Actors.Select(x => x.Value))
+        {
+            yield return a;
+        }
+    }
 }

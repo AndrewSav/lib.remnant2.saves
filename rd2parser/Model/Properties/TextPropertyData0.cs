@@ -33,4 +33,8 @@ public class TextPropertyData0 : Node
         w.WriteFString(Key);
         w.WriteFString(SourceString);
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        yield break;
+    }
 }

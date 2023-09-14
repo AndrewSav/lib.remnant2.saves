@@ -42,4 +42,9 @@ public class Actor : Node
         }
         Archive.Write(w);
     }
+
+    public override IEnumerable<Node> GetChildren()
+    {
+        yield return Archive;
+    }
 }

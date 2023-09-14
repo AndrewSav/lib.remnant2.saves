@@ -55,4 +55,15 @@ public class MapProperty : Node
             PropertyValue.WritePropertyValue(w, ctx, keyValuePair.Value, ValueType.Name);
         }
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        foreach (KeyValuePair<object, object> kvp in Values)
+        {
+            if (kvp.Key is Node key)
+                yield return key;
+
+            if (kvp.Value is Node value)
+                yield return value;
+        }
+    }
 }

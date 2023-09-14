@@ -42,4 +42,8 @@ public class EnumProperty : Node
     {
         return EnumValue.ToString();
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        yield break;
+    }
 }

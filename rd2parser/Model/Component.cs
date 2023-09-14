@@ -21,4 +21,11 @@ public class Component : Node
         ComponentKey = componentKey;
         Path.Add(new() { Name = componentKey, Type = "Component" });
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        if (Properties != null)
+            yield return Properties;
+        if (Variables != null)
+            yield return Variables;
+    }
 }

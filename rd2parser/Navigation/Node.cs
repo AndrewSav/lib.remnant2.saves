@@ -20,6 +20,7 @@ public abstract class Node
     public Node? Parent { get; set; }
     [JsonIgnore]
     public List<Segment> Path { get; set; }
+
     protected static void AddIndexToChild(object child, int index)
     {
         switch (child)
@@ -52,4 +53,7 @@ public abstract class Node
     {
         throw new NotImplementedException();
     }
+
+    public abstract IEnumerable<Node> GetChildren();
+
 }

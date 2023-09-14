@@ -85,4 +85,12 @@ public class ArrayStructProperty : Node
         w.Write(Size);
         w.Position = endOffset;
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        foreach (object? item in Items)
+        {
+            if (item is Node node)
+                yield return node;
+        }
+    }
 }

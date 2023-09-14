@@ -35,4 +35,8 @@ public class TextPropertyData255 : Node
             w.WriteFString(Value!);
         }
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        yield break;
+    }
 }

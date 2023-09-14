@@ -44,4 +44,12 @@ public class ArrayProperty : Node
         w.Write(Items.Count);
         foreach (object? item in Items) PropertyValue.WritePropertyValue(w, ctx, item, ElementType.Name);
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        foreach (object? item in Items)
+        {
+            if (item is Node node)
+                yield return node;
+        }
+    }
 }

@@ -376,5 +376,11 @@ public class SaveData : Node
             w.Position = endOffset;
         }
     }
-
+    public override IEnumerable<Node> GetChildren()
+    {
+        foreach (UObject o in Objects)
+        {
+                yield return o;
+        }
+    }
 }

@@ -125,4 +125,9 @@ public class Property : Node
         result.Path = new(Path);
         return result;
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        if (Value is Node node)
+            yield return node;
+    }
 }

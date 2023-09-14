@@ -88,5 +88,9 @@ public class Variable : Node
     {
         return (T)Convert.ChangeType(value!, typeof(T), CultureInfo.InvariantCulture);
     }
-
+    public override IEnumerable<Node> GetChildren()
+    {
+        if (Value is Node node)
+            yield return node;
+    }
 }

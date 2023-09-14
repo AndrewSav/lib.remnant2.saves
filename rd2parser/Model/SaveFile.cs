@@ -206,4 +206,22 @@ public class SaveFile
     {
         return SaveData.GetVariableTypes();
     }
+
+    public int CountObjects()
+    {
+        int i = 0;
+        Queue<Node> q = new Queue<Node>();
+        q.Enqueue(SaveData);
+        while (q.Count > 0)
+        {
+            Node n = q.Dequeue();
+            i++;
+            Console.WriteLine(n.DisplayPath);
+            foreach (Node c in n.GetChildren())
+            {
+                q.Enqueue(c);
+            }
+        }
+        return i;
+    }
 }

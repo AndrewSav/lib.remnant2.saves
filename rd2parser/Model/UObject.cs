@@ -100,4 +100,17 @@ public class UObject : Node
     {
         return (UObject)Copy();
     }
+    public override IEnumerable<Node> GetChildren()
+    {
+        if (Properties != null)
+            yield return Properties;
+
+        if (Components != null)
+        {
+            foreach (Component c in Components)
+            {
+                    yield return c;
+            }
+        }
+    }
 }
