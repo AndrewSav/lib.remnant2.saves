@@ -1,9 +1,8 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 using rd2parser.Model;
-using rd2parser.Model.Properties;
 
-namespace rd2parser;
+namespace rd2parser.Navigation;
 public abstract class Node
 {
     protected Node()
@@ -20,7 +19,7 @@ public abstract class Node
     [JsonIgnore]
     public Node? Parent { get; set; }
     [JsonIgnore]
-    public List<Segment> Path { get;  set; }
+    public List<Segment> Path { get; set; }
     protected static void AddIndexToChild(object child, int index)
     {
         switch (child)
@@ -41,7 +40,7 @@ public abstract class Node
             StringBuilder sb = new();
             foreach (Segment segment in Path)
             {
-                string name = segment.Name == null ?"" : $"({segment.Name})";
+                string name = segment.Name == null ? "" : $"({segment.Name})";
                 string index = segment.Index == null ? "" : $"[{segment.Index}]";
                 sb.Append($"{index}{segment.Type}{name}.");
             }

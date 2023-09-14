@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using rd2parser.IO;
+using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
@@ -27,6 +28,10 @@ public class StructProperty : Node
         Type = new(r, ctx.NamesTable);
         Guid = r.Read<FGuid>();
         Unknown = r.Read<byte>();
+        if (Unknown != 0)
+        {
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Location}, {Offset}", Unknown, DisplayPath, r.Position);
+        }
         Value = ReadStructPropertyValue(r, ctx, Type.Name, this);
     }
 

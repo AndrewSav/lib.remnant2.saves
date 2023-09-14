@@ -1,4 +1,5 @@
 ﻿using rd2parser.Model.Memory;
+using rd2parser.Navigation;
 using System.Globalization;
 using System.Numerics;
 

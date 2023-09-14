@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using rd2parser.Model.Memory;
 using rd2parser.Model.Properties;
+using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 
@@ -46,6 +47,8 @@ public class SaveData : Node
 
         int objectsDataOffset = r.Position;
 
+
+        int maxPosition = r.Position;
         r.Position = (int)NameTableOffset;
         NamesTable = ReadNameTable(r);
         SerializationContext ctx = new()
@@ -54,10 +57,12 @@ public class SaveData : Node
             ClassPath = SaveGameClassPath?.Path
         };
 
+        maxPosition = int.Max(maxPosition, r.Position);
         r.Position = (int)ObjectsOffset;
 
         ctx.Objects = Objects = ReadObjects(r, ctx);
 
+        maxPosition = int.Max(maxPosition, r.Position);
         r.Position = objectsDataOffset;
 
         for (int i = 0; i < Objects.Count; i++)
@@ -77,6 +82,8 @@ public class SaveData : Node
         _propertyRegistry = ctx.PropertyRegistry;
         _variableRegistry = ctx.VariableRegistry;
 
+        maxPosition = int.Max(maxPosition, r.Position);
+        r.Position = maxPosition;
         if (oldCtx == null) return;
         oldCtx.PropertyRegistry.Add(_propertyRegistry);
         oldCtx.VariableRegistry.Add(_variableRegistry);
@@ -165,6 +172,13 @@ public class SaveData : Node
 
         extraData = r.ReadBytes((int)(start + len) - r.Position);
 
+        if (extraData.Any(x => x != 0))
+        {
+            string debug = BitConverter.ToString(extraData);
+            Log.Logger.Warning("unexpected non-zero extra data while reading properties at {Location}, {Offset:x8}",parent?.DisplayPath, r.Position);
+            Log.Logger.Debug(debug);
+        }
+
         return (result, extraData);
     }
 
@@ -201,6 +215,14 @@ public class SaveData : Node
                 if (r.Position > start + len)
                     throw new ApplicationException("ReadComponents read too much data unexpectedly");
                 c.ExtraComponentsData = r.ReadBytes(start + len - r.Position);
+                if (c.ExtraComponentsData.Any(x => x != 0))
+                {
+                    Node child = c.Variables as Node ?? c.Properties!;
+
+                    string debug = BitConverter.ToString(c.ExtraComponentsData);
+                    Log.Logger.Warning("unexpected non-zero extra data while reading components at {Location}, {Offset:x8}", child.DisplayPath, r.Position);
+                    Log.Logger.Debug(debug);
+                }
             }
 
             result.Add(c);

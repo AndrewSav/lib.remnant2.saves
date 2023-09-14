@@ -3,7 +3,6 @@ using System.IO.Compression;
 using System.IO.Hashing;
 using rd2parser.Compression.Model;
 using rd2parser.IO;
-using Serilog;
 
 namespace rd2parser.Compression;
 
@@ -12,7 +11,7 @@ public class Archive
     public static byte[] DecompressSave(string saveFile)
     {
         ReaderBase r = new(File.ReadAllBytes(saveFile));
-        using MemoryStream output = new MemoryStream();
+        using MemoryStream output = new();
 
         CompressedFileHeader fh = r.Read<CompressedFileHeader>();
         fh.DumpDebug();
@@ -27,22 +26,22 @@ public class Archive
             byte[] buffer = r.ReadBytes((int)header.CompressedSize1);
             header.Validate(r.IsEof, chunkCounter);
 
-            using MemoryStream bufferStream = new MemoryStream(buffer);
-            using ZLibStream decompressor = new ZLibStream(bufferStream, CompressionMode.Decompress);
+            using MemoryStream bufferStream = new(buffer);
+            using ZLibStream decompressor = new(bufferStream, CompressionMode.Decompress);
             decompressor.CopyTo(output);
             chunkCounter++;
         }
 
-        Span<byte> span = new Span<byte>(output.GetBuffer());
+        Span<byte> span = new(output.GetBuffer());
         int saveSize = BinaryPrimitives.ReadInt32LittleEndian(span[8..]);
 
         if (saveSize + 12 != fh.DecompressedSize)
         {
-            Log.Warning("Expected saveSize + 12 == fh.DecompressedSize, got: saveSize: {saveSize} DecompressedSize: {DecompressedSize}", saveSize, fh.DecompressedSize);
+            Log.Logger.Warning("Expected saveSize + 12 == fh.DecompressedSize, got: saveSize: {saveSize} DecompressedSize: {DecompressedSize}", saveSize, fh.DecompressedSize);
         }
         if (9 != fh.Version)
         {
-            Log.Warning("Expected save version 9, got: saveSize: {Version}", fh.Version);
+            Log.Logger.Warning("Expected save version 9, got: saveSize: {Version}", fh.Version);
         }
 
         BinaryPrimitives.WriteUInt32LittleEndian(span, fh.Crc32);
@@ -70,7 +69,7 @@ public class Archive
         };
         w.Write(fh);
 
-        Span<byte> span = new Span<byte>(data);
+        Span<byte> span = new(data);
         BinaryPrimitives.WriteInt32LittleEndian(span[8..], fh.DecompressedSize-12);
         int current = 8;
         while (current < data.Length)
@@ -88,7 +87,7 @@ public class Archive
             w.Write(header);
             long startOffset = w.Position;
             {
-                using ZLibStream compressor = new ZLibStream(w.Stream, CompressionMode.Compress, true);
+                using ZLibStream compressor = new(w.Stream, CompressionMode.Compress, true);
                 compressor.Write(span[current..(current + decompressedSize)]);
                 compressor.Flush();
             }

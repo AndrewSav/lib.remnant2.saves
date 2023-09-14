@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 
@@ -24,6 +25,10 @@ public class Variables : Node
         Name = new FName(r, ctx.NamesTable);
         Path.Add(new() { Name = Name.Name, Type = "Variables" });
         Unknown = r.Read<ulong>();
+        if (Unknown != 0)
+        {
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Location}, {Offset}", Unknown, DisplayPath, r.Position);
+        }
         int len = r.Read<int>();
 
         for (int i = 0; i < len; i++)

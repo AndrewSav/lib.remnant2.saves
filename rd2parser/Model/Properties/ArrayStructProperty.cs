@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using rd2parser.Model.Memory;
+using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
@@ -27,6 +28,10 @@ public class ArrayStructProperty : Node
     public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, Node? parent) : this(parent)
     {
         Unknown = unknown;
+        if (Unknown != 0)
+        {
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Location}, {Offset}", Unknown, DisplayPath, r.Position);
+        }
         OuterElementType = elementType;
         NameIndex = r.Read<ushort>();
         TypeIndex = r.Read<ushort>();
@@ -35,6 +40,10 @@ public class ArrayStructProperty : Node
         ElementType = new(r, ctx.NamesTable);
         Guid = r.Read<FGuid>();
         Unknown2 = r.Read<byte>();
+        if (Unknown != 0)
+        {
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown2 byte at {Location}, {Offset}", Unknown2, DisplayPath, r.Position);
+        }
 
         Count = count;
         Items = new List<object?>();

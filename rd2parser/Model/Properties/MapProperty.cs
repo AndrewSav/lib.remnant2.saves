@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
@@ -21,6 +22,12 @@ public class MapProperty : Node
         KeyType = new(r, ctx.NamesTable);
         ValueType = new(r, ctx.NamesTable);
         Unknown = r.ReadBytes(5);
+        if (Unknown.Any(x => x != 0))
+        {
+            string debug = BitConverter.ToString(Unknown);
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown bytes at {Location}, {Offset}", debug, DisplayPath, r.Position);
+        }
+
         int len = r.Read<int>();
         for (int i = 0; i < len; i++)
         {

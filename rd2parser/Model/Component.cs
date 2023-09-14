@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using rd2parser.Model.Properties;
+using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 

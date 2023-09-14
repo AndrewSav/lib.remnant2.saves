@@ -1,4 +1,6 @@
-﻿namespace rd2parser.examples;
+﻿using Serilog;
+
+namespace rd2parser.examples;
 
 internal class Program
 {
@@ -22,10 +24,17 @@ internal class Program
     // TODO: README - FIX UPS: ObjectProperty: UObject (write)
     // TODO: README - FIX UPS: Navigation
     // TODO: README - FIX UPS: Copying object will screw up navigation
+    // TODO: move UObject read/write code from SaveData to UObject
 
 
     private static void Main()
     {
+        // This can be specified to see logging events from the library
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Warning()  // Change this if needed
+            .WriteTo.Console()
+            .CreateLogger();
+
         Example.AddRing();
         Example.EditScrap();
         Example.EditScrapRaw();

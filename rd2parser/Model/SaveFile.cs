@@ -2,7 +2,9 @@
 using System.IO.Hashing;
 using rd2parser.Model.Memory;
 using rd2parser.Compression;
+using rd2parser.IO.AddressUsageTracker;
 using rd2parser.Model.Properties;
+using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 public class SaveFile
@@ -18,8 +20,18 @@ public class SaveFile
     [SetsRequiredMembers]
     public SaveFile(Reader r)
     {
+        r.ActivateTracker();
         FileHeader = r.Read<FileHeader>();
         SaveData = new(r);
+        SortedDictionary<int, AddressRange> d = r.GetTracker().GetRanges();
+        if (d.Count > 1)
+        {
+            Log.Logger.Warning("unexpected gaps in the the read data");
+        }
+        if (d[0].End != r.Position)
+        {
+            Log.Logger.Warning("unexpected unexpected position after read");
+        }
     }
 
     public void Write(Writer w)

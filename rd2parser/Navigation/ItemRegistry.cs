@@ -1,7 +1,7 @@
-﻿namespace rd2parser;
+﻿namespace rd2parser.Navigation;
 public class ItemRegistry<T> where T : Node
 {
-    private readonly Dictionary<string,List<T>> _registry = new ();
+    private readonly Dictionary<string, List<T>> _registry = new();
 
     public void Add(string name, T item)
     {
@@ -55,7 +55,7 @@ public class ItemRegistry<T> where T : Node
         {
             foreach (T item in registryItem.Value)
             {
-                foreach(Segment s in item.Path)
+                foreach (Segment s in item.Path)
                 {
                     if (s.Name != null)
                     {

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 public class Variable : Node

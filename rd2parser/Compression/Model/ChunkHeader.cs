@@ -1,5 +1,4 @@
-﻿using Serilog;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace rd2parser.Compression.Model;
 
@@ -20,19 +19,19 @@ public struct ChunkHeader
 
     public readonly void DumpDebug(int chunk = -1)
     {
-        Log.Debug("Dumping ChunkHeader");
+        Log.Logger.Debug("Dumping ChunkHeader");
         if (chunk != -1)
         {
-            Log.Debug($"Chunk {chunk}");
+            Log.Logger.Debug($"Chunk {chunk}");
         }
-        Log.Debug($"HeaderTag {HeaderTag:X8}");
-        Log.Debug($"ChunkSize {ChunkSize}");
-        Log.Debug($"Compressor {Compressor}");
-        Log.Debug($"CompressedSize1 {CompressedSize1}");
-        Log.Debug($"DecompressedSize1 {DecompressedSize1}");
-        Log.Debug($"CompressedSize2 {CompressedSize2}");
-        Log.Debug($"DecompressedSize2 {DecompressedSize2}");
-        Log.Debug("--");
+        Log.Logger.Debug($"HeaderTag {HeaderTag:X8}");
+        Log.Logger.Debug($"ChunkSize {ChunkSize}");
+        Log.Logger.Debug($"Compressor {Compressor}");
+        Log.Logger.Debug($"CompressedSize1 {CompressedSize1}");
+        Log.Logger.Debug($"DecompressedSize1 {DecompressedSize1}");
+        Log.Logger.Debug($"CompressedSize2 {CompressedSize2}");
+        Log.Logger.Debug($"DecompressedSize2 {DecompressedSize2}");
+        Log.Logger.Debug("--");
 
     }
 
@@ -48,23 +47,23 @@ public struct ChunkHeader
         }
         if (DecompressedSize1 != DecompressedSize2)
         {
-            Log.Warning("Decompressed size mismatch in chunk {chunk}: {DecompressedSize1} vs {DecompressedSize2}", chunkCounter, DecompressedSize1, DecompressedSize2);
+            Log.Logger.Warning("Decompressed size mismatch in chunk {chunk}: {DecompressedSize1} vs {DecompressedSize2}", chunkCounter, DecompressedSize1, DecompressedSize2);
         }
         if (CompressedSize1 != CompressedSize2)
         {
-            Log.Warning("Compressed size mismatch in chunk {chunk}: {CompressedSize1} vs {CompressedSize2}", chunkCounter, CompressedSize1, CompressedSize2);
+            Log.Logger.Warning("Compressed size mismatch in chunk {chunk}: {CompressedSize1} vs {CompressedSize2}", chunkCounter, CompressedSize1, CompressedSize2);
         }
         if (ChunkSize != FullChunkSize)
         {
-            Log.Warning("Unexpected ChunkSize in chunk {chunk}: {ChunkSize} vs {ExpectedChunkSize}", chunkCounter, ChunkSize, FullChunkSize);
+            Log.Logger.Warning("Unexpected ChunkSize in chunk {chunk}: {ChunkSize} vs {ExpectedChunkSize}", chunkCounter, ChunkSize, FullChunkSize);
         }
         if (!isEof && ChunkSize != DecompressedSize1)
         {
-            Log.Warning("Unexpected DecompressedSize1 in chunk {chunk}: {ChunkSize} vs {DecompressedSize1}", chunkCounter, ChunkSize, DecompressedSize1);
+            Log.Logger.Warning("Unexpected DecompressedSize1 in chunk {chunk}: {ChunkSize} vs {DecompressedSize1}", chunkCounter, ChunkSize, DecompressedSize1);
         }
         if (!isEof && ChunkSize != DecompressedSize2)
         {
-            Log.Warning("Unexpected DecompressedSize2 in chunk {chunk}: {ChunkSize} vs {DecompressedSize2}", chunkCounter, ChunkSize, DecompressedSize2);
+            Log.Logger.Warning("Unexpected DecompressedSize2 in chunk {chunk}: {ChunkSize} vs {DecompressedSize2}", chunkCounter, ChunkSize, DecompressedSize2);
         }
     }
 }

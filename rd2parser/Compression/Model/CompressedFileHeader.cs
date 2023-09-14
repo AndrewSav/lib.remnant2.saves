@@ -1,5 +1,4 @@
-﻿using Serilog;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace rd2parser.Compression.Model;
 
@@ -12,10 +11,10 @@ public struct CompressedFileHeader
 
     public readonly void DumpDebug()
     {
-        Log.Debug("Dumping CompressedFileHeader");
-        Log.Debug($"Crc32 {Crc32:X8}");
-        Log.Debug($"DecompressedSize {DecompressedSize}");
-        Log.Debug($"Version {Version}");
-        Log.Debug("--");
+        Log.Logger.Debug("Dumping CompressedFileHeader");
+        Log.Logger.Debug($"Crc32 {Crc32:X8}");
+        Log.Logger.Debug($"DecompressedSize {DecompressedSize}");
+        Log.Logger.Debug($"Version {Version}");
+        Log.Logger.Debug("--");
     }
 }
