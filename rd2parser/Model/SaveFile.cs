@@ -146,22 +146,6 @@ public class SaveFile
         return Filter(SaveData.GetRegistryItem<T>(name), filter);
     }
 
-    public List<Property>? GetProperties(string name, string? filter = null)
-    {
-        return GetRegistryItems<Property>(name, filter);
-    }
-
-    public Property? GetProperty(string name, string? filter = null)
-    {
-        return GetRegistryItem<Property>(name, filter);
-    }
-
-    public List<T>? GetProperties<T>(string name, string? filter = null)
-    {
-        List<Property>? list = Filter(SaveData.GetRegistryItem<Property>(name), filter);
-        return list?.Select(x => (T)x.Value!).ToList();
-    }
-
     public T? GetRegistryItem<T>(string name, string? filter = "") where T : Node
     {
         List<T>? l = GetRegistryItems<T>(name, filter);
@@ -177,6 +161,79 @@ public class SaveFile
 
         throw new InvalidOperationException("there are more than one property");
     }
+
+
+    public List<T>? GetProperties<T>(string name, string? filter = null)
+    {
+        List<Property>? list = Filter(SaveData.GetRegistryItem<Property>(name), filter);
+        return list?.Select(x => (T)x.Value!).ToList();
+    }
+
+    public List<Property>? GetProperties(string name, string? filter = null)
+    {
+        return GetRegistryItems<Property>(name, filter);
+    }
+
+    public List<Property>? GetAllProperties()
+    {
+        return SaveData.GetAllRegistryItem<Property>();
+    }
+
+    public Property? GetProperty(string name, string? filter = null)
+    {
+        return GetRegistryItem<Property>(name, filter);
+    }
+
+    public List<T>? GetVariables<T>(string name, string? filter = null)
+    {
+        List<Variable>? list = Filter(SaveData.GetRegistryItem<Variable>(name), filter);
+        return list?.Select(x => (T)x.Value!).ToList();
+    }
+
+    public List<Variable>? GetVariables(string name, string? filter = null)
+    {
+        return GetRegistryItems<Variable>(name, filter);
+    }
+
+    public List<Variable>? GetAllVariables()
+    {
+        return SaveData.GetAllRegistryItem<Variable>();
+    }
+
+    public Variable? GetVariable(string name, string? filter = null)
+    {
+        return GetRegistryItem<Variable>(name, filter);
+    }
+
+    public List<Actor>? GetActors(string name, string? filter = null)
+    {
+        return GetRegistryItems<Actor>(name, filter);
+    }
+
+    public List<Actor>? GetAllActors()
+    {
+        return SaveData.GetAllRegistryItem<Actor>();
+    }
+    public Actor? GetActor(string name, string? filter = null)
+    {
+        return GetRegistryItem<Actor>(name, filter);
+    }
+    
+    public List<UObject>? GetObjects(string name, string? filter = null)
+    {
+        return GetRegistryItems<UObject>(name, filter);
+    }
+
+    public List<UObject>? GetAllObjects()
+    {
+        return SaveData.GetAllRegistryItem<UObject>();
+    }
+
+    public UObject? GetObject(string name, string? filter = null)
+    {
+        return GetRegistryItem<UObject>(name, filter);
+    }
+
 
 
     public void VisitObjects(Action<Node> f)

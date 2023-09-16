@@ -66,6 +66,13 @@ internal partial class Example
         var spw = sf.GetProperties("Tag");
         */
 
+        UObject main = sf.GetObject("/Game/Maps/Main.Main:PersistentLevel")!;
+
+        //List<UObject> oo = sf.GetAllObjects()!;
+        //var bla2 = oo.Where(x => x.ObjectPath == null && x.Name != null);
+        //var bla = oo.Select(x => new { x.Key, x.ObjectPath, x.Name });
+
+
     }
 
     private static void PrintMode(Property slot, string mode, string world = "")

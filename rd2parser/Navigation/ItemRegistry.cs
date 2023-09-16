@@ -42,6 +42,14 @@ public class ItemRegistry
         return !byType.ContainsKey(name) ? null : byType[name].Select(x =>(T)x).ToList();
     }
 
+    public List<T>? GetAll<T>() where T : Node
+    {
+        string type = typeof(T).Name;
+        if (!_registry.ContainsKey(type)) return null;
+        var byType = _registry[type];
+        return byType.SelectMany(x => x.Value).Select( x=>(T)x).ToList();
+    }
+
     public List<string> GetTypes()
     {
         List<string> type = new();

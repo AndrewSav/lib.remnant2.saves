@@ -54,6 +54,18 @@ public class UObject : Node
             throw new ApplicationException("unexpected object index");
         }
         (Properties, ExtraPropertiesData) = ReadProperties(r, ctx);
+        string? name = ObjectPath ?? Name;
+        if (Properties is { Properties.Count: > 0 } && Properties.Properties[0].Key == "Key")
+        {
+            if (Properties.Properties[0].Value.ToString() != null)
+            {
+                name = Properties.Properties[0].Value.ToString()!;
+            }
+        }
+        if (name != null)
+        {
+            ctx.Registry.Add(name, this);
+        }
 
         IsActor = r.Read<byte>();
         if (IsActor != 0)
@@ -238,7 +250,7 @@ public class UObject : Node
     // To make it easier to navigate in the debugger
     public override string? ToString()
     {
-        return Key ?? ObjectPath ?? Name;
+        return Key ?? ObjectPath;
     }
 
     // To make it easier to navigate in the debugger

@@ -61,7 +61,13 @@ public class PersistenceContainer : Node
         for (uint i = 0; i < dynamicCount; i++)
         {
             DynamicActor da = new(r);
-            Actors.Single( x => x.Key == da.UniqueId).Value.DynamicData = da;
+            Actor a = Actors.Single(x => x.Key == da.UniqueId).Value;
+            a.DynamicData = da;
+            if (a.DynamicData.ClassPath.Name != null)
+            {
+                ctx.Registry.Add(a.DynamicData.ClassPath.Name, a);
+                a.Path[^1].Name = a.DynamicData.ClassPath.Name;
+            }
         }
     }
 

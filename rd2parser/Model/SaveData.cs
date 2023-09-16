@@ -158,6 +158,11 @@ public class SaveData : Node
         return _registry.Get<T>(name);
     }
 
+    public List<T>? GetAllRegistryItem<T>() where T : Node
+    {
+        return _registry.GetAll<T>();
+    }
+
     public override IEnumerable<Node> GetChildren()
     {
         foreach (UObject o in Objects)
