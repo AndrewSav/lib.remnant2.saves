@@ -17,8 +17,7 @@ public class SerializationContext
 
     // These two properties keep names of all properties and variables
     // So they are easier to find with SaveFile.GetVariable(s)/Property(ies)
-    public ItemRegistry<Property> PropertyRegistry = new();
-    public ItemRegistry<Variable> VariableRegistry = new();
+    public ItemRegistry Registry = new();
 
     // This is used during read/write in a nested container
     // to keep track of outermost file offsets

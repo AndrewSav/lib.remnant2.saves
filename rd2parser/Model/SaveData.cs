@@ -21,14 +21,11 @@ public class SaveData : Node
 
     // The next two is for navigation
     [JsonIgnore]
-    private readonly ItemRegistry<Property> _propertyRegistry;
-    [JsonIgnore]
-    private readonly ItemRegistry<Variable> _variableRegistry;
+    private readonly ItemRegistry _registry;
 
     public SaveData() :base(null, new())
     {
-        _propertyRegistry = new();
-        _variableRegistry = new();
+        _registry = new();
     }
 
     [SetsRequiredMembers]
@@ -92,11 +89,9 @@ public class SaveData : Node
         maxPosition = int.Max(maxPosition, r.Position);
         r.Position = maxPosition;
 
-        _propertyRegistry = ctx.PropertyRegistry;
-        _variableRegistry = ctx.VariableRegistry;
+        _registry = ctx.Registry;
         if (oldCtx == null) return;
-        oldCtx.PropertyRegistry.Add(_propertyRegistry);
-        oldCtx.VariableRegistry.Add(_variableRegistry);
+        oldCtx.Registry.Add(_registry);
     }
 
     public void Write(Writer w, int containerOffset = 0)
@@ -158,34 +153,9 @@ public class SaveData : Node
         w.Position = endOffset;
     }
 
-    public List<Property>? GetProperty(string name)
+    public List<T>? GetRegistryItem<T>(string name) where T : Node
     {
-        return _propertyRegistry.Get(name);
-    }
-
-    public List<Variable>? GetVariable(string name)
-    {
-        return _variableRegistry.Get(name);
-    }
-
-    public List<string> GetPropertyNames()
-    {
-        return _propertyRegistry.GetNames();
-    }
-
-    public List<string> GetVariableNames()
-    {
-        return _variableRegistry.GetNames();
-    }
-
-    public List<string> GetPropertyTypes()
-    {
-        return _propertyRegistry.GetTypes();
-    }
-
-    public List<string> GetVariableTypes()
-    {
-        return _variableRegistry.GetTypes();
+        return _registry.Get<T>(name);
     }
 
     public override IEnumerable<Node> GetChildren()

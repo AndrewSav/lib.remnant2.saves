@@ -57,7 +57,7 @@ public class Variable : Node
             default:
                 throw new ApplicationException("unknown variable type");
         }
-        ctx.VariableRegistry.Add(Name.Name, this);
+        ctx.Registry.Add(Name.Name, this);
     }
 
     public void Write(Writer w, SerializationContext ctx)

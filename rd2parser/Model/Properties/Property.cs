@@ -51,7 +51,7 @@ public class Property : Node
             Value = pv.Value;
         }
 
-        ctx.PropertyRegistry.Add(Name.Name, this);
+        ctx.Registry.Add(Name.Name, this);
     }
 
     public override string? ToString()

@@ -141,25 +141,30 @@ public class SaveFile
         return result;
     }
 
+    public List<T>? GetRegistryItems<T>(string name, string? filter = null) where T : Node
+    {
+        return Filter(SaveData.GetRegistryItem<T>(name), filter);
+    }
+
     public List<Property>? GetProperties(string name, string? filter = null)
     {
-        return Filter(SaveData.GetProperty(name),filter);
+        return GetRegistryItems<Property>(name, filter);
+    }
+
+    public Property? GetProperty(string name, string? filter = null)
+    {
+        return GetRegistryItem<Property>(name, filter);
     }
 
     public List<T>? GetProperties<T>(string name, string? filter = null)
     {
-        List<Property>? list = Filter(SaveData.GetProperty(name), filter);
+        List<Property>? list = Filter(SaveData.GetRegistryItem<Property>(name), filter);
         return list?.Select(x => (T)x.Value!).ToList();
     }
 
-    public List<Variable>? GetVariables(string name, string? filter = null)
+    public T? GetRegistryItem<T>(string name, string? filter = "") where T : Node
     {
-        return Filter(SaveData.GetVariable(name),filter);
-    }
-
-    public Property? GetProperty(string name, string? filter = "")
-    {
-        List<Property>? l = GetProperties(name, filter);
+        List<T>? l = GetRegistryItems<T>(name, filter);
         if (l == null || l.Count == 0)
         {
             return null;
@@ -173,40 +178,6 @@ public class SaveFile
         throw new InvalidOperationException("there are more than one property");
     }
 
-    public Variable? GetVariable(string name, string? filter = "")
-    {
-        List<Variable>? l = GetVariables(name, filter);
-        if (l == null || l.Count == 0)
-        {
-            return null;
-        }
-
-        if (l.Count == 1)
-        {
-            return l[0];
-        }
-
-        throw new InvalidOperationException("there are more than one variable");
-    }
-    public List<string> GetPropertyNames()
-    {
-        return SaveData.GetPropertyNames();
-    }
-
-    public List<string> GetVariableNames()
-    {
-        return SaveData.GetVariableNames();
-    }
-
-    public List<string> GetPropertyTypes()
-    {
-        return SaveData.GetPropertyTypes();
-    }
-
-    public List<string> GetVariableTypes()
-    {
-        return SaveData.GetVariableTypes();
-    }
 
     public void VisitObjects(Action<Node> f)
     {
