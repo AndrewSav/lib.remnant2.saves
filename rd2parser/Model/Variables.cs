@@ -7,7 +7,7 @@ public class Variables : Node
 {
     public required FName Name;
     public required ulong Unknown;
-    public required List<KeyValuePair<string, Variable>> Properties;
+    public required List<KeyValuePair<string, Variable>> Items;
 
     public Variables()
     {
@@ -22,7 +22,7 @@ public class Variables : Node
     public Variables(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
-        Properties = new();
+        Items = new();
         Name = new FName(r, ctx.NamesTable);
         Path.Add(new() { Name = Name.Name, Type = "Variables" });
         Unknown = r.Read<ulong>();
@@ -36,7 +36,7 @@ public class Variables : Node
         {
             Variable v = new(r, ctx,this);
             v.Path[^1].Index = i;
-            Properties.Add(new KeyValuePair<string, Variable>(v.Name.Name,v));
+            Items.Add(new KeyValuePair<string, Variable>(v.Name.Name,v));
         }
     }
 
@@ -45,15 +45,15 @@ public class Variables : Node
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
         Name.Write(w, ctx);
         w.Write(Unknown);
-        w.Write(Properties.Count);
-        foreach (KeyValuePair<string, Variable> keyValuePair in Properties)
+        w.Write(Items.Count);
+        foreach (KeyValuePair<string, Variable> keyValuePair in Items)
         {
             keyValuePair.Value.Write(w, ctx);
         }
     }
     public override IEnumerable<Node> GetChildren()
     {
-        foreach (Variable v in Properties.Select(x => x.Value))
+        foreach (Variable v in Items.Select(x => x.Value))
         {
             yield return v;
         }

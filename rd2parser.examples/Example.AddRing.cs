@@ -29,7 +29,7 @@ internal partial class Example
             return;
         }
 
-        Property? ringItem = sf.GetProperties("ItemBP", $"UObject={character.ObjectIndex}")!
+        Property? ringItem = sf.GetProperties("ItemBP", character.Object!)!
             .SingleOrDefault(x => x.Value!.ToString() == ringId);
 
         if (ringItem != null)
@@ -38,7 +38,7 @@ internal partial class Example
             return;
         }
 
-        ringItem = sf.GetProperties("ItemBP", $"UObject={character.ObjectIndex}")!
+        ringItem = sf.GetProperties("ItemBP", character.Object!)!
             .FirstOrDefault(x => x.Value!.ToString()!.Contains("Ring_"));
 
         if (ringItem == null)

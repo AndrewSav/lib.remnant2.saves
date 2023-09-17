@@ -110,6 +110,8 @@ public class UObject : Node
                 ReadOffset = readOffset
             };
             c.Path[^1].Index = i;
+            c.Path[^1].Name = componentKey;
+            ctx.Registry.Add(componentKey,c);
             int len = r.Read<int>();
 
             int start = r.Position;

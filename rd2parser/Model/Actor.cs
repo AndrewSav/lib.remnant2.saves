@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using rd2parser.Model.Memory;
+using rd2parser.Model.Properties;
 using rd2parser.Navigation;
 
 namespace rd2parser.Model;
@@ -45,8 +47,50 @@ public class Actor : Node
         Archive.Write(w, containerOffset);
     }
 
+
+    public override string? ToString()
+    {
+        if (DynamicData?.ClassPath.Name != null)
+        {
+            if (DynamicData.ClassPath.Name == "ZoneActor")
+            {
+                string label = Archive.Objects[0].Properties["Label"].ToString();
+                return $"ZoneActor({label})";
+            }
+            return DynamicData.ClassPath.Name;
+        }
+        return base.ToString();
+    }
+
     public override IEnumerable<Node> GetChildren()
     {
         yield return Archive;
+    }
+
+    [JsonIgnore]
+    public PropertyBag? ZoneActorProperties
+    {
+        get
+        {
+            UObject? zoneActorObject = Archive.Objects.FirstOrDefault(x => x.Name == "ZoneActor");
+            if (zoneActorObject != null)
+            {
+                return zoneActorObject.Properties;
+            }
+            return null;
+        }
+    }
+    [JsonIgnore]
+    public PropertyBag? FirstObjectProperties
+    {
+        get
+        {
+            UObject? firstObject = Archive.Objects.FirstOrDefault();
+            if (firstObject != null)
+            {
+                return firstObject.Properties;
+            }
+            return null;
+        }
     }
 }

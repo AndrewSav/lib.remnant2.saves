@@ -1,11 +1,8 @@
-﻿using Serilog;
-
-namespace rd2parser.examples;
+﻿namespace rd2parser.examples;
 
 internal class Program
 {
 
-    // TODO: adv/campaign locations/events examples
     // TODO: blood moon?
     // TODO: show Cass Shop example
     // TODO: edit Cass Shop example
@@ -26,7 +23,6 @@ internal class Program
 
     private static void Main()
     {
-        Example.Campaign();
         Tests.Run();
 
         Example.AddRing();
@@ -34,6 +30,6 @@ internal class Program
         Example.EditScrapRaw();
         Example.ReadProfile();
         Example.Json();
-
+        Example.Campaign();
     }
 }

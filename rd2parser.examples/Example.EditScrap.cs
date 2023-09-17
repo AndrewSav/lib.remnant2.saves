@@ -30,13 +30,12 @@ internal partial class Example
             return;
         }
 
-        Property scrapItem = sf.GetProperties("ItemBP", $"UObject={character.ObjectIndex}")!
+        Property scrapItem = sf.GetProperties("ItemBP", character.Object!)!
             .Single(x => x.Value!.ToString() == scrapId);
 
-        int instanceDataIndex = (scrapItem.Bag["InstanceData"].Value as ObjectProperty)!.ObjectIndex;
+        UObject instanceData = (scrapItem.Bag["InstanceData"].Value as ObjectProperty)!.Object!;
 
-        Property scrap = sf.GetProperty("Quantity",
-            $"UObject={character.ObjectIndex},UObject=ItemInstanceData:{instanceDataIndex}")!;
+        Property scrap = sf.GetProperty("Quantity",instanceData)!;
         Console.WriteLine($"Current scrap value is {scrap.Value}. Changing to {targetScrapValue}...");
         scrap.Value = targetScrapValue;
 

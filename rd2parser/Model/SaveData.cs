@@ -162,6 +162,10 @@ public class SaveData : Node
     {
         return _registry.GetAll<T>();
     }
+    public List<T>? FindRegistryItem<T>(string namePattern) where T : Node
+    {
+        return _registry.Find<T>(namePattern);
+    }
 
     public override IEnumerable<Node> GetChildren()
     {

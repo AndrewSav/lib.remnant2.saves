@@ -28,4 +28,9 @@ public class Component : Node
         if (Variables != null)
             yield return Variables;
     }
+
+    public override string ToString()
+    {
+        return ComponentKey;
+    }
 }

@@ -1,4 +1,6 @@
-﻿namespace rd2parser.Navigation;
+﻿using System.Text.RegularExpressions;
+
+namespace rd2parser.Navigation;
 public class ItemRegistry
 {
     private readonly Dictionary<string, Dictionary<string, List<Node>>> _registry = new();
@@ -49,6 +51,15 @@ public class ItemRegistry
         var byType = _registry[type];
         return byType.SelectMany(x => x.Value).Select( x=>(T)x).ToList();
     }
+
+    public List<T>? Find<T>(string namePattern) where T : Node
+    {
+        string type = typeof(T).Name;
+        if (!_registry.ContainsKey(type)) return null;
+        var byType = _registry[type];
+        return byType.SelectMany(x => x.Value).Select(x => (T)x).Where(x => x.Path[^1].Name != null && Regex.IsMatch(x.Path[^1].Name!, namePattern) ).ToList();
+    }
+
 
     public List<string> GetTypes()
     {
