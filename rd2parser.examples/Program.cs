@@ -21,6 +21,8 @@ internal class Program
 
     private static void Main()
     {
+        Example.BloodMoon();
+
         Tests.Run();
 
         Example.AddRing();

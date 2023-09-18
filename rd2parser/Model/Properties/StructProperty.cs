@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using rd2parser.IO;
 using rd2parser.Navigation;
+using Newtonsoft.Json.Linq;
 
 namespace rd2parser.Model.Properties;
 
@@ -141,5 +142,10 @@ public class StructProperty : Node
     {
         if (Value is Node node)
             yield return node;
+    }
+
+    public override string? ToString()
+    {
+        return Value?.ToString();
     }
 }

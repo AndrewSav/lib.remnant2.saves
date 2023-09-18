@@ -57,7 +57,8 @@ public class ItemRegistry
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) return null;
         Dictionary<string, List<Node>> byType = _registry[type];
-        return byType.SelectMany(x => x.Value).Select(x => (T)x).Where(x => x.Path[^1].Name != null && Regex.IsMatch(x.Path[^1].Name!, namePattern) ).ToList();
+        List<T> result = byType.SelectMany(x => x.Value).Select(x => (T)x).Where(x => x.Path[^1].Name != null && Regex.IsMatch(x.Path[^1].Name!, namePattern)).ToList();
+        return result.Count > 0 ? result : null;
     }
 
 
