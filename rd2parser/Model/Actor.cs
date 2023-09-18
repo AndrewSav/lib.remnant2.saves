@@ -54,7 +54,7 @@ public class Actor : Node
         {
             if (DynamicData.ClassPath.Name == "ZoneActor")
             {
-                string label = Archive.Objects[0].Properties["Label"].ToString();
+                string? label = Archive.Objects[0].Properties?["Label"].ToString();
                 return $"ZoneActor({label})";
             }
             return DynamicData.ClassPath.Name;

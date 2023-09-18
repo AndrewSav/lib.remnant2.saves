@@ -51,13 +51,11 @@ internal partial class Example
         UObject instanceDataObject = (ringItem.Bag["InstanceData"].Value as ObjectProperty)!.Object!.CopyObject();
 
         itemObject.SaveData.Objects.Add(itemObject);
-        itemObject.Path[^1].Index = itemObject.ObjectIndex;
         itemObject.ObjectPath = ringId;
 
         instanceDataObject.SaveData.Objects.Add(instanceDataObject);
-        instanceDataObject.Path[^1].Index = instanceDataObject.ObjectIndex;
 
-        var newItemBag = ringItem.Bag.CopyPropertyBag();
+        PropertyBag newItemBag = ringItem.Bag.CopyPropertyBag();
         (newItemBag["ItemBP"].Value as ObjectProperty)!.SetObject(itemObject);
         (newItemBag["InstanceData"].Value as ObjectProperty)!.SetObject(instanceDataObject);
         newItemBag["New"].Value = 1; // Just for in-game display

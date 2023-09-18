@@ -4,8 +4,6 @@ internal class Program
 {
 
     // TODO: blood moon?
-    // TODO: show Cass Shop example
-    // TODO: edit Cass Shop example
     // TODO: Replace ApplicationException in library
     // TODO: Nuget
     // TODO: README - do not expect read json to work as is
@@ -30,6 +28,8 @@ internal class Program
         Example.EditScrapRaw();
         Example.ReadProfile();
         Example.Json();
+        Example.Cass();
+        Example.CassAddItem();
         Example.Campaign();
     }
 }

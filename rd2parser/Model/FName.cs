@@ -65,4 +65,18 @@ public class FName
     {
         return Name;
     }
+    public static FName Create(string name, List<string> namesTable, int? number = null)
+    {
+        int index = namesTable.FindIndex(x => x == name);
+        if (index == -1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(name),"name not found in the names table");
+        }
+        return new()
+        {
+            Name = name,
+            Index = (ushort)index,
+            Number = number
+        };
+    }
 }

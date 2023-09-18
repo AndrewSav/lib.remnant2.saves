@@ -12,7 +12,7 @@ public class ItemRegistry
         {
             _registry[type] = new();
         }
-        var byType = _registry[type];
+        Dictionary<string, List<Node>> byType = _registry[type];
         if (!byType.ContainsKey(name))
         {
             byType[name] = new();
@@ -40,7 +40,7 @@ public class ItemRegistry
     {
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) return null;
-        var byType = _registry[type];
+        Dictionary<string, List<Node>> byType = _registry[type];
         return !byType.ContainsKey(name) ? null : byType[name].Select(x =>(T)x).ToList();
     }
 
@@ -48,7 +48,7 @@ public class ItemRegistry
     {
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) return null;
-        var byType = _registry[type];
+        Dictionary<string, List<Node>> byType = _registry[type];
         return byType.SelectMany(x => x.Value).Select( x=>(T)x).ToList();
     }
 
@@ -56,7 +56,7 @@ public class ItemRegistry
     {
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) return null;
-        var byType = _registry[type];
+        Dictionary<string, List<Node>> byType = _registry[type];
         return byType.SelectMany(x => x.Value).Select(x => (T)x).Where(x => x.Path[^1].Name != null && Regex.IsMatch(x.Path[^1].Name!, namePattern) ).ToList();
     }
 

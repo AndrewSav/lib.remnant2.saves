@@ -81,7 +81,7 @@ public class SaveData : Node
         maxPosition = int.Max(maxPosition, r.Position);
         r.Position = objectsDataOffset;
 
-        foreach (var o in Objects)
+        foreach (UObject o in Objects)
         {
             o.ReadData(r, ctx);
         }
@@ -128,7 +128,7 @@ public class SaveData : Node
             o.Parent = this;
         }
 
-        foreach (var o in Objects)
+        foreach (UObject o in Objects)
         {
             o.WriteData(w, ctx);
         }

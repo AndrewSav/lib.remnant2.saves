@@ -52,9 +52,9 @@ internal partial class Example
 
         Console.WriteLine("Campaign");
 
-        var campaignMeta = sf.FindActors("Quest_Campaign", main)!.Single().Archive.Objects[0];
+        UObject campaignMeta = sf.FindActors("Quest_Campaign", main)!.Single().Archive.Objects[0];
         int campaignId = campaignMeta.Properties!["ID"].Get<int>();
-        var campaignObject = sf.GetObject($"/Game/Quest_{campaignId}_Container.Quest_Container:PersistentLevel");
+        UObject? campaignObject = sf.GetObject($"/Game/Quest_{campaignId}_Container.Quest_Container:PersistentLevel");
 
         int world1 = sf.GetComponent("World1", campaignMeta)!.Properties!["QuestID"].Get<int>();
         int world2 = sf.GetComponent("World2", campaignMeta)!.Properties!["QuestID"].Get<int>();
@@ -81,9 +81,9 @@ internal partial class Example
         if (slot1 != null)
         {
             Console.WriteLine("Adventure");
-            var adventureMeta = sf.FindActors("Quest_AdventureMode", main)!.Single().Archive.Objects[0];
+            UObject adventureMeta = sf.FindActors("Quest_AdventureMode", main)!.Single().Archive.Objects[0];
             int? adventureId = adventureMeta.Properties!["ID"].Get<int>();
-            var adventureObject = sf.GetObject($"/Game/Quest_{adventureId}_Container.Quest_Container:PersistentLevel");
+            UObject? adventureObject = sf.GetObject($"/Game/Quest_{adventureId}_Container.Quest_Container:PersistentLevel");
             int quest = sf.GetComponent("Quest", adventureMeta)!.Properties!["QuestID"].Get<int>();
             PropertyBag adventureInventory = sf.GetComponent("RemnantPlayerInventory", adventureMeta)!.Properties!;
             DoInventory(adventureInventory);
@@ -148,7 +148,7 @@ internal partial class Example
             if (seen.Contains(label)) continue;
             seen.Add(label);
 
-            var links = pb["ZoneLinks"].Get<ArrayStructProperty>();
+            ArrayStructProperty links = pb["ZoneLinks"].Get<ArrayStructProperty>();
             Console.WriteLine(label);
 
             List<string> waypoints = new();
@@ -271,7 +271,7 @@ internal partial class Example
             int questId = pb["QuestID"].Get<int>();
             string? nameId = pb["NameID"].ToString();
             string? label = pb["Label"].ToString();
-            var links = pb["ZoneLinks"].Get<ArrayStructProperty>();
+            ArrayStructProperty links = pb["ZoneLinks"].Get<ArrayStructProperty>();
             foreach (object? o in links.Items)
             {
                 PropertyBag link = (PropertyBag)o!;

@@ -22,7 +22,6 @@ public abstract class Node
     public List<Segment> Path { get; set; }
 
     
-    [JsonIgnore] //TODO: remove temp
     public int ReadOffset; // For debugging, reader offset where the object starts when read
     public int WriteOffset; // For debugging, writer offset where the object starts when written
     protected static void AddIndexToChild(object child, int index)
