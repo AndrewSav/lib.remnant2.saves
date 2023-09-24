@@ -16,32 +16,42 @@ internal partial class Example
 
         Actor cass = sf.GetActor("Character_NPC_Cass_C")!;
 
-        PropertyBag inventory = sf.FindComponents("Inventory", cass)![0].Properties!;
-        
-        ArrayStructProperty asp = (ArrayStructProperty)inventory["Items"].Value!;
-        Console.WriteLine("Your Cass has following inventory:");
-
-        foreach (object? o in asp.Items)
+        List<Component>? inventoryList = sf.FindComponents("Inventory", cass);
+        if (inventoryList is { Count: > 0 })
         {
-            PropertyBag itemProperties = (PropertyBag)o!;
+            PropertyBag inventory = inventoryList[0].Properties!;
 
-            Property item = itemProperties.Properties.Single(x => x.Key == "ItemBP").Value;
-            Property hidden = itemProperties.Properties.Single(x => x.Key == "Hidden").Value;
-            Property slot = itemProperties.Properties.Single(x => x.Key == "EquipmentSlotIndex").Value;
+            ArrayStructProperty asp = (ArrayStructProperty)inventory["Items"].Value!;
+            Console.WriteLine("Your Cass has following inventory:");
 
-            if ((byte)hidden.Value! != 0)
+            foreach (object? o in asp.Items)
             {
-                //Console.WriteLine($"    **************HIDDEN:");
-                continue;
-            }
+                PropertyBag itemProperties = (PropertyBag)o!;
 
-            string message = "";
-            if ((int)slot.Value! != -1)
-            {
-                message = $" ***********************EQUIPPED in slot {(int)slot.Value}";
-            }
-            Console.WriteLine($"    {Utils.GetShortenedAssetPath(((ObjectProperty)item.Value!).ClassName!)}{message}");
+                Property item = itemProperties.Properties.Single(x => x.Key == "ItemBP").Value;
+                Property hidden = itemProperties.Properties.Single(x => x.Key == "Hidden").Value;
+                Property slot = itemProperties.Properties.Single(x => x.Key == "EquipmentSlotIndex").Value;
 
+                if ((byte)hidden.Value! != 0)
+                {
+                    //Console.WriteLine($"    **************HIDDEN:");
+                    continue;
+                }
+
+                string message = "";
+                if ((int)slot.Value! != -1)
+                {
+                    message = $" ***********************EQUIPPED in slot {(int)slot.Value}";
+                }
+
+                Console.WriteLine(
+                    $"    {Utils.GetShortenedAssetPath(((ObjectProperty)item.Value!).ClassName!)}{message}");
+
+            }
+        }
+        else
+        {
+            Console.WriteLine("Cass inventory not found");
         }
     }
 }

@@ -132,7 +132,10 @@ internal partial class Example
     private static void DoZone(List<Actor> zoneActors, int world, int labyrinth, List<Actor> events)
     {
         Console.WriteLine("Zone Starts");
-        Actor start = zoneActors.Single(x => x.ZoneActorProperties!["QuestID"].Get<int>() == world && !x.ZoneActorProperties!.Contains("ParentZoneID"));
+        List<Actor> actors = zoneActors.Where(x => x.ZoneActorProperties!["QuestID"].Get<int>() == world && !x.ZoneActorProperties!.Contains("ParentZoneID")).ToList();
+        Actor start = actors.Count > 1 ?
+            actors.Single(x => x.ZoneActorProperties!["NameID"].ToString()!.Contains("one1")) : actors[0];
+        //Actor start = zoneActors.Single(x => x.ZoneActorProperties!["QuestID"].Get<int>() == world && !x.ZoneActorProperties!.Contains("ParentZoneID"));
         string category = "";
         Queue<Actor> queue = new();
         queue.Enqueue(start);

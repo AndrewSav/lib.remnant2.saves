@@ -13,8 +13,6 @@ internal partial class Example
 
         SaveFile sf = SaveFile.Read(path);
 
-        //sf.GetProperty()
-
         KeyValuePair<string, Property> charactersProp = sf.SaveData.Objects[0].Properties!.Properties.Single(x => x.Key == "Characters");
         KeyValuePair<string, Property> activeProp = sf.SaveData.Objects[0].Properties!.Properties.Single(x => x.Key == "ActiveCharacterIndex");
         //KeyValuePair<string, Property> awardedProp = sf.SaveData.Objects[0].Properties!.Properties.Single(x => x.Key == "AccountAwards");

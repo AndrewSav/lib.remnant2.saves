@@ -3,7 +3,6 @@
 internal class Program
 {
 
-    // TODO: blood moon?
     // TODO: Replace ApplicationException in library
     // TODO: Nuget
     // TODO: README - do not expect read json to work as is
@@ -21,7 +20,6 @@ internal class Program
 
     private static void Main()
     {
-        Example.BloodMoon();
 
         Tests.Run();
 
@@ -33,5 +31,7 @@ internal class Program
         Example.Cass();
         Example.CassAddItem();
         Example.Campaign();
+        Example.BloodMoon();
+        Example.Challenges();
     }
 }
