@@ -29,6 +29,73 @@ internal partial class Example
         string timePlayedString = $"{(int)tp.TotalHours}:{tp.Minutes:D2}:{tp.Seconds:D2}";
         Console.WriteLine($"Time Played: {timePlayedString}");
 
+        Dictionary<string, string> quests = new()
+        {
+            //ReSharper disable StringLiteralTypo
+            { "Quest_Boss_Faerlin", "Faerin" },
+            { "Quest_Boss_ManyFaces", "Corruptor" },
+            { "Quest_Boss_NerudGuardian", "Sha'Hala" },
+            { "Quest_Boss_NightWeaver", "Nightweaver" },
+            { "Quest_Boss_Ravager", "Corrupted Ravager" },
+            { "Quest_Boss_TalRatha", "Tal'Ratha" },
+            { "Quest_Earth_TowerBoss", "Annihilation" },
+            { "Quest_Global_RootWalkerDream", "Bane" },
+            { "Quest_Miniboss_Abomination", "Abomination" },
+            { "Quest_Miniboss_BloatKing", "Bloat King" },
+            { "Quest_Miniboss_CustodianEye", "The Custodian's Eye" },
+            { "Quest_Miniboss_DranGrenadier", "Gwentdil The Unburnt" },
+            { "Quest_Miniboss_FaeArchon", "Magister Dullain" },
+            { "Quest_Miniboss_Hatchery", "Primogenitor" },
+            { "Quest_Miniboss_MotherMind", "Mother Mind" },
+            { "Quest_Miniboss_Phantom", "The Astropath" },
+            { "Quest_Miniboss_RedPrince", "The Red Prince" },
+            { "Quest_Miniboss_RootCultist", "Legion" },
+            { "Quest_Miniboss_RootHorror", "Kaeula's Shadow" },
+            { "Quest_Miniboss_Shrewd", "Shrewd" },
+            { "Quest_SideD_CathedralOfSeasons", "Cathedral of Omens" },
+            { "Quest_SideD_CharnelHouse", "Harvester's Reach" },
+            { "Quest_SideD_CrimsonHarvest", "Butchers Quarter" },
+            { "Quest_SideD_Extermination", "Dormant N'Erudian Facility" },
+            { "Quest_SideD_Extraction", "The Dark Conduit" },
+            { "Quest_SideD_FaeCouncil", "Council Chamber" },
+            { "Quest_SideD_HiddenMaze", "Endaira's End" },
+            { "Quest_SideD_Ravenous", "The Great Hall" },
+            { "Quest_SideD_StasisSiege", "Vault of the Formless" },
+            { "Quest_SideD_TheChimney", "The Chimney" },
+            { "Quest_SideD_TheDreamlessSleep_POI", "Void Vessel Facility" },
+            { "Quest_SideD_TheLament", "The Lament" },
+            { "Quest_SideD_TheTangle", "Imperial Gardens" },
+            { "Quest_SideD_ThreeMenMorris", "Postulant's Parlor" },
+            { "Quest_SideD_TowerHeist", "Tower of the Unseen" },
+            { "Quest_SideD_TownTurnToDust", "Tiller's Rest" },
+            { "Quest_SideD_Train", "Terminus Station" },
+            { "Quest_SideD_WailingField", "Forgotten Field" },
+            { "Quest_Story_AllFather", "Story - All Father (Beautific Palace)" },
+            { "Quest_Story_Asylum", "Story - Asylum (Morrow Parish)" },
+            { "Quest_Story_Empress", "Story - Empress (Red Throne)" },
+            { "Quest_Story_IAmLegend", "Story - I Am Legend (Forgotten Prison)" },
+            { "Quest_Story_Labyrinth", "Story - Labyrinth" },
+            { "Quest_Story_Ravager", "Story - Ravager (Forbidden Grove)" },
+            { "Quest_Story_RootEarth_Zone1", "Cancer" },
+            { "Quest_Story_RootEarth_Zone3", "Venom" },
+            { "Quest_Story_TheCore", "Story - The Core (Seeker's Rest)" },
+            { "MainCampaign", "Main Campaign" },
+            // ReSharper restore StringLiteralTypo
+        };
+
+        Property? qcl = sf.GetProperty("QuestCompletedLog");
+        if (qcl != null)
+        {
+            Console.WriteLine("Quest Completed Log");
+            foreach (object? q in sf.GetProperty("QuestCompletedLog")!.Get<ArrayProperty>().Items)
+            {
+                FName quest = (FName)q!;
+                if (quest.ToString() == "None") continue;
+                string line = quests.ContainsKey(quest.ToString()) ? quests[quest.ToString()] : quest.ToString();
+                Console.WriteLine($"  {line}");
+            }
+        }
+
         int slot = (int)sf.GetProperty("LastActiveRootSlot")!.Value!;
 
         string mode = slot == 0 ? "campaign" : "adventure";
