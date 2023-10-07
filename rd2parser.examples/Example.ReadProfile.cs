@@ -106,6 +106,8 @@ internal partial class Example
                 Property hidden = itemProperties.Properties.Single(x => x.Key == "Hidden").Value;
                 Property slot = itemProperties.Properties.Single(x => x.Key == "EquipmentSlotIndex").Value;
 
+                ObjectProperty instanceData = itemProperties["InstanceData"].Get<ObjectProperty>();
+
                 if ((byte)hidden.Value! != 0)
                 {
                     //Console.WriteLine($"    **************HIDDEN:");
@@ -113,12 +115,20 @@ internal partial class Example
                 }
 
                 string message = "";
+                if (instanceData.Object!.Properties!.Contains("Quantity"))
+                {
+                    message += $" x{instanceData.Object.Properties["Quantity"]}";
+                }
                 if ((int)slot.Value! != -1)
                 {
-                    message = $" ***********************EQUIPPED in slot {(int)slot.Value}";
+                    message += $" ***********************EQUIPPED in slot {(int)slot.Value}";
                 }
-                Console.WriteLine($"    {Utils.GetShortenedAssetPath(((ObjectProperty)item.Value!).ClassName!)}{message}");
 
+                string itemName = ((ObjectProperty)item.Value!).ClassName!;
+                if (!itemName.Contains("HiddenContainer"))
+                {
+                    Console.WriteLine($"    {Utils.GetShortenedAssetPath(itemName)}{message}");
+                }
             }
 
             Component traitsComponent = master.Components!.Single(x => x.ComponentKey == "Traits");
