@@ -52,6 +52,7 @@ internal partial class Example
             { "Quest_Miniboss_RootCultist", "Legion" },
             { "Quest_Miniboss_RootHorror", "Kaeula's Shadow" },
             { "Quest_Miniboss_Shrewd", "Shrewd" },
+            { "Quest_OverworldPOI_DranOracle", "Dran Orcale" },
             { "Quest_SideD_CathedralOfSeasons", "Cathedral of Omens" },
             { "Quest_SideD_CharnelHouse", "Harvester's Reach" },
             { "Quest_SideD_CrimsonHarvest", "Butchers Quarter" },
