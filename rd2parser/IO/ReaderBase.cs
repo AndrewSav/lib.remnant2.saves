@@ -8,6 +8,7 @@ namespace rd2parser.IO;
 // for large files, for our purposes though it's fine
 public class ReaderBase
 {
+    public int GameVersion { get; set; } = 0;
     public ReaderBase(byte[] buffer)
     {
         _buffer = buffer;

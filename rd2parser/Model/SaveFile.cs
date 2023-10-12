@@ -22,6 +22,7 @@ public class SaveFile
     {
         r.ActivateTracker();
         FileHeader = r.Read<FileHeader>();
+        r.GameVersion = FileHeader.Version;
         SaveData = new(r: r, opts: opts);
         SortedDictionary<int, AddressRange> d = r.GetTracker().GetRanges();
         if (d.Count > 1)

@@ -16,7 +16,8 @@ public class FTopLevelAssetPath
     public FTopLevelAssetPath(Reader r)
     {
         Path = r.ReadFString();
-        Name = r.ReadFString();
+        if(r.GameVersion > 5)
+            Name = r.ReadFString();
     }
 
     public void Write(Writer w)

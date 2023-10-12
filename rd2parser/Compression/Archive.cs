@@ -10,11 +10,15 @@ public class Archive
 {
     public static byte[] DecompressSave(string saveFile)
     {
-        ReaderBase r = new(File.ReadAllBytes(saveFile));
+        var buf = File.ReadAllBytes(saveFile);
+        ReaderBase r = new(buf);
         using MemoryStream output = new();
 
         CompressedFileHeader fh = r.Read<CompressedFileHeader>();
         fh.DumpDebug();
+
+        if (fh.Version == 5) // Remnant1
+            return buf;
 
         output.Seek(8, SeekOrigin.Current);
 

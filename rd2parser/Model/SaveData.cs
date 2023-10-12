@@ -34,7 +34,7 @@ public class SaveData : Node
     {
         ReadOffset = r.Position + containerOffset;
         Path.Add(new(){Type = "SaveData"});
-        if (hasPackageVersion) PackageVersion = r.Read<PackageVersion>();
+        if (hasPackageVersion) PackageVersion = new PackageVersion(r);
 
         if (hasTopLevelAssetPath) SaveGameClassPath = new FTopLevelAssetPath(r);
 
