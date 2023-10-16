@@ -42,7 +42,7 @@ internal partial class Example
             Property archetype = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "Archetype").Value;
             Property secondaryArchetype = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "SecondaryArchetype").Value;
             Property gender = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "Gender").Value;
-            Property characterType = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "CharacterType").Value;
+            Property characterHardcoreType = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "CharacterType").Value;
             Property characterData = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "CharacterData").Value;
             Property powerLevel = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "PowerLevel").Value;
             Property itemLevel = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "ItemLevel").Value;
@@ -76,10 +76,10 @@ internal partial class Example
                 // Male gender is default and is not included
                 Console.WriteLine($"  Gender: {((EnumProperty)gender.Value!).EnumValue.Name}");
             }
-            if (characterType != null)
+            if (characterHardcoreType != null)
             {
                 // Non-hardcore  is default and is not included
-                Console.WriteLine($"  Character Type: {((EnumProperty)characterType.Value!).EnumValue.Name}");
+                Console.WriteLine($"  Character Type: {((EnumProperty)characterHardcoreType.Value!).EnumValue.Name}");
             }
             if (archetype != null)
             {
