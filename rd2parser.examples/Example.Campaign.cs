@@ -35,7 +35,7 @@ internal partial class Example
             { "Quest_Boss_Faerlin", "Faerin" },
             { "Quest_Boss_ManyFaces", "Corruptor" },
             { "Quest_Boss_NerudGuardian", "Sha'Hala" },
-            { "Quest_Boss_NightWeaver", "Nightweaver" },
+            { "Quest_Boss_NightWeaver", "The Nightweaver" },
             { "Quest_Boss_Ravager", "Corrupted Ravager" },
             { "Quest_Boss_TalRatha", "Tal'Ratha" },
             { "Quest_Earth_TowerBoss", "Annihilation" },
@@ -278,7 +278,10 @@ internal partial class Example
                 }
             }
 
-            Console.WriteLine($"  World stones: {string.Join(", ", waypoints)}");
+            if (waypoints.Count > 0)
+            {
+                Console.WriteLine($"  World stones: {string.Join(", ", waypoints)}");
+            }
 
 
             string cat = category;
