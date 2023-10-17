@@ -1757,7 +1757,7 @@
     "World": "World_Nerud",
     "Material": "Material_CrackedShell",
     "DropType": "Event",
-    "DropReference": "Quest_Miniboss_Hatchery_V2",
+    "DropReference": "Quest_Miniboss_Hatchery",
     "Note": "Crafted from Cracked Shell dropped by Primogenitor, found in The Hatchery location on N'Erud"
   },
   {
@@ -3286,7 +3286,7 @@
     "Name": "Embrace of Sha'Hala",
     "DropType": "Event",
     "DropReference": "Quest_OverworldPOI_TheCustodian",
-    "Note": "Found in the first overworld location pon N'Erud. Awarded by the Custodian after you defeat Sha'Hala world boss. Do not use the Override Pin on the terminal before the fight",
+    "Note": "Found in the first overworld location on N'Erud. Awarded by the Custodian after you defeat Sha'Hala world boss. Do not use the Override Pin on the terminal before the fight",
     "CustomScript": true
   },
   {
@@ -6226,5 +6226,580 @@
     "Id": "15A2A6C2-46ADD690-33FDBDAB-BC80BE8E",
     "Type": "achievement",
     "Name": "Transmutate - Upgrade a Weapon Mutator to +10"
+  },
+  {
+    "Id": "Quest_Boss_Faelin",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Faelin",
+    "Subtype": "boss",
+    "EventLocation": "Beatific Gallery"
+  },
+  {
+    "Id": "Quest_Boss_Faerlin",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Faerin",
+    "Subtype": "boss",
+    "EventLocation": "Malefic Gallery"
+  },
+  {
+    "Id": "Quest_Boss_ManyFaces",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Corruptor",
+    "Subtype": "boss",
+    "EventLocation": "The Great Bole"
+  },
+  {
+    "Id": "Quest_Boss_NerudGuardian",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Sha'Hala",
+    "Subtype": "boss",
+    "EventLocation": "Sentinel's Keep"
+  },
+  {
+    "Id": "Quest_Boss_NightWeaver",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Nightweaver",
+    "Subtype": "boss",
+    "EventLocation": "The Tormented Asylum"
+  },
+  {
+    "Id": "Quest_Boss_Ravager",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Corrupted Ragager",
+    "Subtype": "boss",
+    "EventLocation": "Ravager's Lair"
+  },
+  {
+    "Id": "Quest_Boss_TalRatha",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Tal'Ratha",
+    "Subtype": "boss",
+    "EventLocation": "Forgotten Prison"
+  },
+  {
+    "Id": "Quest_Injectable_BurningCity_FieryGraveyard",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Burning House",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_BurningCity_Oink",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Gorge",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_BurningCity_Rookery",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Rookery",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Crypt_LivingStone",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Four Statues",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Crypt_Sarcophagus",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "The Coffin",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_CryptHidden",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Hidden Tomb",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_FaeCity_BoneHarvesterLair",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Manticora from the Drain",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_GoldenHall_AboveBelow",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "The Executioner",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_GoldenHall_BlackAndWhite",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Flaming Pawns Puzzle",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_GoldenHall_SilverGold",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "The Statues",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Island_BrokenTomb",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Sniper Arena",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_IslandJump",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Floating Ruins",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Islands_Tower",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Code Tower",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_OverworldFog",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Fog",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Sewer_BoneHarvesterLair",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Monster in the Drain",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Sewer_RisingTides",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Flooding Sewer",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Sewer_TheNest",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Hanging Cages",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Sewer_TheSafe",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Locked Safe",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Towers_ElevatorShaft",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Double Elevator",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Towers_RemainsBelow",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Sentry Eye Pit",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Towers_Seeker",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Secret Walkway",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Underworld_BlackHole",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Wrecked Train",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Underworld_LurkerVents",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Robot Hanger",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Underworld_SewageFacility",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Flooded Chamber",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Underworld_Shockwire",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Broken Cable",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Underworld_StoreRoom",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Aerary Glyph Door",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Underworld_TheClaw",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Stasis Pod Towers",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_WindHollow",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Wind Hollow",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Ziggurat_HiddenChamber",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Waterfall Room",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Ziggurat_Library",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Hidden Library",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Miniboss_Abomination",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Abomination",
+    "Subtype": "miniboss",
+    "EventLocation": "The Putrid Domain"
+  },
+  {
+    "Id": "Quest_Miniboss_BloatKing",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Bloat King",
+    "Subtype": "miniboss",
+    "EventLocation": "The Great Sewers"
+  },
+  {
+    "Id": "Quest_Miniboss_CustodianEye",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "The Custodian's Eye",
+    "Subtype": "miniboss",
+    "EventLocation": "Spectrum Nexus"
+  },
+  {
+    "Id": "Quest_Miniboss_DranGrenadier",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Gwentdil The Unburnt",
+    "Subtype": "miniboss",
+    "EventLocation": "Cotton's Kiln"
+  },
+  {
+    "Id": "Quest_Miniboss_FaeArchon",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Magister Dullain",
+    "Subtype": "miniboss",
+    "EventLocation": "Shattered Gallery"
+  },
+  {
+    "Id": "Quest_Miniboss_Hatchery",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Primogenitor",
+    "Subtype": "miniboss",
+    "EventLocation": "The Hatchery"
+  },
+  {
+    "Id": "Quest_Miniboss_MotherMind",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Mother Mind",
+    "Subtype": "miniboss",
+    "EventLocation": "The Nameless Nest"
+  },
+  {
+    "Id": "Quest_Miniboss_Phantom",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "The Astropath",
+    "Subtype": "miniboss",
+    "EventLocation": "Astropath's Respite"
+  },
+  {
+    "Id": "Quest_Miniboss_RedPrince",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "The Red Prince",
+    "Subtype": "miniboss",
+    "EventLocation": "Gilded Chambers"
+  },
+  {
+    "Id": "Quest_Miniboss_RootCultist",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Legion",
+    "Subtype": "miniboss",
+    "EventLocation": "The Twisted Chantry"
+  },
+  {
+    "Id": "Quest_Miniboss_RootHorror",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Kaeula's Shadow",
+    "Subtype": "miniboss",
+    "EventLocation": "Kaeula's Rest"
+  },
+  {
+    "Id": "Quest_Miniboss_Shrewd",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Shrewd",
+    "Subtype": "miniboss",
+    "EventLocation": "The Expanding Glade"
+  },
+  {
+    "Id": "Quest_OverworldPOI_ClockTower",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Lemark District",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_OverworldPOI_DranOracle",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Oracle's Refuge",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_OverworldPOI_Flautist",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Root Nexus",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_OverworldPOI_IronGiant",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Titan's Reach",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_OverworldPOI_KoaraKuri",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Koara Kuri Nest",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_OverworldPOI_Meidra",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Name": "Meidra",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_OverworldPOI_OilField",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Extraction Hub",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_OverworldPOI_TheCustodian",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Name": "Ascension Spire",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_OverworldPOI_TheHunter",
+    "Type": "event",
+    "World": "World_Fae",
+    "Name": "Briella's Garden",
+    "Subtype": "overworld POI"
+  },
+  {
+    "Id": "Quest_RootEarth_TowerBoss",
+    "Type": "event",
+    "World": "World_Root",
+    "Name": "Blackened Citadel",
+    "Subtype": "fixed",
+    "EventLocation": "Blackened Citadel"
+  },
+  {
+    "Id": "Quest_RootEarth_Zone1",
+    "Type": "event",
+    "World": "World_Root",
+    "Name": "Ashen Wasteland",
+    "Subtype": "fixed",
+    "EventLocation": "Ashen Wasteland"
+  },
+  {
+    "Id": "Quest_RootEarth_Zone2",
+    "Type": "event",
+    "World": "World_Root",
+    "Name": "Corrupted Harbor",
+    "Subtype": "fixed",
+    "EventLocation": "Corrupted Harbor"
+  },
+  {
+    "Id": "Quest_SideD_CathedralOfSeason",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Subtype": "dungeon",
+    "EventLocation": "Cathedral of Omens"
+  },
+  {
+    "Id": "Quest_SideD_CharnelHouse",
+    "Type": "event",
+    "World": "World_Fae",
+    "Subtype": "dungeon",
+    "EventLocation": "Harvester's Reach"
+  },
+  {
+    "Id": "Quest_SideD_CrimsonHarvest",
+    "Type": "event",
+    "World": "World_Fae",
+    "Subtype": "dungeon",
+    "EventLocation": "Butchers Quarter"
+  },
+  {
+    "Id": "Quest_SideD_Extermination",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Subtype": "dungeon",
+    "EventLocation": "Dormant N'Erudian Facility"
+  },
+  {
+    "Id": "Quest_SideD_Extraction",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Subtype": "dungeon",
+    "EventLocation": "The Dark Conduit"
+  },
+  {
+    "Id": "Quest_SideD_FaeCouncil",
+    "Type": "event",
+    "World": "World_Fae",
+    "Subtype": "dungeon",
+    "EventLocation": "Council Chamber"
+  },
+  {
+    "Id": "Quest_SideD_HiddenMaze",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Subtype": "dungeon",
+    "EventLocation": "Endaira's End"
+  },
+  {
+    "Id": "Quest_SideD_Ravenous",
+    "Type": "event",
+    "World": "World_Fae",
+    "Subtype": "dungeon",
+    "EventLocation": "The Great Hall"
+  },
+  {
+    "Id": "Quest_SideD_StasisSiege",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Subtype": "dungeon",
+    "EventLocation": "Vault of the Formless"
+  },
+  {
+    "Id": "Quest_SideD_TheChimney",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Subtype": "dungeon",
+    "EventLocation": "The Chimney"
+  },
+  {
+    "Id": "Quest_SideD_TheDreamlessSleep",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Subtype": "dungeon",
+    "EventLocation": "Void Vessel Facility"
+  },
+  {
+    "Id": "Quest_SideD_TheLament",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Subtype": "dungeon",
+    "EventLocation": "The Lament"
+  },
+  {
+    "Id": "Quest_SideD_TheTangle",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Subtype": "dungeon",
+    "EventLocation": "Imperial Gardens"
+  },
+  {
+    "Id": "Quest_SideD_ThreeMenMorris",
+    "Type": "event",
+    "World": "World_Fae",
+    "Subtype": "dungeon",
+    "EventLocation": "Postulant's Parlor"
+  },
+  {
+    "Id": "Quest_SideD_TowerHeists",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Subtype": "dungeon",
+    "EventLocation": "Tower of the Unseen"
+  },
+  {
+    "Id": "Quest_SideD_TownTurnedToDust",
+    "Type": "event",
+    "World": "World_Fae",
+    "Subtype": "dungeon",
+    "EventLocation": "Tiller's Rest"
+  },
+  {
+    "Id": "Quest_SideD_Train",
+    "Type": "event",
+    "World": "World_Nerud",
+    "Subtype": "dungeon",
+    "EventLocation": "Terminus Station"
+  },
+  {
+    "Id": "Quest_SideD_WailingField",
+    "Type": "event",
+    "World": "World_Jungle",
+    "Subtype": "dungeon",
+    "EventLocation": "Forgotten Field"
   }
 ]
