@@ -269,7 +269,7 @@
     "Type": "amulet",
     "World": "World_Jungle",
     "DropType": "Event",
-    "DropReference": "Quest_OverworldPOI_KoaraKuri",
+    "DropReference": "OverworldPOI_KoaraKuri",
     "Note": "Found in an overworld location io Yaesha, in a big bird's nest. You need to return to the nest later (do not fast travel) when the bird is away to get it"
   },
   {
@@ -4815,6 +4815,8 @@
     "Type": "engram",
     "World": "World_Base",
     "Material": "Material_Engram_Archon",
+    "DropType": "Location",
+    "DropReference": "The Labyrinth",
     "Note": "Equip: Fortune Hunter skill of Explorer, Wormhole skill of Invader, Realmwalker armor set, Void Heart relic, Ford's Scattergun, Cube Gun, Labyrinth Staff, Leto's Amulet, Amber Moonstone, Black Cat Band, Anastasija's Inspiration, Zania's Malice. In the Labyrinth, head to the cycling portal. Wait until you see the scene in which you will drop into nothingness, and after two seconds enter. A bridge will appear, granting you safe passage. Move to the back of the area, you will have to fight some enemies, and turn right to find the Corrupted door. Open it using the biome portal key. Go through the gate, you'll be at \"The Backrooms\". Explore the backrooms until you find the Strange Box. The Fortune Hunter skill of the explorer, can help finding it before the timer expires",
     "CustomScript": true
   },
@@ -5051,8 +5053,7 @@
     "ProfileId": "/Game/World_Fae/Quests/Quest_Story_Asylum/Items/Quest_Item_Asylum_NightweaverKey/Quest_Item_Asylum_NightweaverKey.Quest_Item_Asylum_NightweaverKey_C",
     "Type": "quest_item",
     "World": "World_Fae",
-    "Name": "Soulkey Tribute",
-    "CustomScript": true
+    "Name": "Soulkey Tribute"
   },
   {
     "Id": "Quest_Item_Asylum_PrisonKey",
@@ -6618,7 +6619,7 @@
     "Subtype": "overworld POI"
   },
   {
-    "Id": "Quest_OverworldPOI_KoaraKuri",
+    "Id": "OverworldPOI_KoaraKuri",
     "Type": "event",
     "World": "World_Jungle",
     "Name": "Koara Kuri Nest",
@@ -6657,7 +6658,7 @@
     "Type": "event",
     "World": "World_Root",
     "Name": "Blackened Citadel",
-    "Subtype": "fixed",
+    "Subtype": "location",
     "EventLocation": "Blackened Citadel"
   },
   {
@@ -6665,7 +6666,7 @@
     "Type": "event",
     "World": "World_Root",
     "Name": "Ashen Wasteland",
-    "Subtype": "fixed",
+    "Subtype": "location",
     "EventLocation": "Ashen Wasteland"
   },
   {
@@ -6673,7 +6674,7 @@
     "Type": "event",
     "World": "World_Root",
     "Name": "Corrupted Harbor",
-    "Subtype": "fixed",
+    "Subtype": "location",
     "EventLocation": "Corrupted Harbor"
   },
   {

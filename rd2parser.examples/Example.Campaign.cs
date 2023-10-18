@@ -32,6 +32,7 @@ internal partial class Example
         Dictionary<string, string> quests = new()
         {
             //ReSharper disable StringLiteralTypo
+            { "Quest_Boss_Faelin", "Faelin" },
             { "Quest_Boss_Faerlin", "Faerin" },
             { "Quest_Boss_ManyFaces", "Corruptor" },
             { "Quest_Boss_NerudGuardian", "Sha'Hala" },
