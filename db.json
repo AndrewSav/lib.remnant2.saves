@@ -2109,8 +2109,116 @@
     "Aberration": "Gorge",
     "Subtype": "Ranged",
     "DropType": "Event",
-    "DropReference": "Quest_Injectable_BurningCity_Oink",
+    "DropReference": "Quest_Injectable_Oink",
     "Note": "Drops from Gorge Aberration found in an outdoor location on Losomn. In the area where you found Shiny Hog Lure, keep following the path until the end and climb the wooden structure, to fall off to the sewers Move along and you will find a lever, activate it. and you will find Gorge"
+  },
+  {
+    "Id": "MetaGem_Edgelord",
+    "ProfileId": "/Game/World_Base/Items/Gems/Melee/MetaGems/Edgelord/MetaGem_Edgelord.MetaGem_Edgelord_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Melee",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_Latency",
+    "ProfileId": "/Game/World_Base/Items/Gems/Melee/MetaGems/Latency/MetaGem_Latency.MetaGem_Latency_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Melee",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_Opportunist",
+    "ProfileId": "/Game/World_Base/Items/Gems/Melee/MetaGems/Opportunist/MetaGem_Opportunist.MetaGem_Opportunist_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Melee",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_Shocker",
+    "ProfileId": "/Game/World_Base/Items/Gems/Melee/MetaGems/Shocker/MetaGem_Shocker.MetaGem_Shocker_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Melee",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_Stormbringer",
+    "ProfileId": "/Game/World_Base/Items/Gems/Melee/MetaGems/Stormbringer/MetaGem_Stormbringer.MetaGem_Stormbringer_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Melee",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_BottomFeeder",
+    "ProfileId": "/Game/World_Base/Items/Gems/Ranged/MetaGems/BottomFeeder/MetaGem_BottomFeeder.MetaGem_BottomFeeder_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Ranged",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_BottomHeavy",
+    "ProfileId": "/Game/World_Base/Items/Gems/Ranged/MetaGems/BottomHeavy/MetaGem_BottomHeavy.MetaGem_BottomHeavy_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Ranged",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_Ingenuity",
+    "ProfileId": "/Game/World_Base/Items/Gems/Ranged/MetaGems/Ingenuity/MetaGem_Ingenuity.MetaGem_Ingenuity_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Ranged",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_KillSwitch",
+    "ProfileId": "/Game/World_Base/Items/Gems/Ranged/MetaGems/KillSwitch/MetaGem_KillSwitch.MetaGem_KillSwitch_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Ranged",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_SequencedShot",
+    "ProfileId": "/Game/World_Base/Items/Gems/Ranged/MetaGems/SequencedShot/MetaGem_SequencedShot.MetaGem_SequencedShot_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Ranged",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_SpiritHealer",
+    "ProfileId": "/Game/World_Base/Items/Gems/Ranged/MetaGems/SpiritHealer/MetaGem_SpiritHealer.MetaGem_SpiritHealer_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Ranged",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
+  },
+  {
+    "Id": "MetaGem_TopHeavy",
+    "ProfileId": "/Game/World_Base/Items/Gems/Ranged/MetaGems/TopHeavy/MetaGem_TopHeavy.MetaGem_TopHeavy_C",
+    "Type": "mutator",
+    "World": "World_Base",
+    "Subtype": "Ranged",
+    "DropType": "Global",
+    "Note": "Drops from a ramdom aberration on a random world"
   },
   {
     "Id": "Relic_Consumable_BloomingHeart",
@@ -2768,7 +2876,7 @@
     "Type": "ring",
     "World": "World_Fae",
     "DropType": "Event",
-    "DropReference": "Quest_Injectable_BurningCity_Oink",
+    "DropReference": "Quest_Injectable_Oink",
     "Note": "Found in an outdoor location on Losomn. You will find a small area where there are two charred bodies. There is a gap in the wall behind them, crouch and pass through it. You will notice that performing this action will lead you to an area not visible on the minimap before. Continue going down until you reach an area in which you will have to jump or fall off, to wooden beams. Just follow the wooden beam to avoid falling off to your death. After you pass the round entrance, turn left, and you will find the item, after climbing that structure"
   },
   {
@@ -6292,7 +6400,7 @@
     "Subtype": "injectable"
   },
   {
-    "Id": "Quest_Injectable_BurningCity_Oink",
+    "Id": "Quest_Injectable_Oink",
     "Type": "event",
     "World": "World_Fae",
     "Name": "Gorge",
