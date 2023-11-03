@@ -4908,6 +4908,61 @@
     "Note": "Buy from Brabus at Ward 13"
   },
   {
+    "Id": "Weapon_CorruptedAphelion",
+    "ProfileId": "/Game/World_Base/Items/Weapons/Longguns/Special/CorruptedAphelion/Weapon_CorruptedAphelion.Weapon_CorruptedAphelion_C",
+    "Type": "weapon",
+    "World": "World_Base",
+    "Subtype": "Long Gun",
+    "DropType": "Vendor",
+    "DropReference": "Dwell",
+    "Prerequisite": "Weapon_Aphelion",
+    "Note": "Crafted By Dwell from Aphelion weapon"
+  },
+  {
+    "Id": "Weapon_CorruptedDeceit",
+    "ProfileId": "/Game/World_Base/Items/Weapons/Longguns/Special/CorruptedDeceit/Weapon_CorruptedDeceit.Weapon_CorruptedDeceit_C",
+    "Type": "weapon",
+    "World": "World_Base",
+    "Subtype": "Long Gun",
+    "DropType": "Vendor",
+    "DropReference": "Dwell",
+    "Prerequisite": "Weapon_Deceit",
+    "Note": "Crafted By Dwell from Deceit weapon"
+  },
+  {
+    "Id": "Weapon_CorruptedMerciless",
+    "ProfileId": "/Game/World_Base/Items/Weapons/Longguns/Special/CorruptedMerciless/Weapon_CorruptedMerciless.Weapon_CorruptedMerciless_C",
+    "Type": "weapon",
+    "World": "World_Base",
+    "Subtype": "Long Gun",
+    "DropType": "Vendor",
+    "DropReference": "Dwell",
+    "Prerequisite": "Weapon_Merciless",
+    "Note": "Crafted By Dwell from Merciless weapon"
+  },
+  {
+    "Id": "Weapon_CorruptedMeridian",
+    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/CorruptedMeridian/Weapon_CorruptedMeridian.Weapon_CorruptedMeridian_C",
+    "Type": "weapon",
+    "World": "World_Base",
+    "Subtype": "Hand Gun",
+    "DropType": "Vendor",
+    "DropReference": "Dwell",
+    "Prerequisite": "Weapon_Meridian",
+    "Note": "Crafted By Dwell from Meredian weapon"
+  },
+  {
+    "Id": "Weapon_CorruptedRunePistol",
+    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/CorruptedRunePistol/Weapon_CorruptedRunePistol.Weapon_CorruptedRunePistol_C",
+    "Type": "weapon",
+    "World": "World_Base",
+    "Subtype": "Hand Gun",
+    "DropType": "Vendor",
+    "DropReference": "Dwell",
+    "Prerequisite": "Weapon_RunePistol",
+    "Note": "Crafted By Dwell from Rune Pistol weapon"
+  },
+  {
     "Id": "Engram_Alchemist",
     "ProfileId": "/Game/World_Base/Items/Archetypes/Alchemist/Engram_Alchemist.Engram_Alchemist_C",
     "Type": "engram",
