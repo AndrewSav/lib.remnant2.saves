@@ -16,10 +16,9 @@ public class Component : Node
     }
 
     [SetsRequiredMembers]
-    public Component(Node? parent, string componentKey) : base(parent, new List<Segment>(parent!.Path))
+    public Component(string componentKey)
     {
         ComponentKey = componentKey;
-        Path.Add(new() { Name = componentKey, Type = "Component" });
     }
     public override IEnumerable<Node> GetChildren()
     {

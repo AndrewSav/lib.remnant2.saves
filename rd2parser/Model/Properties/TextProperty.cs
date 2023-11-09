@@ -13,21 +13,16 @@ public class TextProperty : Node
     {
     }
 
-    public TextProperty(Node? parent) : base(parent, new List<Segment>(parent!.Path))
-    {
-        Path.Add(new() { Type = "TextProperty" });
-    }
-
     [SetsRequiredMembers]
-    public TextProperty(Reader r, SerializationContext ctx, Node? parent) : this(parent)
+    public TextProperty(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         Flags = r.Read<uint>();
         HistoryType = r.Read<byte>();
         Value = HistoryType switch
         {
-            0 => new TextPropertyData0(r, ctx, this),
-            255 => new TextPropertyData255(r, ctx, this),
+            0 => new TextPropertyData0(r, ctx),
+            255 => new TextPropertyData255(r, ctx),
             _ => throw new ApplicationException("unsupported history type")
         };
     }

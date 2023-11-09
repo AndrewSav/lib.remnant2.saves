@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Newtonsoft.Json;
 using rd2parser.Model.Memory;
-using rd2parser.Model.Properties;
 using rd2parser.Navigation;
 
 namespace rd2parser.Model;
@@ -19,21 +17,14 @@ public class SaveData : Node
     public required List<UObject> Objects;
     public required List<string> NamesTable;
 
-    // The next two is for navigation
-    [JsonIgnore]
-    private readonly ItemRegistry _registry;
-
-    public SaveData() :base(null, new())
+    public SaveData()
     {
-        _registry = new();
     }
 
     [SetsRequiredMembers]
-    public SaveData(Reader r, Node? parent = null, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true, SerializationContext? oldCtx = null, int containerOffset = 0, Options? opts = null) :
-        base(parent, parent?.Path ?? new())
+    public SaveData(Reader r, bool hasPackageVersion = true, bool hasTopLevelAssetPath = true, int containerOffset = 0, Options? opts = null) 
     {
         ReadOffset = r.Position + containerOffset;
-        Path.Add(new(){Type = "SaveData"});
         if (hasPackageVersion) PackageVersion = r.Read<PackageVersion>();
 
         if (hasTopLevelAssetPath) SaveGameClassPath = new FTopLevelAssetPath(r);
@@ -72,7 +63,7 @@ public class SaveData : Node
         Objects = new();
         for (int i = 0; i < numUniqueObjects; i++)
         {
-            UObject o = new(r, ctx, i, this);
+            UObject o = new(r, ctx, i);
             Objects.Add(o);
         }
 
@@ -88,10 +79,6 @@ public class SaveData : Node
 
         maxPosition = int.Max(maxPosition, r.Position);
         r.Position = maxPosition;
-
-        _registry = ctx.Registry;
-        if (oldCtx == null) return;
-        oldCtx.Registry.Add(_registry);
     }
 
     public void Write(Writer w, int containerOffset = 0)
@@ -123,13 +110,6 @@ public class SaveData : Node
 
         foreach (UObject o in Objects)
         {
-            // Save will fail if this link is broken: object will not know their indices
-            // This can happen when deserializing from json or because of save editing
-            o.Parent = this;
-        }
-
-        foreach (UObject o in Objects)
-        {
             o.WriteData(w, ctx);
         }
 
@@ -152,21 +132,6 @@ public class SaveData : Node
         w.Write(offsetInfo);
         w.Position = endOffset;
     }
-
-    public List<T>? GetRegistryItem<T>(string name) where T : Node
-    {
-        return _registry.Get<T>(name);
-    }
-
-    public List<T>? GetAllRegistryItem<T>() where T : Node
-    {
-        return _registry.GetAll<T>();
-    }
-    public List<T>? FindRegistryItem<T>(string namePattern) where T : Node
-    {
-        return _registry.Find<T>(namePattern);
-    }
-
     public override IEnumerable<Node> GetChildren()
     {
         foreach (UObject o in Objects)

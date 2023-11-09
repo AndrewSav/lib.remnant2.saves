@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Newtonsoft.Json;
 using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
@@ -13,23 +12,15 @@ public class Property : Node
     public FName? Type;
     public object? Value;
 
-    [JsonIgnore]
-    public PropertyBag Bag => (PropertyBag)Parent!;
-
     public Property()
     {
+    }
 
-    }
-    public Property(Node? parent, string name) : base(parent, parent?.Path ?? new())
-    {
-        Path.Add(new() { Name = name, Type = "Property" });
-    }
     [SetsRequiredMembers]
-    public Property(Reader r, SerializationContext ctx, PropertyBag parent) : base(parent, new List<Segment>(parent.Path))
+    public Property(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         Name = new(r, ctx.NamesTable);
-        Path.Add(new() { Name = Name.Name, Type = "Property" });
         if (Name.Name == "None")
         {
             return;
@@ -46,12 +37,10 @@ public class Property : Node
         }
         else
         {
-            PropertyValue pv = PropertyValue.ReadPropertyValue(r, ctx, Type.Name, this,false);
+            PropertyValue pv = PropertyValue.ReadPropertyValue(r, ctx, Type.Name, false);
             NoRaw = pv.NoRawByte;
             Value = pv.Value;
         }
-
-        ctx.Registry.Add(Name.Name, this);
     }
 
     public override string? ToString()
@@ -138,12 +127,6 @@ public class Property : Node
         };
     }
 
-    public override Node Copy()
-    {
-        Property result = (Property)MemberwiseClone();
-        result.Path = new(Path);
-        return result;
-    }
     public override IEnumerable<Node> GetChildren()
     {
         if (Value is Node node)

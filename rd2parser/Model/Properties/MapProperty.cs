@@ -10,13 +10,12 @@ public class MapProperty : Node
     public required byte[] Unknown;
     public required List<KeyValuePair<object, object>> Values;
 
-    public MapProperty(Node? parent) : base(parent, parent!.Path )
+    public MapProperty()
     {
-        Path.Add(new() { Type = "MapProperty" });
     }
 
     [SetsRequiredMembers]
-    public MapProperty(Reader r, SerializationContext ctx, Node? parent) : this(parent)
+    public MapProperty(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         Values = new List<KeyValuePair<object, object>>();
@@ -26,22 +25,16 @@ public class MapProperty : Node
         if (Unknown.Any(x => x != 0))
         {
             string debug = BitConverter.ToString(Unknown);
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown bytes at {Location}, {Offset}", debug, DisplayPath, r.Position);
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown bytes at {Offset}", debug, r.Position);
         }
 
         int len = r.Read<int>();
         for (int i = 0; i < len; i++)
         {
-            object key = PropertyValue.ReadPropertyValue(r, ctx, KeyType.Name, this).Value!;
-            AddIndexToChild(key, i);
-            object value = PropertyValue.ReadPropertyValue(r, ctx, ValueType.Name, this).Value!;
-            AddIndexToChild(value, i);
+            object key = PropertyValue.ReadPropertyValue(r, ctx, KeyType.Name).Value!;
+            object value = PropertyValue.ReadPropertyValue(r, ctx, ValueType.Name).Value!;
             Values.Add(new KeyValuePair<object, object>(key, value));
         }
-    }
-
-    public MapProperty()
-    {
     }
 
     public void Write(Writer w, SerializationContext ctx)

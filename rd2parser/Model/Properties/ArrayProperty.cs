@@ -9,33 +9,26 @@ public class ArrayProperty : Node
     public required List<object?> Items;
     public required byte Unknown;
 
-    public ArrayProperty(Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    public ArrayProperty()
     {
-        Path.Add(new Segment { Type = "ArrayProperty" });
     }
 
     [SetsRequiredMembers]
-    public ArrayProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, int readOffset,
-        Node? parent) : this(parent)
+    public ArrayProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, int readOffset) 
     {
         ReadOffset = readOffset;
         Unknown = unknown;
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Location}, {Offset}", Unknown, DisplayPath, r.Position);
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown,  r.Position);
         }
         ElementType = elementType;
         Items = new List<object?>();
         for (int i = 0; i < count; i++)
         {
-            object o = PropertyValue.ReadPropertyValue(r, ctx, ElementType.Name, this).Value!;
-            AddIndexToChild(o, i);
+            object o = PropertyValue.ReadPropertyValue(r, ctx, ElementType.Name).Value!;
             Items.Add(o);
         }
-    }
-
-    public ArrayProperty()
-    {
     }
 
     public void Write(Writer w, SerializationContext ctx)

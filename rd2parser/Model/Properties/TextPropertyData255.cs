@@ -12,13 +12,8 @@ public class TextPropertyData255 : Node
     {
     }
 
-    public TextPropertyData255(Node? parent) : base(parent, new List<Segment>(parent!.Path))
-    {
-        Path.Add(new () { Type = "TextPropertyData255" });
-    }
-
     [SetsRequiredMembers]
-    public TextPropertyData255(Reader r, SerializationContext ctx, Node? parent) : this(parent)
+    public TextPropertyData255(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         Flag = r.Read<uint>();

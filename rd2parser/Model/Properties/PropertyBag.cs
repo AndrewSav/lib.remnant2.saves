@@ -6,33 +6,23 @@ public class PropertyBag : Node
 {
     public required List<KeyValuePair<string, Property>> Properties;
 
-    public static readonly PropertyBag Dummy = new() { Properties = new() };
-
     public PropertyBag()
     {
-
-    }
-    public PropertyBag(Node? parent) : base(parent, new List<Segment>(parent!.Path))
-    {
-        Path.Add(new() { Type = "PropertyBag" });
     }
 
     [SetsRequiredMembers]
-    public PropertyBag(Reader r, SerializationContext ctx, Node? parent) : this(parent)
+    public PropertyBag(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         Properties = new();
-        int i = 0;
         while (true)
         {
-            Property p = new(r, ctx, this);
-            p.Path[^1].Index = i;
+            Property p = new(r, ctx);
             if (p.Name.Name == "None")
             {
                 break;
             }
             Properties.Add(new KeyValuePair<string, Property>(p.Name.Name, p));
-            i++;
         }
     }
 
@@ -45,7 +35,7 @@ public class PropertyBag : Node
         }
 
         ushort index = (ushort)ctx.GetNamesTableIndex("None");
-        new Property(null, "None") { Name = new FName { Name = "None", Index = index, Number = null }}.Write(w, ctx);
+        new Property { Name = new FName { Name = "None", Index = index, Number = null }}.Write(w, ctx);
     }
 
     public Property this[string s]
@@ -56,37 +46,12 @@ public class PropertyBag : Node
 
         }
     }
-
+    
     public bool Contains(string s)
     {
         return Properties.Any(x => x.Key == s);
     }
 
-    public override Node Copy()
-    {
-        PropertyBag result = new()
-        {
-            Properties = Properties.Select(x => new KeyValuePair<string, Property>(x.Key,(Property)x.Value.Copy())).ToList(),
-            Parent = Parent,
-            Path = new(Path)
-        };
-
-        foreach (KeyValuePair<string, Property> pair in result.Properties)
-        {
-            pair.Value.Parent = result;
-            if (pair.Value.Type?.Name == "ObjectProperty")
-            {
-                ObjectProperty op = (ObjectProperty)pair.Value.Value!;
-                pair.Value.Value = new ObjectProperty(pair.Value){ObjectIndex = op.ObjectIndex};
-            }
-        }
-
-        return result;
-    }
-    public  PropertyBag CopyPropertyBag()
-    {
-        return (PropertyBag)Copy();
-    }
     public override IEnumerable<Node> GetChildren()
     {
         foreach (Property p in Properties.Select(x => x.Value))

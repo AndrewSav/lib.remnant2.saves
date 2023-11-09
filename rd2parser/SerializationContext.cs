@@ -1,6 +1,4 @@
 ﻿using rd2parser.Model;
-using rd2parser.Model.Properties;
-using rd2parser.Navigation;
 
 namespace rd2parser;
 
@@ -14,10 +12,6 @@ public class SerializationContext
     // This is used so we could populate ObjectProperty with object path for display purposes
     // This is also used during writing of ObjectProperty to update object index
     public List<UObject>? Objects;
-
-    // These two properties keep names of all properties and variables
-    // So they are easier to find with SaveFile.GetVariable(s)/Property(ies)
-    public ItemRegistry Registry = new();
 
     // This is used during read/write in a nested container
     // to keep track of outermost file offsets

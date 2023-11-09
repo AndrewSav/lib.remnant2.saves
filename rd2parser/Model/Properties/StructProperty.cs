@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using rd2parser.IO;
 using rd2parser.Navigation;
-using Newtonsoft.Json.Linq;
 
 namespace rd2parser.Model.Properties;
 
@@ -18,13 +17,8 @@ public class StructProperty : Node
     {
     }
 
-    public StructProperty(Node? parent) : base(parent, new List<Segment>(parent!.Path))
-    {
-        Path.Add(new() { Type = "StructProperty" });
-    }
-
     [SetsRequiredMembers]
-    public StructProperty(Reader r, SerializationContext ctx, Node? parent) : this(parent)
+    public StructProperty(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position;
         Type = new(r, ctx.NamesTable);
@@ -32,13 +26,13 @@ public class StructProperty : Node
         Unknown = r.Read<byte>();
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Location}, {Offset}", Unknown, DisplayPath, r.Position);
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
         }
-        Value = ReadStructPropertyValue(r, ctx, Type.Name, this);
+        Value = ReadStructPropertyValue(r, ctx, Type.Name);
     }
 
     // Also called by ArrayStructProperty constructor
-    public static object? ReadStructPropertyValue(Reader r, SerializationContext ctx, string type, Node parent)
+    public static object? ReadStructPropertyValue(Reader r, SerializationContext ctx, string type)
     {
         return type switch
         {
@@ -47,11 +41,11 @@ public class StructProperty : Node
             "Guid" => r.Read<FGuid>(),
             "Vector" => r.Read<FVector>(),
             "DateTime" => new DateTime(r.Read<long>()),
-            "PersistenceBlob" => ReadPersistenceBlob(r, ctx, parent),
-            _ => new PropertyBag(r,ctx, parent)
+            "PersistenceBlob" => ReadPersistenceBlob(r, ctx),
+            _ => new PropertyBag(r,ctx)
         };
     }
-    private static object ReadPersistenceBlob(ReaderBase r, SerializationContext ctx, Node parent)
+    private static object ReadPersistenceBlob(ReaderBase r, SerializationContext ctx)
     {
         int persistenceSize = r.Read<int>();
         int containerOffset = r.Position;
@@ -60,9 +54,9 @@ public class StructProperty : Node
 
         if (ctx.ClassPath == "/Game/_Core/Blueprints/Base/BP_RemnantSaveGameProfile")
         {
-            return new SaveData(persistenceReader, parent, true, false, ctx, containerOffset,ctx.Options);
+            return new SaveData(persistenceReader, true, false, containerOffset,ctx.Options);
         }
-        return new PersistenceContainer(persistenceReader, ctx,parent, containerOffset);
+        return new PersistenceContainer(persistenceReader, ctx,containerOffset);
     }
 
     public void Write(Writer w, SerializationContext ctx)

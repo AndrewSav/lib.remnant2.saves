@@ -13,29 +13,22 @@ public class Variables : Node
     {
     }
 
-    public Variables(Node? parent, string name) : base(parent, new List<Segment>(parent!.Path))
-    {
-        Path.Add(new() { Name = name, Type = "Variables" });
-    }
-
     [SetsRequiredMembers]
-    public Variables(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    public Variables(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         Items = new();
         Name = new FName(r, ctx.NamesTable);
-        Path.Add(new() { Name = Name.Name, Type = "Variables" });
         Unknown = r.Read<ulong>();
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Location}, {Offset}", Unknown, DisplayPath, r.Position);
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
         }
         int len = r.Read<int>();
 
         for (int i = 0; i < len; i++)
         {
-            Variable v = new(r, ctx,this);
-            v.Path[^1].Index = i;
+            Variable v = new(r, ctx);
             Items.Add(new KeyValuePair<string, Variable>(v.Name.Name,v));
         }
     }

@@ -34,7 +34,7 @@ internal class Tests
 
         string targetPath = Path.GetFileName(Path.ChangeExtension(path, "dec"));
         File.WriteAllBytes(targetPath, decoded1);
-        SaveFile.Write("test.DoOne",sf);
+        SaveFile.Write("test.DoOne", sf);
         sf = SaveFile.Read("test.DoOne");
 
         w = new();
@@ -54,7 +54,7 @@ internal class Tests
             if (node.ReadOffset != node.WriteOffset)
             {
                 Console.WriteLine($"ReadOffset {node.ReadOffset} is not the same as WriteOffset {node.WriteOffset}");
-                Console.WriteLine($"At {node.DisplayPath}");
+                //Console.WriteLine($"At {node.DisplayPath}");
             }
         });
         Console.WriteLine($"Found {count} objects");

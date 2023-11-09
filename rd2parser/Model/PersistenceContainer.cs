@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Newtonsoft.Json;
 using rd2parser.Model.Memory;
 using rd2parser.Navigation;
 
@@ -16,13 +15,8 @@ public class PersistenceContainer : Node
 
     }
 
-    public PersistenceContainer(Node? parent) : base(parent, new List<Segment>(parent!.Path))
-    {
-        Path.Add(new() { Type = "PersistenceContainer" });
-    }
-
     [SetsRequiredMembers]
-    public PersistenceContainer(Reader r, SerializationContext ctx, Node? parent, int containerOffset) : this(parent)
+    public PersistenceContainer(Reader r, SerializationContext ctx, int containerOffset)
     {
         ReadOffset = r.Position + containerOffset;
         Version = r.Read<uint>();
@@ -51,8 +45,7 @@ public class PersistenceContainer : Node
             r.Position = info.Offset;
             byte[] actorBytes = r.ReadBytes(info.Size);
             Reader actorReader = new(actorBytes);
-            Actor a = new(actorReader, ctx, this, info.Offset+ containerOffset);
-            a.Path[^1].Index = index;
+            Actor a = new(actorReader, ctx, info.Offset+ containerOffset);
             Actors.Add(new KeyValuePair<ulong, Actor>(info.UniqueID, a));
         }
 
@@ -63,27 +56,9 @@ public class PersistenceContainer : Node
             DynamicActor da = new(r);
             Actor a = Actors.Single(x => x.Key == da.UniqueId).Value;
             a.DynamicData = da;
-            if (a.DynamicData.ClassPath.Name != null)
-            {
-                ctx.Registry.Add(a.DynamicData.ClassPath.Name, a);
-                a.Path[^1].Name = a.DynamicData.ClassPath.Name;
-            }
         }
     }
-
-    // To make it easier to navigate in the debugger
-    [JsonIgnore]
-    public List<Dictionary<string, UObject>> Children =>
-        Actors.Select(
-                x => x.Value.Archive.Objects
-                    .Select((input, index) => new { index, input })
-                    .ToDictionary(o => o.index + "|" + (o.input.ObjectPath ?? ""),o => o.input))
-            .ToList();
-
-    // To make it easier to navigate in the debugger
-    [JsonIgnore]
-    public List<UObject> FlattenChildren => Children.SelectMany(x => x.Values).ToList();
-
+    
     public void Write(Writer w, int containerOffset)
     {
         WriteOffset = (int)w.Position + containerOffset;

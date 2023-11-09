@@ -18,19 +18,19 @@ public class ArrayStructProperty : Node
     public required byte Unknown2;
     public required List<object?> Items;
 
-    public ArrayStructProperty(Node? parent) : base(parent, new List<Segment>(parent!.Path))
+
+    public ArrayStructProperty()
     {
-        Path.Add(new() { Type = "ArrayStructProperty" });
     }
 
     [SetsRequiredMembers]
-    public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, int readOffset, Node? parent) : this(parent)
+    public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, int readOffset) 
     {
         ReadOffset = readOffset;
         Unknown = unknown;
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Location}, {Offset}", Unknown, DisplayPath, r.Position);
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
         }
         OuterElementType = elementType;
         NameIndex = r.Read<ushort>();
@@ -42,7 +42,7 @@ public class ArrayStructProperty : Node
         Unknown2 = r.Read<byte>();
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown2 byte at {Location}, {Offset}", Unknown2, DisplayPath, r.Position);
+            Log.Logger.Warning("unexpected non-zero value {value} of an unknown2 byte at {Offset}", Unknown2, r.Position);
         }
 
         Count = count;
@@ -50,14 +50,9 @@ public class ArrayStructProperty : Node
 
         for (int i = 0; i < Count; i++)
         {
-            object o = StructProperty.ReadStructPropertyValue(r, ctx, ElementType.Name, this)!;
-            AddIndexToChild(o,i);
+            object o = StructProperty.ReadStructPropertyValue(r, ctx, ElementType.Name)!;
             Items.Add(o);
         }
-    }
-
-    public ArrayStructProperty()
-    {
     }
 
     public void Write(Writer w, SerializationContext ctx)

@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Newtonsoft.Json;
 using rd2parser.Model.Memory;
-using rd2parser.Model.Properties;
 using rd2parser.Navigation;
 
 namespace rd2parser.Model;
@@ -18,14 +16,10 @@ public class Actor : Node
     {
     }
 
-    public Actor(Node? parent) : base(parent, new List<Segment>(parent!.Path))
-    {
-        Path.Add(new() { Type = "Actor" });
-    }
 
     [SetsRequiredMembers]
 
-    public Actor(Reader r, SerializationContext ctx, Node? parent, int containerOffset) : this(parent)
+    public Actor(Reader r, SerializationContext ctx, int containerOffset)
     {
         ReadOffset = r.Position + containerOffset;
         HasTransform = r.Read<uint>();
@@ -33,7 +27,7 @@ public class Actor : Node
         {
             Transform = r.Read<FTransform>();
         }
-        Archive =  new SaveData(r,this, false, false, ctx, containerOffset,ctx.Options);
+        Archive =  new SaveData(r, false, false, containerOffset,ctx.Options);
     }
 
     public void WriteNonDynamic(Writer w, int containerOffset)
@@ -65,32 +59,5 @@ public class Actor : Node
     public override IEnumerable<Node> GetChildren()
     {
         yield return Archive;
-    }
-
-    [JsonIgnore]
-    public PropertyBag? ZoneActorProperties
-    {
-        get
-        {
-            UObject? zoneActorObject = Archive.Objects.FirstOrDefault(x => x.Name == "ZoneActor");
-            if (zoneActorObject != null)
-            {
-                return zoneActorObject.Properties;
-            }
-            return null;
-        }
-    }
-    [JsonIgnore]
-    public PropertyBag? FirstObjectProperties
-    {
-        get
-        {
-            UObject? firstObject = Archive.Objects.FirstOrDefault();
-            if (firstObject != null)
-            {
-                return firstObject.Properties;
-            }
-            return null;
-        }
     }
 }

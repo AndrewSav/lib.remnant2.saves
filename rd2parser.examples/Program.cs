@@ -23,15 +23,15 @@ internal class Program
 
         Tests.Run();
 
-        Example.AddRing();
-        Example.EditScrap();
-        Example.EditScrapRaw();
-        Example.ReadProfile();
-        Example.Json();
-        Example.Cass();
-        Example.CassAddItem();
-        Example.Campaign();
-        Example.BloodMoon();
-        Example.Challenges();
+        //Example.AddRing();
+        //Example.EditScrap();
+        //Example.EditScrapRaw();
+        //Example.ReadProfile();
+        //Example.Json();
+        //Example.Cass();
+        //Example.CassAddItem();
+        //Example.Campaign();
+        //Example.BloodMoon();
+        //Example.Challenges();
     }
 }

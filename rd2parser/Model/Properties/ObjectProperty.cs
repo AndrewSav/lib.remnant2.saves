@@ -11,22 +11,16 @@ public class ObjectProperty : Node
     [JsonIgnore]
     public UObject? Object;
 
-    public ObjectProperty(Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    public ObjectProperty()
     {
-        Path.Add(new() { Type = "ObjectProperty" });
     }
 
     [SetsRequiredMembers]
-    public ObjectProperty(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    public ObjectProperty(Reader r, SerializationContext ctx) 
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
-        Path.Add(new() { Type = "ObjectProperty" });
         ObjectIndex = r.Read<int>();
         SetIndex(ObjectIndex, ctx.Objects!);
-    }
-
-    public ObjectProperty()
-    {
     }
 
     public override string? ToString()
@@ -47,18 +41,13 @@ public class ObjectProperty : Node
         {
             ClassName = objects[index].ObjectPath;
             Object = objects[index];
-            if (Parent != null) Path[^1].Name = ClassName;
-        }
-        else
-        {
-            if (Parent != null) Path[^1].Name = null;
         }
         ObjectIndex = index;
     }
-    public void SetObject(UObject o)
-    {
-        SetIndex(o.ObjectIndex, o.SaveData.Objects);
-    }
+    //public void SetObject(UObject o)
+    //{
+    //    SetIndex(o.ObjectIndex, o.SaveData.Objects);
+    //}
     public override IEnumerable<Node> GetChildren()
     {
         yield break;

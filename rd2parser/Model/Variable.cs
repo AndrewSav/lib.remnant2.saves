@@ -21,13 +21,8 @@ public class Variable : Node
     {
     }
 
-    public Variable(Node? parent,  string name) : base(parent, new List<Segment>(parent!.Path))
-    {
-        Path.Add(new() { Name = name, Type = "Variable" });
-    }
-
     [SetsRequiredMembers]
-    public Variable(Reader r, SerializationContext ctx, Node? parent) : base(parent, new List<Segment>(parent!.Path))
+    public Variable(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         FName name = new(r, ctx.NamesTable);
@@ -37,7 +32,6 @@ public class Variable : Node
         }
         byte enumVal = r.Read<byte>();
         Name = name;
-        Path.Add(new() { Name = Name.Name, Type = "Variable" });
         Type = _varTypeNames[enumVal];
 
         switch (Type)
@@ -57,7 +51,6 @@ public class Variable : Node
             default:
                 throw new ApplicationException("unknown variable type");
         }
-        ctx.Registry.Add(Name.Name, this);
     }
 
     public void Write(Writer w, SerializationContext ctx)
