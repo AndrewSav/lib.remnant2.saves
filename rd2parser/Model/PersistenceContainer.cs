@@ -37,6 +37,7 @@ public class PersistenceContainer : Node
         {
             Destroyed.Add(r.Read<ulong>());
         }
+        ReadLength = r.Position + containerOffset - ReadOffset;
 
         Actors = new();
         for (int index = 0; index < actorInfo.Count; index++)
@@ -45,7 +46,7 @@ public class PersistenceContainer : Node
             r.Position = info.Offset;
             byte[] actorBytes = r.ReadBytes(info.Size);
             Reader actorReader = new(actorBytes);
-            Actor a = new(actorReader, ctx, info.Offset+ containerOffset);
+            Actor a = new(actorReader, ctx, info.Offset + containerOffset);
             Actors.Add(new KeyValuePair<ulong, Actor>(info.UniqueID, a));
         }
 
@@ -53,10 +54,11 @@ public class PersistenceContainer : Node
         uint dynamicCount = r.Read<uint>();
         for (uint i = 0; i < dynamicCount; i++)
         {
-            DynamicActor da = new(r);
+            ActorDynamicData da = new(r);
             Actor a = Actors.Single(x => x.Key == da.UniqueId).Value;
             a.DynamicData = da;
         }
+
     }
     
     public void Write(Writer w, int containerOffset)
@@ -103,6 +105,7 @@ public class PersistenceContainer : Node
         w.Write(indexOffset);
         w.Write(dynamicOffset);
         w.Position = endOffset;
+        WriteLength = (int)w.Position + containerOffset - WriteOffset;
     }
     public override IEnumerable<Node> GetChildren()
     {

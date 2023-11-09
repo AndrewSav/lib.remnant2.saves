@@ -31,6 +31,7 @@ public class Variables : Node
             Variable v = new(r, ctx);
             Items.Add(new KeyValuePair<string, Variable>(v.Name.Name,v));
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -43,6 +44,7 @@ public class Variables : Node
         {
             keyValuePair.Value.Write(w, ctx);
         }
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     public override IEnumerable<Node> GetChildren()
     {

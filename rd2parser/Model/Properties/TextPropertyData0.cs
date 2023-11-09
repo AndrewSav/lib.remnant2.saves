@@ -20,6 +20,7 @@ public class TextPropertyData0 : Node
         Namespace = r.ReadFString();
         Key = r.ReadFString();
         SourceString = r.ReadFString();
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -28,6 +29,7 @@ public class TextPropertyData0 : Node
         w.WriteFString(Namespace);
         w.WriteFString(Key);
         w.WriteFString(SourceString);
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     public override IEnumerable<Node> GetChildren()
     {

@@ -34,6 +34,7 @@ public class ByteProperty : Node
         {
             EnumValue = new(r, ctx.NamesTable);
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -49,6 +50,7 @@ public class ByteProperty : Node
         {
             EnumValue!.Write(w, ctx);
         }
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
     public override string? ToString()

@@ -56,6 +56,11 @@ internal class Tests
                 Console.WriteLine($"ReadOffset {node.ReadOffset} is not the same as WriteOffset {node.WriteOffset}");
                 //Console.WriteLine($"At {node.DisplayPath}");
             }
+            if (node.ReadLength != node.WriteLength)
+            {
+                Console.WriteLine($"ReadLength {node.ReadLength} is not the same as WriteLength {node.WriteLength}");
+                //Console.WriteLine($"At {node.DisplayPath}");
+            }
         });
         Console.WriteLine($"Found {count} objects");
     }

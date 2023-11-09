@@ -24,6 +24,7 @@ public class EnumProperty : Node
             Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
         }
         EnumValue = new(r, ctx.NamesTable);
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -32,6 +33,7 @@ public class EnumProperty : Node
         EnumType.Write(w, ctx);
         w.Write(Unknown);
         EnumValue.Write(w, ctx);
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
     public override string ToString()

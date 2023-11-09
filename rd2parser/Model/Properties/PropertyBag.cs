@@ -24,6 +24,7 @@ public class PropertyBag : Node
             }
             Properties.Add(new KeyValuePair<string, Property>(p.Name.Name, p));
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -36,6 +37,7 @@ public class PropertyBag : Node
 
         ushort index = (ushort)ctx.GetNamesTableIndex("None");
         new Property { Name = new FName { Name = "None", Index = index, Number = null }}.Write(w, ctx);
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
     public Property this[string s]

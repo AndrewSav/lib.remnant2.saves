@@ -3,18 +3,18 @@ using rd2parser.Model.Memory;
 
 namespace rd2parser.Model;
 
-public class DynamicActor
+public class ActorDynamicData
 {
     public required ulong UniqueId;
     public required FTransform Transform;
     public required FTopLevelAssetPath ClassPath;
 
-    public DynamicActor()
+    public ActorDynamicData()
     {
 
     }
     [SetsRequiredMembers]
-    public DynamicActor(Reader r)
+    public ActorDynamicData(Reader r)
     {
         UniqueId = r.Read<ulong>();
         Transform = r.Read<FTransform>();

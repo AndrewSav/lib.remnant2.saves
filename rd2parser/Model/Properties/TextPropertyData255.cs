@@ -21,6 +21,7 @@ public class TextPropertyData255 : Node
         {
             Value = r.ReadFString();
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -31,6 +32,7 @@ public class TextPropertyData255 : Node
         {
             w.WriteFString(Value!);
         }
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     public override IEnumerable<Node> GetChildren()
     {

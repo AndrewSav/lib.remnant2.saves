@@ -53,6 +53,7 @@ public class ArrayStructProperty : Node
             object o = StructProperty.ReadStructPropertyValue(r, ctx, ElementType.Name)!;
             Items.Add(o);
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -80,6 +81,7 @@ public class ArrayStructProperty : Node
         w.Position = sizeOffset;
         w.Write(Size);
         w.Position = endOffset;
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     public override IEnumerable<Node> GetChildren()
     {

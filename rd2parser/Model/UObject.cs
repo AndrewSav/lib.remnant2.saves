@@ -32,6 +32,7 @@ public class UObject : Node
             Name = new(r, ctx.NamesTable),
             OuterId = r.Read<uint>()
         };
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset; // Does not include object data, which is saved separately
     }
 
     internal void ReadData(Reader r, SerializationContext ctx)
@@ -113,6 +114,7 @@ public class UObject : Node
             }
 
             result.Add(c);
+            c.ReadLength = r.Position + ctx.ContainerOffset - c.ReadOffset;
         }
 
         return result;
@@ -130,6 +132,7 @@ public class UObject : Node
         if (this is not { WasLoadedByte: 0, LoadedData: not null }) return;
         LoadedData.Name.Write(w, ctx);
         w.Write(LoadedData.OuterId);
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
     internal void WriteData(Writer w, SerializationContext ctx)
@@ -197,6 +200,7 @@ public class UObject : Node
             w.Position = lengthOffset;
             w.Write(len);
             w.Position = endOffset;
+            c.WriteLength = (int)w.Position + ctx.ContainerOffset - c.WriteOffset; // Does not include object data, which is saved separately
         }
     }
 

@@ -79,6 +79,8 @@ public class SaveData : Node
 
         maxPosition = int.Max(maxPosition, r.Position);
         r.Position = maxPosition;
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
+
     }
 
     public void Write(Writer w, int containerOffset = 0)
@@ -131,6 +133,7 @@ public class SaveData : Node
         w.Position = offsetPosition;
         w.Write(offsetInfo);
         w.Position = endOffset;
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     public override IEnumerable<Node> GetChildren()
     {

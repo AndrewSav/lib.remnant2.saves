@@ -10,7 +10,7 @@ public class Actor : Node
     public FTransform? Transform;
     public required SaveData Archive;
     // DynamicData block is read after actors have been read
-    public DynamicActor? DynamicData;
+    public ActorDynamicData? DynamicData;
 
     public Actor()
     {
@@ -28,6 +28,7 @@ public class Actor : Node
             Transform = r.Read<FTransform>();
         }
         Archive =  new SaveData(r, false, false, containerOffset,ctx.Options);
+        ReadLength = r.Position + containerOffset - ReadOffset; // Does not include DynamicData
     }
 
     public void WriteNonDynamic(Writer w, int containerOffset)
@@ -39,6 +40,7 @@ public class Actor : Node
             w.Write(Transform!.Value);
         }
         Archive.Write(w, containerOffset);
+        WriteLength = (int)w.Position + containerOffset - WriteOffset; // Does not include DynamicData
     }
 
 

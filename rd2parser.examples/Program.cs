@@ -22,12 +22,12 @@ internal class Program
     {
 
         Tests.Run();
+        Example.Json();
 
         //Example.AddRing();
         //Example.EditScrap();
         //Example.EditScrapRaw();
         //Example.ReadProfile();
-        //Example.Json();
         //Example.Cass();
         //Example.CassAddItem();
         //Example.Campaign();

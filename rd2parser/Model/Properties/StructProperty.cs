@@ -20,7 +20,7 @@ public class StructProperty : Node
     [SetsRequiredMembers]
     public StructProperty(Reader r, SerializationContext ctx)
     {
-        ReadOffset = r.Position;
+        ReadOffset = r.Position + ctx.ContainerOffset;
         Type = new(r, ctx.NamesTable);
         Guid = r.Read<FGuid>();
         Unknown = r.Read<byte>();
@@ -29,6 +29,7 @@ public class StructProperty : Node
             Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
         }
         Value = ReadStructPropertyValue(r, ctx, Type.Name);
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     // Also called by ArrayStructProperty constructor
@@ -61,11 +62,12 @@ public class StructProperty : Node
 
     public void Write(Writer w, SerializationContext ctx)
     {
-        WriteOffset = (int)w.Position;
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
         Type.Write(w, ctx);
         w.Write(Guid);
         w.Write(Unknown);
         WriteStructPropertyValue(w, ctx, Type.Name, Value);
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
     public static void WriteStructPropertyValue(Writer w, SerializationContext ctx, string type, object? value)

@@ -35,6 +35,7 @@ public class MapProperty : Node
             object value = PropertyValue.ReadPropertyValue(r, ctx, ValueType.Name).Value!;
             Values.Add(new KeyValuePair<object, object>(key, value));
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -49,6 +50,7 @@ public class MapProperty : Node
             PropertyValue.WritePropertyValue(w, ctx, keyValuePair.Key, KeyType.Name);
             PropertyValue.WritePropertyValue(w, ctx, keyValuePair.Value, ValueType.Name);
         }
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     public override IEnumerable<Node> GetChildren()
     {

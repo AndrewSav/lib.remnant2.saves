@@ -21,6 +21,7 @@ public class ObjectProperty : Node
         ReadOffset = r.Position + ctx.ContainerOffset;
         ObjectIndex = r.Read<int>();
         SetIndex(ObjectIndex, ctx.Objects!);
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public override string? ToString()
@@ -33,6 +34,7 @@ public class ObjectProperty : Node
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
         SetIndex(ObjectIndex, ctx.Objects!);
         w.Write(Object?.ObjectIndex ?? -1);
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
     public void SetIndex(int index,List<UObject> objects )

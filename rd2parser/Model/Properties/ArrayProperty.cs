@@ -29,6 +29,7 @@ public class ArrayProperty : Node
             object o = PropertyValue.ReadPropertyValue(r, ctx, ElementType.Name).Value!;
             Items.Add(o);
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -38,6 +39,7 @@ public class ArrayProperty : Node
         w.Write(Unknown);
         w.Write(Items.Count);
         foreach (object? item in Items) PropertyValue.WritePropertyValue(w, ctx, item, ElementType.Name);
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     public override IEnumerable<Node> GetChildren()
     {

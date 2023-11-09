@@ -51,6 +51,7 @@ public class Variable : Node
             default:
                 throw new ApplicationException("unknown variable type");
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -78,6 +79,7 @@ public class Variable : Node
             default:
                 throw new ApplicationException("unknown variable type");
         }
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     private static T Get<T>(object? value)
     {

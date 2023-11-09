@@ -41,6 +41,7 @@ public class Property : Node
             NoRaw = pv.NoRawByte;
             Value = pv.Value;
         }
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public override string? ToString()
@@ -111,6 +112,8 @@ public class Property : Node
             w.Write(Size!.Value);
             w.Position = endOffset;
         }
+
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
     public List<T> GetItems<T>()
     {

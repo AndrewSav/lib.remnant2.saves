@@ -25,6 +25,7 @@ public class TextProperty : Node
             255 => new TextPropertyData255(r, ctx),
             _ => throw new ApplicationException("unsupported history type")
         };
+        ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
     public void Write(Writer w, SerializationContext ctx)
@@ -43,6 +44,7 @@ public class TextProperty : Node
             default:
                 throw new ApplicationException("unsupported history type");
         }
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
     public override string? ToString()
