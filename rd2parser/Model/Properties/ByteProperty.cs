@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class ByteProperty : Node
+public class ByteProperty : ModelBase
 {
     public required FName EnumName;
     public required byte Unknown;
@@ -57,7 +56,7 @@ public class ByteProperty : Node
     {
         return EnumName.Name == "None" ? EnumByte!.ToString() : EnumValue!.ToString();
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         yield break;
     }

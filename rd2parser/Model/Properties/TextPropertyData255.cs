@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class TextPropertyData255 : Node
+public class TextPropertyData255 : ModelBase
 {
     public required uint Flag;
     public string? Value;
@@ -34,7 +33,7 @@ public class TextPropertyData255 : Node
         }
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         yield break;
     }

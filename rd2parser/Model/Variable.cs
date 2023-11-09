@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model;
-public class Variable : Node
+public class Variable : ModelBase
 {
     public required FName Name;
     public required string Type;
@@ -85,9 +84,9 @@ public class Variable : Node
     {
         return (T)Convert.ChangeType(value!, typeof(T), CultureInfo.InvariantCulture);
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        if (Value is Node node)
-            yield return node;
+        if (Value is ModelBase node)
+            yield return (node, null);
     }
 }

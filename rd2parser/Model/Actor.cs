@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using rd2parser.Model.Memory;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 
-public class Actor : Node
+public class Actor : ModelBase
 {
     public required uint HasTransform;
     public FTransform? Transform;
@@ -58,8 +57,8 @@ public class Actor : Node
         return base.ToString();
     }
 
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        yield return Archive;
+        yield return (Archive, null);
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 
-public class Variables : Node
+public class Variables : ModelBase
 {
     public required FName Name;
     public required ulong Unknown;
@@ -46,11 +45,12 @@ public class Variables : Node
         }
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        foreach (Variable v in Items.Select(x => x.Value))
+        for (int index = 0; index < Items.Count; index++)
         {
-            yield return v;
+            KeyValuePair<string, Variable> v = Items[index];
+            yield return (v.Value, index);
         }
     }
 }

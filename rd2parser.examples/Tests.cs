@@ -1,4 +1,5 @@
 ﻿using rd2parser.Model;
+using rd2parser.Navigation;
 using Serilog;
 
 namespace rd2parser.examples;
@@ -28,6 +29,8 @@ internal class Tests
     {
         SaveFile sf = SaveFile.Read(path);
 
+        Navigator n = new(sf);
+
         Writer w = new();
         sf.SaveData.Write(w);
         byte[] decoded1 = w.ToArray();
@@ -48,7 +51,7 @@ internal class Tests
         SaveFile.Write("test.DoOne", sf);
 
         int count = 0;
-        sf.VisitObjects(node =>
+        sf.VisitObjects((node, index) =>
         {
             count++;
             if (node.ReadOffset != node.WriteOffset)

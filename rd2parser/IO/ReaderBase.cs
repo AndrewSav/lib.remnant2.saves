@@ -4,7 +4,7 @@ using rd2parser.IO.AddressUsageTracker;
 namespace rd2parser.IO;
 
 // This is a utility class for reading from a byte array
-// Node that the entire buffer resides in memory so it's not suitable
+// Note that the entire buffer resides in memory so it's not suitable
 // for large files, for our purposes though it's fine
 public class ReaderBase
 {

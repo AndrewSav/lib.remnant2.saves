@@ -2,11 +2,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using rd2parser.IO;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class StructProperty : Node
+public class StructProperty : ModelBase
 {
     public required FName Type;
     public required FGuid Guid;
@@ -134,10 +133,10 @@ public class StructProperty : Node
             _ => (DateTime)value
         };
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        if (Value is Node node)
-            yield return node;
+        if (Value is ModelBase node)
+            yield return (node, null);
     }
 
     public override string? ToString()

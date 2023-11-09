@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using rd2parser.Model.Memory;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 
-public class SaveData : Node
+public class SaveData : ModelBase
 {
     // The members order roughly correspond to the order of data in a save file
     // after objects offset object properties and components go, one set for
@@ -135,11 +134,12 @@ public class SaveData : Node
         w.Position = endOffset;
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        foreach (UObject o in Objects)
+        for (int index = 0; index < Objects.Count; index++)
         {
-                yield return o;
+            UObject o = Objects[index];
+            yield return (o, index);
         }
     }
 }

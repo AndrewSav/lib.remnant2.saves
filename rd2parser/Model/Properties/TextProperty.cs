@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class TextProperty : Node
+public class TextProperty : ModelBase
 {
     public required uint Flags;
     public required byte HistoryType;
@@ -56,9 +55,9 @@ public class TextProperty : Node
             _ => throw new ApplicationException("unsupported history type")
         };
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        if (Value is Node node )
-            yield return node;
+        if (Value is ModelBase node )
+            yield return (node, null);
     }
 }

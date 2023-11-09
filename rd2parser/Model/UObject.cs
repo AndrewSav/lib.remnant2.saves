@@ -1,9 +1,8 @@
 ﻿using rd2parser.Model.Properties;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 
-public class UObject : Node
+public class UObject : ModelBase
 {
     public byte WasLoadedByte;
     public string? ObjectPath;
@@ -44,7 +43,7 @@ public class UObject : Node
             Components = ReadComponents(r, ctx);
     }
 
-    public (PropertyBag?, byte[]?) ReadProperties(Reader r, SerializationContext ctx)
+    public static (PropertyBag?, byte[]?) ReadProperties(Reader r, SerializationContext ctx)
     {
         byte[]? extraData = null;
         uint len = r.Read<uint>();
@@ -69,7 +68,7 @@ public class UObject : Node
         return (result, extraData);
     }
 
-    public List<Component> ReadComponents(Reader r, SerializationContext ctx)
+    public static List<Component> ReadComponents(Reader r, SerializationContext ctx)
     {
         List<Component> result = new();
         uint componentCount = r.Read<uint>();
@@ -227,16 +226,17 @@ public class UObject : Node
         }
     }
 
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         if (Properties != null)
-            yield return Properties;
+            yield return (Properties,null);
 
         if (Components != null)
         {
-            foreach (Component c in Components)
+            for (int index = 0; index < Components.Count; index++)
             {
-                    yield return c;
+                Component c = Components[index];
+                yield return (c,index);
             }
         }
     }

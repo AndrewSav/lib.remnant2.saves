@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using rd2parser.Model.Properties;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 
-public class Component : Node
+public class Component : ModelBase
 {
     public required string ComponentKey;
     public PropertyBag? Properties;
@@ -20,12 +19,12 @@ public class Component : Node
     {
         ComponentKey = componentKey;
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         if (Properties != null)
-            yield return Properties;
+            yield return (Properties, null);
         if (Variables != null)
-            yield return Variables;
+            yield return (Variables, null);
     }
 
     public override string ToString()

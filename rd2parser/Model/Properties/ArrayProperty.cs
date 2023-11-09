@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class ArrayProperty : Node
+public class ArrayProperty : ModelBase
 {
     public required FName ElementType;
     public required List<object?> Items;
@@ -41,12 +40,13 @@ public class ArrayProperty : Node
         foreach (object? item in Items) PropertyValue.WritePropertyValue(w, ctx, item, ElementType.Name);
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        foreach (object? item in Items)
+        for (int index = 0; index < Items.Count; index++)
         {
-            if (item is Node node)
-                yield return node;
+            object? item = Items[index];
+            if (item is ModelBase node)
+                yield return (node, index);
         }
     }
 }

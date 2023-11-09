@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using rd2parser.Model.Memory;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 
-public class PersistenceContainer : Node
+public class PersistenceContainer : ModelBase
 {
     public required uint Version;
     public required List<ulong> Destroyed;
@@ -107,11 +106,12 @@ public class PersistenceContainer : Node
         w.Position = endOffset;
         WriteLength = (int)w.Position + containerOffset - WriteOffset;
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        foreach (Actor a in Actors.Select(x => x.Value))
+        for (int index = 0; index < Actors.Count; index++)
         {
-            yield return a;
+            KeyValuePair<ulong, Actor> a = Actors[index];
+            yield return (a.Value, index);
         }
     }
 }

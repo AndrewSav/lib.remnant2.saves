@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class Property : Node
+public class Property : ModelBase
 {
     public required FName Name;
     public uint? Index;
@@ -130,9 +129,9 @@ public class Property : Node
         };
     }
 
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        if (Value is Node node)
-            yield return node;
+        if (Value is ModelBase node)
+            yield return (node, null);
     }
 }

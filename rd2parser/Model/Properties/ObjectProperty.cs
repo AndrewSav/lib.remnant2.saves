@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class ObjectProperty : Node
+public class ObjectProperty : ModelBase
 {
     public required int ObjectIndex;
     public string? ClassName; // To make it easier to navigate in the debugger
@@ -50,7 +49,7 @@ public class ObjectProperty : Node
     //{
     //    SetIndex(o.ObjectIndex, o.SaveData.Objects);
     //}
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         yield break;
     }

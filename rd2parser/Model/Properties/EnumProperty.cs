@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class EnumProperty : Node
+public class EnumProperty : ModelBase
 {
     public required FName EnumType;
     public required byte Unknown;
@@ -40,7 +39,7 @@ public class EnumProperty : Node
     {
         return EnumValue.ToString();
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         yield break;
     }

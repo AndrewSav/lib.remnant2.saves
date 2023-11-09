@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using rd2parser.Model.Memory;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class ArrayStructProperty : Node
+public class ArrayStructProperty : ModelBase
 {
     public required byte Unknown;
     public required FName OuterElementType;
@@ -83,12 +82,13 @@ public class ArrayStructProperty : Node
         w.Position = endOffset;
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        foreach (object? item in Items)
+        for (int index = 0; index < Items.Count; index++)
         {
-            if (item is Node node)
-                yield return node;
+            object? item = Items[index];
+            if (item is ModelBase node)
+                yield return (node, index);
         }
     }
 }

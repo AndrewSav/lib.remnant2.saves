@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
-public class PropertyBag : Node
+public class PropertyBag : ModelBase
 {
     public required List<KeyValuePair<string, Property>> Properties;
 
@@ -54,11 +53,12 @@ public class PropertyBag : Node
         return Properties.Any(x => x.Key == s);
     }
 
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        foreach (Property p in Properties.Select(x => x.Value))
+        for (int index = 0; index < Properties.Count; index++)
         {
-            yield return p;
+            KeyValuePair<string, Property> p = Properties[index];
+            yield return (p.Value, index);
         }
     }
 }

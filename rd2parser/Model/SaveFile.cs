@@ -3,7 +3,6 @@ using System.IO.Hashing;
 using rd2parser.Model.Memory;
 using rd2parser.Compression;
 using rd2parser.IO.AddressUsageTracker;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model;
 public class SaveFile
@@ -29,7 +28,7 @@ public class SaveFile
         }
         if (d[0].End != r.Position)
         {
-            Log.Logger.Warning("unexpected unexpected position after read");
+            Log.Logger.Warning("unexpected position after read");
         }
     }
 
@@ -61,17 +60,17 @@ public class SaveFile
         Archive.CompressSave(path, w.ToArray());
     }
 
-    public void VisitObjects(Action<Node> f)
+    public void VisitObjects(Action<ModelBase, int?> f)
     {
-        Queue<Node> q = new();
-        q.Enqueue(SaveData);
+        Queue<(ModelBase obj, int? index)> q = new();
+        q.Enqueue((SaveData, 0));
         while (q.Count > 0)
         {
-            Node n = q.Dequeue();
-            f(n);
-            foreach (Node c in n.GetChildren())
+            (ModelBase obj, int? index) = q.Dequeue();
+            f(obj, index);
+            foreach ((ModelBase o, int? i) in obj.GetChildren())
             {
-                q.Enqueue(c);
+                q.Enqueue((o, i));
             }
         }
     }

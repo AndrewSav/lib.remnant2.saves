@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Navigation;
 
 namespace rd2parser.Model.Properties;
 
-public class MapProperty : Node
+public class MapProperty : ModelBase
 {
     public required FName KeyType;
     public required FName ValueType;
@@ -52,15 +51,16 @@ public class MapProperty : Node
         }
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
-    public override IEnumerable<Node> GetChildren()
+    public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
-        foreach (KeyValuePair<object, object> kvp in Values)
+        for (int index = 0; index < Values.Count; index++)
         {
-            if (kvp.Key is Node key)
-                yield return key;
+            KeyValuePair<object, object> kvp = Values[index];
+            if (kvp.Key is ModelBase key)
+                yield return (key, index);
 
-            if (kvp.Value is Node value)
-                yield return value;
+            if (kvp.Value is ModelBase value)
+                yield return (value, index);
         }
     }
 }
