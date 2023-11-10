@@ -1,74 +1,79 @@
-﻿//using rd2parser.Model.Properties;
-//using rd2parser.Model;
+﻿using rd2parser.Model.Properties;
+using rd2parser.Model;
+using rd2parser.Navigation;
 
-//namespace rd2parser.examples;
+namespace rd2parser.examples;
 
-//internal partial class Example
-//{
-//    public static void AddRing()
-//    {
-//        Console.WriteLine("Add Ring===========");
+internal partial class Example
+{
+    public static void AddRing()
+    {
+        Console.WriteLine("Add Ring===========");
 
-//        const string ringId = "/Game/World_Base/Items/Trinkets/Rings/CompulsionLoop/Ring_CompulsionLoop.Ring_CompulsionLoop_C";
-//        const string targetFileName = "ring_added.sav";
+        const string ringId = "/Game/World_Jungle/Items/Trinkets/Rings/ArchersCrest/Ring_ArchersCrest.Ring_ArchersCrest_C";
+        const string targetFileName = "ring_added.sav";
 
-//        string folder = Utils.GetSteamSavePath();
-//        string path = Path.Combine(folder, "profile.sav");
+        string folder = Utils.GetSteamSavePath();
+        string path = Path.Combine(folder, "profile.sav");
 
-//        Console.WriteLine("Reading profile data...");
-//        SaveFile sf = SaveFile.Read(path);
+        Console.WriteLine("Reading profile data...");
+        SaveFile sf = SaveFile.Read(path);
+        Navigator navigator = new(sf);
 
-//        Console.WriteLine("Looking for the ring on the first character...");
+        Console.WriteLine("Looking for the ring on the first character...");
 
-//        Property? characters = sf.GetProperty("Characters");
+        Property? characters = navigator.GetProperty("Characters");
 
-//        ObjectProperty? character = characters!.GetItems<ObjectProperty>().FirstOrDefault();
-//        if (character == null)
-//        {
-//            Console.WriteLine("Do you have any characters?");
-//            return;
-//        }
+        ObjectProperty? character = characters!.GetItems<ObjectProperty>().FirstOrDefault();
+        if (character == null)
+        {
+            Console.WriteLine("Do you have any characters?");
+            return;
+        }
 
-//        Property? ringItem = sf.GetProperties("ItemBP", character.Object!)!
-//            .SingleOrDefault(x => x.Value!.ToString() == ringId);
+        Property? ringItem = navigator.GetProperties("ItemBP", character.Object)!
+            .SingleOrDefault(x => x.Value!.ToString() == ringId);
 
-//        if (ringItem != null)
-//        {
-//            Console.WriteLine("Your character already has the ring");
-//            return;
-//        }
+        if (ringItem != null)
+        {
+            Console.WriteLine("Your character already has the ring");
+            return;
+        }
 
-//        ringItem = sf.GetProperties("ItemBP", character.Object!)!
-//            .FirstOrDefault(x => x.Value!.ToString()!.Contains("Ring_"));
+        ringItem = navigator.GetProperties("ItemBP", character.Object)!
+            .FirstOrDefault(x => x.Value!.ToString()!.Contains("Ring_"));
 
-//        if (ringItem == null)
-//        {
-//            Console.WriteLine("Your character does not have any rings, we need an existing ring to clone from");
-//            return;
-//        }
+        if (ringItem == null)
+        {
+            Console.WriteLine("Your character does not have any rings, we need an existing ring to clone from");
+            return;
+        }
 
-//        UObject itemObject = (ringItem.Value as ObjectProperty)!.Object!.CopyObject();
-//        UObject instanceDataObject = (ringItem.Bag["InstanceData"].Value as ObjectProperty)!.Object!.CopyObject();
+        UObject itemObject = (ringItem.Value as ObjectProperty)!.Object!.
+            ShallowCopyObject(navigator);
+        UObject instanceDataObject = (ringItem.GetParent<PropertyBag>(navigator)["InstanceData"].Value as ObjectProperty)!.Object!.ShallowCopyObject(navigator);
 
-//        itemObject.SaveData.Objects.Add(itemObject);
-//        itemObject.ObjectPath = ringId;
+        itemObject.ObjectPath = ringId;
 
-//        instanceDataObject.SaveData.Objects.Add(instanceDataObject);
+        PropertyBag newItemBag = new()
+        {
+            Properties = ringItem.GetParent<PropertyBag>(navigator).Properties
+                .Select(x => new KeyValuePair<string, Property>(x.Key, x.Value.ShallowCopyProperty())).ToList(),
+        };
 
-//        PropertyBag newItemBag = ringItem.Bag.CopyPropertyBag();
-//        (newItemBag["ItemBP"].Value as ObjectProperty)!.SetObject(itemObject);
-//        (newItemBag["InstanceData"].Value as ObjectProperty)!.SetObject(instanceDataObject);
-//        newItemBag["New"].Value = 1; // Just for in-game display
-//        newItemBag["EquipmentSlotIndex"].Value = -1; // In case ring we cloned from is equipped
+        newItemBag["ItemBP"].Value = new ObjectProperty { ObjectIndex = itemObject.ObjectIndex };
+        newItemBag["InstanceData"].Value = new ObjectProperty { ObjectIndex = instanceDataObject.ObjectIndex };
+        newItemBag["New"].Value = 1; // Just for in-game display
+        newItemBag["EquipmentSlotIndex"].Value = -1; // In case ring we cloned from is equipped
 
-//        ArrayStructProperty inventoryArray = (ArrayStructProperty)ringItem.Bag.Parent!;
-//        int maxId = inventoryArray.Items.Select(x => (int)((PropertyBag)x!)["ID"].Value!).Max();
-//        newItemBag["ID"].Value = maxId+1;
+        ArrayStructProperty inventoryArray = ringItem.GetParent<PropertyBag>(navigator).GetParent<ArrayStructProperty>(navigator);
+        int maxId = inventoryArray.Items.Select(x => (int)((PropertyBag)x!)["ID"].Value!).Max();
+        newItemBag["ID"].Value = maxId + 1;
 
-//        inventoryArray.Items.Add(newItemBag);
+        inventoryArray.Items.Add(newItemBag);
 
-//        Console.WriteLine($"Writing to {targetFileName}...");
-//        SaveFile.Write(targetFileName, sf);
-//        Console.WriteLine($"You have to copy {targetFileName} over your profile.sav in the game save folder!");
-//    }
-//}
+        Console.WriteLine($"Writing to {targetFileName}...");
+        SaveFile.Write(targetFileName, sf);
+        Console.WriteLine($"You have to copy {targetFileName} over your profile.sav in the game save folder!");
+    }
+}

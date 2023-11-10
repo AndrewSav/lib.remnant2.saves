@@ -21,20 +21,17 @@ public class SerializationContext
 
     // Caching NameTable entries for faster access
     private readonly Dictionary<string, int> _namesTableIndex = new();
+    private readonly object _lock = new();
 
     public int GetNamesTableIndex(string name)
     {
-        if (_namesTableIndex.TryGetValue(name, out int index))
+        if (!_namesTableIndex.ContainsKey(name))
         {
-            return index;
+            lock (_lock)
+            {
+                _namesTableIndex.TryAdd(name, NamesTable.FindIndex(x => x == name));
+            }
         }
-
-        index = NamesTable.FindIndex(x => x == name);
-        if (index < 0)
-        {
-            return index;
-        }
-        _namesTableIndex.Add(name, index);
-        return index;
+        return _namesTableIndex[name];
     }
 }

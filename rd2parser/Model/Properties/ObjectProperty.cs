@@ -19,36 +19,26 @@ public class ObjectProperty : ModelBase
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         ObjectIndex = r.Read<int>();
-        SetIndex(ObjectIndex, ctx.Objects!);
+        if (ObjectIndex != -1)
+        {
+            ClassName = ctx.Objects![ObjectIndex].ObjectPath;
+            Object = ctx.Objects[ObjectIndex];
+        }
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
+    }
+
+    public void Write(Writer w, SerializationContext ctx)
+    {
+        WriteOffset = (int)w.Position + ctx.ContainerOffset;
+        w.Write(ObjectIndex);
+        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
     public override string? ToString()
     {
         return ClassName;
     }
-
-    public void Write(Writer w, SerializationContext ctx)
-    {
-        WriteOffset = (int)w.Position + ctx.ContainerOffset;
-        SetIndex(ObjectIndex, ctx.Objects!);
-        w.Write(Object?.ObjectIndex ?? -1);
-        WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
-    }
-
-    public void SetIndex(int index,List<UObject> objects )
-    {
-        if (index != -1)
-        {
-            ClassName = objects[index].ObjectPath;
-            Object = objects[index];
-        }
-        ObjectIndex = index;
-    }
-    //public void SetObject(UObject o)
-    //{
-    //    SetIndex(o.ObjectIndex, o.SaveData.Objects);
-    //}
+    
     public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         yield break;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Text;
 using rd2parser.Model;
 using rd2parser.Model.Properties;
 
@@ -32,10 +27,19 @@ public class Node
         }
     }
 
-    public Node(ModelBase o)
+    public ModelBase Object => _object;
+
+    public Node(ModelBase obj)
     {
-        _object = o;
-        Path = new();
+        _object = obj;
+        Path = new() { new() { Name = GetName(obj), Type = obj.GetType().Name } };
+    }
+
+    public Node(ModelBase obj, int? index, Node parent)
+    {
+        _object = obj;
+        Parent = parent;
+        Path = new(parent.Path) { new() { Name = GetName(obj), Type = obj.GetType().Name, Index = index } };
     }
 
     private static string GetName(ModelBase item)
@@ -60,12 +64,7 @@ public class Node
     {
         foreach ((ModelBase obj, int? index) in _object.GetChildren())
         {
-        
-            yield return new(obj)
-            {
-                Parent = this,
-                Path = new(Path) { new() { Name = GetName(obj), Type = obj.GetType().Name, Index = index} }
-            };
+            yield return new(obj, index, this);
         }
     }
     public string DisplayPath

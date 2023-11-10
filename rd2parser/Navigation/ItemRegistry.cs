@@ -1,13 +1,19 @@
 ﻿using System.Text.RegularExpressions;
+using rd2parser.Model;
 
 namespace rd2parser.Navigation;
 public class ItemRegistry
 {
     private readonly Dictionary<string, Dictionary<string, List<Node>>> _registry = new();
 
-    public void Add<T>(string name, T item) where T : Node
+    public bool Add(Node item)
     {
-        string type = typeof(T).Name;
+        string type = item.Path[^1].Type;
+        if (string.IsNullOrEmpty(item.Path[^1].Name))
+        {
+            return false;
+        }
+        string name = item.Path[^1].Name;
         if (!_registry.ContainsKey(type))
         {
             _registry[type] = new();
@@ -18,49 +24,33 @@ public class ItemRegistry
             byType[name] = new();
         }
         byType[name].Add(item);
+        return true;
     }
 
-    public void Add(ItemRegistry registry)
-    {
-        foreach (KeyValuePair<string, Dictionary<string, List<Node>>> byType in registry._registry)
-        {
-            foreach (KeyValuePair<string, List<Node>> registryItem in byType.Value)
-            {
-                {
-                    foreach (Node item in registryItem.Value)
-                    {
-                        Add(registryItem.Key, (dynamic)item);
-                    }
-                }
-            }
-        }
-    }
-
-    public List<T>? Get<T>(string name) where T : Node
+    public List<T>? Get<T>(string name) where T : ModelBase
     {
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) return null;
         Dictionary<string, List<Node>> byType = _registry[type];
-        return !byType.ContainsKey(name) ? null : byType[name].Select(x => (T)x).ToList();
+        return !byType.ContainsKey(name) ? null : byType[name].Select(x => (T)x.Object).ToList();
     }
 
-    public List<T>? GetAll<T>() where T : Node
+    public List<T>? GetAll<T>() where T : ModelBase
     {
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) return null;
         Dictionary<string, List<Node>> byType = _registry[type];
-        return byType.SelectMany(x => x.Value).Select(x => (T)x).ToList();
+        return byType.SelectMany(x => x.Value).Select(x => (T)x.Object).ToList();
     }
 
-    public List<T>? Find<T>(string namePattern) where T : Node
+    public List<T>? Find<T>(string namePattern) where T : ModelBase
     {
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) return null;
         Dictionary<string, List<Node>> byType = _registry[type];
-        List<T> result = byType.SelectMany(x => x.Value).Select(x => (T)x).Where(x => x.Path[^1].Name != null && Regex.IsMatch(x.Path[^1].Name!, namePattern)).ToList();
+        List<T> result = byType.SelectMany(x => x.Value).Where(x => x.Path[^1].Name != null && Regex.IsMatch(x.Path[^1].Name!, namePattern)).Select(x => (T)x.Object).ToList();
         return result.Count > 0 ? result : null;
     }
-
 
     public List<string> GetTypes()
     {

@@ -1,4 +1,4 @@
-﻿namespace rd2parser.Model;
+﻿namespace rd2parser.Model.Memory;
 
 public class UObjectLoadedData
 {

@@ -1,5 +1,4 @@
 ﻿using rd2parser.Model;
-using rd2parser.Navigation;
 using Serilog;
 
 namespace rd2parser.examples;
@@ -21,15 +20,12 @@ internal class Tests
         DoOne(profilePath);
         DoOne(savePath);
 
-
         Log.Logger = null!;
     }
 
     private static void DoOne(string path)
     {
         SaveFile sf = SaveFile.Read(path);
-
-        Navigator n = new(sf);
 
         Writer w = new();
         sf.SaveData.Write(w);

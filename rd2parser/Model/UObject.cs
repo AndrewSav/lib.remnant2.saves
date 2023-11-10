@@ -1,4 +1,5 @@
-﻿using rd2parser.Model.Properties;
+﻿using rd2parser.Model.Memory;
+using rd2parser.Model.Properties;
 
 namespace rd2parser.Model;
 

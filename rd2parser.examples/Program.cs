@@ -17,6 +17,8 @@ internal class Program
     // TODO: README - FIX UPS: Navigation
     // TODO: README - FIX UPS: Copying object will screw up navigation
     // TODO: README - ParseFowVisitedCoordinates
+    // TODO: README - Note on absence of deep copy
+    // TODO: README - Names va ToString()
 
     private static void Main()
     {
@@ -24,14 +26,14 @@ internal class Program
         Tests.Run();
         Example.Json();
 
-        //Example.AddRing();
-        //Example.EditScrap();
-        //Example.EditScrapRaw();
-        //Example.ReadProfile();
-        //Example.Cass();
+        Example.ReadProfile();
+        Example.Cass();
+        Example.Campaign();
+        Example.BloodMoon();
+        Example.Challenges();
+        Example.EditScrapRaw();
+        Example.EditScrap();
+        Example.AddRing();
         //Example.CassAddItem();
-        //Example.Campaign();
-        //Example.BloodMoon();
-        //Example.Challenges();
     }
 }
