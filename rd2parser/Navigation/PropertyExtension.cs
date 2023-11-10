@@ -2,11 +2,6 @@
 namespace rd2parser.Navigation;
 public static class PropertyExtension
 {
-    //public static PropertyBag GetBag(this Property property, Navigator navigator)
-    //{
-    //    return (PropertyBag)navigator.Lookup(property).Parent!.Object;
-    //}
-
     public static Property ShallowCopyProperty(this Property property)
     {
         Property result = new()
@@ -21,4 +16,3 @@ public static class PropertyExtension
         return result;
     }
 }
-

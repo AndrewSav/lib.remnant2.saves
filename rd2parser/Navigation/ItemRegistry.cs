@@ -2,7 +2,7 @@
 using rd2parser.Model;
 
 namespace rd2parser.Navigation;
-public class ItemRegistry
+internal class ItemRegistry
 {
     private readonly Dictionary<string, Dictionary<string, List<Node>>> _registry = new();
 
@@ -48,7 +48,7 @@ public class ItemRegistry
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) return null;
         Dictionary<string, List<Node>> byType = _registry[type];
-        List<T> result = byType.SelectMany(x => x.Value).Where(x => x.Path[^1].Name != null && Regex.IsMatch(x.Path[^1].Name!, namePattern)).Select(x => (T)x.Object).ToList();
+        List<T> result = byType.SelectMany(x => x.Value).Where(x => !string.IsNullOrEmpty(x.Path[^1].Name) && Regex.IsMatch(x.Path[^1].Name, namePattern)).Select(x => (T)x.Object).ToList();
         return result.Count > 0 ? result : null;
     }
 
@@ -87,7 +87,7 @@ public class ItemRegistry
                 {
                     foreach (Segment s in item.Path)
                     {
-                        if (s.Name != null)
+                        if (!string.IsNullOrEmpty(s.Name))
                         {
                             if (!name.Contains(s.Name))
                             {

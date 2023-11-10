@@ -11,14 +11,14 @@ internal partial class Example
         Console.WriteLine("Cass add item===========");
 
         string folder = Utils.GetSteamSavePath();
-        //string savePath = Path.Combine(folder, Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE") ?? "save_0.sav");
-        string savePath = Path.Combine(folder, "save_2.sav");
+        string savePath = Path.Combine(folder, Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE") ?? "save_0.sav");
 
         SaveFile sf = SaveFile.Read(savePath);
         Navigator navigator = new(sf);
 
 
-        string item = @"/Game/World_Base/Items/Trinkets/Amulets/LetosAmulet/Amulet_LetosAmulet.Amulet_LetosAmulet_C";
+        // Note that you will only see the character in the Cass shop only if your character does not already have it
+        string item = @"/Game/World_Jungle/Items/Trinkets/Amulets/FullMoonCirclet/Amulet_FullMoonCirclet.Amulet_FullMoonCirclet_C";
         const string targetFileName = "cass_changed.sav";
 
         Actor cass = navigator.GetActor("Character_NPC_Cass_C")!;
@@ -63,7 +63,9 @@ internal partial class Example
         };
 
         cass.Archive.Objects.Add(itemObject);
+        itemObject.ObjectIndex = cass.Archive.Objects.FindIndex(x => x == itemObject);
         cass.Archive.Objects.Add(equipmentData);
+        equipmentData.ObjectIndex = cass.Archive.Objects.FindIndex(x => x == equipmentData);
 
         PropertyBag newItemBag = new()
         {
@@ -84,7 +86,7 @@ internal partial class Example
                     Type = FName.Create("ObjectProperty", cass.Archive.NamesTable),
                     Value = new ObjectProperty
                     {
-                      ObjectIndex = -1
+                      ObjectIndex = itemObject.ObjectIndex
                     },
                     Size = 4,
                     Index = 0,
@@ -132,7 +134,7 @@ internal partial class Example
                     Type = FName.Create("ObjectProperty", cass.Archive.NamesTable),
                     Value = new ObjectProperty
                     {
-                        ObjectIndex = -1
+                        ObjectIndex = equipmentData.ObjectIndex
                     },
                     Size = 4,
                     Index = 0,
@@ -140,9 +142,6 @@ internal partial class Example
                 }),
             }
         };
-
-        newItemBag["ItemBP"].Value = new ObjectProperty { ObjectIndex = itemObject.ObjectIndex };
-        newItemBag["InstanceData"].Value = new ObjectProperty { ObjectIndex = equipmentData.ObjectIndex };
 
         PropertyBag inventory = navigator.FindComponents("Inventory", cass)![0].Properties!;
         ArrayStructProperty asp = (ArrayStructProperty)inventory["Items"].Value!;

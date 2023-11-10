@@ -2,10 +2,6 @@
 namespace rd2parser.Navigation;
 public static class UObjectExtension
 {
-    //public static SaveData GetSaveData(this UObject obj, Navigator navigator)
-    //{
-    //    return (SaveData)navigator.Lookup(obj).Parent!.Object;
-    //}
     public static UObject ShallowCopyObject(this UObject obj, Navigator navigator)
     {
         UObject result = new()
