@@ -52,52 +52,8 @@ internal class ItemRegistry
         return result.Count > 0 ? result : null;
     }
 
-    public List<string> GetTypes()
+    public Dictionary<string,List<string>> GetNames()
     {
-        List<string> type = new();
-        foreach (KeyValuePair<string, Dictionary<string, List<Node>>> byType in _registry)
-        {
-            foreach (KeyValuePair<string, List<Node>> registryItem in byType.Value)
-            {
-                foreach (Node item in registryItem.Value)
-                {
-                    foreach (Segment s in item.Path)
-                    {
-                        if (!type.Contains(s.Type))
-                        {
-                            type.Add(s.Type);
-                        }
-                    }
-                }
-            }
-        }
-
-        return type;
-    }
-
-    public List<string> GetNames()
-    {
-        List<string> name = new();
-
-        foreach (KeyValuePair<string, Dictionary<string, List<Node>>> byType in _registry)
-        {
-            foreach (KeyValuePair<string, List<Node>> registryItem in byType.Value)
-            {
-                foreach (Node item in registryItem.Value)
-                {
-                    foreach (Segment s in item.Path)
-                    {
-                        if (!string.IsNullOrEmpty(s.Name))
-                        {
-                            if (!name.Contains(s.Name))
-                            {
-                                name.Add(s.Name);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return name;
+        return _registry.Keys.ToDictionary(x => x,x=> _registry[x].Keys.ToList());
     }
 }

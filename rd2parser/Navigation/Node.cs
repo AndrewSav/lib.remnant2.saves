@@ -11,6 +11,7 @@ public class Node
 
     private List<Node>? _children;
     private readonly object _lock = new ();
+    private readonly Navigator _navigator;
 
     public List<Node> Children
     {
@@ -29,14 +30,16 @@ public class Node
 
     public ModelBase Object => _object;
 
-    public Node(ModelBase obj)
+    public Node(ModelBase obj, Navigator navigator)
     {
+        _navigator = navigator;
         _object = obj;
         Path = new() { new() { Name = GetName(obj), Type = obj.GetType().Name } };
     }
 
-    public Node(ModelBase obj, int? index, Node parent)
+    public Node(ModelBase obj, int? index, Node parent, Navigator navigator)
     {
+        _navigator = navigator;
         _object = obj;
         Parent = parent;
         Path = new(parent.Path) { new() { Name = GetName(obj), Type = obj.GetType().Name, Index = index } };
@@ -64,7 +67,7 @@ public class Node
     {
         foreach ((ModelBase obj, int? index) in _object.GetChildren())
         {
-            yield return new(obj, index, this);
+            yield return new(obj, index, this, _navigator);
         }
     }
     public string DisplayPath
@@ -84,6 +87,94 @@ public class Node
 
     public override string? ToString()
     {
-        return _object.ToString();
+        return $"[{_object.GetType().Name}]{_object}";
+    }
+
+    public List<Dictionary<string, Node>>? NavPersistenceContainerChildren
+    {
+        get
+        {
+            if (_object is not PersistenceContainer container)
+            {
+                return null;
+            }
+
+            return container.Actors.Select(
+                    x => x.Value.Archive.Objects
+                        .Select((input, index) => new { index, input })
+                        .ToDictionary(o => o.index + "|" + (o.input.ObjectPath ?? ""), o => _navigator.Lookup(o.input)))
+                .ToList();
+        }
+    }
+    public List<Node>? NavPersistenceContainerFlattenedChildren
+    {
+        get
+        {
+            return NavPersistenceContainerChildren?.SelectMany(x => x.Values).ToList();
+        }
+    }
+
+    public List<Dictionary<string, Node>>? NavObjectChildren
+    {
+        get
+        {
+            if (_object is not UObject o)
+            {
+                return null;
+            }
+
+            if (o.Properties is not { Properties.Count: > 1 })
+            {
+                return null;
+            }
+
+            KeyValuePair<string, Property> property = o.Properties.Properties[1];
+            if (property.Key != "Blob")
+            {
+                return null;
+            }
+
+            if (property.Value.Value is not StructProperty s)
+            {
+                return null;
+            }
+
+            return s.Value is not PersistenceContainer p ? null : _navigator.Lookup(p).NavPersistenceContainerChildren;
+        }
+    }
+    public List<Node>? NavObjectFlattenedChildren
+    {
+        get
+        {
+            return NavObjectChildren?.SelectMany(x => x.Values).ToList();
+        }
+    }
+
+    public Node? NavActorZoneActorProperties
+    {
+        get
+        {
+            if (_object is not Actor a)
+            {
+                return null;
+            }
+
+            PropertyBag? result = a.GetZoneActorProperties();
+            return result == null ? null : _navigator.Lookup(result);
+        }
+    }
+    
+    public Node? NavActorFirstObjectProperties
+    {
+        get
+        {
+            if (_object is not Actor a)
+            {
+                return null;
+            }
+
+            PropertyBag? result = a.GetFirstObjectProperties();
+            return result == null ? null : _navigator.Lookup(result);
+        }
     }
 }

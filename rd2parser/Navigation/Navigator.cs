@@ -2,6 +2,7 @@
 using rd2parser.Model.Properties;
 
 namespace rd2parser.Navigation;
+
 public class Navigator
 {
     private readonly SaveFile _saveFile;
@@ -12,7 +13,7 @@ public class Navigator
     public Navigator(SaveFile saveFile)
     {
         _saveFile = saveFile;
-        _root = new Node(_saveFile.SaveData);
+        _root = new Node(_saveFile.SaveData, this);
         Queue<Node> q = new();
         q.Enqueue(_root);
         while (q.Count > 0)
@@ -30,7 +31,8 @@ public class Navigator
                     _registry.Add(n);
                     break;
             }
-        foreach (Node c in n.Children)
+
+            foreach (Node c in n.Children)
             {
                 q.Enqueue(c);
             }
@@ -81,8 +83,10 @@ public class Navigator
             {
                 if (obj[i] != filter[i]) return false;
             }
+
             return true;
         }
+
         return items.Where(x => IsParent(_lookup[x].Path, _lookup[parent].Path)).ToList();
     }
 
@@ -127,6 +131,7 @@ public class Navigator
     {
         return FindRegistryItems<Variable>(namePattern, parent);
     }
+
     public List<Variable>? GetAllVariables()
     {
         return _registry.GetAll<Variable>();
@@ -146,10 +151,12 @@ public class Navigator
     {
         return FindRegistryItems<Actor>(namePattern, parent);
     }
+
     public List<Actor>? GetAllActors()
     {
         return _registry.GetAll<Actor>();
     }
+
     public Actor? GetActor(string name, ModelBase? parent = null)
     {
         return GetRegistryItem<Actor>(name, parent);
@@ -164,6 +171,7 @@ public class Navigator
     {
         return FindRegistryItems<UObject>(namePattern, parent);
     }
+
     public List<UObject>? GetAllObjects()
     {
         return _registry.GetAll<UObject>();
@@ -178,16 +186,24 @@ public class Navigator
     {
         return GetRegistryItems<Component>(name, parent);
     }
+
     public List<Component>? FindComponents(string namePattern, ModelBase? parent = null)
     {
         return FindRegistryItems<Component>(namePattern, parent);
     }
+
     public List<Component>? GetAllComponents()
     {
         return _registry.GetAll<Component>();
     }
+
     public Component? GetComponent(string name, ModelBase? parent = null)
     {
         return GetRegistryItem<Component>(name, parent);
+    }
+
+    public Dictionary<string, List<string>> GetSearchableNames()
+    {
+        return _registry.GetNames();
     }
 }
