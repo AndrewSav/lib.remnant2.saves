@@ -5,17 +5,14 @@ namespace rd2parser.Navigation;
 
 public class Navigator
 {
-    private readonly SaveFile _saveFile;
-    private readonly Node _root;
     private readonly ItemRegistry _registry = new();
     private readonly Dictionary<ModelBase, Node> _lookup = new();
 
     public Navigator(SaveFile saveFile)
     {
-        _saveFile = saveFile;
-        _root = new Node(_saveFile.SaveData, this);
+        var root = new Node(saveFile.SaveData, this);
         Queue<Node> q = new();
-        q.Enqueue(_root);
+        q.Enqueue(root);
         while (q.Count > 0)
         {
             Node n = q.Dequeue();
@@ -44,36 +41,8 @@ public class Navigator
         return _lookup[o];
     }
 
-
-    private List<T>? GetRegistryItems<T>(string name, ModelBase? parent = null) where T : ModelBase
+    private List<T> Filter<T>(List<T> items, ModelBase? parent) where T : ModelBase
     {
-        return Filter(_registry.Get<T>(name), parent);
-    }
-
-    private List<T>? FindRegistryItems<T>(string namePattern, ModelBase? parent = null) where T : ModelBase
-    {
-        return Filter(_registry.Find<T>(namePattern), parent);
-    }
-
-    private T? GetRegistryItem<T>(string name, ModelBase? parent = null) where T : ModelBase
-    {
-        List<T>? l = GetRegistryItems<T>(name, parent);
-        if (l == null || l.Count == 0)
-        {
-            return null;
-        }
-
-        if (l.Count == 1)
-        {
-            return l[0];
-        }
-
-        throw new InvalidOperationException("there are more than one property");
-    }
-
-    private List<T>? Filter<T>(List<T>? items, ModelBase? parent) where T : ModelBase
-    {
-        if (items == null) return null;
         if (parent == null) return items;
 
         static bool IsParent(List<Segment> obj, List<Segment> filter)
@@ -90,23 +59,48 @@ public class Navigator
         return items.Where(x => IsParent(_lookup[x].Path, _lookup[parent].Path)).ToList();
     }
 
-    public List<T>? GetProperties<T>(string name, ModelBase? parent = null)
+    private List<T> GetRegistryItems<T>(string name, ModelBase? parent = null) where T : ModelBase
     {
-        List<Property>? list = Filter(_registry.Get<Property>(name), parent);
-        return list?.Select(x => (T)x.Value!).ToList();
+        return Filter(_registry.Get<T>(name), parent);
     }
 
-    public List<Property>? GetProperties(string name, ModelBase? parent = null)
+    private List<T> FindRegistryItems<T>(string namePattern, ModelBase? parent = null) where T : ModelBase
+    {
+        return Filter(_registry.Find<T>(namePattern), parent);
+    }
+
+    private T? GetRegistryItem<T>(string name, ModelBase? parent = null) where T : ModelBase
+    {
+        List<T> l = GetRegistryItems<T>(name, parent);
+        if (l.Count == 0)
+        {
+            return null;
+        }
+
+        if (l.Count == 1)
+        {
+            return l[0];
+        }
+
+        throw new InvalidOperationException("there are more than one item");
+    }
+    public List<T> GetPropertiesValues<T>(string name, ModelBase? parent = null)
+    {
+        List<Property> list = Filter(_registry.Get<Property>(name), parent);
+        return list.Select(x => (T)x.Value!).ToList();
+    }
+
+    public List<Property> GetProperties(string name, ModelBase? parent = null)
     {
         return GetRegistryItems<Property>(name, parent);
     }
 
-    public List<Property>? FindProperties(string namePattern, ModelBase? parent = null)
+    public List<Property> FindProperties(string namePattern, ModelBase? parent = null)
     {
         return FindRegistryItems<Property>(namePattern, parent);
     }
 
-    public List<Property>? GetAllProperties()
+    public List<Property> GetAllProperties()
     {
         return _registry.GetAll<Property>();
     }
@@ -116,23 +110,23 @@ public class Navigator
         return GetRegistryItem<Property>(name, parent);
     }
 
-    public List<T>? GetVariables<T>(string name, ModelBase? parent = null)
+    public List<T> GetVariablesValues<T>(string name, ModelBase? parent = null)
     {
-        List<Variable>? list = Filter(_registry.Get<Variable>(name), parent);
-        return list?.Select(x => (T)x.Value!).ToList();
+        List<Variable> list = Filter(_registry.Get<Variable>(name), parent);
+        return list.Select(x => (T)x.Value!).ToList();
     }
 
-    public List<Variable>? GetVariables(string name, ModelBase? parent = null)
+    public List<Variable> GetVariables(string name, ModelBase? parent = null)
     {
         return GetRegistryItems<Variable>(name, parent);
     }
 
-    public List<Variable>? FindVariables(string namePattern, ModelBase? parent = null)
+    public List<Variable> FindVariables(string namePattern, ModelBase? parent = null)
     {
         return FindRegistryItems<Variable>(namePattern, parent);
     }
 
-    public List<Variable>? GetAllVariables()
+    public List<Variable> GetAllVariables()
     {
         return _registry.GetAll<Variable>();
     }
@@ -142,17 +136,17 @@ public class Navigator
         return GetRegistryItem<Variable>(name, parent);
     }
 
-    public List<Actor>? GetActors(string name, ModelBase? parent = null)
+    public List<Actor> GetActors(string name, ModelBase? parent = null)
     {
         return GetRegistryItems<Actor>(name, parent);
     }
 
-    public List<Actor>? FindActors(string namePattern, ModelBase? parent = null)
+    public List<Actor> FindActors(string namePattern, ModelBase? parent = null)
     {
         return FindRegistryItems<Actor>(namePattern, parent);
     }
 
-    public List<Actor>? GetAllActors()
+    public List<Actor> GetAllActors()
     {
         return _registry.GetAll<Actor>();
     }
@@ -162,17 +156,17 @@ public class Navigator
         return GetRegistryItem<Actor>(name, parent);
     }
 
-    public List<UObject>? GetObjects(string name, ModelBase? parent = null)
+    public List<UObject> GetObjects(string name, ModelBase? parent = null)
     {
         return GetRegistryItems<UObject>(name, parent);
     }
 
-    public List<UObject>? FindObjects(string namePattern, ModelBase? parent = null)
+    public List<UObject> FindObjects(string namePattern, ModelBase? parent = null)
     {
         return FindRegistryItems<UObject>(namePattern, parent);
     }
 
-    public List<UObject>? GetAllObjects()
+    public List<UObject> GetAllObjects()
     {
         return _registry.GetAll<UObject>();
     }
@@ -182,17 +176,17 @@ public class Navigator
         return GetRegistryItem<UObject>(name, parent);
     }
 
-    public List<Component>? GetComponents(string name, ModelBase? parent = null)
+    public List<Component> GetComponents(string name, ModelBase? parent = null)
     {
         return GetRegistryItems<Component>(name, parent);
     }
 
-    public List<Component>? FindComponents(string namePattern, ModelBase? parent = null)
+    public List<Component> FindComponents(string namePattern, ModelBase? parent = null)
     {
         return FindRegistryItems<Component>(namePattern, parent);
     }
 
-    public List<Component>? GetAllComponents()
+    public List<Component> GetAllComponents()
     {
         return _registry.GetAll<Component>();
     }

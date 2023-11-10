@@ -53,7 +53,7 @@ public class Archive
         crc32.Append(output);
         if (fh.Crc32 != BitConverter.ToUInt32(crc32.GetCurrentHash(), 0))
         {
-            throw new ApplicationException("crc32 mismatch");
+            throw new InvalidOperationException("crc32 mismatch");
         }
         return output.ToArray();
     }

@@ -22,7 +22,7 @@ public class TextProperty : ModelBase
         {
             0 => new TextPropertyData0(r, ctx),
             255 => new TextPropertyData255(r, ctx),
-            _ => throw new ApplicationException("unsupported history type")
+            _ => throw new InvalidOperationException("unsupported history type")
         };
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
@@ -41,7 +41,7 @@ public class TextProperty : ModelBase
                 ((TextPropertyData255)Value).Write(w, ctx);
                 break;
             default:
-                throw new ApplicationException("unsupported history type");
+                throw new InvalidOperationException("unsupported history type");
         }
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
@@ -52,7 +52,7 @@ public class TextProperty : ModelBase
         {
             0 => ((TextPropertyData0)Value).SourceString,
             255 => ((TextPropertyData255)Value).Value,
-            _ => throw new ApplicationException("unsupported history type")
+            _ => throw new InvalidOperationException("unsupported history type")
         };
     }
     public override IEnumerable<(ModelBase obj, int? index)> GetChildren()

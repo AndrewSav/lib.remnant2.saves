@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rd2parser", "rd2parser\rd2p
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rd2parser.examples", "rd2parser.examples\rd2parser.examples.csproj", "{07A31D62-6C83-4AEC-99B7-D010A4AFC482}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2185C044-55FC-4DC0-8CE6-DE398639CF39}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

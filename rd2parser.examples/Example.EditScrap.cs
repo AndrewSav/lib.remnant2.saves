@@ -32,12 +32,13 @@ internal partial class Example
             return;
         }
 
-        Property scrapItem = navigator.GetProperties("ItemBP", character.Object)!
+        Property scrapItem = navigator.GetProperties("ItemBP", character.Object)
             .Single(x => x.Value is ObjectProperty { ClassName: scrapId });
 
         UObject instanceData = (scrapItem.GetParent<PropertyBag>(navigator)["InstanceData"].Value as ObjectProperty)!.Object!;
 
         Property scrap = navigator.GetProperty("Quantity", instanceData)!;
+
         Console.WriteLine($"Current scrap value is {scrap.Value}. Changing to {targetScrapValue}...");
         scrap.Value = targetScrapValue;
 

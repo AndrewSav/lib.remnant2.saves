@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace rd2parser.Model;
+namespace rd2parser.Model.Parts;
 
 public class FTopLevelAssetPath
 {

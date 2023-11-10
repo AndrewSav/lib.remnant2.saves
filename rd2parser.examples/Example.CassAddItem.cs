@@ -1,4 +1,5 @@
 ﻿using rd2parser.Model;
+using rd2parser.Model.Parts;
 using rd2parser.Model.Properties;
 using rd2parser.Navigation;
 
@@ -143,7 +144,7 @@ internal partial class Example
             }
         };
 
-        PropertyBag inventory = navigator.FindComponents("Inventory", cass)![0].Properties!;
+        PropertyBag inventory = navigator.FindComponents("Inventory", cass)[0].Properties!;
         ArrayStructProperty asp = (ArrayStructProperty)inventory["Items"].Value!;
         //int maxId = asp.Items.Select(x => (int)((PropertyBag)x!)["ID"].Value!).Max();
         //newItemBag["ID"].Value = maxId + 1;

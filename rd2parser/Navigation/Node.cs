@@ -85,11 +85,12 @@ public class Node
         }
     }
 
-    public override string? ToString()
+    public override string ToString()
     {
         return $"[{_object.GetType().Name}]{_object}";
     }
 
+    // The Nav* properties below make it easier to navigate in the debugger
     public List<Dictionary<string, Node>>? NavPersistenceContainerChildren
     {
         get

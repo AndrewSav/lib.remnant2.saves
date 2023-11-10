@@ -39,11 +39,11 @@ public struct ChunkHeader
     {
         if (HeaderTag != ArchiveHeaderTag)
         {
-            throw new ApplicationException("bad chunk header tag");
+            throw new InvalidOperationException("bad chunk header tag");
         }
         if (Compressor != CompressorId)
         {
-            throw new ApplicationException("bad compressor id");
+            throw new InvalidOperationException("bad compressor id");
         }
         if (DecompressedSize1 != DecompressedSize2)
         {

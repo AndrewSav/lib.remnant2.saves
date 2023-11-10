@@ -20,13 +20,13 @@ internal partial class Example
         Navigator navigator = new(sf);
 
         UObject main = navigator.GetObject("/Game/Maps/Main.Main:PersistentLevel")!;
-        UObject campaignMeta = navigator.FindActors("Quest_Campaign", main)!.Single().Archive.Objects[0];
+        UObject campaignMeta = navigator.FindActors("Quest_Campaign", main).Single().Archive.Objects[0];
         int campaignId = campaignMeta.Properties!["ID"].Get<int>();
         UObject campaignObject = navigator.GetObject($"/Game/Quest_{campaignId}_Container.Quest_Container:PersistentLevel")!;
 
-        UObject? adventureMeta = navigator.FindActors("Quest_AdventureMode", main)!.SingleOrDefault()?.Archive.Objects[0];
+        UObject? adventureMeta = navigator.FindActors("Quest_AdventureMode", main).SingleOrDefault()?.Archive.Objects[0];
         int? adventureId = adventureMeta?.Properties!["ID"].Get<int>();
-        UObject? adventureObject = navigator.GetObjects($"/Game/Quest_{adventureId}_Container.Quest_Container:PersistentLevel")?[0];
+        UObject? adventureObject = navigator.GetObject($"/Game/Quest_{adventureId}_Container.Quest_Container:PersistentLevel");
 
         Console.WriteLine("Campaign");
         PrintBloodMoonData(navigator, campaignMeta, campaignObject);

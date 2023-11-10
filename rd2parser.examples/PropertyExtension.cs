@@ -1,5 +1,6 @@
 ﻿using rd2parser.Model.Properties;
-namespace rd2parser.Navigation;
+
+namespace rd2parser.examples;
 public static class PropertyExtension
 {
     public static Property ShallowCopyProperty(this Property property)

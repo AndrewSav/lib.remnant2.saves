@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace rd2parser.Model;
+namespace rd2parser.Model.Parts;
 
 public class FName
 {
@@ -30,7 +30,7 @@ public class FName
         }
         if (Index >= namesTable.Count)
         {
-            throw new ApplicationException("invalid name index");
+            throw new InvalidOperationException("invalid name index");
         }
         Name = namesTable[Index];
     }
@@ -70,7 +70,7 @@ public class FName
         int index = namesTable.FindIndex(x => x == name);
         if (index == -1)
         {
-            throw new ArgumentOutOfRangeException(nameof(name),"name not found in the names table");
+            throw new ArgumentOutOfRangeException(nameof(name), "name not found in the names table");
         }
         return new()
         {

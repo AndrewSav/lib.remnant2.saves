@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using rd2parser.Model.Parts;
 
 namespace rd2parser.Model;
 public class Variable : ModelBase
@@ -27,7 +28,7 @@ public class Variable : ModelBase
         FName name = new(r, ctx.NamesTable);
         if (name.Name == "None")
         {
-            throw new ApplicationException("unexpected None in variable");
+            throw new InvalidOperationException("unexpected None in variable");
         }
         byte enumVal = r.Read<byte>();
         Name = name;
@@ -48,7 +49,7 @@ public class Variable : ModelBase
                 Value = new FName(r, ctx.NamesTable);
                 break;
             default:
-                throw new ApplicationException("unknown variable type");
+                throw new InvalidOperationException("unknown variable type");
         }
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
@@ -76,7 +77,7 @@ public class Variable : ModelBase
                 ((FName)Value!).Write(w, ctx);
                 break;
             default:
-                throw new ApplicationException("unknown variable type");
+                throw new InvalidOperationException("unknown variable type");
         }
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }

@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using rd2parser.IO;
+using rd2parser.Model.Parts;
 
 namespace rd2parser.Model.Properties;
 
@@ -119,7 +120,7 @@ public class StructProperty : ModelBase
     {
         return value switch
         {
-            null => throw new ApplicationException("expected timestamp got null"),
+            null => throw new InvalidOperationException("expected timestamp got null"),
             string timespan => TimeSpan.Parse(timespan, CultureInfo.InvariantCulture),
             _ => (TimeSpan)value
         };
@@ -128,7 +129,7 @@ public class StructProperty : ModelBase
     {
         return value switch
         {
-            null => throw new ApplicationException("expected datetime got null"),
+            null => throw new InvalidOperationException("expected datetime got null"),
             string timespan => DateTime.Parse(timespan, CultureInfo.InvariantCulture),
             _ => (DateTime)value
         };

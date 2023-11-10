@@ -1,9 +1,15 @@
 ﻿namespace rd2parser.Model;
 public abstract class ModelBase
 {
-    public int ReadOffset; // For debugging, reader offset where the object starts when read
-    public int WriteOffset; // For debugging, writer offset where the object starts when written
-    public int ReadLength; // For debugging, length of the object when read
-    public int WriteLength; // For debugging, length of the object when written
+    // These four properties are not used for any business logic, they are used in a test
+    // to check that for each object that we write the offset and the length remained the
+    // same as they were when we read them. For some objects - those that are stored in
+    // fragmented manner, e.g UObject and Actor, length is quite arbitrary
+    // If these four are removed with everything that references them the library will
+    // still work
+    public int ReadOffset;
+    public int WriteOffset;
+    public int ReadLength;
+    public int WriteLength;
     public abstract IEnumerable<(ModelBase obj, int? index)> GetChildren();
 }

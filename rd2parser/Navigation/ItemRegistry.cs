@@ -27,29 +27,28 @@ internal class ItemRegistry
         return true;
     }
 
-    public List<T>? Get<T>(string name) where T : ModelBase
+    public List<T> Get<T>(string name) where T : ModelBase
     {
         string type = typeof(T).Name;
-        if (!_registry.ContainsKey(type)) return null;
+        if (!_registry.ContainsKey(type)) throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
         Dictionary<string, List<Node>> byType = _registry[type];
-        return !byType.ContainsKey(name) ? null : byType[name].Select(x => (T)x.Object).ToList();
+        return !byType.ContainsKey(name) ? new() : byType[name].Select(x => (T)x.Object).ToList();
     }
 
-    public List<T>? GetAll<T>() where T : ModelBase
+    public List<T> GetAll<T>() where T : ModelBase
     {
         string type = typeof(T).Name;
-        if (!_registry.ContainsKey(type)) return null;
+        if (!_registry.ContainsKey(type)) throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
         Dictionary<string, List<Node>> byType = _registry[type];
         return byType.SelectMany(x => x.Value).Select(x => (T)x.Object).ToList();
     }
 
-    public List<T>? Find<T>(string namePattern) where T : ModelBase
+    public List<T> Find<T>(string namePattern) where T : ModelBase
     {
         string type = typeof(T).Name;
-        if (!_registry.ContainsKey(type)) return null;
+        if (!_registry.ContainsKey(type)) throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
         Dictionary<string, List<Node>> byType = _registry[type];
-        List<T> result = byType.SelectMany(x => x.Value).Where(x => !string.IsNullOrEmpty(x.Path[^1].Name) && Regex.IsMatch(x.Path[^1].Name, namePattern)).Select(x => (T)x.Object).ToList();
-        return result.Count > 0 ? result : null;
+        return byType.SelectMany(x => x.Value).Where(x => !string.IsNullOrEmpty(x.Path[^1].Name) && Regex.IsMatch(x.Path[^1].Name, namePattern)).Select(x => (T)x.Object).ToList();
     }
 
     public Dictionary<string,List<string>> GetNames()

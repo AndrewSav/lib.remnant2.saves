@@ -55,7 +55,7 @@ public class UObject : ModelBase
         // After each property we can always observe either 4 ot 8 zeroes
         if (r.Position == (int)(start + len)) return (result, extraData);
         if (r.Position > (int)(start + len))
-            throw new ApplicationException("ReadProperties read too much data unexpectedly");
+            throw new InvalidOperationException("ReadProperties read too much data unexpectedly");
 
         extraData = r.ReadBytes((int)(start + len) - r.Position);
 
@@ -76,7 +76,7 @@ public class UObject : ModelBase
         for (int i = 0; i < componentCount; i++)
         {
             int readOffset = r.Position + ctx.ContainerOffset;
-            string componentKey = r.ReadFString() ?? throw new ApplicationException("unexpected null component key");
+            string componentKey = r.ReadFString() ?? throw new InvalidOperationException("unexpected null component key");
             Component c = new(componentKey)
             {
                 ReadOffset = readOffset
@@ -103,7 +103,7 @@ public class UObject : ModelBase
             if (r.Position != start + len)
             {
                 if (r.Position > start + len)
-                    throw new ApplicationException("ReadComponents read too much data unexpectedly");
+                    throw new InvalidOperationException("ReadComponents read too much data unexpectedly");
                 c.ExtraComponentsData = r.ReadBytes(start + len - r.Position);
                 if (c.ExtraComponentsData.Any(x => x != 0))
                 {

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using rd2parser.Model.Memory;
+using rd2parser.Model.Parts;
 
 namespace rd2parser.Model;
 
@@ -43,7 +44,7 @@ public class SaveData : ModelBase
         NamesTable = new();
         for (int i = 0; i < len; i++)
         {
-            string name = r.ReadFString() ?? throw new ApplicationException("unexpected null entry in names table");
+            string name = r.ReadFString() ?? throw new InvalidOperationException("unexpected null entry in names table");
             NamesTable.Add(name);
         }
 

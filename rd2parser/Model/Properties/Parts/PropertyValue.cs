@@ -1,8 +1,9 @@
 ﻿using rd2parser.Model.Memory;
+using rd2parser.Model.Parts;
 using System.Globalization;
 using System.Numerics;
 
-namespace rd2parser.Model.Properties;
+namespace rd2parser.Model.Properties.Parts;
 
 public class PropertyValue
 {
@@ -30,11 +31,11 @@ public class PropertyValue
             "StructProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<FGuid>() : new StructProperty(r, ctx) },
             "ObjectProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new ObjectProperty(r, ctx) },
             "EnumProperty" => new PropertyValue { NoRawByte = null, Value = new EnumProperty(r, ctx) },
-            //if (isRaw) { throw new ApplicationException("Raw map properties are not supported"); }
+            //if (isRaw) { throw new InvalidOperationException("Raw map properties are not supported"); }
             "MapProperty" => new PropertyValue { NoRawByte = null, Value = new MapProperty(r, ctx) },
             "TextProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r, ctx) },
             "ArrayProperty" => new PropertyValue { NoRawByte = null, Value = ReadArrayProperty(r, ctx) },
-            _ => throw new ApplicationException($"unknown property type {type}")
+            _ => throw new InvalidOperationException($"unknown property type {type}")
         };
     }
 
@@ -53,7 +54,7 @@ public class PropertyValue
         byte unknown = r.Read<byte>();
         uint count = r.Read<uint>();
         return elementType.Name == "StructProperty"
-            ? new ArrayStructProperty(r, ctx, count, unknown,elementType, readOffset)
+            ? new ArrayStructProperty(r, ctx, count, unknown, elementType, readOffset)
             : new ArrayProperty(r, ctx, count, unknown, elementType, readOffset);
     }
 
@@ -108,20 +109,20 @@ public class PropertyValue
                 ((FName)value!).Write(w, ctx);
                 break;
             case "ByteProperty":
-                if (noRow != null) { ((ByteProperty)value!).Write(w, ctx); } else {w.Write((byte)value!);}
+                if (noRow != null) { ((ByteProperty)value!).Write(w, ctx); } else { w.Write((byte)value!); }
                 break;
             case "StructProperty":
                 if (noRow != null) { ((StructProperty)value!).Write(w, ctx); } else { w.Write((FGuid)value!); }
                 break;
             case "ObjectProperty":
                 if (noRow != null) w.Write(noRow.Value);
-                ((ObjectProperty)value!).Write(w,ctx);
+                ((ObjectProperty)value!).Write(w, ctx);
                 break;
             case "EnumProperty":
                 ((EnumProperty)value!).Write(w, ctx);
                 break;
             case "MapProperty":
-                //if (noRaw == null) { throw new ApplicationException("Raw map properties are not supported"); }
+                //if (noRaw == null) { throw new InvalidOperationException("Raw map properties are not supported"); }
                 ((MapProperty)value!).Write(w, ctx);
                 break;
             case "TextProperty":
@@ -132,7 +133,7 @@ public class PropertyValue
                 WriteArrayProperty(w, ctx, value!);
                 break;
             default:
-                throw new ApplicationException($"unknown property type {type}");
+                throw new InvalidOperationException($"unknown property type {type}");
         }
     }
 
@@ -141,17 +142,17 @@ public class PropertyValue
         switch (value)
         {
             case ArrayStructProperty property:
-            {
-                property.Write(w, ctx);
-                break;
-            }
+                {
+                    property.Write(w, ctx);
+                    break;
+                }
             case ArrayProperty property:
-            {
-                property.Write(w, ctx);
-                break;
-            }
+                {
+                    property.Write(w, ctx);
+                    break;
+                }
             default:
-                throw new ApplicationException("unexpected array type");
+                throw new InvalidOperationException("unexpected array type");
         }
     }
 }

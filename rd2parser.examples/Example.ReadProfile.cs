@@ -4,12 +4,11 @@ using rd2parser.Model.Properties;
 namespace rd2parser.examples;
 internal partial class Example
 {
-    // This example uses the raw API and does not use navigation extensions
     public static void ReadProfile()
     {
         Console.WriteLine("Profile Data===========");
 
-        string folder = Utils.GetSteamSavePath();
+        string folder =  Utils.GetSteamSavePath();
         string path = Path.Combine(folder, "profile.sav");
 
         SaveFile sf = SaveFile.Read(path);
@@ -20,7 +19,7 @@ internal partial class Example
 
         ArrayProperty ap = (charactersProp.Value.Value as ArrayProperty)!;
         List<ObjectProperty> op = ap.Items.Select(x => (ObjectProperty)x!).ToList();
-        int count = op.Count(x => x.ObjectIndex >= 0);
+        int count = op.Count(x => x.Object != null);
         Console.WriteLine($"You have {count} characters");
 
         int activeIndex = (int)activeProp.Value.Value!;
@@ -34,9 +33,9 @@ internal partial class Example
 
         Console.WriteLine($"Your active character's index is {activeIndex}, which means it's the {numbers[activeIndex]} character on the screen");
 
-        for (int i = 0, charCount = 0; i < op.Count; i++)
+        for (int i = 0,charCount=0; i < op.Count; i++)
         {
-            if (op[i].ObjectIndex < 0) continue;
+            if (op[i].Object == null) continue;
 
             Console.WriteLine($"Your {numbers[charCount]} character (save slot {i}) has:");
             Property traitRank = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "TraitRank").Value;
@@ -93,7 +92,7 @@ internal partial class Example
 
             StructProperty sp = (StructProperty)characterData.Value!;
             SaveData inner = (SaveData)sp.Value!;
-            UObject master = inner.Objects.Single(x => x.Name == "Character_Master_Player_C");
+            UObject master =  inner.Objects.Single(x => x.Name == "Character_Master_Player_C");
             Component inventory = master.Components!.Single(x => x.ComponentKey == "Inventory");
             Property items = inventory.Properties!.Properties.Single(x => x.Key == "Items").Value;
             ArrayStructProperty asp = (ArrayStructProperty)items.Value!;
@@ -163,5 +162,6 @@ internal partial class Example
 
             charCount++;
         }
+
     }
 }

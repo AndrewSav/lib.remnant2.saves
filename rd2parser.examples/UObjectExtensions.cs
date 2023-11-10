@@ -1,5 +1,7 @@
 ﻿using rd2parser.Model;
-namespace rd2parser.Navigation;
+using rd2parser.Navigation;
+
+namespace rd2parser.examples;
 public static class UObjectExtension
 {
     public static UObject ShallowCopyObject(this UObject obj, Navigator navigator)

@@ -47,7 +47,7 @@ internal class Tests
         SaveFile.Write("test.DoOne", sf);
 
         int count = 0;
-        sf.VisitObjects((node, index) =>
+        sf.VisitObjects((node, _) =>
         {
             count++;
             if (node.ReadOffset != node.WriteOffset)

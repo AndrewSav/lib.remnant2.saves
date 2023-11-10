@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using rd2parser.Model;
+using rd2parser.Model.Parts;
 using rd2parser.Model.Properties;
 using rd2parser.Navigation;
 
@@ -105,9 +106,9 @@ internal partial class Example
         string mode = slot == 0 ? "campaign" : "adventure";
         Console.WriteLine($"You are playing in {mode} mode");
 
-        Property slot0 = navigator.GetProperties("SlotID")!.SingleOrDefault(x => (int)x.Value! == 0)!;
+        Property slot0 = navigator.GetProperties("SlotID").SingleOrDefault(x => (int)x.Value! == 0)!;
         PrintMode(navigator, slot0, "campaign");
-        Property? slot1 = navigator.GetProperties("SlotID")!.SingleOrDefault(x => (int)x.Value! == 1);
+        Property? slot1 = navigator.GetProperties("SlotID").SingleOrDefault(x => (int)x.Value! == 1);
         if (slot1 != null)
         {
             string name = navigator.Lookup(slot1).Path[^3].Name;
@@ -123,7 +124,7 @@ internal partial class Example
 
         Console.WriteLine("Campaign");
 
-        UObject campaignMeta = navigator.FindActors("Quest_Campaign", main)!.Single().Archive.Objects[0];
+        UObject campaignMeta = navigator.FindActors("Quest_Campaign", main).Single().Archive.Objects[0];
         int campaignId = campaignMeta.Properties!["ID"].Get<int>();
         UObject? campaignObject = navigator.GetObject($"/Game/Quest_{campaignId}_Container.Quest_Container:PersistentLevel");
 
@@ -137,8 +138,8 @@ internal partial class Example
 
         DoInventory(campaignInventory);
 
-        List<Actor> zoneActors = navigator.GetActors("ZoneActor", campaignObject)!;
-        List<Actor> events = navigator.FindActors("^((?!ZoneActor).)*$", campaignObject)!
+        List<Actor> zoneActors = navigator.GetActors("ZoneActor", campaignObject);
+        List<Actor> events = navigator.FindActors("^((?!ZoneActor).)*$", campaignObject)
             .Where(x => x.GetFirstObjectProperties()!.Contains("ID")).ToList();
 
         //ZoneLinksToCsv(zoneActors);
@@ -152,15 +153,15 @@ internal partial class Example
         if (slot1 != null)
         {
             Console.WriteLine("Adventure");
-            UObject adventureMeta = navigator.FindActors("Quest_AdventureMode", main)!.Single().Archive.Objects[0];
+            UObject adventureMeta = navigator.FindActors("Quest_AdventureMode", main).Single().Archive.Objects[0];
             int? adventureId = adventureMeta.Properties!["ID"].Get<int>();
             UObject? adventureObject = navigator.GetObject($"/Game/Quest_{adventureId}_Container.Quest_Container:PersistentLevel");
             int quest = navigator.GetComponent("Quest", adventureMeta)!.Properties!["QuestID"].Get<int>();
             PropertyBag adventureInventory = navigator.GetComponent("RemnantPlayerInventory", adventureMeta)!.Properties!;
             DoInventory(adventureInventory);
 
-            List<Actor> zoneActorsAdventure = navigator.GetActors("ZoneActor", adventureObject)!;
-            List<Actor> eventsAdventure = navigator.FindActors("^((?!ZoneActor).)*$", adventureObject)!
+            List<Actor> zoneActorsAdventure = navigator.GetActors("ZoneActor", adventureObject);
+            List<Actor> eventsAdventure = navigator.FindActors("^((?!ZoneActor).)*$", adventureObject)
                 .Where(x => x.GetFirstObjectProperties()!.Contains("ID")).ToList();
             DoZone(zoneActorsAdventure, quest, 0, eventsAdventure);
         }

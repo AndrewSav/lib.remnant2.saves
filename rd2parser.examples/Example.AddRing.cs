@@ -31,7 +31,7 @@ internal partial class Example
             return;
         }
 
-        Property? ringItem = navigator.GetProperties("ItemBP", character.Object)!
+        Property? ringItem = navigator.GetProperties("ItemBP", character.Object)
             .SingleOrDefault(x => x.Value!.ToString() == ringId);
 
         if (ringItem != null)
@@ -40,7 +40,7 @@ internal partial class Example
             return;
         }
 
-        ringItem = navigator.GetProperties("ItemBP", character.Object)!
+        ringItem = navigator.GetProperties("ItemBP", character.Object)
             .FirstOrDefault(x => x.Value!.ToString()!.Contains("Ring_"));
 
         if (ringItem == null)
