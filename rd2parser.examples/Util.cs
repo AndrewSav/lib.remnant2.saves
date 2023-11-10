@@ -42,6 +42,7 @@ public class Utils
         if (path.EndsWith("_C")) path = path[..^2];
         if (path.EndsWith("_UI")) path = path[..^2];
         path = path.Replace("_", " ").Trim();
+        if (path.Contains(':')) path = path[(path.LastIndexOf(":", StringComparison.Ordinal) + 1)..];
         return $"'{path}'";
     }
 }

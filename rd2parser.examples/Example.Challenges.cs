@@ -169,7 +169,7 @@ internal partial class Example
                 uint u4 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[12..16]);
                 string uu = $"{u1:X8}-{u2:X8}-{u3:X8}-{u4:X8}";
 
-                //string r1 = BitConverter.ToString(w.ToArray()).Replace("-", "");
+                //string r1 = BitConverter.ToStringValue(w.ToArray()).Replace("-", "");
 
                 string message = objectives.TryGetValue(uu, out string? objective) ? $"[Challenge] {objective}" : uu;
                 if (achievements.TryGetValue(uu, out string? achievement))

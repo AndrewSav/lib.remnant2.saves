@@ -92,4 +92,9 @@ public class ArrayStructProperty : ModelBase
                 yield return (node, index);
         }
     }
+
+    public override string ToString()
+    {
+        return $"{GetType().Name}({ElementType})";
+    }
 }

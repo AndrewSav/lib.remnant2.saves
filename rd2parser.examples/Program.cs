@@ -10,6 +10,7 @@ internal class Program
         Tests.Run();
         Example.Json();
         Example.ReadProfile();
+        Example.Loadouts();
         Example.Cass();
         Example.Campaign();
         Example.BloodMoon();

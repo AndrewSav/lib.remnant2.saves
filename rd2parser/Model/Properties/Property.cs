@@ -45,9 +45,14 @@ public class Property : ModelBase
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
 
-    public override string? ToString()
+    public string? ToStringValue()
     {
         return Value?.ToString();
+    }
+
+    public override string ToString()
+    {
+        return $"{Name}({Value?.GetType().Name}): {Value}";
     }
 
     public T Get<T>()

@@ -7,12 +7,12 @@ public class Navigator
 {
     private readonly ItemRegistry _registry = new();
     private readonly Dictionary<ModelBase, Node> _lookup = new();
-
+    private readonly Node _root;
     public Navigator(SaveFile saveFile)
     {
-        var root = new Node(saveFile.SaveData, this);
+        _root = new Node(saveFile.SaveData, this);
         Queue<Node> q = new();
-        q.Enqueue(root);
+        q.Enqueue(_root);
         while (q.Count > 0)
         {
             Node n = q.Dequeue();
@@ -35,6 +35,8 @@ public class Navigator
             }
         }
     }
+
+    public Node Root => _root;
 
     public Node Lookup(ModelBase o)
     {

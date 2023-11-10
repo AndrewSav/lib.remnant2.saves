@@ -7,7 +7,7 @@ All credit for the file format goes to <https://github.com/t1nky/remnant-item-fi
 This is a library and a set of examples on reading, editing and writing Remnant 2 save files. It was developed with Microsoft .net 7.0 framework and Microsoft Visual Studio Community 2022. This is not a save editor application, but can be used to build one.
 
 - Read both `profile.sav` and `save_x.sav` files
-- List characters inventory, equipment, progression, achievements and anything else that can be found int them
+- List characters inventory, equipment, progression, achievements, loadouts and anything else that can be found int them
 - Determine which zones generated in rolled words and what items they may spawn
 - Persist the saves in `json` text format, edit them and convert them back into the save files
 - Change save data via object model and persist the changes by writing the save files back
@@ -253,6 +253,7 @@ This library comes with the following code examples:
 - Edit Scrap - edit scrap quantity in your save using navigation system
 - Edit Scrap Raw - edit scrap quantity in your save using raw API
 - JSON - serialize safe file to and deserialize from JSON
+- Loadouts - display characters loadouts
 - Read Profile - read profile data:
   - Active character
   - Character's Power level

@@ -206,7 +206,7 @@ internal partial class Example
         Console.WriteLine("Zone Starts");
         List<Actor> actors = zoneActors.Where(x => x.GetZoneActorProperties()!["QuestID"].Get<int>() == world && !x.GetZoneActorProperties()!.Contains("ParentZoneID")).ToList();
         Actor start = actors.Count > 1 ?
-            actors.Single(x => x.GetZoneActorProperties()!["NameID"].ToString()!.Contains("one1")) : actors[0];
+            actors.Single(x => x.GetZoneActorProperties()!["NameID"].ToStringValue()!.Contains("one1")) : actors[0];
         //Actor start = zoneActors.Single(x => x.GetZoneActorProperties()!["QuestID"].Get<int>() == world && !x.GetZoneActorProperties()!.Contains("ParentZoneID"));
         string category = "";
         Queue<Actor> queue = new();
@@ -216,7 +216,7 @@ internal partial class Example
         {
             Actor current = queue.Dequeue();
             PropertyBag pb = current.GetZoneActorProperties()!;
-            string label = pb["Label"].ToString()!;
+            string label = pb["Label"].ToStringValue()!;
             int zoneId = pb["ID"].Get<int>();
             int questId = pb["QuestID"].Get<int>();
 
@@ -235,17 +235,17 @@ internal partial class Example
 
                 if (string.IsNullOrEmpty(category))
                 {
-                    string? linkCategory = link["Category"].ToString();
+                    string? linkCategory = link["Category"].ToStringValue();
                     if (!string.IsNullOrEmpty(linkCategory) && linkCategory != "None")
                     {
                         category = linkCategory;
                     }
                 }
 
-                string type = link["Type"].ToString()!;
-                string linkLabel = link["Label"].ToString()!;
-                string name = link["NameID"].ToString()!;
-                string? destinationZoneName = link["DestinationZone"].ToString();
+                string type = link["Type"].ToStringValue()!;
+                string linkLabel = link["Label"].ToStringValue()!;
+                string name = link["NameID"].ToStringValue()!;
+                string? destinationZoneName = link["DestinationZone"].ToStringValue();
 
                 switch (type)
                 {
@@ -258,8 +258,8 @@ internal partial class Example
                         if (destinationZoneName != "None" && !name.Contains("CardDoor") && destinationZoneName != "2_Zone")
                         {
                             Actor destinationZone = zoneActors.Single(x =>
-                                x.GetZoneActorProperties()!["NameID"].ToString() == destinationZoneName);
-                            string destinationZoneLabel = destinationZone.GetZoneActorProperties()!["Label"].ToString()!;
+                                x.GetZoneActorProperties()!["NameID"].ToStringValue() == destinationZoneName);
+                            string destinationZoneLabel = destinationZone.GetZoneActorProperties()!["Label"].ToStringValue()!;
 
                             if (linkLabel == "Malefic Palace" && destinationZoneLabel == "Beatific Palace"
                                 || destinationZoneLabel == "Malefic Palace" && linkLabel == "Beatific Palace") continue;
@@ -347,25 +347,25 @@ internal partial class Example
             PropertyBag pb = actor.GetZoneActorProperties()!;
             int id = pb["ID"].Get<int>();
             int questId = pb["QuestID"].Get<int>();
-            string? nameId = pb["NameID"].ToString();
-            string? label = pb["Label"].ToString();
+            string? nameId = pb["NameID"].ToStringValue();
+            string? label = pb["Label"].ToStringValue();
             ArrayStructProperty links = pb["ZoneLinks"].Get<ArrayStructProperty>();
             foreach (object? o in links.Items)
             {
                 PropertyBag link = (PropertyBag)o!;
-                string? linkLabel = link["Label"].ToString();
+                string? linkLabel = link["Label"].ToStringValue();
                 int zoneId = link["ZoneID"].Get<int>();
-                string? lnameId = link["NameID"].ToString();
-                string? worldMapId = link["WorldMapID"].ToString();
-                string? category = link["Category"].ToString();
-                string? type = link["Type"].ToString();
+                string? lnameId = link["NameID"].ToStringValue();
+                string? worldMapId = link["WorldMapID"].ToStringValue();
+                string? category = link["Category"].ToStringValue();
+                string? type = link["Type"].ToStringValue();
                 byte isActive = link["IsActive"].Get<byte>();
                 byte isMainPath = link["IsMainPath"].Get<byte>();
                 byte isDisabled = link["IsDisabled"].Get<byte>();
                 byte canBeRespawnLink = link["CanBeRespawnLink"].Get<byte>();
                 byte used = link["Used"].Get<byte>();
-                string? destinationZone = link["DestinationZone"].ToString();
-                string? destinationLink = link["DestinationLink"].ToString();
+                string? destinationZone = link["DestinationZone"].ToStringValue();
+                string? destinationLink = link["DestinationLink"].ToStringValue();
                 Console.WriteLine(
                     $"{label},{id},{questId},{nameId},{linkLabel},{zoneId},{lnameId},{worldMapId},{category},{type},{isActive},{isMainPath},{isDisabled},{canBeRespawnLink},{used},{destinationZone},{destinationLink}");
             }
