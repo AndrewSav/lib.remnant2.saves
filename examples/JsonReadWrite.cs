@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using rd2parser.Model;
+﻿using lib.remnant2.saves.Model;
+using Newtonsoft.Json;
 
-namespace rd2parser.examples;
+namespace examples;
 public class JsonReadWrite
 {
     public static void ToJson(string path, SaveData o)

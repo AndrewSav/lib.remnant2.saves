@@ -1,6 +1,6 @@
-﻿using rd2parser.Model;
+﻿using lib.remnant2.saves.Model;
 
-namespace rd2parser;
+namespace lib.remnant2.saves;
 
 public class SerializationContext
 {

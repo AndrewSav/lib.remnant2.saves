@@ -1,10 +1,10 @@
-﻿using rd2parser.Model.Memory;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using rd2parser.IO;
-using rd2parser.Model.Parts;
+using lib.remnant2.saves.IO;
+using lib.remnant2.saves.Model.Memory;
+using lib.remnant2.saves.Model.Parts;
 
-namespace rd2parser.Model.Properties;
+namespace lib.remnant2.saves.Model.Properties;
 
 public class StructProperty : ModelBase
 {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace rd2parser.Compression.Model;
+namespace lib.remnant2.saves.Compression.Model;
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public struct ChunkHeader

@@ -1,11 +1,11 @@
-﻿using rd2parser.IO;
-using rd2parser.Model;
-using rd2parser.Model.Memory;
-using rd2parser.Model.Properties;
-using System.Buffers.Binary;
-using rd2parser.Navigation;
+﻿using System.Buffers.Binary;
+using lib.remnant2.saves.IO;
+using lib.remnant2.saves.Model;
+using lib.remnant2.saves.Model.Memory;
+using lib.remnant2.saves.Model.Properties;
+using lib.remnant2.saves.Navigation;
 
-namespace rd2parser.examples;
+namespace examples;
 internal partial class Example
 {
     public static void Challenges()

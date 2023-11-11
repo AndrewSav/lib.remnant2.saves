@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace rd2parser.IO;
+namespace lib.remnant2.saves.IO;
 
 public  class WriterBase
 {

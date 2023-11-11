@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using rd2parser.Model;
+using lib.remnant2.saves.Model;
 
-namespace rd2parser.Navigation;
+namespace lib.remnant2.saves.Navigation;
 internal class ItemRegistry
 {
     private readonly Dictionary<string, Dictionary<string, List<Node>>> _registry = new();

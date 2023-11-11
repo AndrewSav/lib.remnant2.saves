@@ -1,4 +1,4 @@
-﻿namespace rd2parser.Navigation;
+﻿namespace lib.remnant2.saves.Navigation;
 public class Segment
 {
     public required string Type;

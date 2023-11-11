@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.IO.Hashing;
-using rd2parser.Model.Memory;
-using rd2parser.Compression;
-using rd2parser.IO.AddressUsageTracker;
+using lib.remnant2.saves.Compression;
+using lib.remnant2.saves.IO.AddressUsageTracker;
+using lib.remnant2.saves.Model.Memory;
 
-namespace rd2parser.Model;
+namespace lib.remnant2.saves.Model;
 public class SaveFile
 {
     public required FileHeader FileHeader;

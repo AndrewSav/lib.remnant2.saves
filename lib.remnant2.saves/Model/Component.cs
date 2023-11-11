@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Model.Properties;
+using lib.remnant2.saves.Model.Properties;
 
-namespace rd2parser.Model;
+namespace lib.remnant2.saves.Model;
 
 public class Component : ModelBase
 {

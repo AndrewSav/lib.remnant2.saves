@@ -1,4 +1,4 @@
-﻿namespace rd2parser.IO.AddressUsageTracker;
+﻿namespace lib.remnant2.saves.IO.AddressUsageTracker;
 
 // This is a helper class for the ReaderBase to check if we have any unread gaps
 public class Tracker

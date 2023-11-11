@@ -1,4 +1,4 @@
-﻿namespace rd2parser.examples;
+﻿namespace examples;
 
 internal class Program
 {

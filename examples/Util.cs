@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace rd2parser.examples;
+namespace examples;
 
 public class Utils
 {

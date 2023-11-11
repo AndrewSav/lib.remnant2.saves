@@ -1,10 +1,10 @@
 ﻿using System.Buffers.Binary;
 using System.IO.Compression;
 using System.IO.Hashing;
-using rd2parser.Compression.Model;
-using rd2parser.IO;
+using lib.remnant2.saves.Compression.Model;
+using lib.remnant2.saves.IO;
 
-namespace rd2parser.Compression;
+namespace lib.remnant2.saves.Compression;
 
 public class Archive
 {

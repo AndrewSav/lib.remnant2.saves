@@ -1,4 +1,4 @@
-﻿namespace rd2parser.Model;
+﻿namespace lib.remnant2.saves.Model;
 public abstract class ModelBase
 {
     // These four properties are not used for any business logic, they are used in a test

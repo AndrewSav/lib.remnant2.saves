@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using rd2parser.IO;
+using lib.remnant2.saves.IO;
 
-namespace rd2parser;
+namespace lib.remnant2.saves;
 
 public class Reader : ReaderBase
 {

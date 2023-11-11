@@ -1,6 +1,7 @@
-﻿using rd2parser.Model;
+﻿using lib.remnant2.saves;
+using lib.remnant2.saves.Model;
 
-namespace rd2parser.examples;
+namespace examples;
 internal partial class Example
 {
     public static void Json()

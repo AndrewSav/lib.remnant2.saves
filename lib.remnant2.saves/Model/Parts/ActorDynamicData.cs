@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Model.Memory;
+using lib.remnant2.saves.Model.Memory;
 
-namespace rd2parser.Model.Parts;
+namespace lib.remnant2.saves.Model.Parts;
 
 public class ActorDynamicData
 {

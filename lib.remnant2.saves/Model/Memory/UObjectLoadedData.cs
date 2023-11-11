@@ -1,6 +1,6 @@
-﻿using rd2parser.Model.Parts;
+﻿using lib.remnant2.saves.Model.Parts;
 
-namespace rd2parser.Model.Memory;
+namespace lib.remnant2.saves.Model.Memory;
 
 public class UObjectLoadedData
 {

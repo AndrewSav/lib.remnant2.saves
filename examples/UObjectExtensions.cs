@@ -1,7 +1,7 @@
-﻿using rd2parser.Model;
-using rd2parser.Navigation;
+﻿using lib.remnant2.saves.Model;
+using lib.remnant2.saves.Navigation;
 
-namespace rd2parser.examples;
+namespace examples;
 public static class UObjectExtension
 {
     public static UObject ShallowCopyObject(this UObject obj, Navigator navigator)

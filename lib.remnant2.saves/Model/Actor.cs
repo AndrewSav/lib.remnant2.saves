@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using rd2parser.Model.Memory;
-using rd2parser.Model.Parts;
+using lib.remnant2.saves.Model.Memory;
+using lib.remnant2.saves.Model.Parts;
 
-namespace rd2parser.Model;
+namespace lib.remnant2.saves.Model;
 
 public class Actor : ModelBase
 {

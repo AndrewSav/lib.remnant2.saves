@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace rd2parser.Model.Parts;
+namespace lib.remnant2.saves.Model.Parts;
 
 public class FTopLevelAssetPath
 {

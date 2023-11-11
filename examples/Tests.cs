@@ -1,7 +1,9 @@
-﻿using rd2parser.Model;
+﻿using lib.remnant2.saves;
+using lib.remnant2.saves.Model;
 using Serilog;
+using Log = lib.remnant2.saves.Log;
 
-namespace rd2parser.examples;
+namespace examples;
 
 internal class Tests
 {

@@ -1,7 +1,7 @@
-﻿using rd2parser.Model;
-using rd2parser.Model.Properties;
+﻿using lib.remnant2.saves.Model;
+using lib.remnant2.saves.Model.Properties;
 
-namespace rd2parser.Navigation;
+namespace lib.remnant2.saves.Navigation;
 
 public class Navigator
 {

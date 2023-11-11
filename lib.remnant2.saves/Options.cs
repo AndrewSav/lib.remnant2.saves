@@ -1,4 +1,4 @@
-﻿namespace rd2parser;
+﻿namespace lib.remnant2.saves;
 
 public class Options
 {

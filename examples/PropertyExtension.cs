@@ -1,6 +1,6 @@
-﻿using rd2parser.Model.Properties;
+﻿using lib.remnant2.saves.Model.Properties;
 
-namespace rd2parser.examples;
+namespace examples;
 public static class PropertyExtension
 {
     public static Property ShallowCopyProperty(this Property property)

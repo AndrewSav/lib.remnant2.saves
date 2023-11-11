@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace rd2parser;
+namespace lib.remnant2.saves;
 
 // Rudimentary logging facility for debugging and troubleshooting
 // We do not need anything more advanced

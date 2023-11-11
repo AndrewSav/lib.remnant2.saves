@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
-namespace rd2parser.Model.Properties;
+namespace lib.remnant2.saves.Model.Properties;
 
 public class ObjectProperty : ModelBase
 {

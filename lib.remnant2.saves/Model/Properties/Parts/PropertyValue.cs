@@ -1,9 +1,9 @@
-﻿using rd2parser.Model.Memory;
-using rd2parser.Model.Parts;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Numerics;
+using lib.remnant2.saves.Model.Memory;
+using lib.remnant2.saves.Model.Parts;
 
-namespace rd2parser.Model.Properties.Parts;
+namespace lib.remnant2.saves.Model.Properties.Parts;
 
 public class PropertyValue
 {

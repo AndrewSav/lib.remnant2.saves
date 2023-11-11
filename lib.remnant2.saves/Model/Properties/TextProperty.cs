@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace rd2parser.Model.Properties;
+namespace lib.remnant2.saves.Model.Properties;
 
 public class TextProperty : ModelBase
 {

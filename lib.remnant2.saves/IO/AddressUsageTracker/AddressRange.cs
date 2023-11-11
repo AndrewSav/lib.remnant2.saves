@@ -1,4 +1,4 @@
-﻿namespace rd2parser.IO.AddressUsageTracker;
+﻿namespace lib.remnant2.saves.IO.AddressUsageTracker;
 
 public class AddressRange
 {

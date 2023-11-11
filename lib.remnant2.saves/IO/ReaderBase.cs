@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
-using rd2parser.IO.AddressUsageTracker;
+using lib.remnant2.saves.IO.AddressUsageTracker;
 
-namespace rd2parser.IO;
+namespace lib.remnant2.saves.IO;
 
 // This is a utility class for reading from a byte array
 // Note that the entire buffer resides in memory so it's not suitable
