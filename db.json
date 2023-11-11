@@ -2665,7 +2665,7 @@
     "World": "World_Fae",
     "Name": "Burden of the Warlock",
     "DropType": "Event",
-    "DropReference": "Quest_Injectable_BurningCity_FieryGraveyard",
+    "DropReference": "Quest_Injectable_FieryGraveyard",
     "Note": "Found in a outdoor location on Losomn. It is located in a graveyard that is only accessible via a burning building. You get on the top floor of the building first, and you can drop or climb down the ladder to the ground floor, but the path to the graveyard is from the middle floor where you cannot get to from the ladder. You will need to go upstairs from the ground floor first to the middle floor, and the cross over the by a plank clearing some rubble in front of it first. From there you will be able to proceed to the graveyard and get the item"
   },
   {
@@ -6448,7 +6448,7 @@
     "EventLocation": "Forgotten Prison"
   },
   {
-    "Id": "Quest_Injectable_BurningCity_FieryGraveyard",
+    "Id": "Quest_Injectable_FieryGraveyard",
     "Type": "event",
     "World": "World_Fae",
     "Name": "Burning House",
