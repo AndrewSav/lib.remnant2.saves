@@ -178,4 +178,16 @@ public class Node
             return result == null ? null : _navigator.Lookup(result);
         }
     }
+    public Node? NavObjectPropertyObject
+    {
+        get
+        {
+            if (_object is not ObjectProperty a)
+            {
+                return null;
+            }
+
+            return a.ObjectIndex == -1 ? null : _navigator.Lookup(a.Object!);
+        }
+    }
 }

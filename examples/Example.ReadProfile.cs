@@ -117,7 +117,7 @@ internal partial class Example
                 string message = "";
                 if (instanceData.Object!.Properties!.Contains("Quantity"))
                 {
-                    message += $" x{instanceData.Object.Properties["Quantity"]}";
+                    message += $" x{instanceData.Object.Properties["Quantity"].ToStringValue()}";
                 }
                 if ((int)slot.Value! != -1)
                 {
