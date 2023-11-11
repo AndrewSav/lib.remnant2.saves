@@ -4,6 +4,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Remnant 2 save files parser and editor library</Title>
+    <RepositoryUrl>https://github.com/AndrewSav/lib.remnant2.saves</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/AndrewSav/lib.remnant2.saves</PackageProjectUrl>
+    <Version>0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
