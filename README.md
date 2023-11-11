@@ -99,6 +99,7 @@ These are the core types in the save file (see the list below). They all follow 
 The navigator objects wraps every `ModelBase` derived object in the object graph in a `Node` object. It also keeps a registry on object names for certain types:
 
 - Actor
+- ArrayStructProperty
 - Component
 - Property
 - UObject
@@ -187,7 +188,7 @@ The following table gives an overview of types used in the Remnant 2 save object
 | Variable             | ModelBase                             | Name           | Yes       |       |
 | Variables            | ModelBase                             | Name           |           |       |
 | ArrayProprty         | ModelBase                             | None           |           | Yes   |
-| ArrayStructProperty  | ModelBase                             | None           |           | Yes   |
+| ArrayStructProperty  | ModelBase                             | Name           | Yes       | Yes   |
 | ByteProperty         | ModelBase                             | Name, Value    |           |       |
 | EnumProperty         | ModelBase                             | Name, Value    |           |       |
 | MapProperty          | ModelBase                             | None           |           | Yes   |

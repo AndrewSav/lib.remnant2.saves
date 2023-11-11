@@ -25,6 +25,7 @@ public class Navigator
                 case "Actor":
                 case "UObject":
                 case "Component":
+                case "ArrayStructProperty":
                     _registry.Add(n);
                     break;
             }
@@ -198,6 +199,26 @@ public class Navigator
         return GetRegistryItem<Component>(name, parent);
     }
 
+    public List<ArrayStructProperty> GetArrayStructProperties(string name, ModelBase? parent = null)
+    {
+        return GetRegistryItems<ArrayStructProperty>(name, parent);
+    }
+
+    public List<ArrayStructProperty> FindArrayStructProperties(string namePattern, ModelBase? parent = null)
+    {
+        return FindRegistryItems<ArrayStructProperty>(namePattern, parent);
+    }
+
+    public List<ArrayStructProperty> GetAllArrayStructProperties()
+    {
+        return _registry.GetAll<ArrayStructProperty>();
+    }
+
+    public ArrayStructProperty? GetArrayStructProperty(string name, ModelBase? parent = null)
+    {
+        return GetRegistryItem<ArrayStructProperty>(name, parent);
+    }
+    
     public Dictionary<string, List<string>> GetSearchableNames()
     {
         return _registry.GetNames();

@@ -30,6 +30,13 @@ public class Node
 
     public ModelBase Object => _object;
 
+    public T GetObject<T>() where T : ModelBase
+    {
+        return (T)_object;
+    }
+
+    public string Name => Path[^1].Name;
+
     public Node(ModelBase obj, Navigator navigator)
     {
         _navigator = navigator;
@@ -59,6 +66,7 @@ public class Node
             EnumProperty x => x.EnumType.Name,
             ByteProperty x => x.EnumName.Name,
             Actor x => x.DynamicData?.ClassPath.Name,
+            ArrayStructProperty x=> x.ElementType.Name,
             _ => ""
         } ?? "";
     }
