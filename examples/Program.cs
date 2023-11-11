@@ -2,7 +2,6 @@
 
 internal class Program
 {
-    // TODO: Choose a better name
     // TODO: Nuget
 
     private static void Main()

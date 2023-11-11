@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\rd2parser\rd2parser.csproj" />
+    <ProjectReference Include="..\lib.remnant2.saves\lib.remnant2.saves.csproj" />
   </ItemGroup>
 
 </Project>
