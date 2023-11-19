@@ -16,7 +16,8 @@ internal partial class Example
         {
             { "Jungle", "Yaesha" },
             { "Nerud", "Nerud" },
-            { "Fae", "Losomn" }
+            { "Fae", "Losomn" },
+            { "OTK", "Losomn OTK" }
         };
 
 
@@ -206,7 +207,8 @@ internal partial class Example
         Console.WriteLine("Zone Starts");
         List<Actor> actors = zoneActors.Where(x => x.GetZoneActorProperties()!["QuestID"].Get<int>() == world && !x.GetZoneActorProperties()!.Contains("ParentZoneID")).ToList();
         Actor start = actors.Count > 1 ?
-            actors.Single(x => x.GetZoneActorProperties()!["NameID"].ToStringValue()!.Contains("one1")) : actors[0];
+            actors.Single(x => x.GetZoneActorProperties()!["NameID"].ToStringValue()!.Contains("one1") ||
+                               x.GetZoneActorProperties()!["Label"].ToStringValue() == "Forlorn Coast") : actors[0];
         //Actor start = zoneActors.Single(x => x.GetZoneActorProperties()!["QuestID"].Get<int>() == world && !x.GetZoneActorProperties()!.Contains("ParentZoneID"));
         string category = "";
         Queue<Actor> queue = new();

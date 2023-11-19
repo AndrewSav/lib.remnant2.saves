@@ -41,6 +41,7 @@ public class StructProperty : ModelBase
             "Timespan" => new TimeSpan(r.Read<long>()),
             "Guid" => r.Read<FGuid>(),
             "Vector" => r.Read<FVector>(),
+            "Rotator" => r.Read<FRotator>(),
             "DateTime" => new DateTime(r.Read<long>()),
             "PersistenceBlob" => ReadPersistenceBlob(r, ctx),
             _ => new PropertyBag(r,ctx)
@@ -86,6 +87,9 @@ public class StructProperty : ModelBase
                 break;
             case "Vector":
                 w.Write((FVector)value!);
+                break;
+            case "Rotator":
+                w.Write((FRotator)value!);
                 break;
             case "DateTime":
                 w.Write(GetDateTime(value).Ticks);
