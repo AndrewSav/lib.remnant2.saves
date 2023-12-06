@@ -11,8 +11,17 @@ public class Writer : WriterBase
             Write(0);
             return;
         }
-        Write(value.Length + 1);
-        WriteBytes(Encoding.ASCII.GetBytes(value));
-        Write<byte>(0);
+        if (value.All(char.IsAscii))
+        {
+            Write(value.Length + 1);
+            WriteBytes(Encoding.ASCII.GetBytes(value));
+            Write<byte>(0);
+        }
+        else
+        {
+            Write(-2*(value.Length + 1));
+            WriteBytes(Encoding.Unicode.GetBytes(value));
+            Write<short>(0);
+        }
     }
 }
