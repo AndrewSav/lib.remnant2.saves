@@ -590,6 +590,119 @@
     "Note": "Found in Corrupted Harbor location on Root Earth. It just off the main path from the the boiler room arena between the first and second checkpoints. Go to the left from the entrance of the boiler room arena and follow the path, the item will be on a blue glowing fixture"
   },
   {
+    "Id": "Amulet_BirthrightOfTheLost",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/BirthrightOfTheLost/Amulet_BirthrightOfTheLost.Amulet_BirthrightOfTheLost_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "Name": "Birthright of the Lost",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
+    "Id": "Amulet_BrewmastersCork",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/BrewmastersCork/Amulet_BrewmastersCork.Amulet_BrewmastersCork_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
+    "Id": "Amulet_CostOfBetrayal",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/Cost_Of_Betrayal/Amulet_CostOfBetrayal.Amulet_CostOfBetrayal_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "Name": "Cost of Betrayal",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_OneTrueKing",
+    "Note": "Found in Chamber of the Faithless location on Losomn OTK, shoot the dead council members for the item to drop"
+  },
+  {
+    "Id": "Amulet_DeathSoakedIdol",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/DeathSoakedIdol/Amulet_DeathSoakedIdol.Amulet_DeathSoakedIdol_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "DropType": "Event",
+    "DropReference": "Quest_Injectable_BurningCity_DLC",
+    "Note": "Found in an outdoor side path location on Losomn, there will be a manor where inside you will be grabbed by a Dran saying \"wake up!\". You will be teleported to Ethereal Manor location with five locked door, you can open any of these but only one. You need to peer through the window or use Explorer's treasure hunter skill to detect a room with an item, unlock it and take the item in the room, you will be, again teleported to the start. You need to do this five times, you will get in order,  Strange Talisman, Bloody Talisman, Bloody Talisman (again), Bloody Talisman (again), and finally the Death-Soaked Idol"
+  },
+  {
+    "Id": "Amulet_GiftOfEuphoria",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/GiftOfEuphoria/Amulet_GiftOfEuphoria.Amulet_GiftOfEuphoria_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "Name": "Gift of Euphoria",
+    "DropType": "Location",
+    "DropReference": "Walk of Remembrance",
+    "Note": "After defeating Wraithliege in Pathway of the Fallen location on Losomn and obtaining Memoriam Medallion Key quest item from it proceed to the room behind it and destroy the picture hiding passage to the next room. Go through the mirror there to travel to Walk of Rememberance location. Use the quest item to open the pavillion in the middle of the level to get Gift of Euphoria"
+  },
+  {
+    "Id": "Amulet_GiftOfMelancholy",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/GiftOfMelancholy/Amulet_GiftOfMelancholy.Amulet_GiftOfMelancholy_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "Name": "Gift of Melancholy",
+    "DropType": "Event",
+    "DropReference": "Quest_SideD_GardenMaze",
+    "Note": "After defeating Wraithliege in Pathway of the Fallen location on Losomn and obtaining Memoriam Medallion Key quest item from it return the pavillion in the middle of the level and use the the quest item to open it to get Gift of Melancholy"
+  },
+  {
+    "Id": "Amulet_GiftOfTheUnbound",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/GiftOfTheUnbound/Amulet_GiftOfTheUnbound.Amulet_GiftOfTheUnbound_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "Name": "Gift of the Unbound",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "In the One True King adventure, agree to kill Nimue, when talkint to One True King, go to Nimue and chose to spare Nimue. Go back to One True King and kill him. Return to Nimue for the reward"
+  },
+  {
+    "Id": "Amulet_IndexOfTheScribe",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/IndexOfTheScribe/Amulet_IndexOfTheScribe.Amulet_IndexOfTheScribe_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Bring Misplaced Memoir quest item found in Forlorn Coast location on Losomn OTK to Leywise found in Forlorn Coast location on Losomn OTK, receive the item as the reward"
+  },
+  {
+    "Id": "Amulet_LegacyProtocol",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/LegacyProtocol/Amulet_LegacyProtocol.Amulet_LegacyProtocol_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "DropType": "World",
+    "DropReference": "World_Nerud",
+    "Note": "Random N'Erud Drop"
+  },
+  {
+    "Id": "Amulet_ParticipationMedal",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/ParticipationMedal/Amulet_ParticipationMedal.Amulet_ParticipationMedal_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "Difficulty": "Apocalypse",
+    "DropType": "Progression",
+    "Note": "Die from a boss on apocalypse difficulty 10 times"
+  },
+  {
+    "Id": "Amulet_SinisterTotem",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/SinisterTotem/Amulet_SinisterTotem.Amulet_SinisterTotem_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "DropType": "World",
+    "DropReference": "World_Jungle",
+    "Note": "Random Yaesha Drop"
+  },
+  {
+    "Id": "Amulet_WhisperingMarble",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Amulets/WhisperingMarble/Amulet_WhisperingMarble.Amulet_WhisperingMarble_C",
+    "Type": "amulet",
+    "World": "World_DLC1",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
     "Id": "Armor_Body_Challenger",
     "ProfileId": "/Game/World_Base/Items/Armor/Archetype_Starting/Challenger/Armor_Body_Challenger.Armor_Body_Challenger_C",
     "Type": "armor",
@@ -1519,6 +1632,90 @@
     "Note": "Found in Void Vessel Facility location on N'Erud. Some Vessels can be opened by interacting with a console placed next to them, one of them towards the end of the location contains the Stasis Pod Glyph quest item. There will be a door that can be open by it, the item is behind it"
   },
   {
+    "Id": "Armor_Body_Ritualist",
+    "ProfileId": "/Game/World_DLC1/Items/Archetypes/Ritualist/Armor/Armor_Body_Ritualist.Armor_Body_Ritualist_C",
+    "Type": "armor",
+    "World": "World_DLC1",
+    "Name": "Zealot's Overcoat",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK, get to Nimue tower via Palace of the One True King, you need to go upstairs then drop from a balcony and then go downstairs to get access to Nimue tower. As you descend it you will come to a ledge with a few hung bodies, shoot the rope and then interact with the body that drops"
+  },
+  {
+    "Id": "Armor_Gloves_Ritualist",
+    "ProfileId": "/Game/World_DLC1/Items/Archetypes/Ritualist/Armor/Armor_Gloves_Ritualist.Armor_Gloves_Ritualist_C",
+    "Type": "armor",
+    "World": "World_DLC1",
+    "Name": "Zealot's Wraps",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK, get to Nimue tower via Palace of the One True King, you need to go upstairs then drop from a balcony and then go downstairs to get access to Nimue tower. As you descend it you will come to a ledge with a few hung bodies, shoot the rope and then interact with the body that drops"
+  },
+  {
+    "Id": "Armor_Head_Ritualist",
+    "ProfileId": "/Game/World_DLC1/Items/Archetypes/Ritualist/Armor/Armor_Head_Ritualist.Armor_Head_Ritualist_C",
+    "Type": "armor",
+    "World": "World_DLC1",
+    "Name": "Zealot's Hat",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK, get to Nimue tower via Palace of the One True King, you need to go upstairs then drop from a balcony and then go downstairs to get access to Nimue tower. As you descend it you will come to a ledge with a few hung bodies, shoot the rope and then interact with the body that drops"
+  },
+  {
+    "Id": "Armor_Legs_Ritualist",
+    "ProfileId": "/Game/World_DLC1/Items/Archetypes/Ritualist/Armor/Armor_Legs_Ritualist.Armor_Legs_Ritualist_C",
+    "Type": "armor",
+    "World": "World_DLC1",
+    "Name": "Zealot's Seaboots",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK, get to Nimue tower via Palace of the One True King, you need to go upstairs then drop from a balcony and then go downstairs to get access to Nimue tower. As you descend it you will come to a ledge with a few hung bodies, shoot the rope and then interact with the body that drops"
+  },
+  {
+    "Id": "Armor_Body_CrimsonGuard",
+    "ProfileId": "/Game/World_DLC1/Items/Armor/RedPrinceArmor/Armor_Body_CrimsonGuard.Armor_Body_CrimsonGuard_C",
+    "Type": "armor",
+    "World": "World_DLC1",
+    "Name": "Crimson Guard Plate",
+    "DropType": "Location",
+    "DropReference": "Chamber of the Faithless",
+    "Note": "Found in Chamber of the Faithless location on Losomn OTK. Kill One True King, go to Guilded Chambers location and clear it enough times to get three Crimson King Coins, they drop from the teleport Fae, and there are ususally zero one or two spawn each run. Once you get three coins talk to the Red Prince and choose to pay tribute. Go back to Chamber of the Faithless, talk to Red Prince and receive the reward",
+    "CustomScript": true
+  },
+  {
+    "Id": "Armor_Gloves_CrimsonGuard",
+    "ProfileId": "/Game/World_DLC1/Items/Armor/RedPrinceArmor/Armor_Gloves_CrimsonGuard.Armor_Gloves_CrimsonGuard_C",
+    "Type": "armor",
+    "World": "World_DLC1",
+    "Name": "Crimson Guard Gauntlets",
+    "DropType": "Location",
+    "DropReference": "Chamber of the Faithless",
+    "Note": "Found in Chamber of the Faithless location on Losomn OTK. Kill One True King, go to Guilded Chambers location and clear it enough times to get three Crimson King Coins, they drop from the teleport Fae, and there are ususally zero one or two spawn each run. Once you get three coins talk to the Red Prince and choose to pay tribute. Go back to Chamber of the Faithless, talk to Red Prince and receive the reward",
+    "CustomScript": true
+  },
+  {
+    "Id": "Armor_Head_CrimsonGuard",
+    "ProfileId": "/Game/World_DLC1/Items/Armor/RedPrinceArmor/Armor_Head_CrimsonGuard.Armor_Head_CrimsonGuard_C",
+    "Type": "armor",
+    "World": "World_DLC1",
+    "Name": "Crimson Guard Shroud",
+    "DropType": "Location",
+    "DropReference": "Chamber of the Faithless",
+    "Note": "Found in Chamber of the Faithless location on Losomn OTK. Kill One True King, go to Guilded Chambers location and clear it enough times to get three Crimson King Coins, they drop from the teleport Fae, and there are ususally zero one or two spawn each run. Once you get three coins talk to the Red Prince and choose to pay tribute. Go back to Chamber of the Faithless, talk to Red Prince and receive the reward",
+    "CustomScript": true
+  },
+  {
+    "Id": "Armor_Legs_CrimsonGuard",
+    "ProfileId": "/Game/World_DLC1/Items/Armor/RedPrinceArmor/Armor_Legs_CrimsonGuard.Armor_Legs_CrimsonGuard_C",
+    "Type": "armor",
+    "World": "World_DLC1",
+    "Name": "Crimson Guard Sabatons",
+    "DropType": "Location",
+    "DropReference": "Chamber of the Faithless",
+    "Note": "Found in Chamber of the Faithless location on Losomn OTK. Kill One True King, go to Guilded Chambers location and clear it enough times to get three Crimson King Coins, they drop from the teleport Fae, and there are ususally zero one or two spawn each run. Once you get three coins talk to the Red Prince and choose to pay tribute. Go back to Chamber of the Faithless, talk to Red Prince and receive the reward",
+    "CustomScript": true
+  },
+  {
     "Id": "Mod_ConcussiveShot",
     "ProfileId": "/Game/World_Base/Items/Mods/ConcussiveShot/Mod_ConcussiveShot.Mod_ConcussiveShot_C",
     "Type": "mod",
@@ -1792,6 +1989,38 @@
     "Note": "Crafted from Dread Core dropped by Wenom, found in Corrupted Harbor location on Root Earth"
   },
   {
+    "Id": "Mod_CreepingMist",
+    "ProfileId": "/Game/World_DLC1/Items/Mods/Mod_CreepingMist/Mod_CreepingMist.Mod_CreepingMist_C",
+    "Type": "mod",
+    "World": "World_DLC1 ",
+    "Material": "Material_HexWreath",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_Witch",
+    "Note": "Crafted from Hex Wreath droped by Sunken Witch in Sunken Haunt location on Losomn"
+  },
+  {
+    "Id": "Mod_KnightGuard",
+    "ProfileId": "/Game/World_DLC1/Items/Mods/Mod_KnightGuard/Mod_KnightGuard.Mod_KnightGuard_C",
+    "Type": "mod",
+    "World": "World_DLC1 ",
+    "Material": "Material_CrematedSoulAsh",
+    "DropType": "Location",
+    "DropReference": "Walk of Remembrance",
+    "Prerequisite": "Armor_Head_RedPrince",
+    "Note": "Found in the tomb in Walk Of Rememberance location on Losomn. First find and defeat Warithliege aberration at the end of the maze in the Path of the Fallen location. The Memoriam Medallion Key quest item drops. Do not use it on the tomb in the Path of the Fallen, go through the room where Warithliege used to be and destroy the picutre in the next room to reveal a door. Go through the door and then through the mirror to the Walk of Rememberance. Find the tomb there and use the Memoriam Medallion Key to enter it. Wear the Red Prince's Crown to reveal a hidden passage where you collect Cremated Soul Ash, which this item is crafted from"
+  },
+  {
+    "Id": "Mod_RingOfSpears",
+    "ProfileId": "/Game/World_DLC1/Items/Mods/Mod_RingOfSpears/Mod_RingOfSpears.Mod_RingOfSpears_C",
+    "Type": "mod",
+    "World": "World_DLC1 ",
+    "Name": "Ring Of Spears",
+    "Material": "Material_WretchedSkull",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_Impaler",
+    "Note": "Crafted from Wretched Skull droped by Bruin, Blade of The King in Glistering Cloister location on Losomn"
+  },
+  {
     "Id": "MetaGem_Dervish",
     "ProfileId": "/Game/World_Base/Items/Gems/Melee/MetaGems/Dervish/MetaGem_Dervish.MetaGem_Dervish_C",
     "Type": "mutator",
@@ -1988,7 +2217,7 @@
     "ProfileId": "/Game/World_Base/Items/Gems/Ranged/MetaGems/Failsafe/MetaGem_Failsafe.MetaGem_Failsafe_C",
     "Type": "mutator",
     "World": "World_Base",
-    "Aberration": "S.D. OA7",
+    "Aberration": "S.D. 0A7",
     "Subtype": "Ranged",
     "DropType": "Event",
     "DropReference": "Quest_SideD_Extermination",
@@ -2221,6 +2450,92 @@
     "Note": "Drops from a ramdom aberration on a random world"
   },
   {
+    "Id": "MetaGem_Dreadful",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/Dreadful/MetaGem_Dreadful.MetaGem_Dreadful_C",
+    "Type": "mutator",
+    "World": "World_DLC1 ",
+    "Aberration": "Dire Fiend",
+    "Subtype": "Ranged",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Drops from Dire Fiend aberation in Forlon Coast location on Losomn OTK, at the start of the level when you cross a long bridge to the main area there will be a preacher. Attack the bystander Dran and the preacher will turn into the Dire Fiend"
+  },
+  {
+    "Id": "MetaGem_FetidWounds",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/FetidWounds/MetaGem_FetidWounds.MetaGem_FetidWounds_С",
+    "Type": "mutator",
+    "World": "World_DLC1 ",
+    "Subtype": "Ranged",
+    "DropType": "Vendor",
+    "DropReference": "Dwell",
+    "Note": "Buy from Dwell at Ward 13"
+  },
+  {
+    "Id": "MetaGem_Maelstrom",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/Maelstrom/MetaGem_Maelstrom.MetaGem_Maelstrom_C",
+    "Type": "mutator",
+    "World": "World_DLC1 ",
+    "Aberration": "Mangled Atoner",
+    "Subtype": "Ranged",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Drops from Mangled Atoner aberation in Forlon Coast location on Losomn OTK, at the top of Nimue tower"
+  },
+  {
+    "Id": "MetaGem_Prophecy",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/Prophecy/MetaGem_Prophecy.MetaGem_Prophecy_С",
+    "Type": "mutator",
+    "World": "World_DLC1 ",
+    "Aberration": "Wraithliege",
+    "Subtype": "Ranged",
+    "DropType": "Event",
+    "DropReference": "Quest_SideD_GardenMaze",
+    "Note": "Drops from Wraithliege aberration in Pathway of the Fallen location on Losomn"
+  },
+  {
+    "Id": "MetaGem_Sleeper",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/Sleeper/MetaGem_Sleeper.MetaGem_Sleeper_С",
+    "Type": "mutator",
+    "World": "World_DLC1 ",
+    "Aberration": "Gorecarver and Thunderpiercer",
+    "Subtype": "Ranged",
+    "DropType": "Event",
+    "DropReference": "Quest_SideD_Lighthouse",
+    "Note": "Drops from Gorecarver and Thunderpiercer aberrations in Derelict Lighthouse location on Losomn"
+  },
+  {
+    "Id": "MetaGem_Executor",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Melee/Executor/MetaGem_Executor.MetaGem_Executor_C",
+    "Type": "mutator",
+    "World": "World_DLC1 ",
+    "Aberration": "Little Gorge",
+    "Subtype": "Melee",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Drops from Little Gorge aberation in Forlon Coast location on Losomn OTK, that spawns if you do not get too close to a pig ritual in the Drowned Wen area. From the first checkpoint after the Drowned Wen world stone (the checkpoint is near the iron door, that when unlocked leads back to the start of Forlorn Coast) drop down to where the boats are and follow a side path from boat to boat until you can see a breach in the wall, follow a short path inside and see a witch perofrming a ritual on a pig"
+  },
+  {
+    "Id": "MetaGem_Guts",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Melee/Guts/MetaGem_Guts.MetaGem_Guts_C",
+    "Type": "mutator",
+    "World": "World_DLC1 ",
+    "Aberration": "Cursed Wretch",
+    "Subtype": "Melee",
+    "DropType": "Event",
+    "DropReference": "Quest_SideD_SewerChamber",
+    "Note": "Drops from Cursed Wretch aberration in The Forgotten Commune location on Losomn. There will be NPC called Elowen in the area. Talk to her and then return to her after destroying the Befouled Altars. She will trasform to the Cursed Wretch"
+  },
+  {
+    "Id": "MetaGem_TaintedBlade",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Melee/TaintedBlade/MetaGem_TaintedBlade.MetaGem_TaintedBlade_C",
+    "Type": "mutator",
+    "World": "World_DLC1 ",
+    "Subtype": "Melee",
+    "DropType": "Vendor",
+    "DropReference": "Dwell",
+    "Note": "Buy from Dwell at Ward 13"
+  },
+  {
     "Id": "Relic_Consumable_BloomingHeart",
     "ProfileId": "/Game/World_Base/Items/Armor/Base/RelicTesting/BloomingHeart/Relic_Consumable_BloomingHeart.Relic_Consumable_BloomingHeart_C",
     "Type": "relic",
@@ -2409,6 +2724,24 @@
     "DropReference": "Alepsis-Taura",
     "Note": "Found in Alepsis-Taura location on N'Erud. You need to defeat Sha'Hala, one of the N'Erud world bosses without using the Override Pin quest item in the console before the fight. Talk to the Custodian after the battle and wait for 24 hours for Alepsis-Taura to unlock",
     "CustomScript": true
+  },
+  {
+    "Id": "Relic_Consumable_BrokenHeart",
+    "ProfileId": "/Game/World_DLC1/Items/Relics/BrokenHeart/Relic_Consumable_BrokenHeart.Relic_Consumable_BrokenHeart_C",
+    "Type": "relic",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK. Talk to One True King and agree to kill Nimue. Get to Nimue tower via Palace of the One True King, you need to go upstairs then drop from a balcony and then go downstairs to get access to Nimue tower. Descend the tower, talk to Nimue and chose option to kill her"
+  },
+  {
+    "Id": "Relic_Consumable_PaperHeart",
+    "ProfileId": "/Game/World_DLC1/Items/Relics/PaperHeart/Relic_Consumable_PaperHeart.Relic_Consumable_PaperHeart_C",
+    "Type": "relic",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "Chamber of the Faithless",
+    "Note": "Found in Chamber of the Faithless location on Losomn OTK. Find Misplaced Memoir quest item in Forlorn Coast location. Examine the item and interact with it to get the Bookbound Medallion quest item. Use it to open the locked door, the item is behind it"
   },
   {
     "Id": "Ring_RingOfTheAdmiral",
@@ -3359,7 +3692,8 @@
     "ProfileId": "/Game/World_Nerud/Items/Trinkets/Rings/ConservationSeal/Ring_ConservationSeal.Ring_ConservationSeal_C",
     "Type": "ring",
     "World": "World_Nerud",
-    "DropType": "World"
+    "DropType": "World",
+    "Note": "Random N'Erud drop"
   },
   {
     "Id": "Ring_ConstantVariableRing",
@@ -3757,6 +4091,257 @@
     "Note": "Found in Ashen Wasteland location on Root Earth. From the first checkpoint go to the left of the ramp to the carriages fight arena, along the wall. There will be a hole in the wall at the end, just above the ramp, and the item will be on the other side"
   },
   {
+    "Id": "Ring_ATaeriiBooster",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/AtaeriiBooster/Ring_ATaeriiBooster.Ring_ATaeriiBooster_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "A'taerii Booster",
+    "DropType": "World",
+    "DropReference": "World_Nerud",
+    "Note": "Random N'Erud drop"
+  },
+  {
+    "Id": "Ring_AtonementFold",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/AtonementFold/Ring_AtonementFold.Ring_AtonementFold_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "Vendor",
+    "DropReference": "Leywise",
+    "Note": "Buy from Leywise in Forlorn Coast location on Losomn OTK. Leywise can be found besides a cooking pot, looking extremely worried and occupied. He denies the player when he is being interacted on, until you try a few more times. After telling him, 'I want something crafted', he will explain that he does not do that because he is a Royal Scribe. After this, we can tell him that we want to buy something. Laywise will offer us the item."
+  },
+  {
+    "Id": "Ring_BandOfTheFanatic",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/BandOfTheFanatic/Ring_BandOfTheFanatic.Ring_BandOfTheFanatic_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Band of the Fanatic",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Prerequisite": "Armor_Body_Ritualist, Armor_Gloves_Ritualist, Armor_Head_Ritualist, Armor_Legs_Ritualist",
+    "Note": "Found in Forlon Coast location on Losomn OTK, at the start of the level when you cross a long bridge to the main area there will be a preacher. Wear the Zealot set (otherwise you will get attacked once you approach the preacher), do not attack anyone and wait until the end of the preacher's speech. Then interact with the preacher and he will give you the item.",
+    "CustomScript": true
+  },
+  {
+    "Id": "Ring_BitterMemento",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/BitterMemento/Ring_BitterMemento.Ring_BitterMemento_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "The Tormented Asylum",
+    "Prerequisite": "Quest_Item_GardenMaze_MausoleumMedallionKey",
+    "Note": "Feed the Nightweaver's Web Memoriam Medallion Key found in the Pathway of the Fallen location on Losomn. Memoriam Medallion Key drops from Wraithliege aberration"
+  },
+  {
+    "Id": "Ring_BrawlersPride",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/BrawlersPride/Ring_BrawlersPride.Ring_BrawlersPride_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Brawler's Pride",
+    "DropType": "World",
+    "DropReference": "World_Jungle",
+    "Note": "Random Yaesha Drop"
+  },
+  {
+    "Id": "Ring_BridgeWardensCrest",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/BridgeWardensCrest/Ring_BridgeWardensCrest.Ring_BridgeWardensCrest_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Bridge Warden's Crest",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK. Aftert getting to Drowened Wen worldstone  you reach a small checkpoint near an iron door leading to the level start. From there you need to cross the water by jumping from boat to boat. Once on the otherside you need to reach the Mournful Promenade world stone without killing any Fae. If you avoid the area where Fae fighting with Dran nearby you should not meet any additional Fae on your way to the worldstone. You will see the big Warden not far from the Worldstone. Do not attack him, talk to him and he will give you the item."
+  },
+  {
+    "Id": "Ring_BurdenOfTheDeparted",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/BurdenOfTheDeparted/Ring_BurdenOfTheDeparted.Ring_BurdenOfTheDeparted_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Burden of the Departed",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_OneTrueKing",
+    "Prerequisite": "Ring_BurdenOfTheDivine",
+    "Note": "Found in the Chamber of the Faithless location on Losomn OTK. Defeat The One True King while having Burden of the Divine equipped"
+  },
+  {
+    "Id": "Ring_BurdenOfTheSciolist",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/BurdenOfTheSciolist/Ring_BurdenOfTheSciolist.Ring_BurdenOfTheSciolist_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Burden of the Sciolist",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlon Coast location on Losomn OTK, Find Misplaced Memoir quest item in Forlon Coast location on Losomn OTK, interact with it to get Bookbound Medallion quest intem. Talk to Leywise in Forlon Coast location on Losomn OTK and give him the medallion the first time he asks"
+  },
+  {
+    "Id": "Ring_CrimsonDreamstone",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/CrimsonDreamstone/Ring_CrimsonDreamstone.Ring_CrimsonDreamstone_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "Event",
+    "DropReference": "Quest_Injectable_BurningCity_DLC",
+    "Note": "Found in Ethereal Manor event that spawns in an outdoor location on Losomn. Once you approach the Dran that says \"Wake up\" and you get teleported to the Ethereal Manor location, drink Liquid Escape. You will respawn in theConsecrated Throne area and will see the item near by"
+  },
+  {
+    "Id": "Ring_DigestedHogLure",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/DigestedHogLure/Ring_DigestedHogLure.Ring_DigestedHogLure_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast loaction on Losomn OTK. Frow the Drowned Wen Worldstone go straight ahead on the first intersection to the anchor statue. Kill all the pigs nearby to get the item"
+  },
+  {
+    "Id": "Ring_DriedClayRing",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/DriedClayRing/Ring_DriedClayRing.Ring_DriedClayRing_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
+    "Id": "Ring_ElevatedRing",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/ElevatedRing/Ring_ElevatedRing.Ring_ElevatedRing_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK. On the other side of the broken bridge that starts from the Mournful Promenade Worldstone access the lift to go down, the item will be at the bottom of the ride"
+  },
+  {
+    "Id": "Ring_JewelOfTheBeholden",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/JewelOfTheBeholden/Ring_JewelOfTheBeholden.Ring_JewelOfTheBeholden_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK. Talk to One True King before talking to Nimue and kill him. Get to Nimue tower via Palace of the One True King, you need to go upstairs then drop from a balcony and then go downstairs to get access to Nimue tower. Descend the tower, talk to Nimue and get the item"
+  },
+  {
+    "Id": "Ring_LightHouseKeepersRing",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/LightHouseKeepersRing/Ring_LightHouseKeepersRing.Ring_LightHouseKeepersRing_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Lighthouse Keeper's Ring",
+    "DropType": "Event",
+    "DropReference": "Quest_SideD_Lighthouse",
+    "Note": "Found in the Derelict Lighthouse location on Losomn. First, obtain the Lighthouse Key quest item by defeating Gorecarver and Thunderpiercer aberrations. Cross the bridge to the lighthouse and go upstairs. Open a locked door upstairs with the Lighthouse Key, the item behind that door"
+  },
+  {
+    "Id": "Ring_OfferingStone",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/Offering_Stone/Ring_OfferingStone.Ring_OfferingStone_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
+    "Id": "Ring_PainlessObsidian",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/PainlessObsidian/Ring_PainlessObsidian.Ring_PainlessObsidian_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
+    "Id": "Ring_PowerComplex",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/PowerComplex/Ring_PowerComplex.Ring_PowerComplex_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "World",
+    "DropReference": "World_Nerud",
+    "Note": "Random N'Erud drop"
+  },
+  {
+    "Id": "Ring_RedRingOfDeath",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/RedRingofDeath/Ring_RedRingOfDeath.Ring_RedRingOfDeath_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Red Ring of Death",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
+    "Id": "Ring_RingOfInfiniteDamage",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/RingOfInfiniteDamage/Ring_RingOfInfiniteDamage.Ring_RingOfInfiniteDamage_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Ring of Infinite Damage",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlon Coast location on Losomn OTK, Find Misplaced Memoir quest item in Forlon Coast location on Losomn OTK, interact with it to get Bookbound Medallion quest intem. Talk to Leywise in Forlon Coast location on Losomn OTK do not give him the medallion the first time he asks, but give it to him second time he asks"
+  },
+  {
+    "Id": "Ring_RingOfTheCastaway",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/RingOfTheCastaway/Ring_RingOfTheCastaway.Ring_RingOfTheCastaway_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Ring of the Castaway",
+    "DropType": "Event",
+    "DropReference": "Quest_Injectable_Sewer_DLC",
+    "Note": "Found in a sewer location on Losomn. There will be an area with a pit in the middle and some platforms on the surroinding walls. Go all the way to the top, which will require a few jumps and find the item there"
+  },
+  {
+    "Id": "Ring_RingOfTheVain",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/RingOfTheVain/Ring_RingOfTheVain.Ring_RingOfTheVain_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Ring of the Vain",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
+    "Id": "Ring_ShadowOfMisery",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/ShadowOfMisery/Ring_ShadowOfMisery.Ring_ShadowOfMisery_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "Name": "Shadow of Misery",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
+    "Id": "Ring_ShaedStone",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/ShaedStone/Ring_ShaedStone.Ring_ShaedStone_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "Event",
+    "DropReference": "Quest_Injectable_Halls_DLC",
+    "Note": "Found in an indoor (light) location on Losomn. There will be an area with the mirror floor. Look at the mirror and search for a golden vase that appears only in the mirror. Should where there vase should be and the item drops"
+  },
+  {
+    "Id": "Ring_SoulShard",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/SoulShard/Ring_SoulShard.Ring_SoulShard_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "World",
+    "DropReference": "World_Jungle",
+    "Note": "Random Yaesha Drop"
+  },
+  {
+    "Id": "Ring_WhiteGlassBead",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/WhiteGlassBead/Ring_WhiteGlassBead.Ring_WhiteGlassBead_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Prerequisite": "Quest_Item_OTK_FeastmasterLeftovers",
+    "Note": "Obtained from Leywise in Forlorn Coast location on Losomn OTK. First to The Great Hall location on Losomn OTK and talk to the Feastmaster until he gives you Feast Master's Leftovers quest item. Then talk to Leywise and insit on him eating the Leftovers. You will receive the item as the result"
+  },
+  {
+    "Id": "Ring_WoodRing",
+    "ProfileId": "/Game/World_DLC1/Items/Trinkets/Rings/WoodRing/Ring_WoodRing.Ring_WoodRing_C",
+    "Type": "ring",
+    "World": "World_DLC1 ",
+    "DropType": "World",
+    "DropReference": "World_Fae",
+    "Note": "Random Losomn Drop"
+  },
+  {
     "Id": "Trait_AmmoReserves",
     "ProfileId": "/Game/World_Base/Items/Traits/Archetype/AmmoReserves/Trait_AmmoReserves.Trait_AmmoReserves_C",
     "Type": "trait",
@@ -4026,6 +4611,23 @@
     "DropType": "Event",
     "DropReference": "Quest_RootEarth_Zone2",
     "Note": "Found in Corrupted Harbor location on Root Earth. Complete the boiler room fight event after the first checkpoint"
+  },
+  {
+    "Id": "Trait_Affliction",
+    "ProfileId": "/Game/World_DLC1/Items/Traits/Affliction/Trait_Affliction.Trait_Affliction_C",
+    "Type": "trait",
+    "World": "World_DLC1 ",
+    "DropType": "Progression",
+    "Note": "Reach Ritualist level 10 to unlock this trait for use in any build"
+  },
+  {
+    "Id": "Trait_DarkPact",
+    "ProfileId": "/Game/World_DLC1/Items/Traits/DarkPact/Trait_DarkPact.Trait_DarkPact_C",
+    "Type": "trait",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in the Forlorn Coast location on Losomn OTK. You need to shoot three bells after which the trait is awared. The first bell in near the Drawned Wen worldstone. The second bell is in the courtyard right before the Palace of the One True King, where there is a big guy with an Axe along with a lot of hogs. To find the third bell, in Palace of the One True King, you need to go upstairs then drop from a balcony and then go downstairs. Once you transition outside hug the right  wall till you see the bell"
   },
   {
     "Id": "Weapon_CubeGun",
@@ -4963,6 +5565,79 @@
     "Note": "Crafted By Dwell from Rune Pistol weapon"
   },
   {
+    "Id": "Weapon_Anguish",
+    "ProfileId": "/Game/World_DLC1/Items/Weapons/Anguish/Weapon_Anguish.Weapon_Anguish_C",
+    "Type": "weapon",
+    "World": "World_DLC1 ",
+    "Subtype": "Hand Gun",
+    "Note": "Crafted from the Occult Vessel material. Start in an outdoor side path location on Losomn, that has the Ethereal Manor event. There will be a manor where inside you will be grabbed by a Dran saying \"wake up!\". Use Liquid Escape to die and then use the stone to go to Ward 13. Meet the Dran at the Big Door of the old Ward always exahust the dialogue. From now onward you must not die, or you will have to start over. For the locations listed below, they can be either adventure or compaign, but they need to be rolled past the DLC1 patch, as pre patch worlds won't work. You can freely re-roll them until you find a suitable one. Go to Yaesha - Red Throne, go to the right path where you spawn, down the stairs and where the chest is at the other side is another Dran. Go to Labyrinth - Fractured Ingress, from the stone go up the stairs (right or left doesn't matter) until you reach the top. There is another Dran at the middle of the bridge. Go to N'Erud - Tal'Ratha's Refuge and behind you to the left bottom side of the room there is another Dran. Go to Root Earth - Ashen Wasteland, past the train area you will see a checkpoint and another Dran. Go to the Losomn - Tormented Asylum, go straight past the nightweavers web to the other side of the hallway. At your right should be the last Dran. He will give you a consumable Dran Dream. Use the consumable to get to a locatio with the material.",
+    "CustomScript": true
+  },
+  {
+    "Id": "Weapon_Sparkfire",
+    "ProfileId": "/Game/World_DLC1/Items/Weapons/Buster/Weapon_Sparkfire.Weapon_Sparkfire_C",
+    "Type": "weapon",
+    "World": "World_DLC1 ",
+    "Name": "Sparkfire Shotgun",
+    "Subtype": "Long Gun",
+    "DropType": "Event",
+    "DropReference": "Quest_SideD_Lighthouse",
+    "Note": "Found in the Derelict Lighthouse location on Losomn. First, obtain the Lighthouse Key quest item by defeating Gorecarver and Thunderpiercer aberrations. Then inspect the key and interact with it to transform it. Cross the bridge to the lighthouse and drop to the hole on the left of the bridge, down a side path. Open a locked door at the bottom with the Lighthouse Key, the item behind that door"
+  },
+  {
+    "Id": "Weapon_RitualistScythe",
+    "ProfileId": "/Game/World_DLC1/Items/Weapons/Melee/Scythe/Scythe_Ritualist/Weapon_RitualistScythe.Weapon_RitualistScythe_C",
+    "Type": "weapon",
+    "World": "World_DLC1 ",
+    "Subtype": "Melee Weapon",
+    "DropType": "Event",
+    "DropReference": "Quest_SideD_SewerChamber",
+    "Note": "Found in the Forotten Commune location on Losomn. There are two Befouled Altars to defeat in the location, one drops Sythe Hilt quest item, and the other drops Scythe Blade. Inspect Scythe Hilt and interact with it to combine it with Scythe Blade to get the item"
+  },
+  {
+    "Id": "Weapon_Scythe",
+    "ProfileId": "/Game/World_DLC1/Items/Weapons/Melee/Scythe/Scythe/Weapon_Scythe.Weapon_Scythe_C",
+    "Type": "weapon",
+    "World": "World_DLC1 ",
+    "Name": "Steel Scythe",
+    "Subtype": "Melee Weapon",
+    "DropType": "Vendor",
+    "DropReference": "Brabus",
+    "Note": "Buy from Brabus at Ward 13"
+  },
+  {
+    "Id": "Weapon_AbyssalHook",
+    "ProfileId": "/Game/World_DLC1/Items/Weapons/Melee/Special/AbyssalHook/Weapon_AbyssalHook.Weapon_AbyssalHook_C",
+    "Type": "weapon",
+    "World": "World_DLC1 ",
+    "Subtype": "Melee Weapon",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in the Forlorn Coast location on Losomn OTK. From the Drowned Wen world stone go straight ahead at the first intersection to reach an anchor statue, turn right, descend into the well and follow a short path. Once you emerge to the sewers take a ladder directly to your left. Kill the manticora, and find the item in the next room"
+  },
+  {
+    "Id": "Weapon_Wrathbringer",
+    "ProfileId": "/Game/World_DLC1/Items/Weapons/Melee/Special/Wrathbringer/Weapon_Wrathbringer.Weapon_Wrathbringer_C",
+    "Type": "weapon",
+    "World": "World_DLC1 ",
+    "Material": "Material_TormentorsPommel",
+    "Subtype": "Melee Weapon",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_OneTrueKing",
+    "Note": "Crafted from Tormentor's Pommel, which is obtained by defeating One True King in Chamber of the Faithless location on Losomn OTK after destroying his weapon at least once"
+  },
+  {
+    "Id": "Weapon_Monarch",
+    "ProfileId": "/Game/World_DLC1/Items/Weapons/Monarch/Blueprints/Weapon_Monarch.Weapon_Monarch_C",
+    "Type": "weapon",
+    "World": "World_DLC1 ",
+    "Material": "Material_AgonySpike",
+    "Subtype": "Long Gun",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_OneTrueKing",
+    "Note": "Crafted from Tormentor's Pommel, which is obtained by defeating One True King in Chamber of the Faithless location on Losomn OTK defore destroying his weapon even once"
+  },
+  {
     "Id": "Engram_Alchemist",
     "ProfileId": "/Game/World_Base/Items/Archetypes/Alchemist/Engram_Alchemist.Engram_Alchemist_C",
     "Type": "engram",
@@ -5073,6 +5748,15 @@
     "DropType": "Vendor",
     "DropReference": "Blood Moon Altar",
     "Note": "Buy Faded Grimoire from Blood Moon Altar in an overworld location on Yaesha"
+  },
+  {
+    "Id": "Engram_Ritualist",
+    "ProfileId": "/Game/World_DLC1/Items/Archetypes/Ritualist/Engram/Engram_Ritualist.Engram_Ritualist_C",
+    "Type": "engram",
+    "World": "World_DLC1 ",
+    "DropType": "Location",
+    "DropReference": "Forlorn Coast",
+    "Note": "Found in Forlorn Coast location on Losomn OTK, From the first checkpoint after the Drowned Wen world stone (the checkpoint is near the iron door, that when unlocked leads back to the start of Forlorn Coast) world stone follow the boats until you see a breach in the wall, follow a short path inside and see a witch perofrming a ritual on a pig. The Ragged Poppet will be near the witch"
   },
   {
     "Id": "Quest_Item_Matchbook",
@@ -5478,6 +6162,113 @@
     "DropReference": "Quest_Boss_NerudGuardian"
   },
   {
+    "Id": "Quest_Item_DLCInjectable_BloodyMedallion_Stage1",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Injectable_BurningCity_DLC/Items/Quest_Item_DLCInjectable_BloodyMedallion/Quest_Item_DLCInjectable_BloodyMedallion_Stage1.Quest_Item_DLCInjectable_BloodyMedallion_Stage1_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Strange Talisman"
+  },
+  {
+    "Id": "Quest_Item_DLCInjectable_BloodyMedallion_Stage2",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Injectable_BurningCity_DLC/Items/Quest_Item_DLCInjectable_BloodyMedallion/Quest_Item_DLCInjectable_BloodyMedallion_Stage2.Quest_Item_DLCInjectable_BloodyMedallion_Stage2_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Bloody Talisman"
+  },
+  {
+    "Id": "Quest_Item_DLCInjectable_BloodyMedallion_Stage3",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Injectable_BurningCity_DLC/Items/Quest_Item_DLCInjectable_BloodyMedallion/Quest_Item_DLCInjectable_BloodyMedallion_Stage3.Quest_Item_DLCInjectable_BloodyMedallion_Stage3_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Bloody Talisman"
+  },
+  {
+    "Id": "Quest_Item_DLCInjectable_BloodyMedallion_Stage4",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Injectable_BurningCity_DLC/Items/Quest_Item_DLCInjectable_BloodyMedallion/Quest_Item_DLCInjectable_BloodyMedallion_Stage4.Quest_Item_DLCInjectable_BloodyMedallion_Stage4_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Bloody Talisman"
+  },
+  {
+    "Id": "Quest_Item_GardenMaze_MausoleumMedallionKey",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_SideD_GardenMaze/Items/Quest_Item_GardenMaze_MausoleumMedallionKey/Quest_Item_GardenMaze_MausoleumMedallionKey.Quest_Item_GardenMaze_MausoleumMedallionKey_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Memoriam Medallion Key",
+    "DropType": "Event",
+    "DropReference": "Quest_SideD_GardenMaze"
+  },
+  {
+    "Id": "Quest_Item_Lighthouse_KeyA",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_SideD_Lighthouse/Items/Quest_Item_Lighthouse_Keys/Quest_Item_Lighthouse_KeyA.Quest_Item_Lighthouse_KeyA_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Lighthouse Key"
+  },
+  {
+    "Id": "Quest_Item_Lighthouse_KeyB",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_SideD_Lighthouse/Items/Quest_Item_Lighthouse_Keys/Quest_Item_Lighthouse_KeyB.Quest_Item_Lighthouse_KeyB_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Lighthouse Key"
+  },
+  {
+    "Id": "Quest_Item_SewerChamber_ScythePiece1",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_SideD_SewerChamber/Items/Quest_Item_SewerChamber_ScythePieces/Quest_Item_SewerChamber_ScythePiece1.Quest_Item_SewerChamber_ScythePiece1_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Scythe Blade"
+  },
+  {
+    "Id": "Quest_Item_SewerChamber_ScythePiece2",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_SideD_SewerChamber/Items/Quest_Item_SewerChamber_ScythePieces/Quest_Item_SewerChamber_ScythePiece2.Quest_Item_SewerChamber_ScythePiece2_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Scythe Hilt"
+  },
+  {
+    "Id": "Quest_Item_OTK_FeastmasterLeftovers",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Story_OneTrueKing/Items/Quest_Item_OTK_FeastmasterLeftovers/Quest_Item_OTK_FeastmasterLeftovers.Quest_Item_OTK_FeastmasterLeftovers_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Feast Master's Leftovers"
+  },
+  {
+    "Id": "Quest_Item_OTK_NimueDeathItem",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Story_OneTrueKing/Items/Quest_Item_OTK_NimueDeathItem/Quest_Item_OTK_NimueDeathItem.Quest_Item_OTK_NimueDeathItem_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Rod of Retribution"
+  },
+  {
+    "Id": "Quest_Item_OTK_NimuesBloodWard",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Story_OneTrueKing/Items/Quest_Item_OTK_NimuesWard/Quest_Item_OTK_NimuesBloodWard.Quest_Item_OTK_NimuesBloodWard_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Nimue’s Blood-Marred Vow"
+  },
+  {
+    "Id": "Quest_Item_OTK_NimuesWard",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Story_OneTrueKing/Items/Quest_Item_OTK_NimuesWard/Quest_Item_OTK_NimuesWard.Quest_Item_OTK_NimuesWard_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Nimue's Vow"
+  },
+  {
+    "Id": "Quest_Item_OTK_ScribeMedallionKey",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Story_OneTrueKing/Items/Quest_Item_OTK_ScribeMedallionKey/Quest_Item_OTK_ScribeMedallionKey.Quest_Item_OTK_ScribeMedallionKey_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Bookbound Medallion"
+  },
+  {
+    "Id": "Quest_Item_OTK_ScribeTome",
+    "ProfileId": "/Game/World_DLC1/Quests/Quest_Story_OneTrueKing/Items/Quest_Item_OTK_ScribeTome/Quest_Item_OTK_ScribeTome.Quest_Item_OTK_ScribeTome_C",
+    "Type": "quest_item",
+    "World": "World_DLC1 ",
+    "Name": "Misplaced Memoir"
+  },
+  {
     "Id": "Material_RootGanglia",
     "ProfileId": "/Game/World_Base/Items/Materials/RootGanglia/Material_RootGanglia.Material_RootGanglia_C",
     "Type": "material",
@@ -5823,6 +6614,13 @@
     "Name": "Faded Grimoire"
   },
   {
+    "Id": "Material_Engram_Ritualist",
+    "ProfileId": "/Game/World_DLC1/Items/Archetypes/Ritualist/Engram/Material_Engram_Ritualist.Material_Engram_Ritualist_C",
+    "Type": "material",
+    "World": "World_DLC1 ",
+    "Name": "Ragged Poppet"
+  },
+  {
     "Id": "Material_ShinningEssenceEcho",
     "ProfileId": "/Game/World_Nerud/Items/Materials/Boss/ShinningEssenceEcho/Material_ShinningEssenceEcho.Material_ShinningEssenceEcho_C",
     "Type": "material",
@@ -5830,6 +6628,43 @@
     "Name": "Shining Essence Echo",
     "DropType": "Event",
     "DropReference": "Quest_Boss_TalRatha"
+  },
+  {
+    "Id": "Material_HexWreath",
+    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/Miniboss/HexWreath/Material_HexWreath.Material_HexWreath_C",
+    "Type": "material",
+    "World": "World_DLC1 "
+  },
+  {
+    "Id": "Material_WretchedSkull",
+    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/Miniboss/WretchedSkull/Material_WretchedSkull.Material_WretchedSkull_C",
+    "Type": "material",
+    "World": "World_DLC1 "
+  },
+  {
+    "Id": "Material_CrematedSoulAsh",
+    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/World/CrematedSoulAsh/Material_CrematedSoulAsh.Material_CrematedSoulAsh_C",
+    "Type": "material",
+    "World": "World_DLC1 "
+  },
+  {
+    "Id": "Material_OccultVessel",
+    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/World/OccultVessel/Material_OccultVessel.Material_OccultVessel_C",
+    "Type": "material",
+    "World": "World_DLC1 "
+  },
+  {
+    "Id": "Material_AgonySpike",
+    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/WorldBoss/AgonySpike/Material_AgonySpike.Material_AgonySpike_C",
+    "Type": "material",
+    "World": "World_DLC1 "
+  },
+  {
+    "Id": "Material_TormentorsPommel",
+    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/WorldBoss/TormentorsPommel/Material_TormentorsPommel.Material_TormentorsPommel_C",
+    "Type": "material",
+    "World": "World_DLC1 ",
+    "Name": "Tormentor's Pommel"
   },
   {
     "Id": "3E4C2F02-472BB871-BE76D7A8-E869D8C2",
@@ -6142,6 +6977,11 @@
     "Name": "Revive Allies - No Soldier Left Behind"
   },
   {
+    "Id": "1856B8B3-49AA2901-48AE90B8-B3C89533",
+    "Type": "challenge",
+    "Name": "Die 10 Times - Die 10 Times to Bosses on Apocalypse"
+  },
+  {
     "Id": "95D6799E-449077F7-0969C7AB-8CD29A2C",
     "Type": "achievement",
     "Name": "Blue Goddess - Meet Nimue"
@@ -6392,6 +7232,31 @@
     "Name": "Transmutate - Upgrade a Weapon Mutator to +10"
   },
   {
+    "Id": "542BE490-4FDD1707-6DED76B3-B36F6B35",
+    "Type": "achievement",
+    "Name": "Regicide - Defeat the One True King"
+  },
+  {
+    "Id": "BC708029-4DF5524B-43F4D9BA-08ABF269",
+    "Type": "achievement",
+    "Name": "A Foul Feast - Deliver Leftovers to a Reluctant Recipient "
+  },
+  {
+    "Id": "CF93A734-4E89E4BF-87E4DE97-16E547D6",
+    "Type": "achievement",
+    "Name": "Succession - Discover the One True Ending"
+  },
+  {
+    "Id": "F0A803CF-4C3BAC9A-DE0CE0AA-A2BCC601",
+    "Type": "achievement",
+    "Name": "Master of the Dark Arts - Acquire the Ritualist Archetype"
+  },
+  {
+    "Id": "C6796EC7-4BB35105-23CA4380-EA9E3124",
+    "Type": "achievement",
+    "Name": "You Shall Pass - Acquire a Reward from the Bridge Warden "
+  },
+  {
     "Id": "Quest_Boss_Faelin",
     "Type": "event",
     "World": "World_Fae",
@@ -6430,6 +7295,14 @@
     "Name": "Nightweaver",
     "Subtype": "boss",
     "EventLocation": "The Tormented Asylum"
+  },
+  {
+    "Id": "Quest_Boss_OneTrueKing",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Name": "The One True King",
+    "Subtype": "boss",
+    "EventLocation": "Chamber of the Faithless"
   },
   {
     "Id": "Quest_Boss_Ravager",
@@ -6658,6 +7531,27 @@
     "Subtype": "injectable"
   },
   {
+    "Id": "Quest_Injectable_BurningCity_DLC",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Name": "Ethereal Manor",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Sewer_DLC",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Name": "Traitor's Pit",
+    "Subtype": "injectable"
+  },
+  {
+    "Id": "Quest_Injectable_Halls_DLC",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Name": "Mirror Floor",
+    "Subtype": "injectable"
+  },
+  {
     "Id": "Quest_Miniboss_Abomination",
     "Type": "event",
     "World": "World_Nerud",
@@ -6752,6 +7646,22 @@
     "Name": "Shrewd",
     "Subtype": "miniboss",
     "EventLocation": "The Expanding Glade"
+  },
+  {
+    "Id": "Quest_Miniboss_Witch",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Name": "Sunken Witch",
+    "Subtype": "miniboss",
+    "EventLocation": "Sunken Haunt"
+  },
+  {
+    "Id": "Quest_Miniboss_Impaler",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Name": "Bruin, Blade of The King",
+    "Subtype": "miniboss",
+    "EventLocation": "Glistering Cloister"
   },
   {
     "Id": "Quest_OverworldPOI_ClockTower",
@@ -6965,5 +7875,574 @@
     "World": "World_Jungle",
     "Subtype": "dungeon",
     "EventLocation": "Forgotten Field"
+  },
+  {
+    "Id": "Quest_SideD_GardenMaze",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Subtype": "dungeon",
+    "EventLocation": "Pathway of the Fallen"
+  },
+  {
+    "Id": "Quest_SideD_Lighthouse",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Subtype": "dungeon",
+    "EventLocation": "Derelict Lighthouse"
+  },
+  {
+    "Id": "Quest_SideD_SewerChamber",
+    "Type": "event",
+    "World": "World_DLC1",
+    "Hardcore": "0",
+    "Subtype": "dungeon",
+    "EventLocation": "The Forgotten Commune"
+  },
+  {
+    "Id": "Char_Forgotten_Jumper_Aberration",
+    "Type": "aberration",
+    "World": "World_DLC1",
+    "Name": "Cursed Wretch",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_SewerChamber"
+  },
+  {
+    "Id": "Char_DLC1_Chainsaw_Aberration",
+    "Type": "aberration",
+    "World": "World_DLC1",
+    "Name": "Gorecarver",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_Lighthouse"
+  },
+  {
+    "Id": "Char_Dran_M_Shotgun_Aberration",
+    "Type": "aberration",
+    "World": "World_DLC1",
+    "Name": "Thunderpiercer",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_Lighthouse"
+  },
+  {
+    "Id": "Char_Fae_Knight_DLC_Aberration",
+    "Type": "aberration",
+    "World": "World_DLC1",
+    "Name": "Wraithliege",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_GardenMaze"
+  },
+  {
+    "Id": "Char_Forgotten_Balloon_Aberration",
+    "Type": "aberration",
+    "World": "World_DLC1",
+    "Name": "Dire Fiend",
+    "SpawnType": "Location",
+    "SpawnReference": "Forlorn Coast"
+  },
+  {
+    "Id": "Char_Pig_DLC1_Ritual_Aberration",
+    "Type": "aberration",
+    "World": "World_DLC1",
+    "Name": "Little Gorge",
+    "SpawnType": "Location",
+    "SpawnReference": "Forlorn Coast"
+  },
+  {
+    "Id": "Char_Fae_Penitent_Variant_Aberration",
+    "Type": "aberration",
+    "World": "World_DLC1",
+    "Name": "Mangled Atoner",
+    "SpawnType": "Location",
+    "SpawnReference": "Forlorn Coast"
+  },
+  {
+    "Id": "Char_Fae_Penitent_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Arcanum Diviner",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Fae_Bloat_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Blightspawn",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_M_Torch_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Emberkeeper",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_F_Torch_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Emberwatcher",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_M_Thrower_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Flintblade Marauder",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_F_Thrower_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Flintblade Prowler",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_M_Rifle_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Grimshot",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Fae_Soldier_Spear_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Highborn Stalker",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Fae_Knight_Golden_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Maleficent Glimmer",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_Nurse_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Malpractitioner",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_F_Rifle_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Mournshot ",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_F_Bomber_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Scorchslinger",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_M_Bomber_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Scorchstrike",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Fae_Archon_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Seer of the Veil",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Fae_Soldier_Spear_Armored_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Shadowrend Warden",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Fae_Soldier_Spear_Flying_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Sliverwing Marauder",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_Immolator_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Tortured Flame",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_M_Melee_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Vilethorn Brawler",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Dran_F_Melee_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Vilethorn Scrapper",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Bone_Harvester_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Barghest the Vile",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_CharnelHouse"
+  },
+  {
+    "Id": "Char_Fae_Soldier_Royal_Archer_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Firth : The Oathkeeper",
+    "SpawnType": "Location",
+    "SpawnReference": "Malefic Palace"
+  },
+  {
+    "Id": "Char_Dran_Chainsaw_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Ripsaw",
+    "SpawnType": "Location",
+    "SpawnReference": "Morrow Parish"
+  },
+  {
+    "Id": "Fae_Pig_Beast_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "Gorge",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Oink"
+  },
+  {
+    "Id": "Char_Fae_Painless_Executioner_Aberration",
+    "Type": "aberration",
+    "World": "World_Fae",
+    "Name": "The Executioner",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_GoldenHall_AboveBelow"
+  },
+  {
+    "Id": "Char_Root_Pan_Brute_Armored_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Deathsower",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Cultist_Crypt_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Deceitful Augur ",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Infected_Jungle_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Desolate Stalker",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Pan_Brute_Impaler_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Goreglut",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Flyer_TeleportVariant_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Lichwing",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Zombie_Exploder_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Plaguebringer",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Wraith_Mountains_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Ruinweaver",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Cultist_Mountains_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Sorrow Weaver",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Horror_Jungle_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Squalid Creeper",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Flyer_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Talonscythe",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Wraith_Jungle_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Veilstalker",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Horror_Ziggurat_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Venomspine",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Hollow_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Voidmaw",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Root_Infected_Jungle_Variant_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Defiler",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_WailingField"
+  },
+  {
+    "Id": "Char_Root_Zombie_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Fester",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_HiddenMaze"
+  },
+  {
+    "Id": "Char_Root_Flyer_Cub_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Fester Flier",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_TheLament"
+  },
+  {
+    "Id": "Char_Root_Ray_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Mantagora",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_TheTangle"
+  },
+  {
+    "Id": "Char_Nemesis_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Wither",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_TheLament"
+  },
+  {
+    "Id": "Char_Root_Hunter_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Atrophy",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Ziggurat_Library"
+  },
+  {
+    "Id": "Char_Root_Brute_Aberration",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Rot",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Crypt_Sarcophagus"
+  },
+  {
+    "Id": "Char_Root_Hunter_Aberration_Split",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "Rot Stalker",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Ziggurat_Library"
+  },
+  {
+    "Id": "Char_Pan_Bowman_Aberration_BrokenTomb2",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "The Gnarled Archer",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Island_BrokenTomb"
+  },
+  {
+    "Id": "Char_Pan_Bowman_Aberration_BrokenTomb1",
+    "Type": "aberration",
+    "World": "World_Jungle",
+    "Name": "The Weald Stalker",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Island_BrokenTomb"
+  },
+  {
+    "Id": "Char_Labyrinth_Brute_Aberration",
+    "Type": "aberration",
+    "World": "World_Labyrinth",
+    "Name": "Bastion",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Abomination_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Abyssal Dreadnought",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Barnacle_Hatchery_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Befouled Larva",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_CustodianEye_Stasis_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "C.E. Sigma",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_CustodianEye_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "C.E. Theta",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Engineering_Drone_Variant_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "E.D.V.A.",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Sentinel_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "S.D. 0C1",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_ServiceDrone_Aberration_Repair",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "S.D.R. 17",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Phantom_Stasis_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Severed Husk",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Phantom_Overworld_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Soulshrieker",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Phantom_Towers_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Void Illusion",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Barnacle_Base_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Voidmite",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_Nerud_Crab_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Wretched Crawler",
+    "SpawnType": "World"
+  },
+  {
+    "Id": "Char_EngineeringDrone_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "E.D. Alpha",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_TowerHeists"
+  },
+  {
+    "Id": "Char_Drzyr_Hollowed_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Fetid Corpse",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_TheDreamlessSleep"
+  },
+  {
+    "Id": "Char_Nerud_Sentinel_Heavy_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "S.D. 0A7",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_Extermination"
+  },
+  {
+    "Id": "Char_Eng_Drone_SmallDrone_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "T.T.D. 23",
+    "SpawnType": "SideD",
+    "SpawnReference": "Quest_SideD_TowerHeists"
+  },
+  {
+    "Id": "Char_Drzyr_Hollowed_Psyker_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "Restless Spirit",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Towers_RemainsBelow"
+  },
+  {
+    "Id": "Char_Nerud_Barnacle_Big_Aberration",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "The Progeny",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Underworld_StoreRoom"
+  },
+  {
+    "Id": "Char_ServiceDrone_Aberration_Welder",
+    "Type": "aberration",
+    "World": "World_Nerud",
+    "Name": "W.D. 109",
+    "SpawnType": "Injectable",
+    "SpawnReference": "Quest_Injectable_Underworld_LurkerVents"
   }
 ]
