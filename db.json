@@ -6631,13 +6631,13 @@
   },
   {
     "Id": "Material_HexWreath",
-    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/Miniboss/HexWreath/Material_HexWreath.Material_HexWreath_C",
+    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/MiniBoss/HexWreath/Material_HexWreath.Material_HexWreath_C",
     "Type": "material",
     "World": "World_DLC1 "
   },
   {
     "Id": "Material_WretchedSkull",
-    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/Miniboss/WretchedSkull/Material_WretchedSkull.Material_WretchedSkull_C",
+    "ProfileId": "/Game/World_DLC1/Items/CraftingMaterial/MiniBoss/WretchedSkull/Material_WretchedSkull.Material_WretchedSkull_C",
     "Type": "material",
     "World": "World_DLC1 "
   },
