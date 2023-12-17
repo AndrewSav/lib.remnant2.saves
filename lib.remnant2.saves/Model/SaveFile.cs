@@ -49,7 +49,6 @@ public class SaveFile
     public static SaveFile Read(string path, Options? opts = null)
     {
         byte[] b = Archive.DecompressSave(path);
-        File.WriteAllBytes("debug.dec",b);
         Reader r = new(b);
         return new SaveFile(r,opts);
     }
