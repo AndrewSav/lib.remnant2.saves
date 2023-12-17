@@ -2462,7 +2462,7 @@
   },
   {
     "Id": "MetaGem_FetidWounds",
-    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/FetidWounds/MetaGem_FetidWounds.MetaGem_FetidWounds_С",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/FetidWounds/MetaGem_FetidWounds.MetaGem_FetidWounds_C",
     "Type": "mutator",
     "World": "World_DLC1 ",
     "Subtype": "Ranged",
@@ -2483,7 +2483,7 @@
   },
   {
     "Id": "MetaGem_Prophecy",
-    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/Prophecy/MetaGem_Prophecy.MetaGem_Prophecy_С",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/Prophecy/MetaGem_Prophecy.MetaGem_Prophecy_C",
     "Type": "mutator",
     "World": "World_DLC1 ",
     "Aberration": "Wraithliege",
@@ -2494,7 +2494,7 @@
   },
   {
     "Id": "MetaGem_Sleeper",
-    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/Sleeper/MetaGem_Sleeper.MetaGem_Sleeper_С",
+    "ProfileId": "/Game/World_DLC1/Items/Gems/Ranged/Sleeper/MetaGem_Sleeper.MetaGem_Sleeper_C",
     "Type": "mutator",
     "World": "World_DLC1 ",
     "Aberration": "Gorecarver and Thunderpiercer",
