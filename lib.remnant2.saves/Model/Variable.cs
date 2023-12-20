@@ -9,13 +9,13 @@ public class Variable : ModelBase
     public required string Type;
     public object? Value;
 
-    private readonly string[] _varTypeNames = {
+    private readonly string[] _varTypeNames = [
         "None",
         "BoolProperty",
         "IntProperty",
         "FloatProperty",
         "NameProperty"
-    };
+    ];
 
     public Variable()
     {

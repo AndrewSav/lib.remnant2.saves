@@ -25,13 +25,13 @@ public class PersistenceContainer : ModelBase
 
         r.Position = indexOffset;
         uint infoCount = r.Read<uint>();
-        List<FInfo> actorInfo = new();
+        List<FInfo> actorInfo = [];
         for (uint i = 0; i < infoCount; i++)
         {
             actorInfo.Add(r.Read<FInfo>());
         }
 
-        Destroyed = new();
+        Destroyed = [];
         uint destroyedCount = r.Read<uint>();
         for (uint i = 0; i < destroyedCount; i++)
         {
@@ -39,7 +39,7 @@ public class PersistenceContainer : ModelBase
         }
         ReadLength = r.Position + containerOffset - ReadOffset;
 
-        Actors = new();
+        Actors = [];
         for (int index = 0; index < actorInfo.Count; index++)
         {
             FInfo info = actorInfo[index];
@@ -68,7 +68,7 @@ public class PersistenceContainer : ModelBase
         long patchOffset = (int)w.Position;
         w.Write(0); // index offset, unknown yet, will patch later
         w.Write(0); // dynamic offset, unknown yet, will patch later
-        List<FInfo> actorInfo = new();
+        List<FInfo> actorInfo = [];
         foreach (KeyValuePair<ulong, Actor> a in Actors)
         {
             Writer actorWriter = new();

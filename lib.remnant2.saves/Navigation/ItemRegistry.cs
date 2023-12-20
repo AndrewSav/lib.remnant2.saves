@@ -21,7 +21,7 @@ internal class ItemRegistry
         Dictionary<string, List<Node>> byType = _registry[type];
         if (!byType.ContainsKey(name))
         {
-            byType[name] = new();
+            byType[name] = [];
         }
         byType[name].Add(item);
         return true;
@@ -32,7 +32,7 @@ internal class ItemRegistry
         string type = typeof(T).Name;
         if (!_registry.ContainsKey(type)) throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
         Dictionary<string, List<Node>> byType = _registry[type];
-        return !byType.ContainsKey(name) ? new() : byType[name].Select(x => (T)x.Object).ToList();
+        return !byType.ContainsKey(name) ? [] : byType[name].Select(x => (T)x.Object).ToList();
     }
 
     public List<T> GetAll<T>() where T : ModelBase

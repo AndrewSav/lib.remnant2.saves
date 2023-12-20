@@ -41,7 +41,7 @@ public class Node
     {
         _navigator = navigator;
         _object = obj;
-        Path = new() { new() { Name = GetName(obj), Type = obj.GetType().Name } };
+        Path = [new() { Name = GetName(obj), Type = obj.GetType().Name }];
     }
 
     public Node(ModelBase obj, int? index, Node parent, Navigator navigator)
@@ -49,7 +49,7 @@ public class Node
         _navigator = navigator;
         _object = obj;
         Parent = parent;
-        Path = new(parent.Path) { new() { Name = GetName(obj), Type = obj.GetType().Name, Index = index } };
+        Path = [..parent.Path, new() { Name = GetName(obj), Type = obj.GetType().Name, Index = index }];
     }
 
     private static string GetName(ModelBase item)

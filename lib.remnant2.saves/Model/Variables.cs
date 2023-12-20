@@ -17,7 +17,7 @@ public class Variables : ModelBase
     public Variables(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
-        Items = new();
+        Items = [];
         Name = new FName(r, ctx.NamesTable);
         Unknown = r.Read<ulong>();
         if (Unknown != 0)

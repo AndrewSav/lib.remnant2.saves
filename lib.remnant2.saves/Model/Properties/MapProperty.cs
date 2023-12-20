@@ -19,7 +19,7 @@ public class MapProperty : ModelBase
     public MapProperty(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
-        Values = new List<KeyValuePair<object, object>>();
+        Values = [];
         KeyType = new(r, ctx.NamesTable);
         ValueType = new(r, ctx.NamesTable);
         Unknown = r.ReadBytes(5);

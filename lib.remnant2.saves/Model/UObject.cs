@@ -71,7 +71,7 @@ public class UObject : ModelBase
 
     public static List<Component> ReadComponents(Reader r, SerializationContext ctx)
     {
-        List<Component> result = new();
+        List<Component> result = [];
         uint componentCount = r.Read<uint>();
         for (int i = 0; i < componentCount; i++)
         {

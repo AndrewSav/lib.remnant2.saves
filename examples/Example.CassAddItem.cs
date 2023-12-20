@@ -48,8 +48,8 @@ internal partial class Example
             },
             Properties = new()
             {
-                Properties = new()
-                {
+                Properties =
+                [
                     new("Quantity", new()
                     {
                         Name = FName.Create("Quantity", cass.Archive.NamesTable),
@@ -59,7 +59,7 @@ internal partial class Example
                         Index = 0,
                         NoRaw = 0
                     })
-                }
+                ]
             }
         };
 
@@ -70,8 +70,8 @@ internal partial class Example
 
         PropertyBag newItemBag = new()
         {
-            Properties = new()
-            {
+            Properties =
+            [
                 new("ID", new()
                 {
                     Name = FName.Create("ID", cass.Archive.NamesTable),
@@ -81,18 +81,20 @@ internal partial class Example
                     Index = 0,
                     NoRaw = 0
                 }),
+
                 new("ItemBP", new()
                 {
                     Name = FName.Create("ItemBP", cass.Archive.NamesTable),
                     Type = FName.Create("ObjectProperty", cass.Archive.NamesTable),
                     Value = new ObjectProperty
                     {
-                      ObjectIndex = itemObject.ObjectIndex
+                        ObjectIndex = itemObject.ObjectIndex
                     },
                     Size = 4,
                     Index = 0,
                     NoRaw = 0
                 }),
+
                 new("New", new()
                 {
                     Name = FName.Create("New", cass.Archive.NamesTable),
@@ -102,6 +104,7 @@ internal partial class Example
                     Index = 0,
                     NoRaw = 0
                 }),
+
                 new("Favorited", new()
                 {
                     Name = FName.Create("Favorited", cass.Archive.NamesTable),
@@ -111,6 +114,7 @@ internal partial class Example
                     Index = 0,
                     NoRaw = 0
                 }),
+
                 new("Hidden", new()
                 {
                     Name = FName.Create("Hidden", cass.Archive.NamesTable),
@@ -120,6 +124,7 @@ internal partial class Example
                     Index = 0,
                     NoRaw = 0
                 }),
+
                 new("EquipmentSlotIndex", new()
                 {
                     Name = FName.Create("EquipmentSlotIndex", cass.Archive.NamesTable),
@@ -129,6 +134,7 @@ internal partial class Example
                     Index = 0,
                     NoRaw = 0
                 }),
+
                 new("InstanceData", new()
                 {
                     Name = FName.Create("InstanceData", cass.Archive.NamesTable),
@@ -140,8 +146,9 @@ internal partial class Example
                     Size = 4,
                     Index = 0,
                     NoRaw = 0
-                }),
-            }
+                })
+
+            ]
         };
 
         PropertyBag inventory = navigator.FindComponents("Inventory", cass)[0].Properties!;

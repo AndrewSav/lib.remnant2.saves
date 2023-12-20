@@ -23,13 +23,13 @@ internal partial class Example
         Console.WriteLine($"You have {count} characters");
 
         int activeIndex = (int)activeProp.Value.Value!;
-        string[] numbers = {
+        string[] numbers = [
             "first",
             "second",
             "third",
             "fourth",
             "fifth"
-        };
+        ];
 
         Console.WriteLine($"Your active character's index is {activeIndex}, which means it's the {numbers[activeIndex]} character on the screen");
 

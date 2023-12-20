@@ -113,7 +113,7 @@ internal partial class Example
         if (slot1 != null)
         {
             string name = navigator.Lookup(slot1).Path[^3].Name;
-            string world = worlds[Regex.Match(name, @"Quest_AdventureMode_(\w+)_C").Groups[1].Value];
+            string world = worlds[RegexAdventureMode().Match(name).Groups[1].Value];
             PrintMode(navigator, slot1, "adventure", $" ({world})");
         }
         else
@@ -213,7 +213,7 @@ internal partial class Example
         string category = "";
         Queue<Actor> queue = new();
         queue.Enqueue(start);
-        List<string> seen = new();
+        List<string> seen = [];
         while (queue.Count > 0)
         {
             Actor current = queue.Dequeue();
@@ -228,8 +228,8 @@ internal partial class Example
             ArrayStructProperty links = pb["ZoneLinks"].Get<ArrayStructProperty>();
             Console.WriteLine(label);
 
-            List<string> waypoints = new();
-            List<string> connectsTo = new();
+            List<string> waypoints = [];
+            List<string> connectsTo = [];
 
             foreach (object? o in links.Items)
             {
@@ -326,14 +326,13 @@ internal partial class Example
 
     private static void PrintMode(Navigator navigator, Property slot, string mode, string world = "")
     {
-        string[] difficulties =
-        {
+        string[] difficulties = [
             "None",
             "Survivor",
             "Veteran",
             "Nightmare",
             "Apocalypse"
-        };
+        ];
 
         TimeSpan tp2 = slot.GetParent<PropertyBag>(navigator)["PlayTime"].Get<TimeSpan>();
         string timePlayedString2 = $"{(int)tp2.TotalHours}:{tp2.Minutes:D2}:{tp2.Seconds:D2}";
@@ -373,4 +372,7 @@ internal partial class Example
             }
         }
     }
+
+    [GeneratedRegex(@"Quest_AdventureMode_(\w+)_C")]
+    private static partial Regex RegexAdventureMode();
 }

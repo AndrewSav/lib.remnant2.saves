@@ -14,7 +14,7 @@ public class PropertyBag : ModelBase
     public PropertyBag(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
-        Properties = new();
+        Properties = [];
         while (true)
         {
             Property p = new(r, ctx);
