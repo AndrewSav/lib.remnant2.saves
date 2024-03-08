@@ -688,6 +688,7 @@
     "Difficulty": "Apocalypse",
     "DropType": "Progression",
     "Note": "Die from a boss on apocalypse difficulty 10 times",
+    "Undetectable": true,
     "Challange": "1856B8B3-49AA2901-48AE90B8-B3C89533"
   },
   {
@@ -1520,7 +1521,8 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Survivor Overcoat",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Armor_Gloves_Survivor",
@@ -1528,7 +1530,8 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Survivor Gloves",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Armor_Legs_Survivor",
@@ -1536,7 +1539,8 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Survivor Leggings",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Armor_Body_FaeRoyalGuard",
@@ -3040,7 +3044,7 @@
     "Type": "ring",
     "World": "World_Fae",
     "DropType": "Event",
-    "DropReference": "Quest_Injectable_GoldenHall_BlackAndWhite",
+    "DropReference": "Quest_Injectable_GoldenHall_BlackandWhite",
     "Note": "Found in a indoor location on Losomn. In the room with five torches on both sides make all the torches blue. When you shoot or melee a torch it and adjacent torch(es) change colour"
   },
   {
@@ -3343,7 +3347,7 @@
     "Type": "ring",
     "World": "World_Fae",
     "DropType": "Event",
-    "DropReference": "Quest_Injectable_GoldenHall_BlackAndWhite",
+    "DropReference": "Quest_Injectable_GoldenHall_BlackandWhite",
     "Note": "Found in an indoor location on Losomn. In the room with five torches on both sides make all the torches white. When you shoot or melee a torch it and adjacent torch(es) change colour"
   },
   {
@@ -4560,14 +4564,16 @@
     "ProfileId": "/Game/World_Base/Items/Traits/Core/Endurance/Trait_Endurance.Trait_Endurance_C",
     "Type": "trait",
     "World": "World_Base",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Expertise",
     "ProfileId": "/Game/World_Base/Items/Traits/Core/Expertise/Trait_Expertise.Trait_Expertise_C",
     "Type": "trait",
     "World": "World_Base",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Fitness",
@@ -4677,14 +4683,16 @@
     "ProfileId": "/Game/World_Base/Items/Traits/Core/Spirit/Trait_Spirit.Trait_Spirit_C",
     "Type": "trait",
     "World": "World_Base",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Vigor",
     "ProfileId": "/Game/World_Base/Items/Traits/Core/Vigor/Trait_Vigor.Trait_Vigor_C",
     "Type": "trait",
     "World": "World_Base",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Wayfarer",
@@ -4849,7 +4857,8 @@
     "World": "World_Base",
     "Name": "Rusty Repeater",
     "Subtype": "Hand Gun",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Weapon_Repeater",
@@ -5149,7 +5158,8 @@
     "World": "World_Base",
     "Name": "Rusty Lever Action",
     "Subtype": "Long Gun",
-    "DropType": "Start"
+    "DropType": "Start",
+    "Undetectable": true
   },
   {
     "Id": "Weapon_LeverAction",
@@ -6761,152 +6771,242 @@
   {
     "Id": "3E4C2F02-472BB871-BE76D7A8-E869D8C2",
     "Type": "challenge",
-    "Name": "Kill Jungle World Boss - Finish Campaign (Survivor)"
+    "Name": "Kill Jungle World Boss - Finish Campaign (Survivor)",
+    "DropType": "World",
+    "DropReference": "World_Jungle"
   },
   {
     "Id": "BC7301F3-4340EFA2-E55B6995-C77D97DB",
     "Type": "challenge",
-    "Name": "Kill Fae World Boss - Finish Campaign (Survivor)"
+    "Name": "Kill Fae World Boss - Finish Campaign (Survivor)",
+    "DropType": "World",
+    "DropReference": "World_Fae"
   },
   {
     "Id": "9EA9A018-4A8B1EC5-334D4DB5-9ACDC4DA",
     "Type": "challenge",
-    "Name": "Kill Nerud World Boss - Finish Campaign (Survivor)"
+    "Name": "Kill Nerud World Boss - Finish Campaign (Survivor)",
+    "DropType": "World",
+    "DropReference": "World_Nerud"
   },
   {
     "Id": "E8E2AE55-465512DA-20F7E2B8-97DC7A7F",
     "Type": "challenge",
-    "Name": "Kill Lab Boss - Finish Campaign (Survivor)"
+    "Name": "Kill Lab Boss - Finish Campaign (Survivor)",
+    "DropType": "World",
+    "DropReference": "World_Labyrinth"
   },
   {
     "Id": "B9BC305C-4A7A3D58-CFA0759F-C914A400",
     "Type": "challenge",
-    "Name": "Kill Final Boss - Finish Campaign (Survivor)"
+    "Name": "Kill Final Boss - Finish Campaign (Survivor)",
+    "DropType": "Event",
+    "DropReference": "Quest_RootEarth_TowerBoss"
   },
   {
     "Id": "CF080EC5-4624C541-27ED12B3-4266F172",
     "Type": "challenge",
-    "Name": "Kill Jungle World Boss - Finish Campaign (Veteran)"
+    "Name": "Kill Jungle World Boss - Finish Campaign (Veteran)",
+    "Difficulty": "Veteran",
+    "DropType": "World",
+    "DropReference": "World_Jungle"
   },
   {
     "Id": "EBA4EB4E-452F49A3-527DDC9A-8A784005",
     "Type": "challenge",
-    "Name": "Kill Fae World Boss - Finish Campaign (Veteran)"
+    "Name": "Kill Fae World Boss - Finish Campaign (Veteran)",
+    "Difficulty": "Veteran",
+    "DropType": "World",
+    "DropReference": "World_Fae"
   },
   {
     "Id": "F8E52CFE-4257CD33-40F2DF9B-A062A1EF",
     "Type": "challenge",
-    "Name": "Kill Nerud World Boss - Finish Campaign (Veteran)"
+    "Name": "Kill Nerud World Boss - Finish Campaign (Veteran)",
+    "Difficulty": "Veteran",
+    "DropType": "World",
+    "DropReference": "World_Nerud"
   },
   {
     "Id": "9EA379FB-416FB280-E03734A8-B0710CA7",
     "Type": "challenge",
-    "Name": "Kill Lab Boss - Finish Campaign (Veteran)"
+    "Name": "Kill Lab Boss - Finish Campaign (Veteran)",
+    "Difficulty": "Veteran",
+    "DropType": "World",
+    "DropReference": "World_Labyrinth"
   },
   {
     "Id": "C387CCC0-49E47FC8-982653A7-AF028280",
     "Type": "challenge",
-    "Name": "Kill Final Boss - Finish Campaign (Veteran)"
+    "Name": "Kill Final Boss - Finish Campaign (Veteran)",
+    "Difficulty": "Veteran",
+    "DropType": "Event",
+    "DropReference": "Quest_RootEarth_TowerBoss"
   },
   {
     "Id": "85714765-4385A092-269FC387-05F2CEED",
     "Type": "challenge",
-    "Name": "Kill Jungle World Boss - Finish Campaign (Nightmare)"
+    "Name": "Kill Jungle World Boss - Finish Campaign (Nightmare)",
+    "Difficulty": "Nightmare",
+    "DropType": "World",
+    "DropReference": "World_Jungle"
   },
   {
     "Id": "998893F4-4EDB91C4-062836A3-B96B45EB",
     "Type": "challenge",
-    "Name": "Kill Fae World Boss - Finish Campaign (Nightmare)"
+    "Name": "Kill Fae World Boss - Finish Campaign (Nightmare)",
+    "Difficulty": "Nightmare",
+    "DropType": "World",
+    "DropReference": "World_Fae"
   },
   {
     "Id": "80DC90B3-4E744298-7377EC8A-D200F4D4",
     "Type": "challenge",
-    "Name": "Kill Nerud World Boss - Finish Campaign (Nightmare)"
+    "Name": "Kill Nerud World Boss - Finish Campaign (Nightmare)",
+    "Difficulty": "Nightmare",
+    "DropType": "World",
+    "DropReference": "World_Nerud"
   },
   {
     "Id": "33CB9FB5-4C17EBD1-74603EB6-DC98C1DA",
     "Type": "challenge",
-    "Name": "Kill Lab Boss - Finish Campaign (Nightmare)"
+    "Name": "Kill Lab Boss - Finish Campaign (Nightmare)",
+    "Difficulty": "Nightmare",
+    "DropType": "World",
+    "DropReference": "World_Labyrinth"
   },
   {
     "Id": "591A3BBD-44DA5522-769D9A83-F7527CA5",
     "Type": "challenge",
-    "Name": "Kill Final Boss - Finish Campaign (Nightmare)"
+    "Name": "Kill Final Boss - Finish Campaign (Nightmare)",
+    "Difficulty": "Nightmare",
+    "DropType": "Event",
+    "DropReference": "Quest_RootEarth_TowerBoss"
   },
   {
     "Id": "395BA5BA-494A225A-046D668C-B9514B86",
     "Type": "challenge",
-    "Name": "Kill Jungle World Boss - Finish Campaign (Apocalypse)"
+    "Name": "Kill Jungle World Boss - Finish Campaign (Apocalypse)",
+    "Difficulty": "Apocalypse",
+    "DropType": "World",
+    "DropReference": "World_Jungle"
   },
   {
     "Id": "632D3390-43FDAC4C-E977EA94-11A6175A",
     "Type": "challenge",
-    "Name": "Kill Fae World Boss - Finish Campaign (Apocalypse)"
+    "Name": "Kill Fae World Boss - Finish Campaign (Apocalypse)",
+    "Difficulty": "Apocalypse",
+    "DropType": "World",
+    "DropReference": "World_Fae"
   },
   {
     "Id": "ADC39805-4881F728-5B706583-409157AA",
     "Type": "challenge",
-    "Name": "Kill Nerud World Boss - Finish Campaign (Apocalypse)"
+    "Name": "Kill Nerud World Boss - Finish Campaign (Apocalypse)",
+    "Difficulty": "Apocalypse",
+    "DropType": "World",
+    "DropReference": "World_Nerud"
   },
   {
     "Id": "3C213F97-44B0694E-9582EF82-F167080E",
     "Type": "challenge",
-    "Name": "Kill Lab Boss - Finish Campaign (Apocalypse)"
+    "Name": "Kill Lab Boss - Finish Campaign (Apocalypse)",
+    "Difficulty": "Apocalypse",
+    "DropType": "World",
+    "DropReference": "World_Labyrinth"
   },
   {
     "Id": "D7DC551D-4A2A05B4-44B79798-7EDC0A7D",
     "Type": "challenge",
-    "Name": "Kill Final Boss - Finish Campaign (Apocalypse)"
+    "Name": "Kill Final Boss - Finish Campaign (Apocalypse)",
+    "Difficulty": "Apocalypse",
+    "DropType": "Event",
+    "DropReference": "Quest_RootEarth_TowerBoss"
   },
   {
     "Id": "7D57C8EC-4C12B1A6-72737F90-80703BC3",
     "Type": "challenge",
-    "Name": "Kill Jungle World Boss - Finish Campaign (Hardcore)"
+    "Name": "Kill Jungle World Boss - Finish Campaign (Hardcore)",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Jungle"
   },
   {
     "Id": "A96B0583-4AF213A8-E2134599-E5907BB1",
     "Type": "challenge",
-    "Name": "Kill Fae World Boss - Finish Campaign (Hardcore)"
+    "Name": "Kill Fae World Boss - Finish Campaign (Hardcore)",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Fae"
   },
   {
     "Id": "C0791D74-4560C013-5609FC9A-C36D397C",
     "Type": "challenge",
-    "Name": "Kill Nerud World Boss - Finish Campaign (Hardcore)"
+    "Name": "Kill Nerud World Boss - Finish Campaign (Hardcore)",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Nerud"
   },
   {
     "Id": "90C248AE-470530A0-29453DB7-C09E1DCB",
     "Type": "challenge",
-    "Name": "Kill Lab Boss - Finish Campaign (Hardcore)"
+    "Name": "Kill Lab Boss - Finish Campaign (Hardcore)",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Labyrinth"
   },
   {
     "Id": "06099657-48EE26F3-B14160AE-69D540C5",
     "Type": "challenge",
-    "Name": "Kill Final Boss - Finish Campaign (Hardcore)"
+    "Name": "Kill Final Boss - Finish Campaign (Hardcore)",
+    "Hardcore": true,
+    "DropType": "Event",
+    "DropReference": "Quest_RootEarth_TowerBoss"
   },
   {
     "Id": "20DB617A-448F41B9-F197B997-F7E835DE",
     "Type": "challenge",
-    "Name": "Kill Jungle World Boss - Finish Campaign (Hardcore, Veteran)"
+    "Name": "Kill Jungle World Boss - Finish Campaign (Hardcore, Veteran)",
+    "Difficulty": "Veteran",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Jungle"
   },
   {
     "Id": "D83F4DDB-4C1710D7-A4F02CBE-A1EFCA42",
     "Type": "challenge",
-    "Name": "Kill Fae World Boss - Finish Campaign (Hardcore, Veteran)"
+    "Name": "Kill Fae World Boss - Finish Campaign (Hardcore, Veteran)",
+    "Difficulty": "Veteran",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Fae"
   },
   {
     "Id": "EF395D15-4B2200BC-3A79C7B0-8F02FE51",
     "Type": "challenge",
-    "Name": "Kill Nerud World Boss - Finish Campaign (Hardcore, Veteran)"
+    "Name": "Kill Nerud World Boss - Finish Campaign (Hardcore, Veteran)",
+    "Difficulty": "Veteran",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Nerud"
   },
   {
     "Id": "CAF078B3-4B433782-7F1E9381-8A62BB97",
     "Type": "challenge",
-    "Name": "Kill Lab Boss - Finish Campaign (Hardcore, Veteran)"
+    "Name": "Kill Lab Boss - Finish Campaign (Hardcore, Veteran)",
+    "Difficulty": "Veteran",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Labyrinth"
   },
   {
     "Id": "14D89A62-43D6EDAB-D9CC37AB-FA537B7B",
     "Type": "challenge",
-    "Name": "Kill Final Boss - Finish Campaign (Hardcore, Veteran)"
+    "Name": "Kill Final Boss - Finish Campaign (Hardcore, Veteran)",
+    "Difficulty": "Veteran",
+    "Hardcore": true,
+    "DropType": "Event",
+    "DropReference": "Quest_RootEarth_TowerBoss"
   },
   {
     "Id": "88F5D110-4F8FC2A0-CBD23F87-096A8A69",
@@ -6935,122 +7035,174 @@
   {
     "Id": "FA9E9656-47A99109-514867A8-317FD001",
     "Type": "challenge",
-    "Name": "Kill Yaesha World Boss - Defeat Yaesha World Boss Hardcore"
+    "Name": "Kill Yaesha World Boss - Defeat Yaesha World Boss Hardcore",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Jungle"
   },
   {
     "Id": "5D723181-43CF071E-D7D312A1-E599CFA8",
     "Type": "challenge",
-    "Name": "Kill Losomn World Boss - Defeat Losomn World Boss Hardcore"
+    "Name": "Kill Losomn World Boss - Defeat Losomn World Boss Hardcore",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Fae"
   },
   {
     "Id": "4F01E4EF-4891C7E1-3F6A6D8A-8FBAA4F7",
     "Type": "challenge",
-    "Name": "Kill Nerud World Boss - Defeat Nerud World Boss Hardcore"
+    "Name": "Kill Nerud World Boss - Defeat Nerud World Boss Hardcore",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Nerud"
   },
   {
     "Id": "D01CBE33-4D00C490-4063FB9C-D2C14102",
     "Type": "challenge",
-    "Name": "Kill Labyrinth World Boss - Defeat Labyrinth World Boss Hardcore"
+    "Name": "Kill Labyrinth World Boss - Defeat Labyrinth World Boss Hardcore",
+    "Hardcore": true,
+    "DropType": "World",
+    "DropReference": "World_Labyrinth"
   },
   {
     "Id": "5BF22894-486F2872-1D9DCE98-03CE36B6",
     "Type": "challenge",
-    "Name": "Kill Many Faces - Defeat All Bosses"
+    "Name": "Kill Many Faces - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_ManyFaces"
   },
   {
     "Id": "6C1DCC18-4D8C8A04-BE98AEA5-0DEF0048",
     "Type": "challenge",
-    "Name": "Kill Ravager - Defeat All Bosses"
+    "Name": "Kill Ravager - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_Ravager"
   },
   {
     "Id": "9913D482-413562BC-DCB03C8C-0E20BF21",
     "Type": "challenge",
-    "Name": "Kill Mother Mind - Defeat All Bosses"
+    "Name": "Kill Mother Mind - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_MotherMind"
   },
   {
     "Id": "21D2C28C-4081DFF6-73E1EEAE-0453659D",
     "Type": "challenge",
-    "Name": "Kill Root Horror - Defeat All Bosses"
+    "Name": "Kill Root Horror - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_RootHorror"
   },
   {
     "Id": "8760D76F-429AE74E-67F6E89F-B7C0F901",
     "Type": "challenge",
-    "Name": "Kill Shrewd - Defeat All Bosses"
+    "Name": "Kill Shrewd - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_Shrewd"
   },
   {
     "Id": "8F77948F-4BE95E4E-31522EB9-D2E4D352",
     "Type": "challenge",
-    "Name": "Kill Legion - Defeat All Bosses"
+    "Name": "Kill Legion - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_RootCultist"
   },
   {
     "Id": "686A7F08-495846E7-1D2225B5-D35817AD",
     "Type": "challenge",
-    "Name": "Kill Nightweaver - Defeat All Bosses"
+    "Name": "Kill Nightweaver - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_NightWeaver"
   },
   {
     "Id": "4E87628C-4B61F8F0-09E0F988-1D2E0B9A",
     "Type": "challenge",
-    "Name": "Kill Fae King - Defeat All Bosses"
+    "Name": "Kill Fae King - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_Faelin | Quest_Boss_Faerlin"
   },
   {
     "Id": "6E0A0ACC-4D5BF6C0-8B0E14B8-D7117E00",
     "Type": "challenge",
-    "Name": "Kill Bloat King - Defeat All Bosses"
+    "Name": "Kill Bloat King - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_BloatKing"
   },
   {
     "Id": "8A7975D1-4FA4D9D8-8CB78581-E1F2509B",
     "Type": "challenge",
-    "Name": "Kill Grenadier - Defeat All Bosses"
+    "Name": "Kill Grenadier - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_DranGrenadier"
   },
   {
     "Id": "741B6FFA-43ABF22D-4A01449C-A280AC76",
     "Type": "challenge",
-    "Name": "Kill Archon - Defeat All Bosses"
+    "Name": "Kill Archon - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_FaeArchon"
   },
   {
     "Id": "DEB77A92-46375286-EBB6F080-8E3E82A0",
     "Type": "challenge",
-    "Name": "Kill Red Prince - Defeat All Bosses"
+    "Name": "Kill Red Prince - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_RedPrince"
   },
   {
     "Id": "02D135CF-4D337EBE-C0BC8A8D-07C52DFB",
     "Type": "challenge",
-    "Name": "Kill Nerud Guardian - Defeat All Bosses"
+    "Name": "Kill Nerud Guardian - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_NerudGuardian"
   },
   {
     "Id": "83620A7C-406BF2EB-BC5CE9A4-2C41C6AF",
     "Type": "challenge",
-    "Name": "Kill Tal Ratha - Defeat All Bosses"
+    "Name": "Kill Tal Ratha - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Boss_TalRatha"
   },
   {
     "Id": "DED753A5-4DAEBDF5-0B81DCA3-7B8A0DB5",
     "Type": "challenge",
-    "Name": "Kill Abomination - Defeat All Bosses"
+    "Name": "Kill Abomination - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_Abomination"
   },
   {
     "Id": "29985858-4F465A66-79B6B8BF-5A10D18E",
     "Type": "challenge",
-    "Name": "Kill Custodian's Eye - Defeat All Bosses"
+    "Name": "Kill Custodian's Eye - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_CustodianEye"
   },
   {
     "Id": "16D6C192-41CE8B04-953577AB-9ACC7747",
     "Type": "challenge",
-    "Name": "Kill Hatchery - Defeat All Bosses"
+    "Name": "Kill Hatchery - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_Hatchery"
   },
   {
     "Id": "10F756CA-4AFDF975-C6C317BE-F36B0705",
     "Type": "challenge",
-    "Name": "Kill Phantom - Defeat All Bosses"
+    "Name": "Kill Phantom - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_Miniboss_Phantom"
   },
   {
     "Id": "13B32649-45C6BD47-CBC226A2-91E5FC25",
     "Type": "challenge",
-    "Name": "Kill Labyrinth World Boss - Defeat All Bosses"
+    "Name": "Kill Labyrinth World Boss - Defeat All Bosses",
+    "DropType": "World",
+    "DropReference": "World_Labyrinth"
   },
   {
     "Id": "38454571-49A3C942-36466797-0BBF4F34",
     "Type": "challenge",
-    "Name": "Kill Final Boss - Defeat All Bosses"
+    "Name": "Kill Final Boss - Defeat All Bosses",
+    "DropType": "Event",
+    "DropReference": "Quest_RootEarth_TowerBoss"
   },
   {
     "Id": "FFBA0676-4D3D4968-850D04B0-4A5CE89F",
@@ -7078,6 +7230,7 @@
     "Id": "1856B8B3-49AA2901-48AE90B8-B3C89533",
     "Type": "challenge",
     "Name": "Die 10 Times - Die 10 Times to Bosses on Apocalypse",
+    "Difficulty": "Apocalypse",
     "ChallengeCount": "10"
   },
   {
@@ -7476,7 +7629,7 @@
     "Subtype": "injectable"
   },
   {
-    "Id": "Quest_Injectable_GoldenHall_BlackAndWhite",
+    "Id": "Quest_Injectable_GoldenHall_BlackandWhite",
     "Type": "event",
     "World": "World_Fae",
     "Name": "Flaming Pawns Puzzle",
