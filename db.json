@@ -9,6 +9,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_FinishCampaign_Veteran",
     "Note": "Buy from Reggie at Ward 13 after completing the campaign on Veteran difficulty"
   },
   {
@@ -21,6 +22,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_FinishCampaign_Hardcore",
     "Note": "Buy from Reggie after completing the campaign in Hardcore mode"
   },
   {
@@ -42,6 +44,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_FlopDodge",
     "Note": "Buy from Reggie at Ward 13 after 100 flops. Use some heavy armor to make you flop instead of rolling"
   },
   {
@@ -52,6 +55,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_DefeatAllBosses",
     "Note": "Buy from Reggie at Ward 13 after killing every single boss, aberrations not required. There are 23 in total"
   },
   {
@@ -59,10 +63,11 @@
     "ProfileId": "/Game/World_Base/Items/Trinkets/Amulets/OnyxPendulum/Amulet_OnyxPendulum.Amulet_OnyxPendulum_C",
     "Type": "amulet",
     "World": "World_Base",
-    "Difficulty": "Nigthmare",
+    "Difficulty": "Nightmare",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_FinishCampaign_Nightmare",
     "Note": "Buy from Reggie at Ward 13 after completing the campaign on Nightmare difficulty"
   },
   {
@@ -682,7 +687,8 @@
     "World": "World_DLC1",
     "Difficulty": "Apocalypse",
     "DropType": "Progression",
-    "Note": "Die from a boss on apocalypse difficulty 10 times"
+    "Note": "Die from a boss on apocalypse difficulty 10 times",
+    "Challange": "1856B8B3-49AA2901-48AE90B8-B3C89533"
   },
   {
     "Id": "Amulet_SinisterTotem",
@@ -710,6 +716,7 @@
     "Name": "Bruiser Bodyplate",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Challenger",
     "Note": "Buy from Whispers at Ward 13 after getting the Challenger Archetype"
   },
   {
@@ -720,6 +727,7 @@
     "Name": "Bruiser Gloves",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Challenger",
     "Note": "Buy from Whispers at Ward 13 after getting the Challenger Archetype"
   },
   {
@@ -730,6 +738,7 @@
     "Name": "Bruiser Helmet",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Challenger",
     "Note": "Buy from Whispers at Ward 13 after getting the Challenger Archetype"
   },
   {
@@ -740,6 +749,7 @@
     "Name": "Bruiser Boots",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Challenger",
     "Note": "Buy from Whispers at Ward 13 after getting the Challenger Archetype"
   },
   {
@@ -750,6 +760,7 @@
     "Name": "Trainer Clothes",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Handler",
     "Note": "Buy from Whispers at Ward 13 after getting the Handler Archetype"
   },
   {
@@ -760,6 +771,7 @@
     "Name": "Trainer Bracer",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Handler",
     "Note": "Buy from Whispers at Ward 13 after getting the Handler Archetype"
   },
   {
@@ -770,6 +782,7 @@
     "Name": "Trainer Cap",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Handler",
     "Note": "Buy from Whispers at Ward 13 after getting the Handler Archetype"
   },
   {
@@ -780,6 +793,7 @@
     "Name": "Trainer Workboots",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Handler",
     "Note": "Buy from Whispers at Ward 13 after getting the Handler Archetype"
   },
   {
@@ -790,6 +804,7 @@
     "Name": "Nightstalker Garb",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Hunter",
     "Note": "Buy from Whispers at Ward 13 after getting the Hunter Archetype"
   },
   {
@@ -800,6 +815,7 @@
     "Name": "Nightstalker Gloves",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Hunter",
     "Note": "Buy from Whispers at Ward 13 after getting the Hunter Archetype"
   },
   {
@@ -810,6 +826,7 @@
     "Name": "Nightstalker Shroud",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Hunter",
     "Note": "Buy from Whispers at Ward 13 after getting the Hunter Archetype"
   },
   {
@@ -820,6 +837,7 @@
     "Name": "Nightstalker Pants",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Hunter",
     "Note": "Buy from Whispers at Ward 13 after getting the Hunter Archetype"
   },
   {
@@ -830,6 +848,7 @@
     "Name": "Field Medic Overcoat",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Medic",
     "Note": "Buy from Whispers at Ward 13 after getting the Medic Archetype"
   },
   {
@@ -840,6 +859,7 @@
     "Name": "Field Medic Gloves",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Medic",
     "Note": "Buy from Whispers at Ward 13 after getting the Medic Archetype"
   },
   {
@@ -850,6 +870,7 @@
     "Name": "Field Medic Mask",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Medic",
     "Note": "Buy from Whispers at Ward 13 after getting the Medic Archetype"
   },
   {
@@ -860,6 +881,7 @@
     "Name": "Field Medic Trousers",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Medic",
     "Note": "Buy from Whispers at Ward 13 after getting the Medic Archetype"
   },
   {
@@ -910,6 +932,7 @@
     "Name": "Labyrinth Mantle",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Archon",
     "Note": "Buy from Whispers at Ward 13 after getting the Archon Archetype"
   },
   {
@@ -920,6 +943,7 @@
     "Name": "Labyrinth Gauntlets",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Archon",
     "Note": "Buy from Whispers at Ward 13 after getting the Archon Archetype"
   },
   {
@@ -930,6 +954,7 @@
     "Name": "Labyrinth Headplate",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Archon",
     "Note": "Buy from Whispers at Ward 13 after getting the Archon Archetype"
   },
   {
@@ -940,6 +965,7 @@
     "Name": "Labyrinth Treads",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Archon",
     "Note": "Buy from Whispers at Ward 13 after getting the Archon Archetype"
   },
   {
@@ -990,6 +1016,7 @@
     "Name": "Realmwalker Tunic",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Explorer",
     "Note": "Buy from Whispers at Ward 13 after getting the Explorer Archetype"
   },
   {
@@ -1000,6 +1027,7 @@
     "Name": "Realmwalker Gloves",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Explorer",
     "Note": "Buy from Whispers at Ward 13 after getting the Explorer Archetype"
   },
   {
@@ -1010,6 +1038,7 @@
     "Name": "Realmwalker Beret",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Explorer",
     "Note": "Buy from Whispers at Ward 13 after getting the Explorer Archetype"
   },
   {
@@ -1020,6 +1049,7 @@
     "Name": "Realmwalker Pantaloons",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Explorer",
     "Note": "Buy from Whispers at Ward 13 after getting the Explorer Archetype"
   },
   {
@@ -1030,6 +1060,7 @@
     "Name": "High Noon Duds",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Gunslinger",
     "Note": "Buy from Whispers at Ward 13 after getting the Gunslinger Archetype"
   },
   {
@@ -1040,6 +1071,7 @@
     "Name": "High Noon Armguards",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Gunslinger",
     "Note": "Buy from Whispers at Ward 13 after getting the Gunslinger Archetype"
   },
   {
@@ -1050,6 +1082,7 @@
     "Name": "High Noon Hat",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Gunslinger",
     "Note": "Buy from Whispers at Ward 13 after getting the Gunslinger Archetype"
   },
   {
@@ -1060,6 +1093,7 @@
     "Name": "High Noon Soles",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Gunslinger",
     "Note": "Buy from Whispers at Ward 13 after getting the Gunslinger Archetype"
   },
   {
@@ -1150,6 +1184,7 @@
     "Name": "Leto Mark I Armor",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1160,6 +1195,7 @@
     "Name": "Leto Mark I Gloves",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1170,6 +1206,7 @@
     "Name": "Leto Mark I Helmet",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1180,6 +1217,7 @@
     "Name": "Leto Mark I Leggings",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1230,6 +1268,7 @@
     "Name": "Field Medic Hat",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "Engram_Medic",
     "Note": "Buy from Whispers at Ward 13 after getting the Medic Archetype"
   },
   {
@@ -1251,6 +1290,7 @@
     "Name": "Bandit Jacket",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1261,6 +1301,7 @@
     "Name": "Bandit's Mask",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1271,6 +1312,7 @@
     "Name": "Bandit Gloves",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1281,6 +1323,7 @@
     "Name": "Bandit Trousers",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1291,6 +1334,7 @@
     "Name": "Culstist Duster",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1301,6 +1345,7 @@
     "Name": "Culstist Gloves",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1311,6 +1356,7 @@
     "Name": "Cultist Hat",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1321,6 +1367,7 @@
     "Name": "Cultist Britches",
     "DropType": "Vendor",
     "DropReference": "Whispers",
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
     "Note": "Buy from Whispers at Ward 13 after finishing campaign on any difficulty"
   },
   {
@@ -1329,11 +1376,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Elder Raiment",
-    "Difficulty": "Veteran",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Veteran difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Gloves_Elder",
@@ -1341,11 +1388,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Elder Gloves",
-    "Difficulty": "Veteran",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Veteran difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Head_Elder",
@@ -1353,11 +1400,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Elder Headdress",
-    "Difficulty": "Veteran",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Veteran difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Legs_Elder",
@@ -1365,11 +1412,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Elder Leggings",
-    "Difficulty": "Veteran",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Veteran difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Body_Radiant",
@@ -1377,11 +1424,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Radiant Protector",
-    "Difficulty": "Nightmare",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Nightmare difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Gloves_Radiant",
@@ -1389,11 +1436,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Radiant Bracers",
-    "Difficulty": "Nightmare",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Nightmare difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Head_Radiant",
@@ -1401,11 +1448,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Radiant Visage",
-    "Difficulty": "Nightmare",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Nightmare difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Legs_Radiant",
@@ -1413,11 +1460,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Radiant Greaves",
-    "Difficulty": "Nightmare",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Nightmare difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Body_Void",
@@ -1425,11 +1472,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Void Carapace",
-    "Difficulty": "Apocalypse",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Apocalypse difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Gloves_Void",
@@ -1437,11 +1484,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Void Wraps",
-    "Difficulty": "Apocalypse",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Apocalypse difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Head_Void",
@@ -1449,11 +1496,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Void Skull",
-    "Difficulty": "Apocalypse",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Apocalypse difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Legs_Void",
@@ -1461,11 +1508,11 @@
     "Type": "armor",
     "World": "World_Base",
     "Name": "Void Greaves",
-    "Difficulty": "Apocalypse",
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Whispers",
-    "Note": "Buy from Whispers at Ward 13 after finishing campaign on Apocalypse difficulty"
+    "Prerequisite": "AccountAward_FinishCampaign_Survivor",
+    "Note": "Buy from Whispers at Ward 13 after finishing campaign"
   },
   {
     "Id": "Armor_Body_Survivor",
@@ -2348,7 +2395,8 @@
     "World": "World_Base",
     "Subtype": "Melee",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_Latency",
@@ -2357,7 +2405,8 @@
     "World": "World_Base",
     "Subtype": "Melee",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_Opportunist",
@@ -2366,7 +2415,8 @@
     "World": "World_Base",
     "Subtype": "Melee",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_Shocker",
@@ -2375,7 +2425,8 @@
     "World": "World_Base",
     "Subtype": "Melee",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_Stormbringer",
@@ -2384,7 +2435,8 @@
     "World": "World_Base",
     "Subtype": "Melee",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_BottomFeeder",
@@ -2393,7 +2445,8 @@
     "World": "World_Base",
     "Subtype": "Ranged",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_BottomHeavy",
@@ -2402,7 +2455,8 @@
     "World": "World_Base",
     "Subtype": "Ranged",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_Ingenuity",
@@ -2411,7 +2465,8 @@
     "World": "World_Base",
     "Subtype": "Ranged",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_KillSwitch",
@@ -2420,7 +2475,8 @@
     "World": "World_Base",
     "Subtype": "Ranged",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_SequencedShot",
@@ -2429,7 +2485,8 @@
     "World": "World_Base",
     "Subtype": "Ranged",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_SpiritHealer",
@@ -2438,7 +2495,8 @@
     "World": "World_Base",
     "Subtype": "Ranged",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_TopHeavy",
@@ -2447,7 +2505,8 @@
     "World": "World_Base",
     "Subtype": "Ranged",
     "DropType": "Global",
-    "Note": "Drops from a ramdom aberration on a random world"
+    "Note": "Drops from a ramdom aberration on a random world",
+    "Undetectable": true
   },
   {
     "Id": "MetaGem_Dreadful",
@@ -2552,6 +2611,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Cass",
+    "Prerequisite": "AccountAward_Complete15Biomes",
     "Note": "Buy from Cass at Ward 13 after performing 15 world boss kills"
   },
   {
@@ -2580,6 +2640,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Cass",
+    "Prerequisite": "AccountAward_Complete30Biomes",
     "Note": "Buy from Cass at Ward 13 after performing 30 world boss kills"
   },
   {
@@ -2590,6 +2651,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Cass",
+    "Prerequisite": "AccountAward_Complete5Biomes",
     "Note": "Buy from Cass at Ward 13 after performing 5 world boss kills"
   },
   {
@@ -2762,6 +2824,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_HardcoreLabyrinth",
     "Note": "Buy from Reggie at Ward 13 after defeating Labyrinth Sentinel in Hardcore mode"
   },
   {
@@ -2792,6 +2855,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_HighFiveTeamate",
     "Note": "Buy from Reggie at Ward 13 after performing the High Five emote in co-op"
   },
   {
@@ -2802,6 +2866,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_Die15Times",
     "Note": "Buy from Reggie at Ward 13 after dying 15 times"
   },
   {
@@ -2830,6 +2895,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_DefeatXWorldBosses",
     "Note": "Buy from Reggie at Ward 13 after performing 10 world boss kills"
   },
   {
@@ -2871,6 +2937,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_FinishCampaign_Apocalypse",
     "Note": "Buy from Reggie at Ward 13 after completing the campaign on Apocalypse difficulty"
   },
   {
@@ -2883,6 +2950,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_HardcoreLosomn",
     "Note": "Buy from Reggie after killing a Losomn world boss in Hardcore mode"
   },
   {
@@ -2894,6 +2962,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_HardcoreNerud",
     "Note": "Buy from Reggie after killing a N'Erud world boss in Hardcore mode"
   },
   {
@@ -2916,6 +2985,7 @@
     "AccountAward": true,
     "DropType": "Vendor",
     "DropReference": "Reggie",
+    "Prerequisite": "AccountAward_HardcoreYaesha",
     "Note": "Buy from Reggie after killing a Yaesha world boss in Hardcore mode"
   },
   {
@@ -4347,7 +4417,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Gunslinger level 10 to unlock this trait for use in any build"
+    "Note": "Reach Gunslinger level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Amplitude",
@@ -4364,7 +4435,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Archon level 10 to unlock this trait for use in any build"
+    "Note": "Reach Archon level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Fortify",
@@ -4372,7 +4444,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Engineer level 10 to unlock this trait for use in any build"
+    "Note": "Reach Engineer level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Kinship",
@@ -4380,7 +4453,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Handler level 10 to unlock this trait for use in any build"
+    "Note": "Reach Handler level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Longshot",
@@ -4388,7 +4462,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Hunter level 10 to unlock this trait for use in any build"
+    "Note": "Reach Hunter level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Potency",
@@ -4396,7 +4471,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Alchemist level 10 to unlock this trait for use in any build"
+    "Note": "Reach Alchemist level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Regrowth",
@@ -4404,7 +4480,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Summoner level 10 to unlock this trait for use in any build"
+    "Note": "Reach Summoner level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_StrongBack",
@@ -4412,7 +4489,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Challenger level 10 to unlock this trait for use in any build"
+    "Note": "Reach Challenger level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Swiftness",
@@ -4420,7 +4498,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Explorer level 10 to unlock this trait for use in any build"
+    "Note": "Reach Explorer level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Triage",
@@ -4428,7 +4507,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Medic level 10 to unlock this trait for use in any build"
+    "Note": "Reach Medic level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Untouchable",
@@ -4436,7 +4516,8 @@
     "Type": "trait",
     "World": "World_Base",
     "DropType": "Progression",
-    "Note": "Reach Invader level 10 to unlock this trait for use in any build"
+    "Note": "Reach Invader level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_ArcaneStrike",
@@ -4551,7 +4632,9 @@
     "World": "World_Base",
     "Coop": true,
     "DropType": "Progression",
-    "Note": "Revive a teammate 15 times"
+    "Prerequisite": "Material_AwardTrait_Revivalist",
+    "Note": "Revive a teammate 15 times",
+    "Undetectable": true
   },
   {
     "Id": "Trait_Rugged",
@@ -4618,7 +4701,8 @@
     "Type": "trait",
     "World": "World_DLC1 ",
     "DropType": "Progression",
-    "Note": "Reach Ritualist level 10 to unlock this trait for use in any build"
+    "Note": "Reach Ritualist level 10 to unlock this trait for use in any build",
+    "Undetectable": true
   },
   {
     "Id": "Trait_DarkPact",
@@ -4919,6 +5003,7 @@
     "Subtype": "Long Gun",
     "DropType": "Vendor",
     "DropReference": "Brabus",
+    "Prerequisite": "AccountAward_FinishCampaign_Nightmare",
     "Note": "Buy from Brabus at Ward 13 after Nightmare Difficulty Playthrough"
   },
   {
@@ -4942,6 +5027,7 @@
     "Subtype": "Long Gun",
     "DropType": "Vendor",
     "DropReference": "Brabus",
+    "Prerequisite": "AccountAward_FinishCampaign_Hardcore_Veteran",
     "Note": "Buy from Brabus at Ward 13 after Hardcore Veteran Difficulty Playthrough"
   },
   {
@@ -4954,6 +5040,7 @@
     "Subtype": "Long Gun",
     "DropType": "Vendor",
     "DropReference": "Brabus",
+    "Prerequisite": "AccountAward_FinishCampaign_Veteran",
     "Note": "Buy from Brabus at Ward 13 after Veteran Difficulty Playthrough"
   },
   {
@@ -4966,6 +5053,7 @@
     "Subtype": "Long Gun",
     "DropType": "Vendor",
     "DropReference": "Brabus",
+    "Prerequisite": "AccountAward_FinishCampaign_Apocalypse",
     "Note": "Buy from Brabus at Ward 13 after Apocalypse Difficulty Playthrough"
   },
   {
@@ -5172,6 +5260,7 @@
     "Subtype": "Melee Weapon",
     "DropType": "Vendor",
     "DropReference": "Brabus",
+    "Prerequisite": "AccountAward_FinishCampaign_Nightmare",
     "Note": "Buy from Brabus at Ward 13 after Nightmare Difficulty Playthrough"
   },
   {
@@ -5227,6 +5316,7 @@
     "Subtype": "Melee Weapon",
     "DropType": "Vendor",
     "DropReference": "Brabus",
+    "Prerequisite": "AccountAward_FinishCampaign_Veteran",
     "Note": "Buy from Brabus at Ward 13 after Veteran Difficulty Playthrough"
   },
   {
@@ -5274,6 +5364,7 @@
     "Subtype": "Melee Weapon",
     "DropType": "Vendor",
     "DropReference": "Brabus",
+    "Prerequisite": "AccountAward_FinishCampaign_Apocalypse",
     "Note": "Buy from Brabus at Ward 13 after Apocalypse Difficulty Playthrough"
   },
   {
@@ -5754,6 +5845,7 @@
     "ProfileId": "/Game/World_DLC1/Items/Archetypes/Ritualist/Engram/Engram_Ritualist.Engram_Ritualist_C",
     "Type": "engram",
     "World": "World_DLC1 ",
+    "Material": "Material_Engram_Ritualist",
     "DropType": "Location",
     "DropReference": "Forlorn Coast",
     "Note": "Found in Forlorn Coast location on Losomn OTK, From the first checkpoint after the Drowned Wen world stone (the checkpoint is near the iron door, that when unlocked leads back to the start of Forlorn Coast) world stone follow the boats until you see a breach in the wall, follow a short path inside and see a witch perofrming a ritual on a pig. The Ragged Poppet will be near the witch"
@@ -6819,22 +6911,26 @@
   {
     "Id": "88F5D110-4F8FC2A0-CBD23F87-096A8A69",
     "Type": "challenge",
-    "Name": "Finish 5 Biomes - Finish 5 Biomes"
+    "Name": "Finish 5 Biomes - Finish 5 Biomes",
+    "ChallengeCount": "5"
   },
   {
     "Id": "82549C68-47A24E15-E18F158E-A4776318",
     "Type": "challenge",
-    "Name": "Finish 15 Biomes - Finish 15 Biomes"
+    "Name": "Finish 15 Biomes - Finish 15 Biomes",
+    "ChallengeCount": "15"
   },
   {
     "Id": "ACE83068-450088C8-3D3FA8A8-4E009B9C",
     "Type": "challenge",
-    "Name": "Finish 30 Biomes - Finish 30 Biomes"
+    "Name": "Finish 30 Biomes - Finish 30 Biomes",
+    "ChallengeCount": "30"
   },
   {
     "Id": "CD52F7DE-4618D4DD-A1991D94-E48E33C8",
     "Type": "challenge",
-    "Name": "Kill X Bosses - Defeat X World Bosses"
+    "Name": "Kill X Bosses - Defeat X World Bosses",
+    "ChallengeCount": "10"
   },
   {
     "Id": "FA9E9656-47A99109-514867A8-317FD001",
@@ -6964,12 +7060,14 @@
   {
     "Id": "A071DF92-4C794849-4A1002B0-DFF292DA",
     "Type": "challenge",
-    "Name": "Die 15 Times - Die 15 Times"
+    "Name": "Die 15 Times - Die 15 Times",
+    "ChallengeCount": "15"
   },
   {
     "Id": "D8479145-44C2D683-74BE74A1-ADDF77F8",
     "Type": "challenge",
-    "Name": "Flop 100 Times - Flop Dodge a Bunch"
+    "Name": "Flop 100 Times - Flop Dodge a Bunch",
+    "ChallengeCount": "100"
   },
   {
     "Id": "BCD29B16-4AD4F664-467B11B8-40B71EC6",
@@ -6979,7 +7077,8 @@
   {
     "Id": "1856B8B3-49AA2901-48AE90B8-B3C89533",
     "Type": "challenge",
-    "Name": "Die 10 Times - Die 10 Times to Bosses on Apocalypse"
+    "Name": "Die 10 Times - Die 10 Times to Bosses on Apocalypse",
+    "ChallengeCount": "10"
   },
   {
     "Id": "95D6799E-449077F7-0969C7AB-8CD29A2C",
@@ -7894,7 +7993,6 @@
     "Id": "Quest_SideD_SewerChamber",
     "Type": "event",
     "World": "World_DLC1",
-    "Hardcore": "0",
     "Subtype": "dungeon",
     "EventLocation": "The Forgotten Commune"
   },
@@ -8444,5 +8542,119 @@
     "Name": "W.D. 109",
     "SpawnType": "Injectable",
     "SpawnReference": "Quest_Injectable_Underworld_LurkerVents"
+  },
+  {
+    "Id": "AccountAward_FinishCampaign_Survivor",
+    "Type": "award",
+    "Name": "Finish Campaign (Survivor)",
+    "Challange": "3E4C2F02-472BB871-BE76D7A8-E869D8C2, BC7301F3-4340EFA2-E55B6995-C77D97DB, 9EA9A018-4A8B1EC5-334D4DB5-9ACDC4DA, E8E2AE55-465512DA-20F7E2B8-97DC7A7F, B9BC305C-4A7A3D58-CFA0759F-C914A400"
+  },
+  {
+    "Id": "AccountAward_FinishCampaign_Veteran",
+    "Type": "award",
+    "Name": "Finish Campaign (Veteran)",
+    "Challange": "CF080EC5-4624C541-27ED12B3-4266F172, EBA4EB4E-452F49A3-527DDC9A-8A784005, F8E52CFE-4257CD33-40F2DF9B-A062A1EF, 9EA379FB-416FB280-E03734A8-B0710CA7, C387CCC0-49E47FC8-982653A7-AF028280"
+  },
+  {
+    "Id": "AccountAward_FinishCampaign_Nightmare",
+    "Type": "award",
+    "Name": "Finish Campaign (Nightmare)",
+    "Challange": "85714765-4385A092-269FC387-05F2CEED, 998893F4-4EDB91C4-062836A3-B96B45EB, 80DC90B3-4E744298-7377EC8A-D200F4D4, 33CB9FB5-4C17EBD1-74603EB6-DC98C1DA, 591A3BBD-44DA5522-769D9A83-F7527CA5"
+  },
+  {
+    "Id": "AccountAward_FinishCampaign_Apocalypse",
+    "Type": "award",
+    "Name": "Finish Campaign (Apocalypse)",
+    "Challange": "395BA5BA-494A225A-046D668C-B9514B86, 632D3390-43FDAC4C-E977EA94-11A6175A, ADC39805-4881F728-5B706583-409157AA, 3C213F97-44B0694E-9582EF82-F167080E, D7DC551D-4A2A05B4-44B79798-7EDC0A7D"
+  },
+  {
+    "Id": "AccountAward_FinishCampaign_Hardcore",
+    "Type": "award",
+    "Name": "Finish Campaign (Hardcore)",
+    "Challange": "7D57C8EC-4C12B1A6-72737F90-80703BC3, A96B0583-4AF213A8-E2134599-E5907BB1, C0791D74-4560C013-5609FC9A-C36D397C, 90C248AE-470530A0-29453DB7-C09E1DCB, 06099657-48EE26F3-B14160AE-69D540C5"
+  },
+  {
+    "Id": "AccountAward_FinishCampaign_Hardcore_Veteran",
+    "Type": "award",
+    "Name": "Finish Campaign (Hardcore, Veteran)",
+    "Challange": "20DB617A-448F41B9-F197B997-F7E835DE, D83F4DDB-4C1710D7-A4F02CBE-A1EFCA42, EF395D15-4B2200BC-3A79C7B0-8F02FE51, CAF078B3-4B433782-7F1E9381-8A62BB97, 14D89A62-43D6EDAB-D9CC37AB-FA537B7B"
+  },
+  {
+    "Id": "AccountAward_Complete5Biomes",
+    "Type": "award",
+    "Name": "Finish 5 Biomes",
+    "Challange": "88F5D110-4F8FC2A0-CBD23F87-096A8A69"
+  },
+  {
+    "Id": "AccountAward_Complete15Biomes",
+    "Type": "award",
+    "Name": "Finish 15 Biomes",
+    "Challange": "82549C68-47A24E15-E18F158E-A4776318"
+  },
+  {
+    "Id": "AccountAward_Complete30Biomes",
+    "Type": "award",
+    "Name": "Finish 30 Biomes",
+    "Challange": "ACE83068-450088C8-3D3FA8A8-4E009B9C"
+  },
+  {
+    "Id": "AccountAward_DefeatXWorldBosses",
+    "Type": "award",
+    "Name": "Defeat X World Bosses",
+    "Challange": "CD52F7DE-4618D4DD-A1991D94-E48E33C8"
+  },
+  {
+    "Id": "AccountAward_HardcoreYaesha",
+    "Type": "award",
+    "Name": "Defeat Yaesha World Boss Hardcore",
+    "Challange": "FA9E9656-47A99109-514867A8-317FD001"
+  },
+  {
+    "Id": "AccountAward_HardcoreLosomn",
+    "Type": "award",
+    "Name": "Defeat Losomn World Boss Hardcore",
+    "Challange": "5D723181-43CF071E-D7D312A1-E599CFA8"
+  },
+  {
+    "Id": "AccountAward_HardcoreNerud",
+    "Type": "award",
+    "Name": "Defeat Nerud World Boss Hardcore",
+    "Challange": "4F01E4EF-4891C7E1-3F6A6D8A-8FBAA4F7"
+  },
+  {
+    "Id": "AccountAward_HardcoreLabyrinth",
+    "Type": "award",
+    "Name": "Defeat Labyrinth World Boss Hardcore",
+    "Challange": "D01CBE33-4D00C490-4063FB9C-D2C14102"
+  },
+  {
+    "Id": "AccountAward_DefeatAllBosses",
+    "Type": "award",
+    "Name": "Defeat All Bosses",
+    "Challange": "5BF22894-486F2872-1D9DCE98-03CE36B6, 6C1DCC18-4D8C8A04-BE98AEA5-0DEF0048, 9913D482-413562BC-DCB03C8C-0E20BF21, 21D2C28C-4081DFF6-73E1EEAE-0453659D, 8760D76F-429AE74E-67F6E89F-B7C0F901, 8F77948F-4BE95E4E-31522EB9-D2E4D352, 686A7F08-495846E7-1D2225B5-D35817AD, 4E87628C-4B61F8F0-09E0F988-1D2E0B9A, 6E0A0ACC-4D5BF6C0-8B0E14B8-D7117E00, 8A7975D1-4FA4D9D8-8CB78581-E1F2509B, 741B6FFA-43ABF22D-4A01449C-A280AC76, DEB77A92-46375286-EBB6F080-8E3E82A0, 02D135CF-4D337EBE-C0BC8A8D-07C52DFB, 83620A7C-406BF2EB-BC5CE9A4-2C41C6AF, DED753A5-4DAEBDF5-0B81DCA3-7B8A0DB5, 29985858-4F465A66-79B6B8BF-5A10D18E, 16D6C192-41CE8B04-953577AB-9ACC7747, 10F756CA-4AFDF975-C6C317BE-F36B0705, 13B32649-45C6BD47-CBC226A2-91E5FC25, 38454571-49A3C942-36466797-0BBF4F34"
+  },
+  {
+    "Id": "AccountAward_HighFiveTeamate",
+    "Type": "award",
+    "Name": "High Five Someone",
+    "Challange": "FFBA0676-4D3D4968-850D04B0-4A5CE89F"
+  },
+  {
+    "Id": "AccountAward_Die15Times",
+    "Type": "award",
+    "Name": "Die 15 Times",
+    "Challange": "A071DF92-4C794849-4A1002B0-DFF292DA"
+  },
+  {
+    "Id": "AccountAward_FlopDodge",
+    "Type": "award",
+    "Name": "Flop 100 Times",
+    "Challange": "D8479145-44C2D683-74BE74A1-ADDF77F8"
+  },
+  {
+    "Id": "Material_AwardTrait_Revivalist",
+    "Type": "award",
+    "Name": "Revive Allies",
+    "Challange": "BCD29B16-4AD4F664-467B11B8-40B71EC6"
   }
 ]
