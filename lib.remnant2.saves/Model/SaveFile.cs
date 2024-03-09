@@ -59,6 +59,13 @@ public class SaveFile
         Archive.CompressSave(path, w.ToArray());
     }
 
+    public static void WriteUncompressed(string path, SaveFile data)
+    {
+        Writer w = new();
+        data.Write(w);
+        File.WriteAllBytes(path,w.ToArray());
+    }
+
     public void VisitObjects(Action<ModelBase, int?> f)
     {
         Queue<(ModelBase obj, int? index)> q = new();
