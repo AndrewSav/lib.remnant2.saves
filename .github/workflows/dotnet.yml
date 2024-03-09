@@ -33,4 +33,4 @@ jobs:
     #  run: dotnet pack
     - name: Push
       if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
-      run: dotnet nuget push bin/Release/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push lib.remnant2.saves/bin/Release/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
