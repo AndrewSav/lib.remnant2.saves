@@ -1,0 +1,36 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    tags: 
+    - "v[0-9]+.[0-9]+.[0-9]+"
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Set Version Variable
+      if: ${{ github.ref_type == 'tag' }}
+      env:
+        TAG: ${{ github.ref_name }}
+      run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV      
+    - name: Build
+      run: dotnet build -c Release --no-restore /p:Version=$VERSION
+    #- name: Pack
+    #  run: dotnet pack
+    - name: Push
+      if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
+      run: dotnet nuget push lib.remnant2.saves/bin/Release/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
