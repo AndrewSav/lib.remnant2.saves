@@ -23,9 +23,15 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
+    - name: Set Version Variable
+      if: ${{ github.ref_type == 'tag' }}
+      env:
+        TAG: ${{ github.ref_name }}
+      run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV      
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore /p:Version=$VERSION
     - name: Pack
       run: dotnet pack
-    #- name: Push
-    #  run: dotnet nuget push 
+    - name: Push
+      if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
+      run: dotnet nuget push nupkgs/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
