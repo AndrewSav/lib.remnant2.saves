@@ -11,6 +11,8 @@
     <Version>0.0.1</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Remnant 2 save files parser and editor library</Description>
+    <Copyright>Andrew Savinykh 2023-2024</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
