@@ -4723,7 +4723,7 @@
   },
   {
     "Id": "Weapon_CubeGun",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/CubeGun/Weapon_CubeGun.Weapon_CubeGun_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/CubeGun/Weapon_CubeGun.Weapon_CubeGun_C",
     "Type": "weapon",
     "World": "World_Base",
     "Material": "Material_ConfluxPrism",
@@ -4734,7 +4734,7 @@
   },
   {
     "Id": "Weapon_Enigma",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/Enigma/Weapon_Enigma.Weapon_Enigma_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/Enigma/Weapon_Enigma.Weapon_Enigma_C",
     "Type": "weapon",
     "World": "World_Base",
     "Material": "Material_CipherRod",
@@ -4745,7 +4745,7 @@
   },
   {
     "Id": "Weapon_Hellfire",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/Hellfire/Weapon_Hellfire.Weapon_Hellfire_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/Hellfire/Weapon_Hellfire.Weapon_Hellfire_C",
     "Type": "weapon",
     "World": "World_Base",
     "Subtype": "Hand Gun",
@@ -4755,7 +4755,7 @@
   },
   {
     "Id": "Weapon_Meridian",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/Meridian/Weapon_Meridian.Weapon_Meridian_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/Meridian/Weapon_Meridian.Weapon_Meridian_C",
     "Type": "weapon",
     "World": "World_Base",
     "Subtype": "Hand Gun",
@@ -4765,7 +4765,7 @@
   },
   {
     "Id": "Weapon_Nebula",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/Nebula/Weapon_Nebula.Weapon_Nebula_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/Nebula/Weapon_Nebula.Weapon_Nebula_C",
     "Type": "weapon",
     "World": "World_Base",
     "Material": "Material_SpicedBile",
@@ -4776,7 +4776,7 @@
   },
   {
     "Id": "Weapon_RunePistol",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/RunePistol/Weapon_RunePistol.Weapon_RunePistol_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/RunePistol/Weapon_RunePistol.Weapon_RunePistol_C",
     "Type": "weapon",
     "World": "World_Base",
     "Material": "Material_DecrepitRune",
@@ -4788,7 +4788,7 @@
   },
   {
     "Id": "Weapon_Sorrow",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/Sorrow/Weapon_Sorrow.Weapon_Sorrow_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/Sorrow/Weapon_Sorrow.Weapon_Sorrow_C",
     "Type": "weapon",
     "World": "World_Base",
     "Subtype": "Hand Gun",
@@ -4799,7 +4799,7 @@
   },
   {
     "Id": "Weapon_StarShot",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/StarShot/Weapon_StarShot.Weapon_StarShot_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/StarShot/Weapon_StarShot.Weapon_StarShot_C",
     "Type": "weapon",
     "World": "World_Base",
     "Subtype": "Hand Gun",
@@ -4809,7 +4809,7 @@
   },
   {
     "Id": "Weapon_BoltDriver",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/BoltDriver/Weapon_BoltDriver.Weapon_BoltDriver_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/BoltDriver/Weapon_BoltDriver.Weapon_BoltDriver_C",
     "Type": "weapon",
     "World": "World_Base",
     "Subtype": "Hand Gun",
@@ -4819,7 +4819,7 @@
   },
   {
     "Id": "Weapon_HuntingPistol",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/HuntingPistol/Weapon_HuntingPistol.Weapon_HuntingPistol_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/HuntingPistol/Weapon_HuntingPistol.Weapon_HuntingPistol_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "Sureshot",
@@ -4830,7 +4830,7 @@
   },
   {
     "Id": "Weapon_MachinePistol",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/MachinePistol/Weapon_MachinePistol.Weapon_MachinePistol_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/MachinePistol/Weapon_MachinePistol.Weapon_MachinePistol_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "Tech 22",
@@ -4841,7 +4841,7 @@
   },
   {
     "Id": "Weapon_Magnum",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/Magnum/Weapon_Magnum.Weapon_Magnum_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/Magnum/Weapon_Magnum.Weapon_Magnum_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "Silverback Model 500",
@@ -4852,7 +4852,7 @@
   },
   {
     "Id": "Weapon_Repeater_Rusty",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/Repeater/Weapon_Repeater_Rusty.Weapon_Repeater_Rusty_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/Repeater/Weapon_Repeater_Rusty.Weapon_Repeater_Rusty_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "Rusty Repeater",
@@ -4862,7 +4862,7 @@
   },
   {
     "Id": "Weapon_Repeater",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/Repeater/Weapon_Repeater.Weapon_Repeater_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/Repeater/Weapon_Repeater.Weapon_Repeater_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "Repeater pistol",
@@ -4873,7 +4873,7 @@
   },
   {
     "Id": "Weapon_Revolver",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/Revolver/Weapon_Revolver.Weapon_Revolver_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/Revolver/Weapon_Revolver.Weapon_Revolver_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "Western Classic",
@@ -4884,7 +4884,7 @@
   },
   {
     "Id": "Weapon_RuptureCannon",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/RuptureCannon/Weapon_RuptureCannon.Weapon_RuptureCannon_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/RuptureCannon/Weapon_RuptureCannon.Weapon_RuptureCannon_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "Rupture Canon",
@@ -4895,7 +4895,7 @@
   },
   {
     "Id": "Weapon_ServicePistol",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/ServicePistol/Weapon_ServicePistol.Weapon_ServicePistol_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/ServicePistol/Weapon_ServicePistol.Weapon_ServicePistol_C",
     "Type": "weapon",
     "World": "World_Base",
     "Subtype": "Hand Gun",
@@ -4905,7 +4905,7 @@
   },
   {
     "Id": "Weapon_ShortBarrel",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/ShortBarrel/Weapon_ShortBarrel.Weapon_ShortBarrel_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/ShortBarrel/Weapon_ShortBarrel.Weapon_ShortBarrel_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "Double Barrel",
@@ -4916,7 +4916,7 @@
   },
   {
     "Id": "Weapon_SMG",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Standard/SMG/Weapon_SMG.Weapon_SMG_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Standard/SMG/Weapon_SMG.Weapon_SMG_C",
     "Type": "weapon",
     "World": "World_Base",
     "Name": "MP60-R",
@@ -5645,7 +5645,7 @@
   },
   {
     "Id": "Weapon_CorruptedMeridian",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/CorruptedMeridian/Weapon_CorruptedMeridian.Weapon_CorruptedMeridian_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/CorruptedMeridian/Weapon_CorruptedMeridian.Weapon_CorruptedMeridian_C",
     "Type": "weapon",
     "World": "World_Base",
     "Subtype": "Hand Gun",
@@ -5656,7 +5656,7 @@
   },
   {
     "Id": "Weapon_CorruptedRunePistol",
-    "ProfileId": "/Game/World_Base/Items/Weapons/Handguns/Special/CorruptedRunePistol/Weapon_CorruptedRunePistol.Weapon_CorruptedRunePistol_C",
+    "ProfileId": "/Game/World_Base/Items/Weapons/HandGuns/Special/CorruptedRunePistol/Weapon_CorruptedRunePistol.Weapon_CorruptedRunePistol_C",
     "Type": "weapon",
     "World": "World_Base",
     "Subtype": "Hand Gun",
