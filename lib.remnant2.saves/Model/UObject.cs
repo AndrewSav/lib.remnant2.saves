@@ -227,6 +227,19 @@ public class UObject : ModelBase
         }
     }
 
+    public string? KeySelector
+    {
+        get
+        {
+            if (Properties is { Properties.Count: > 0 } && Properties.Properties[0].Key == "Key")
+            {
+                return Properties.Properties[0].Value.ToStringValue();
+            }
+
+            return null;
+        }
+    }
+
     public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         if (Properties != null)
