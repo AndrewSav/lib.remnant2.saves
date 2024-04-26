@@ -6,7 +6,7 @@ namespace lib.remnant2.saves.Navigation;
 public class Navigator
 {
     private readonly ItemRegistry _registry = new();
-    private readonly Dictionary<ModelBase, Node> _lookup = new();
+    private readonly Dictionary<ModelBase, Node> _lookup = [];
     private readonly Node _root;
     public Navigator(SaveFile saveFile)
     {

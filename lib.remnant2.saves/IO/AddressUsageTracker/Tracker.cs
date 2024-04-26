@@ -3,7 +3,7 @@
 // This is a helper class for the ReaderBase to check if we have any unread gaps
 public class Tracker
 {
-    private readonly SortedDictionary<int,AddressRange> _ranges = new();
+    private readonly SortedDictionary<int,AddressRange> _ranges = [];
 
     public Tracker() { }
 

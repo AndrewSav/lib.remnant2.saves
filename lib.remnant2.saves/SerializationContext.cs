@@ -20,7 +20,7 @@ public class SerializationContext
     public Options? Options;
 
     // Caching NameTable entries for faster access
-    private readonly Dictionary<string, int> _namesTableIndex = new();
+    private readonly Dictionary<string, int> _namesTableIndex = [];
     private readonly object _lock = new();
 
     public int GetNamesTableIndex(string name)

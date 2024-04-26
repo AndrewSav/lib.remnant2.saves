@@ -4,7 +4,7 @@ using lib.remnant2.saves.Model;
 namespace lib.remnant2.saves.Navigation;
 internal class ItemRegistry
 {
-    private readonly Dictionary<string, Dictionary<string, List<Node>>> _registry = new();
+    private readonly Dictionary<string, Dictionary<string, List<Node>>> _registry = [];
 
     public bool Add(Node item)
     {
@@ -16,7 +16,7 @@ internal class ItemRegistry
         string name = item.Path[^1].Name;
         if (!_registry.ContainsKey(type))
         {
-            _registry[type] = new();
+            _registry[type] = [];
         }
         Dictionary<string, List<Node>> byType = _registry[type];
         if (!byType.ContainsKey(name))
