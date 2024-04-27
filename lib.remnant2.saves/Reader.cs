@@ -3,12 +3,8 @@ using lib.remnant2.saves.IO;
 
 namespace lib.remnant2.saves;
 
-public class Reader : ReaderBase
+public class Reader(byte[] buffer) : ReaderBase(buffer)
 {
-    public Reader(byte[] buffer) : base(buffer)
-    {
-    }
-
     public string? ReadFString()
     {
         int len = Read<int>();

@@ -6,14 +6,8 @@ namespace lib.remnant2.saves.IO;
 // This is a utility class for reading from a byte array
 // Note that the entire buffer resides in memory so it's not suitable
 // for large files, for our purposes though it's fine
-public class ReaderBase
+public class ReaderBase(byte[] buffer)
 {
-    public ReaderBase(byte[] buffer)
-    {
-        _buffer = buffer;
-    }
-
-    private readonly byte[] _buffer;
     private int _index;
     private readonly Tracker _tracker = new();
     private bool _trackerActive;
@@ -23,7 +17,7 @@ public class ReaderBase
         get => _index;
         set
         {
-            if (value < 0 || value > _buffer.Length)
+            if (value < 0 || value > buffer.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
@@ -31,7 +25,7 @@ public class ReaderBase
         }
     }
 
-    public int Size => _buffer.Length;
+    public int Size => buffer.Length;
 
     public T Read<T>()
     {
@@ -41,13 +35,13 @@ public class ReaderBase
             _tracker.AddRange(_index, _index + size);
         }
         _index += size;
-        return Unsafe.ReadUnaligned<T>(ref _buffer[_index - size]);
+        return Unsafe.ReadUnaligned<T>(ref buffer[_index - size]);
     }
 
     public byte[] ReadBytes(int size)
     {
         byte[] result = new byte[size];
-        Array.Copy(_buffer, _index, result, 0, size);
+        Array.Copy(buffer, _index, result, 0, size);
         if (_trackerActive)
         {
             _tracker.AddRange(_index, _index + size);
@@ -56,7 +50,7 @@ public class ReaderBase
         return result;
     }
 
-    public bool IsEof => _index >= _buffer.Length;
+    public bool IsEof => _index >= buffer.Length;
 
     public void ActivateTracker()
     {
