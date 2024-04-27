@@ -14,41 +14,44 @@ internal class ItemRegistry
             return false;
         }
         string name = item.Path[^1].Name;
-        if (!_registry.ContainsKey(type))
+        if (!_registry.TryGetValue(type, out Dictionary<string, List<Node>>? byType))
         {
-            _registry[type] = [];
+            byType = [];
+            _registry[type] = byType;
         }
-        Dictionary<string, List<Node>> byType = _registry[type];
-        if (!byType.ContainsKey(name))
+        if (!byType.TryGetValue(name, out List<Node>? nodes))
         {
-            byType[name] = [];
+            nodes = [];
+            byType[name] = nodes;
         }
-        byType[name].Add(item);
+
+        nodes.Add(item);
         return true;
     }
 
     public List<T> Get<T>(string name) where T : ModelBase
     {
         string type = typeof(T).Name;
-        if (!_registry.ContainsKey(type)) throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
-        Dictionary<string, List<Node>> byType = _registry[type];
-        return !byType.ContainsKey(name) ? [] : byType[name].Select(x => (T)x.Object).ToList();
+        if (!_registry.TryGetValue(type, out Dictionary<string, List<Node>>? byType)) 
+            throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
+        return !byType.TryGetValue(name, out List<Node>? nodes) ? [] : nodes.Select(x => (T)x.Object).ToList();
     }
 
     public List<T> GetAll<T>() where T : ModelBase
     {
         string type = typeof(T).Name;
-        if (!_registry.ContainsKey(type)) throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
-        Dictionary<string, List<Node>> byType = _registry[type];
+        if (!_registry.TryGetValue(type, out Dictionary<string, List<Node>>? byType)) 
+            throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
         return byType.SelectMany(x => x.Value).Select(x => (T)x.Object).ToList();
     }
 
     public List<T> Find<T>(string namePattern) where T : ModelBase
     {
         string type = typeof(T).Name;
-        if (!_registry.ContainsKey(type)) throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
-        Dictionary<string, List<Node>> byType = _registry[type];
-        return byType.SelectMany(x => x.Value).Where(x => !string.IsNullOrEmpty(x.Path[^1].Name) && Regex.IsMatch(x.Path[^1].Name, namePattern)).Select(x => (T)x.Object).ToList();
+        if (!_registry.TryGetValue(type, out Dictionary<string, List<Node>>? byType)) 
+            throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
+        return byType.SelectMany(x => x.Value)
+            .Where(x => !string.IsNullOrEmpty(x.Path[^1].Name) && Regex.IsMatch(x.Path[^1].Name, namePattern)).Select(x => (T)x.Object).ToList();
     }
 
     public Dictionary<string,List<string>> GetNames()
