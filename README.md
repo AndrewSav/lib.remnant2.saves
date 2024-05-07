@@ -230,10 +230,6 @@ Objects of some types has an index, which indicate their position in a parent ob
 
 I'm a proponent of a minimal error handling upfront, with adding it as necessary, when a clear use cases for it emerge. The disadvantage of that approach that for projects that are not likely to have a large audience (and/or used in production), they will never emerge, so a new person using it for their own needs is likely to stumble on an exception thrown that they would expect to be processed by the library. If you come across such a situation, please report.
 
-## Items database
-
-There is `db.json` file included in this repository which is not used by the library. This is a Remnant 2 item database which can be used for other applications working with Remnant 2 save files.
-
 ## Examples
 
 This library comes with the following code examples:
