@@ -4,10 +4,10 @@ All credit for the file format goes to <https://github.com/t1nky/remnant-item-fi
 
 ## What it does
 
-This is a library and a set of examples on reading, editing and writing Remnant 2 save files. It was developed with Microsoft .net 7.0 framework and Microsoft Visual Studio Community 2022. This is not a save editor application, but can be used to build one.
+This is a library and a set of examples on reading, editing and writing Remnant 2 save files. It was developed with Microsoft .net 8.0 framework and Microsoft Visual Studio Community 2022. This is not a save editor application, but can be used to build one.
 
 - Read both `profile.sav` and `save_x.sav` files
-- List characters inventory, equipment, progression, achievements, loadouts and anything else that can be found int them
+- List characters inventory, equipment, progression, achievements, loadouts and anything else that can be found in them
 - Determine which zones generated in rolled words and what items they may spawn
 - Persist the saves in `json` text format, edit them and convert them back into the save files
 - Change save data via object model and persist the changes by writing the save files back
@@ -22,7 +22,7 @@ The most practical way to familiarize oneself with the save files format, is to 
 
 - `Compression` folder contains code for decompressing and re-compressing the save file. The top level `SaveFile` data type contains `FileHeader` type used for the compression and `SaveData` type which contains all the data after they were decompressed
 - `IO` folder contains `ReaderBase` and `WriterBase` classes that service all file input and output the library needs. It also contains `AddressUsageTracker` folder with classes that help track if there are any unread gaps in the save file being read. This is to ensure that we understand the format correctly and not leaving any data unread.
-- `Model` folder contains all the type in  Remnant 2 save object model
+- `Model` folder contains all the types in  Remnant 2 save object model
 - `Navigation` folder has a set of helper classes to facilitate navigation in the save file object graph
 - `Reader` and `Writer` classes add functionality to read and write `FString`s that is used by many types
 - `SerializationContext` hold global information that is passed around the object graph during reading and writing
@@ -80,7 +80,7 @@ You will notice, that when you read a save and then save it without changes you 
 
 ## JSON serialization
 
-There is an example called `json` that shows the possibility of serializing and deserializing the save file to / from `json`. The was not much work put into this, it was just proven that it is possible and works. When you deserialize a save file from json it is recommended to write it straight away, and re-read it if further work on the file is required, because some links are not serialized due to cyclic nature. Everything that is required to produce a save file is serialized. Same as in previous section it cannot be guaranteed that your `json` edit will produce a valid save file, it's up to you to ensure, that the structure is correct from the game perspective.
+There is an example called `json` that shows the possibility of serializing and deserializing the save file to / from `json`. There was not much work put into this, it was just proven that it is possible and works. When you deserialize a save file from json it is recommended to write it straight away, and re-read it if further work on the file is required, because some links are not serialized due to cyclic nature. Everything that is required to produce a save file is serialized. Same as in previous section it cannot be guaranteed that your `json` edit will produce a valid save file, it's up to you to ensure, that the structure is correct from the game perspective.
 
 ## `ModelBase` derived types
 
