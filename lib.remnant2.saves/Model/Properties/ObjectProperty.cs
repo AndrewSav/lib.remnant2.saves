@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Newtonsoft.Json;
 
 namespace lib.remnant2.saves.Model.Properties;
 
@@ -7,7 +6,7 @@ public class ObjectProperty : ModelBase
 {
     public required int ObjectIndex;
     public string? ClassName; // To make it easier to navigate in the debugger
-    [JsonIgnore]
+    [NonSerialized]
     public UObject? Object;
 
     public ObjectProperty()
