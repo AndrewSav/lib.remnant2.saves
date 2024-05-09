@@ -17,7 +17,8 @@ internal partial class Example
             { "Jungle", "Yaesha" },
             { "Nerud", "Nerud" },
             { "Fae", "Losomn" },
-            { "OTK", "Losomn OTK" }
+            { "OTK", "Losomn OTK" },
+            { "DLC2", "Forgotten Kingdom" }
         };
 
 
