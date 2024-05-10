@@ -3,11 +3,16 @@ using System.IO.Compression;
 using System.IO.Hashing;
 using lib.remnant2.saves.Compression.Model;
 using lib.remnant2.saves.IO;
+using Serilog;
 
 namespace lib.remnant2.saves.Compression;
 
 public class Archive
 {
+    public static ILogger Logger => Log.Logger
+        .ForContext(Log.Category, Log.Compression)
+        .ForContext<Archive>();
+
     public static byte[] DecompressSave(string saveFile)
     {
         ReaderBase r = new(File.ReadAllBytes(saveFile));
@@ -37,11 +42,11 @@ public class Archive
 
         if (saveSize + 12 != fh.DecompressedSize)
         {
-            Log.Logger.Warning("Expected saveSize + 12 == fh.DecompressedSize, got: saveSize: {saveSize} DecompressedSize: {DecompressedSize}", saveSize, fh.DecompressedSize);
+            Logger.Warning("Expected saveSize + 12 == fh.DecompressedSize, got: saveSize: {saveSize} DecompressedSize: {DecompressedSize}", saveSize, fh.DecompressedSize);
         }
         if (9 != fh.Version)
         {
-            Log.Logger.Warning("Expected save version 9, got: saveSize: {Version}", fh.Version);
+            Logger.Warning("Expected save version 9, got: saveSize: {Version}", fh.Version);
         }
 
         BinaryPrimitives.WriteUInt32LittleEndian(span, fh.Crc32);

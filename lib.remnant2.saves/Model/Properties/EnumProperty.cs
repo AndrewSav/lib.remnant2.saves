@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using lib.remnant2.saves.Model.Parts;
+using Serilog;
 
 namespace lib.remnant2.saves.Model.Properties;
 
 public class EnumProperty : ModelBase
 {
+    public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<EnumProperty>();
     public required FName EnumType;
     public required byte Unknown;
     public required FName EnumValue;
@@ -21,7 +23,7 @@ public class EnumProperty : ModelBase
         Unknown = r.Read<byte>();
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
+            Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
         }
         EnumValue = new(r, ctx.NamesTable);
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;

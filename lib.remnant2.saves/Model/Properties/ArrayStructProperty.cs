@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Parts;
+using Serilog;
 
 namespace lib.remnant2.saves.Model.Properties;
 
 public class ArrayStructProperty : ModelBase
 {
+    public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<ArrayStructProperty>();
+
     public required byte Unknown;
     public required FName OuterElementType;
     public required ushort NameIndex;
@@ -30,7 +33,7 @@ public class ArrayStructProperty : ModelBase
         Unknown = unknown;
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
+            Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
         }
         OuterElementType = elementType;
         NameIndex = r.Read<ushort>();
@@ -42,7 +45,7 @@ public class ArrayStructProperty : ModelBase
         Unknown2 = r.Read<byte>();
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown2 byte at {Offset}", Unknown2, r.Position);
+            Logger.Warning("unexpected non-zero value {value} of an unknown2 byte at {Offset}", Unknown2, r.Position);
         }
 
         Count = count;

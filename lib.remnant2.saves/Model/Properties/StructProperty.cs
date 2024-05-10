@@ -3,11 +3,13 @@ using System.Globalization;
 using lib.remnant2.saves.IO;
 using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Parts;
+using Serilog;
 
 namespace lib.remnant2.saves.Model.Properties;
 
 public class StructProperty : ModelBase
 {
+    public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<StructProperty>();
     public required FName Type;
     public required FGuid Guid;
     public required byte Unknown;
@@ -26,7 +28,7 @@ public class StructProperty : ModelBase
         Unknown = r.Read<byte>();
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
+            Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
         }
         Value = ReadStructPropertyValue(r, ctx, Type.Name);
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;

@@ -1,11 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using lib.remnant2.saves.Model.Parts;
 using lib.remnant2.saves.Model.Properties.Parts;
+using Serilog;
 
 namespace lib.remnant2.saves.Model.Properties;
 
 public class MapProperty : ModelBase
 {
+    public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<MapProperty>();
     public required FName KeyType;
     public required FName ValueType;
     public required byte[] Unknown;
@@ -26,7 +28,7 @@ public class MapProperty : ModelBase
         if (Unknown.Any(x => x != 0))
         {
             string debug = BitConverter.ToString(Unknown);
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown bytes at {Offset}", debug, r.Position);
+            Logger.Warning("unexpected non-zero value {value} of an unknown bytes at {Offset}", debug, r.Position);
         }
 
         int len = r.Read<int>();

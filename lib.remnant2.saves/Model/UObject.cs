@@ -1,10 +1,12 @@
 ﻿using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Properties;
+using Serilog;
 
 namespace lib.remnant2.saves.Model;
 
 public class UObject : ModelBase
 {
+    public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<UObject>();
     public byte WasLoadedByte;
     public string? ObjectPath;
     public UObjectLoadedData? LoadedData;
@@ -62,8 +64,8 @@ public class UObject : ModelBase
         if (extraData.Any(x => x != 0))
         {
             string debug = BitConverter.ToString(extraData);
-            Log.Logger.Warning("unexpected non-zero extra data while reading properties at {Offset:x8}", r.Position);
-            Log.Logger.Debug(debug);
+            Logger.Warning("unexpected non-zero extra data while reading properties at {Offset:x8}", r.Position);
+            Logger.Debug(debug);
         }
 
         return (result, extraData);
@@ -108,8 +110,8 @@ public class UObject : ModelBase
                 if (c.ExtraComponentsData.Any(x => x != 0))
                 {
                     string debug = BitConverter.ToString(c.ExtraComponentsData);
-                    Log.Logger.Warning("unexpected non-zero extra data while reading components at {Offset:x8}", r.Position);
-                    Log.Logger.Debug(debug);
+                    Logger.Warning("unexpected non-zero extra data while reading components at {Offset:x8}", r.Position);
+                    Logger.Debug(debug);
                 }
             }
 

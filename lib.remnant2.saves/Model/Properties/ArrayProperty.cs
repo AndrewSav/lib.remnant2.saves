@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using lib.remnant2.saves.Model.Parts;
 using lib.remnant2.saves.Model.Properties.Parts;
+using Serilog;
 
 namespace lib.remnant2.saves.Model.Properties;
 
 public class ArrayProperty : ModelBase
 {
+    public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<ArrayProperty>();
+
     public required FName ElementType;
     public required List<object?> Items;
     public required byte Unknown;
@@ -21,7 +24,7 @@ public class ArrayProperty : ModelBase
         Unknown = unknown;
         if (Unknown != 0)
         {
-            Log.Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown,  r.Position);
+            Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown,  r.Position);
         }
         ElementType = elementType;
         Items = [];

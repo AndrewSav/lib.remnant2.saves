@@ -3,10 +3,12 @@ using System.IO.Hashing;
 using lib.remnant2.saves.Compression;
 using lib.remnant2.saves.IO.AddressUsageTracker;
 using lib.remnant2.saves.Model.Memory;
+using Serilog;
 
 namespace lib.remnant2.saves.Model;
 public class SaveFile
 {
+    public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<SaveFile>();
     public required FileHeader FileHeader;
     public required SaveData SaveData;
 
@@ -24,11 +26,11 @@ public class SaveFile
         SortedDictionary<int, AddressRange> d = r.GetTracker().GetRanges();
         if (d.Count > 1)
         {
-            Log.Logger.Warning("unexpected gaps in the the read data");
+            Logger.Warning("unexpected gaps in the the read data");
         }
         if (d[0].End != r.Position)
         {
-            Log.Logger.Warning("unexpected position after read");
+            Logger.Warning("unexpected position after read");
         }
     }
 
