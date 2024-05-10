@@ -21,15 +21,13 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: dotnet restore
     - name: Set Version Variable
       if: ${{ github.ref_type == 'tag' }}
       env:
         TAG: ${{ github.ref_name }}
       run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV      
     - name: Build
-      run: dotnet build -c Release --no-restore /p:Version=$VERSION
+      run: dotnet build -c Release /p:Version=$VERSION
     - name: Create Release
       uses: softprops/action-gh-release@v2
     - name: Push
