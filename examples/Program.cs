@@ -2,8 +2,6 @@
 
 internal class Program
 {
-    // TODO: Nuget
-
     private static void Main()
     {
         Tests.Run();
