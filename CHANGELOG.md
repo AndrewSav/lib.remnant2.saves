@@ -1,6 +1,9 @@
 # Changelog
 
 
+## v0.0.10 (28 May 2024)
+- Minor build and debugging fixes
+
 ## v0.0.9 (10 May 2024)
 
 - Improve logging to integrate better with the client

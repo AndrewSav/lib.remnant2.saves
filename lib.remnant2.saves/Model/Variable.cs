@@ -90,4 +90,9 @@ public class Variable : ModelBase
         if (Value is ModelBase node)
             yield return (node, null);
     }
+
+    public override string ToString()
+    {
+        return Name.Name;
+    }
 }
