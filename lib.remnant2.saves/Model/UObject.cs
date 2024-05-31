@@ -73,8 +73,8 @@ public class UObject : ModelBase
 
     public static List<Component> ReadComponents(Reader r, SerializationContext ctx)
     {
-        List<Component> result = [];
         uint componentCount = r.Read<uint>();
+        List<Component> result = new((int)componentCount);
         for (int i = 0; i < componentCount; i++)
         {
             int readOffset = r.Position + ctx.ContainerOffset;

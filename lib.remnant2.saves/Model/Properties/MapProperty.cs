@@ -21,7 +21,6 @@ public class MapProperty : ModelBase
     public MapProperty(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
-        Values = [];
         KeyType = new(r, ctx.NamesTable);
         ValueType = new(r, ctx.NamesTable);
         Unknown = r.ReadBytes(5);
@@ -32,6 +31,7 @@ public class MapProperty : ModelBase
         }
 
         int len = r.Read<int>();
+        Values = new(len);
         for (int i = 0; i < len; i++)
         {
             object key = PropertyValue.ReadPropertyValue(r, ctx, KeyType.Name).Value!;

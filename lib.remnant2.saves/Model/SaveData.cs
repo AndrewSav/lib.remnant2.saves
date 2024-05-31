@@ -41,7 +41,7 @@ public class SaveData : ModelBase
         r.Position = (int)NameTableOffset;
 
         int len = r.Read<int>();
-        NamesTable = [];
+        NamesTable = new List<string>(len);
         for (int i = 0; i < len; i++)
         {
             string name = r.ReadFString() ?? throw new InvalidOperationException("unexpected null entry in names table");
@@ -60,7 +60,7 @@ public class SaveData : ModelBase
         r.Position = (int)ObjectsOffset;
 
         int numUniqueObjects = r.Read<int>();
-        Objects = [];
+        Objects = new List<UObject>(numUniqueObjects);
         for (int i = 0; i < numUniqueObjects; i++)
         {
             UObject o = new(r, ctx, i);

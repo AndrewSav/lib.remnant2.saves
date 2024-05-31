@@ -49,7 +49,7 @@ public class ArrayStructProperty : ModelBase
         }
 
         Count = count;
-        Items = [];
+        Items = new List<object?>((int)Count);
 
         for (int i = 0; i < Count; i++)
         {

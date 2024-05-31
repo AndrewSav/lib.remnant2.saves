@@ -27,7 +27,7 @@ public class ArrayProperty : ModelBase
             Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown,  r.Position);
         }
         ElementType = elementType;
-        Items = [];
+        Items = new List<object?>((int)count);
         for (int i = 0; i < count; i++)
         {
             object o = PropertyValue.ReadPropertyValue(r, ctx, ElementType.Name).Value!;

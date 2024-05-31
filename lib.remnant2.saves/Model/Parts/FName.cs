@@ -14,7 +14,7 @@ public class FName
     }
 
     [SetsRequiredMembers]
-    public FName(Reader r, List<string> namesTable)
+    public FName(Reader r, IReadOnlyList<string> namesTable)
     {
         const ushort hasNumberBit = 1 << 15;
         ushort i = r.Read<ushort>();

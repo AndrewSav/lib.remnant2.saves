@@ -25,7 +25,7 @@ public class PersistenceContainer : ModelBase
 
         r.Position = indexOffset;
         uint infoCount = r.Read<uint>();
-        List<FInfo> actorInfo = [];
+        List<FInfo> actorInfo = new((int)infoCount);
         for (uint i = 0; i < infoCount; i++)
         {
             actorInfo.Add(r.Read<FInfo>());
@@ -39,7 +39,7 @@ public class PersistenceContainer : ModelBase
         }
         ReadLength = r.Position + containerOffset - ReadOffset;
 
-        Actors = [];
+        Actors = new List<KeyValuePair<ulong, Actor>>(actorInfo.Count);
         for (int index = 0; index < actorInfo.Count; index++)
         {
             FInfo info = actorInfo[index];
