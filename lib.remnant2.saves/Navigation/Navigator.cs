@@ -75,13 +75,13 @@ public class Navigator
 
     private T? GetRegistryItem<T>(string name, ModelBase? parent = null) where T : ModelBase
     {
-        var l = GetRegistryItems<T>(name, parent);
-        if (!l.Any())
+        var l = GetRegistryItems<T>(name, parent).ToList();
+        if (l.Count == 0)
         {
             return null;
         }
 
-        if (l.Count() == 1)
+        if (l.Count == 1)
         {
             return l.ElementAt(0);
         }
