@@ -1,6 +1,9 @@
 # Changelog
 
 
+## v0.0.12 (3 June 2024)
+- Add methods to accept byte array for the save data
+
 ## v0.0.11 (3 June 2024)
 - Performance improvements
 

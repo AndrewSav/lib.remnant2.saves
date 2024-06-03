@@ -54,6 +54,14 @@ public class SaveFile
         Reader r = new(b);
         return new SaveFile(r,opts);
     }
+
+    public static SaveFile Read(byte[] data, Options? opts = null)
+    {
+        byte[] b = Archive.DecompressSave(data);
+        Reader r = new(b);
+        return new SaveFile(r, opts);
+    }
+
     public static void Write(string path, SaveFile data)
     {
         Writer w = new();

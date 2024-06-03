@@ -15,7 +15,12 @@ public class Archive
 
     public static byte[] DecompressSave(string saveFile)
     {
-        ReaderBase r = new(File.ReadAllBytes(saveFile));
+        return DecompressSave(File.ReadAllBytes(saveFile));
+    }
+
+    public static byte[] DecompressSave(byte[] data)
+    {
+        ReaderBase r = new(data);
         using MemoryStream output = new();
 
         CompressedFileHeader fh = r.Read<CompressedFileHeader>();
