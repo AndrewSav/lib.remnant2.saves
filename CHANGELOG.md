@@ -1,6 +1,9 @@
 # Changelog
 
 
+## v0.0.11 (3 June 2024)
+- Performance improvements
+
 ## v0.0.10 (28 May 2024)
 - Minor build and debugging fixes
 
