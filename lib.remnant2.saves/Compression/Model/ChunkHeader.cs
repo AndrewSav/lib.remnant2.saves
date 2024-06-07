@@ -24,19 +24,19 @@ public struct ChunkHeader
 
     public readonly void DumpDebug(int chunk = -1)
     {
-        Logger.Debug("Dumping ChunkHeader");
+        Logger.Verbose("Dumping ChunkHeader");
         if (chunk != -1)
         {
-            Logger.Debug($"Chunk {chunk}");
+            Logger.Verbose($"Chunk {chunk}");
         }
-        Logger.Debug($"HeaderTag {HeaderTag:X8}");
-        Logger.Debug($"ChunkSize {ChunkSize}");
-        Logger.Debug($"Compressor {Compressor}");
-        Logger.Debug($"CompressedSize1 {CompressedSize1}");
-        Logger.Debug($"DecompressedSize1 {DecompressedSize1}");
-        Logger.Debug($"CompressedSize2 {CompressedSize2}");
-        Logger.Debug($"DecompressedSize2 {DecompressedSize2}");
-        Logger.Debug("--");
+        Logger.Verbose($"HeaderTag {HeaderTag:X8}");
+        Logger.Verbose($"ChunkSize {ChunkSize}");
+        Logger.Verbose($"Compressor {Compressor}");
+        Logger.Verbose($"CompressedSize1 {CompressedSize1}");
+        Logger.Verbose($"DecompressedSize1 {DecompressedSize1}");
+        Logger.Verbose($"CompressedSize2 {CompressedSize2}");
+        Logger.Verbose($"DecompressedSize2 {DecompressedSize2}");
+        Logger.Verbose("--");
 
     }
 

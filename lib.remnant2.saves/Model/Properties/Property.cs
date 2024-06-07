@@ -61,7 +61,7 @@ public class Property : ModelBase
         {
             T prop => prop,
             StructProperty { Value: T inner } => inner,
-            _ => throw new InvalidOperationException("requested value is of a different type")
+            _ => throw new InvalidOperationException($"requested value is of a different type. Requested type: '{typeof(T)}' actual type: '{Value.ToTypeString()}'")
         };
     }
 
