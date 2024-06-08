@@ -5,6 +5,7 @@ namespace lib.remnant2.saves.Model.Properties;
 public class PropertyBag : ModelBase
 {
     public required List<KeyValuePair<string, Property>> Properties;
+    [NonSerialized]
     public required Dictionary<string, Property> Lookup;
 
     public PropertyBag()
