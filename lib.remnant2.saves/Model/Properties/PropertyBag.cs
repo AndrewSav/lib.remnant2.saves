@@ -5,6 +5,7 @@ namespace lib.remnant2.saves.Model.Properties;
 public class PropertyBag : ModelBase
 {
     public required List<KeyValuePair<string, Property>> Properties;
+    public required Dictionary<string, Property> Lookup;
 
     public PropertyBag()
     {
@@ -14,15 +15,19 @@ public class PropertyBag : ModelBase
     public PropertyBag(Reader r, SerializationContext ctx)
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
+        Lookup = [];
         Properties = [];
         while (true)
         {
             Property p = new(r, ctx);
-            if (p.Name.Name == "None")
+            string name = p.Name.Name;
+            if (name == "None")
             {
                 break;
             }
-            Properties.Add(new KeyValuePair<string, Property>(p.Name.Name, p));
+
+            Properties.Add(new KeyValuePair<string, Property>(name,p));
+            Lookup.TryAdd(name, p);
         }
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
@@ -30,7 +35,7 @@ public class PropertyBag : ModelBase
     public void Write(Writer w, SerializationContext ctx)
     {
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
-        foreach (KeyValuePair<string, Property> keyValuePair in Properties)
+        foreach (KeyValuePair<string, Property> keyValuePair in Lookup)
         {
             keyValuePair.Value.Write(w, ctx);
         }
@@ -40,26 +45,18 @@ public class PropertyBag : ModelBase
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
-    public Property this[string s]
-    {
-        get
-        {
-            return Properties.Single(x=>x.Key == s).Value;
+    public Property this[string s] => Lookup[s];
 
-        }
-    }
-    
     public bool Contains(string s)
     {
-        return Properties.Any(x => x.Key == s);
+        return Lookup.ContainsKey(s);
     }
 
     public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
         for (int index = 0; index < Properties.Count; index++)
         {
-            KeyValuePair<string, Property> p = Properties[index];
-            yield return (p.Value, index);
+            yield return (Properties[index].Value, index);
         }
     }
 }
