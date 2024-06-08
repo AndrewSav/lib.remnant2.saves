@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v0.0.13 (8 June 2024)
+- Optimize propery lookup on PropertyBag
+- Fine tune log level
+- Add type information for exception thrown on type mismatch when getting a Property value
+
 ## v0.0.12 (3 June 2024)
 - Add methods to accept byte array for the save data
 
