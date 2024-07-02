@@ -60,6 +60,7 @@ internal partial class Example
             Properties = ringItem.GetParent<PropertyBag>(navigator).Properties
                 .Select(x => new KeyValuePair<string, Property>(x.Key, x.Value.ShallowCopyProperty())).ToList(),
         };
+        newItemBag.RefreshLookup();
 
         newItemBag["ItemBP"].Value = new ObjectProperty { ObjectIndex = itemObject.ObjectIndex };
         newItemBag["InstanceData"].Value = new ObjectProperty { ObjectIndex = instanceDataObject.ObjectIndex };

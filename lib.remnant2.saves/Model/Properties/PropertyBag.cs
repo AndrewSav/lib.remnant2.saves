@@ -59,4 +59,13 @@ public class PropertyBag : ModelBase
             yield return (Properties[index].Value, index);
         }
     }
+
+    public void RefreshLookup()
+    {
+        Lookup = [];
+        foreach (KeyValuePair<string, Property> pair in Properties)
+        {
+            Lookup.Add(pair.Key,pair.Value);
+        }
+    }
 }

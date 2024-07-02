@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v0.0.14 (2 July 2024)
+- Updated dependencies
+- Fixed edit example that got broken after Lookup optimization
+
 ## v0.0.13 (8 June 2024)
 - Optimize propery lookup on PropertyBag
 - Fine tune log level
