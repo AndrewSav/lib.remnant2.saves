@@ -1,6 +1,9 @@
 # Changelog
 
 
+## v0.0.16 (19 July 2024)
+- And an example of setting corrupted shards number to the maximum of ten
+
 ## v0.0.15 (19 July 2024)
 - Give better name to some UObject's
 

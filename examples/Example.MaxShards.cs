@@ -1,6 +1,4 @@
 ﻿using lib.remnant2.saves.Model;
-using lib.remnant2.saves.Model.Memory;
-using lib.remnant2.saves.Model.Parts;
 using lib.remnant2.saves.Model.Properties;
 using lib.remnant2.saves.Navigation;
 
@@ -40,12 +38,6 @@ internal partial class Example
         Property scrapItem = navigator.GetProperties("ItemBP", character.Object)
             .Single(x => x.Value!.ToString() == scrapId);
 
-        SaveData objectDirectory = scrapItem.Get<ObjectProperty>().Object!.GetParent<SaveData>(navigator);
-        ArrayStructProperty inventoryArray = scrapItem.GetParent<PropertyBag>(navigator).GetParent<ArrayStructProperty>(navigator);
-
-
-        var f1 = navigator.Lookup(scrapItem);
-
 
         if (shardItem != null)
         {
@@ -60,69 +52,18 @@ internal partial class Example
             Console.WriteLine("Your character does not have shards, adding");
             
             UObject itemObject = (scrapItem.Value as ObjectProperty)!.Object!.ShallowCopyObject(navigator);
-
-            //UObject itemObject = new()
-            //{
-            //    Components = null,
-            //    ExtraPropertiesData = null,
-            //    IsActor = 0,
-            //    LoadedData = null,
-            //    ObjectIndex = 0,
-            //    ObjectPath = shardId,
-            //    Properties = null,
-            //    WasLoadedByte = 1,
-            //};
-
-            //objectDirectory.Objects.Add(itemObject);
-            //itemObject.ObjectIndex = objectDirectory.Objects.FindIndex(x => x == itemObject);
-
+            itemObject.ObjectPath = shardId;
 
             UObject instanceDataObject = (scrapItem.GetParent<PropertyBag>(navigator)["InstanceData"].Value as ObjectProperty)!.Object!.ShallowCopyObject(navigator);
-
-
-            //UObject instanceDataObject = new()
-            //{
-            //    Components = null,
-            //    ExtraPropertiesData = new byte[4],
-            //    IsActor = 0,
-            //    LoadedData = new UObjectLoadedData()
-            //    {
-            //        Name = FName.Create("ItemInstanceData", objectDirectory.NamesTable),
-            //        OuterId = 0
-            //    },
-            //    ObjectIndex = 0,
-            //    ObjectPath = "/Script/GunfireRuntime.ItemInstanceData",
-            //    Properties = new PropertyBag()
-            //    {
-            //        Properties = new List<KeyValuePair<string, Property>>()
-            //    },
-            //    WasLoadedByte = 0,
-            //};
-
-            //objectDirectory.Objects.Add(instanceDataObject);
-            //instanceDataObject.ObjectIndex = objectDirectory.Objects.FindIndex(x => x == instanceDataObject);
-
-
+            instanceDataObject.LoadedData = instanceDataObject.LoadedData!.ShallowCopyLoadedData();
             instanceDataObject.Properties = new PropertyBag
             {
                 Properties = instanceDataObject.Properties!.Properties
                     .Select(x => new KeyValuePair<string, Property>(x.Key, x.Value.ShallowCopyProperty())).ToList()
-                //Properties = new List<KeyValuePair<string, Property>>() 
             };
-            instanceDataObject.LoadedData = instanceDataObject.LoadedData!.ShallowCopyLoadedData();
-
-            //instanceDataObject.Properties.Properties.Add(new KeyValuePair<string, Property>("Quantity", new Property()
-            //{
-            //    Index = 0,
-            //    NoRaw = 0,
-            //    Size = 4,
-            //    Name = FName.Create("Quantity", objectDirectory.NamesTable),
-            //    Type = FName.Create("IntProperty", objectDirectory.NamesTable),
-            //    Value = 10
-            //}));
             instanceDataObject.Properties.RefreshLookup();
             instanceDataObject.Properties["Quantity"].Value = 10;
-            itemObject.ObjectPath = shardId;
+
             PropertyBag newItemBag = new()
             {
                 Properties = scrapItem.GetParent<PropertyBag>(navigator).Properties
@@ -133,6 +74,7 @@ internal partial class Example
             newItemBag["InstanceData"].Value = new ObjectProperty { ObjectIndex = instanceDataObject.ObjectIndex };
             newItemBag["New"].Value = 1; // Just for in-game display
 
+            ArrayStructProperty inventoryArray = scrapItem.GetParent<PropertyBag>(navigator).GetParent<ArrayStructProperty>(navigator);
             int maxId = inventoryArray.Items.Select(x => (int)((PropertyBag)x!)["ID"].Value!).Max();
             newItemBag["ID"].Value = maxId + 1;
 

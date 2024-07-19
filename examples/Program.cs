@@ -16,5 +16,6 @@ internal class Program
         Example.EditScrap();
         Example.AddRing();
         Example.CassAddItem();
+        Example.MaxShards();
     }
 }

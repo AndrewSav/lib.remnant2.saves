@@ -235,7 +235,7 @@ I'm a proponent of a minimal error handling upfront, with adding it as necessary
 This library comes with the following code examples:
 
 - Add Ring - edit save file to ad an arbitrary ring to your character
-- Blood Moon - display little information that the save file has about blood moon generation
+- Blood Moon - display little information that the save file has about blood moon generation, edit save file to increase the chance of Blood Moon triggering
 - Campaign - display various data from `save_x.sav` file:
   - Time Played with this character
   - Quest Completed Log
@@ -249,6 +249,7 @@ This library comes with the following code examples:
 - Challenges - Achievements and Challenges progress for each of your characters
 - Edit Scrap - edit scrap quantity in your save using navigation system
 - Edit Scrap Raw - edit scrap quantity in your save using raw API
+- Set corrupted shards number to the maximum of ten
 - JSON - serialize safe file to and deserialize from JSON
 - Loadouts - display characters loadouts
 - Read Profile - read profile data:
