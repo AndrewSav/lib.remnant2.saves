@@ -1,6 +1,9 @@
 # Changelog
 
 
+## v0.0.15 (19 July 2024)
+- Give better name to some UObject's
+
 ## v0.0.14 (2 July 2024)
 - Updated dependencies
 - Fixed edit example that got broken after Lookup optimization

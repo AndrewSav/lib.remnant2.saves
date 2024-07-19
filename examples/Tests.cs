@@ -29,6 +29,20 @@ internal class Tests
     {
         SaveFile sf = SaveFile.Read(path);
 
+        //Navigator n = new Navigator(sf);
+        //List<Node> x = n.GetAllProperties()
+        //    .Select(x => n.Lookup(x).Parent.Parent.Object as UObject)
+        //    .Where(x => x != null && x.ExtraPropertiesData.Any(y => y != 0))
+        //    .Distinct()
+        //    .Select(n.Lookup)
+        //    .ToList();
+        //for (int index = 0; index < x.Count; index++)
+        //{
+        //    var xx = x[index];
+        //    var uo = xx.Object as UObject;
+        //    File.WriteAllBytes($"d:\\data{index}",uo.ExtraPropertiesData);
+        //}
+
         Writer w = new();
         sf.SaveData.Write(w);
         byte[] decoded1 = w.ToArray();

@@ -58,7 +58,7 @@ public class Node
         {
             Variable x => x.Name.Name,
             Variables x => x.Name.Name,
-            UObject x => x.LoadedData?.Name.Name,
+            UObject x => GetUObjectName(x),
             Component x => x.ComponentKey,
             TextPropertyData0 x => x.Key,
             Property x => x.Name.Name,
@@ -69,6 +69,25 @@ public class Node
             ArrayStructProperty x=> x.ElementType.Name,
             _ => ""
         } ?? "";
+    }
+
+    private static string? GetUObjectName(UObject o)
+    {
+        if (o.Name != o.ObjectPath)
+        {
+            o.ToString();
+        }
+
+        
+        if (o.Name == "PersistenceContainer")
+        {
+            return $"pc:{o.KeySelector}";
+        }
+        if (o.Name == "ZoneActor" && (o.Properties?.Contains("Label") ?? false))
+        {
+            return "za:" + o.Properties["Label"].Get<TextProperty>();
+        }
+        return o.Name;
     }
 
     private IEnumerable<Node> GetChildren()
