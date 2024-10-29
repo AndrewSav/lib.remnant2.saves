@@ -17,5 +17,6 @@ internal class Program
         Example.AddRing();
         Example.CassAddItem();
         Example.MaxShards();
+        Example.Alloys();
     }
 }
