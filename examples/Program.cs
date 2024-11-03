@@ -18,5 +18,6 @@ internal class Program
         Example.CassAddItem();
         Example.MaxShards();
         Example.Alloys();
+        Example.ResetOneShots();
     }
 }
