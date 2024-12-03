@@ -1,6 +1,9 @@
 # Changelog
 
 
+## v0.0.17 (3 December 2024)
+- Updated dependencies
+
 ## v0.0.16 (19 July 2024)
 - And an example of setting corrupted shards number to the maximum of ten
 
