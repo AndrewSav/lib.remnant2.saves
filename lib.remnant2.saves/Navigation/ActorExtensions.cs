@@ -22,5 +22,14 @@ public static class ActorExtensions
         }
         return null;
     }
+    public static List<Component>? GetFirstObjectComponents(this Actor actor)
+    {
+        UObject? firstObject = actor.Archive.Objects.FirstOrDefault();
+        if (firstObject != null)
+        {
+            return firstObject.Components;
+        }
+        return null;
+    }
 }
 

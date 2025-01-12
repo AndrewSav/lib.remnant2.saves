@@ -1,6 +1,9 @@
 # Changelog
 
 
+## v0.0.18 (12 January 2024)
+- Added GetFirstObjectComponents extenstion method for Actor
+
 ## v0.0.17 (3 December 2024)
 - Updated dependencies
 
