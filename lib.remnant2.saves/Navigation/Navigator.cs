@@ -11,7 +11,7 @@ public class Navigator
     private readonly Node _root;
     public Navigator(SaveFile saveFile)
     {
-        _root = new Node(saveFile.SaveData, this);
+        _root = new(saveFile.SaveData, this);
         Queue<Node> q = new();
         q.Enqueue(_root);
         while (q.Count > 0)
@@ -75,7 +75,7 @@ public class Navigator
 
     private T? GetRegistryItem<T>(string name, ModelBase? parent = null) where T : ModelBase
     {
-        var l = GetRegistryItems<T>(name, parent).ToList();
+        List<T> l = GetRegistryItems<T>(name, parent).ToList();
         if (l.Count == 0)
         {
             return null;

@@ -9,12 +9,12 @@ public class Tracker
 
     public Tracker(Tracker tracker)
     {
-        _ranges = new SortedDictionary<int,AddressRange>(tracker._ranges);
+        _ranges = new(tracker._ranges);
     }
 
     public void AddRange(int start, int end)
     {
-        _ranges.Add(start, new AddressRange { Begin = start, End = end });
+        _ranges.Add(start, new() { Begin = start, End = end });
         MergeRanges();
     }
     private void MergeRanges()
@@ -34,6 +34,6 @@ public class Tracker
     }
     public SortedDictionary<int, AddressRange> GetRanges()
     {
-        return new SortedDictionary<int, AddressRange>(_ranges);
+        return new(_ranges);
     }
 }

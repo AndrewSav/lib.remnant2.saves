@@ -36,7 +36,7 @@ public class MapProperty : ModelBase
         {
             object key = PropertyValue.ReadPropertyValue(r, ctx, KeyType.Name).Value!;
             object value = PropertyValue.ReadPropertyValue(r, ctx, ValueType.Name).Value!;
-            Values.Add(new KeyValuePair<object, object>(key, value));
+            Values.Add(new(key, value));
         }
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }

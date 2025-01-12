@@ -13,7 +13,7 @@ public  class WriterBase
     }
     public void WriteBytes(byte[] value)
     {
-        Stream.Write(new ReadOnlySpan<byte>(value));
+        Stream.Write(new(value));
     }
 
     public byte[] ToArray()

@@ -29,7 +29,7 @@ public class UObject : ModelBase
         ObjectPath = wasLoaded && index == 0 && ctx.ClassPath != null ? ctx.ClassPath : r.ReadFString();
 
         if (wasLoaded) return;
-        LoadedData = new UObjectLoadedData
+        LoadedData = new()
         {
             Name = new(r, ctx.NamesTable),
             OuterId = r.Read<uint>()
@@ -53,7 +53,7 @@ public class UObject : ModelBase
         int start = r.Position;
         PropertyBag? result = null;
         if (len <= 0) return (result, extraData);
-        result = new PropertyBag(r, ctx);
+        result = new(r, ctx);
         // After each property we can always observe either 4 ot 8 zeroes
         if (r.Position == (int)(start + len)) return (result, extraData);
         if (r.Position > (int)(start + len))
@@ -94,10 +94,10 @@ public class UObject : ModelBase
                 case "PersistenceKeys":
                 case "PersistanceKeys1":
                 case "PersistenceKeys1":
-                    c.Variables = new Variables(r, ctx);
+                    c.Variables = new(r, ctx);
                     break;
                 default:
-                    c.Properties = new PropertyBag(r, ctx);
+                    c.Properties = new(r, ctx);
                     break;
             }
 

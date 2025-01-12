@@ -27,7 +27,7 @@ public class SaveData : ModelBase
         ReadOffset = r.Position + containerOffset;
         if (hasPackageVersion) PackageVersion = r.Read<PackageVersion>();
 
-        if (hasTopLevelAssetPath) SaveGameClassPath = new FTopLevelAssetPath(r);
+        if (hasTopLevelAssetPath) SaveGameClassPath = new(r);
 
         OffsetInfo oi = r.Read<OffsetInfo>();
 
@@ -41,7 +41,7 @@ public class SaveData : ModelBase
         r.Position = (int)NameTableOffset;
 
         int len = r.Read<int>();
-        NamesTable = new List<string>(len);
+        NamesTable = new(len);
         for (int i = 0; i < len; i++)
         {
             string name = r.ReadFString() ?? throw new InvalidOperationException("unexpected null entry in names table");
@@ -60,7 +60,7 @@ public class SaveData : ModelBase
         r.Position = (int)ObjectsOffset;
 
         int numUniqueObjects = r.Read<int>();
-        Objects = new List<UObject>(numUniqueObjects);
+        Objects = new(numUniqueObjects);
         for (int i = 0; i < numUniqueObjects; i++)
         {
             UObject o = new(r, ctx, i);

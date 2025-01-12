@@ -59,6 +59,6 @@ public class ReaderBase(byte[] buffer)
 
     public Tracker GetTracker()
     {
-        return new Tracker(_tracker);
+        return new(_tracker);
     }
 }

@@ -15,26 +15,26 @@ public class PropertyValue
     {
         return type switch
         {
-            "IntProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<int>() },
-            "Int16Property" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<short>() },
-            "Int64Property" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<long>() },
-            "UInt64Property" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<ulong>() },
-            "FloatProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<float>() },
-            "DoubleProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<double>() },
-            "UInt16Property" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<ushort>() },
-            "UInt32Property" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<uint>() },
-            "StrProperty" or "SoftClassPath" or "SoftObjectProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.ReadFString() },
-            "BoolProperty" => new PropertyValue { Value = r.Read<byte>(), NoRawByte = isRaw ? null : r.Read<byte>() },
-            "NameProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new FName(r, ctx.NamesTable) },
+            "IntProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<int>() },
+            "Int16Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<short>() },
+            "Int64Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<long>() },
+            "UInt64Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<ulong>() },
+            "FloatProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<float>() },
+            "DoubleProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<double>() },
+            "UInt16Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<ushort>() },
+            "UInt32Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<uint>() },
+            "StrProperty" or "SoftClassPath" or "SoftObjectProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.ReadFString() },
+            "BoolProperty" => new() { Value = r.Read<byte>(), NoRawByte = isRaw ? null : r.Read<byte>() },
+            "NameProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new FName(r, ctx.NamesTable) },
 
-            "ByteProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<byte>() : new ByteProperty(r, ctx) },
-            "StructProperty" => new PropertyValue { NoRawByte = null, Value = isRaw ? r.Read<FGuid>() : new StructProperty(r, ctx) },
-            "ObjectProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new ObjectProperty(r, ctx) },
-            "EnumProperty" => new PropertyValue { NoRawByte = null, Value = new EnumProperty(r, ctx) },
+            "ByteProperty" => new() { NoRawByte = null, Value = isRaw ? r.Read<byte>() : new ByteProperty(r, ctx) },
+            "StructProperty" => new() { NoRawByte = null, Value = isRaw ? r.Read<FGuid>() : new StructProperty(r, ctx) },
+            "ObjectProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new ObjectProperty(r, ctx) },
+            "EnumProperty" => new() { NoRawByte = null, Value = new EnumProperty(r, ctx) },
             //if (isRaw) { throw new InvalidOperationException("Raw map properties are not supported"); }
-            "MapProperty" => new PropertyValue { NoRawByte = null, Value = new MapProperty(r, ctx) },
-            "TextProperty" => new PropertyValue { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r, ctx) },
-            "ArrayProperty" => new PropertyValue { NoRawByte = null, Value = ReadArrayProperty(r, ctx) },
+            "MapProperty" => new() { NoRawByte = null, Value = new MapProperty(r, ctx) },
+            "TextProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r, ctx) },
+            "ArrayProperty" => new() { NoRawByte = null, Value = ReadArrayProperty(r, ctx) },
             _ => throw new InvalidOperationException($"unknown property type {type}")
         };
     }

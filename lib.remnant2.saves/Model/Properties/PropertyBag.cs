@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using lib.remnant2.saves.Model.Parts;
 
 namespace lib.remnant2.saves.Model.Properties;
 public class PropertyBag : ModelBase
@@ -26,7 +25,7 @@ public class PropertyBag : ModelBase
                 break;
             }
 
-            Properties.Add(new KeyValuePair<string, Property>(name,p));
+            Properties.Add(new(name,p));
             Lookup.TryAdd(name, p);
         }
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
@@ -41,7 +40,7 @@ public class PropertyBag : ModelBase
         }
 
         ushort index = (ushort)ctx.GetNamesTableIndex("None");
-        new Property { Name = new FName { Name = "None", Index = index, Number = null }}.Write(w, ctx);
+        new Property { Name = new() { Name = "None", Index = index, Number = null }}.Write(w, ctx);
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 

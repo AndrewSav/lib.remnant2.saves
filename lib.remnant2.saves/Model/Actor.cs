@@ -27,7 +27,7 @@ public class Actor : ModelBase
         {
             Transform = r.Read<FTransform>();
         }
-        Archive =  new SaveData(r, false, false, containerOffset,ctx.Options);
+        Archive =  new(r, false, false, containerOffset,ctx.Options);
         ReadLength = r.Position + containerOffset - ReadOffset; // Does not include DynamicData
     }
 

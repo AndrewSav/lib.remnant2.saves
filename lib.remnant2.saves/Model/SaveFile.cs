@@ -52,14 +52,14 @@ public class SaveFile
     {
         byte[] b = Archive.DecompressSave(path);
         Reader r = new(b);
-        return new SaveFile(r,opts);
+        return new(r,opts);
     }
 
     public static SaveFile Read(byte[] data, Options? opts = null)
     {
         byte[] b = Archive.DecompressSave(data);
         Reader r = new(b);
-        return new SaveFile(r, opts);
+        return new(r, opts);
     }
 
     public static void Write(string path, SaveFile data)

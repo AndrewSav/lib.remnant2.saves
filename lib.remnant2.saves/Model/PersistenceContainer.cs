@@ -39,7 +39,7 @@ public class PersistenceContainer : ModelBase
         }
         ReadLength = r.Position + containerOffset - ReadOffset;
 
-        Actors = new List<KeyValuePair<ulong, Actor>>(actorInfo.Count);
+        Actors = new(actorInfo.Count);
         for (int index = 0; index < actorInfo.Count; index++)
         {
             FInfo info = actorInfo[index];
@@ -47,7 +47,7 @@ public class PersistenceContainer : ModelBase
             byte[] actorBytes = r.ReadBytes(info.Size);
             Reader actorReader = new(actorBytes);
             Actor a = new(actorReader, ctx, info.Offset + containerOffset);
-            Actors.Add(new KeyValuePair<ulong, Actor>(info.UniqueID, a));
+            Actors.Add(new(info.UniqueID, a));
         }
 
         r.Position = dynamicOffset;
