@@ -15,21 +15,23 @@ internal partial class Example
         string folder = Utils.GetSteamSavePath();
         string savePath = Path.Combine(folder, Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE") ?? "save_0.sav");
 
+        Console.WriteLine($"Save path: {savePath}");
+
         SaveFile sf = SaveFile.Read(savePath);
         Navigator navigator = new(sf);
 
         UObject main = navigator.GetObject("/Game/Maps/Main.Main:PersistentLevel")!;
         UObject campaignMeta = navigator.FindActors("Quest_Campaign", main).Single().Archive.Objects[0];
         int campaignId = campaignMeta.Properties!["ID"].Get<int>();
-        UObject? campaignObject = navigator.GetObjects("PersistenceContainer").SingleOrDefault(x => x.KeySelector == $"/Game/Quest_{campaignId}_Container.Quest_Container:PersistentLevel");
+        UObject campaignObject = navigator.GetObjects($"pc:/Game/Quest_{campaignId}_Container.Quest_Container:PersistentLevel").Single();
 
 
         UObject? adventureMeta = navigator.FindActors("Quest_AdventureMode", main).SingleOrDefault()?.Archive.Objects[0];
         int? adventureId = adventureMeta?.Properties!["ID"].Get<int>();
-        UObject? adventureObject = navigator.GetObjects("PersistenceContainer").SingleOrDefault(x => x.KeySelector == $"/Game/Quest_{adventureId}_Container.Quest_Container:PersistentLevel");
+        UObject? adventureObject = navigator.GetObjects($"pc:/Game/Quest_{adventureId}_Container.Quest_Container:PersistentLevel").SingleOrDefault();
 
         Console.WriteLine("Campaign");
-        PrintBloodMoonData(navigator, campaignMeta, campaignObject!);
+        PrintBloodMoonData(navigator, campaignMeta, campaignObject);
         if (adventureMeta != null && adventureObject != null)
         {
             Console.WriteLine("Adventure");
@@ -56,7 +58,7 @@ internal partial class Example
         {
             string message = (uint)isBloodMoon.Value! != 0 ? "true" : "false";
             Console.WriteLine($"IsBloodMoon: {message}");
-            //isBloodMoon.Value = 1;
+            //isBloodMoon.Value = 1; // This does not seem to work
         }
 
         DateTime now = DateTime.Now.ToUniversalTime();
@@ -94,7 +96,7 @@ internal partial class Example
 
                 if (kvp.Value.Name.Name == "ZoneLoadCount")
                 {
-                    //kvp.Value.Value = 1;
+                    //kvp.Value.Value = 1; // This does not seem to be required
                 }
             }
         }
