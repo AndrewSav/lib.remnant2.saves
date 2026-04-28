@@ -247,6 +247,7 @@ This library comes with the following code examples:
 - Cass - print your Cass's inventory
 - Cass Add Item - add an item to your Cass's inventory
 - Challenges - Achievements and Challenges progress for each of your characters
+- Decompress - decompress a save file to a raw binary output
 - Edit Scrap - edit scrap quantity in your save using navigation system
 - Edit Scrap Raw - edit scrap quantity in your save using raw API
 - Set corrupted shards number to the maximum of ten

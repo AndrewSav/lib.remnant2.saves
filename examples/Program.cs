@@ -19,5 +19,6 @@ internal class Program
         Example.MaxShards();
         Example.Alloys();
         Example.ResetOneShots();
+        Example.Decompress();
     }
 }
