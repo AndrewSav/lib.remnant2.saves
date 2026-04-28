@@ -19,7 +19,7 @@ public class Writer : WriterBase
         }
         else
         {
-            Write(-2*(value.Length + 1));
+            Write(-(value.Length + 1));
             WriteBytes(Encoding.Unicode.GetBytes(value));
             Write<short>(0);
         }
