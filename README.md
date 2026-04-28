@@ -82,6 +82,8 @@ You will notice, that when you read a save and then save it without changes you 
 
 There is an example called `json` that shows the possibility of serializing and deserializing the save file to / from `json`. There was not much work put into this, it was just proven that it is possible and works. When you deserialize a save file from json it is recommended to write it straight away, and re-read it if further work on the file is required, because some links are not serialized due to cyclic nature. Everything that is required to produce a save file is serialized. Same as in previous section it cannot be guaranteed that your `json` edit will produce a valid save file, it's up to you to ensure, that the structure is correct from the game perspective.
 
+Only deserialize JSON from a trusted source. The example uses Newtonsoft.Json `TypeNameHandling.All`, which is unsafe for untrusted input.
+
 ## `ModelBase` derived types
 
 These are the core types in the save file (see the list below). They all follow the same pattern:

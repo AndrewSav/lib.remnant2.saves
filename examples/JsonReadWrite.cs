@@ -18,6 +18,7 @@ public class JsonReadWrite
     }
     public static SaveData FromJson(string path)
     {
+        // Only read JSON from a trusted source; TypeNameHandling.All is unsafe for untrusted input.
         JsonSerializer serializer = new()
         {
             TypeNameHandling = TypeNameHandling.All
