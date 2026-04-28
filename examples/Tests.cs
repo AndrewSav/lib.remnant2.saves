@@ -16,7 +16,7 @@ internal class Tests
     {
         // This can be specified to see logging events from the library
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Warning()  // Change this if needed
+            .MinimumLevel.Information()  // Change this if needed
             .WriteTo.Console()
             .CreateLogger();
 

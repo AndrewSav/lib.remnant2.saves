@@ -20,11 +20,27 @@ internal class Program
         Example.Challenges();
         Example.EditScrapRaw();
         Example.EditScrap();
-        Example.AddRing();
-        Example.CassAddItem();
-        Example.MaxShards();
-        Example.Alloys();
+        RunWithPropertySizeAdjustmentLogging(Example.AddRing);
+        RunWithPropertySizeAdjustmentLogging(Example.CassAddItem);
+        RunWithPropertySizeAdjustmentLogging(Example.MaxShards);
+        RunWithPropertySizeAdjustmentLogging(Example.Alloys);
         Example.ResetOneShots();
         Example.Decompress();
+    }
+
+    private static void RunWithPropertySizeAdjustmentLogging(Action example)
+    {
+        lib.remnant2.saves.Log.Logger = Serilog.ConsoleLoggerConfigurationExtensions
+            .Console(new Serilog.LoggerConfiguration().MinimumLevel.Information().WriteTo)
+            .CreateLogger();
+
+        try
+        {
+            example();
+        }
+        finally
+        {
+            lib.remnant2.saves.Log.Logger = null!;
+        }
     }
 }
