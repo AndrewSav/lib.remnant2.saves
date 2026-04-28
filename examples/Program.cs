@@ -2,8 +2,14 @@
 
 internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
+        if (args.Length == 1 && args[0] == "tests")
+        {
+            Tests.Run();
+            return;
+        }
+
         Tests.Run();
         Example.Json();
         Example.ReadProfile();

@@ -58,7 +58,21 @@ public class StructProperty : ModelBase
 
         if (ctx.ClassPath == "/Game/_Core/Blueprints/Base/BP_RemnantSaveGameProfile")
         {
-            return new SaveData(persistenceReader, true, false, containerOffset,ctx.Options);
+            SaveData saveData = new(persistenceReader, true, false, containerOffset, ctx.Options);
+            int extraLength = persistenceSize - persistenceReader.Position;
+            if (extraLength > 0)
+            {
+                byte[] extraData = bytes[persistenceReader.Position..];
+                saveData.ExtraData = extraData;
+                saveData.ReadLength += extraLength;
+                if (extraData.Any(x => x != 0))
+                {
+                    string debug = BitConverter.ToString(extraData);
+                    Logger.Warning("unexpected non-zero extra data while reading persistence blob at {Offset:x8}", containerOffset + persistenceReader.Position);
+                    Logger.Debug(debug);
+                }
+            }
+            return saveData;
         }
         return new PersistenceContainer(persistenceReader, ctx,containerOffset);
     }

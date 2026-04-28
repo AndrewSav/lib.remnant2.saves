@@ -16,6 +16,7 @@ public class SaveData : ModelBase
     public required long ObjectsOffset;
     public required List<UObject> Objects;
     public required List<string> NamesTable;
+    public byte[]? ExtraData;
 
     public SaveData()
     {
@@ -127,6 +128,10 @@ public class SaveData : ModelBase
         foreach (string? item in NamesTable)
         {
             w.WriteFString(item);
+        }
+        if (ExtraData != null)
+        {
+            w.WriteBytes(ExtraData);
         }
 
         long endOffset = w.Position;
