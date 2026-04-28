@@ -25,13 +25,25 @@ public class SerializationContext
 
     public int GetNamesTableIndex(string name)
     {
-        if (!_namesTableIndex.ContainsKey(name))
+        if (_namesTableIndex.TryGetValue(name, out int index))
         {
-            lock (_lock)
-            {
-                _namesTableIndex.TryAdd(name, NamesTable.FindIndex(x => x == name));
-            }
+            return index;
         }
-        return _namesTableIndex[name];
+
+        lock (_lock)
+        {
+            if (_namesTableIndex.TryGetValue(name, out index))
+            {
+                return index;
+            }
+
+            index = NamesTable.FindIndex(x => x == name);
+            if (index != -1)
+            {
+                _namesTableIndex.TryAdd(name, index);
+            }
+
+            return index;
+        }
     }
 }
