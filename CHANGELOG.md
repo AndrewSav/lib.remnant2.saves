@@ -5,6 +5,7 @@
 - Added Decompress example
 - Preserve trailing profile persistence blob data during round-trip writes
 - Fixed Unicode string length serialization
+- Fixed PropertyBag serialization when lookup cache is empty or stale
 
 ## v0.0.18 (12 January 2024)
 - Added GetFirstObjectComponents extenstion method for Actor

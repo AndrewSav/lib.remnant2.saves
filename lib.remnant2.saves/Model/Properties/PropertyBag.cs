@@ -34,7 +34,7 @@ public class PropertyBag : ModelBase
     public void Write(Writer w, SerializationContext ctx)
     {
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
-        foreach (KeyValuePair<string, Property> keyValuePair in Lookup)
+        foreach (KeyValuePair<string, Property> keyValuePair in Properties)
         {
             keyValuePair.Value.Write(w, ctx);
         }
@@ -64,7 +64,7 @@ public class PropertyBag : ModelBase
         Lookup = [];
         foreach (KeyValuePair<string, Property> pair in Properties)
         {
-            Lookup.Add(pair.Key,pair.Value);
+            Lookup.TryAdd(pair.Key,pair.Value);
         }
     }
 }
