@@ -3,6 +3,7 @@ using System.Globalization;
 using lib.remnant2.saves.IO;
 using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Parts;
+using lib.remnant2.saves.Model.Properties.Parts;
 using Serilog;
 
 namespace lib.remnant2.saves.Model.Properties;
@@ -12,7 +13,8 @@ public class StructProperty : ModelBase
     public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<StructProperty>();
     public required FName Type;
     public required FGuid Guid;
-    public required byte Unknown;
+    public required byte HasPropertyGuid;
+    public FGuid? PropertyGuid;
     public required object? Value;
 
     public StructProperty()
@@ -25,11 +27,7 @@ public class StructProperty : ModelBase
         ReadOffset = r.Position + ctx.ContainerOffset;
         Type = new(r, ctx.NamesTable);
         Guid = r.Read<FGuid>();
-        Unknown = r.Read<byte>();
-        if (Unknown != 0)
-        {
-            Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
-        }
+        (HasPropertyGuid, PropertyGuid) = PropertyValue.ReadPropertyGuid(r);
         Value = ReadStructPropertyValue(r, ctx, Type.Name);
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
@@ -76,7 +74,7 @@ public class StructProperty : ModelBase
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
         Type.Write(w, ctx);
         w.Write(Guid);
-        w.Write(Unknown);
+        PropertyValue.WritePropertyGuid(w, HasPropertyGuid, PropertyGuid);
         WriteStructPropertyValue(w, ctx, Type.Name, Value);
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }

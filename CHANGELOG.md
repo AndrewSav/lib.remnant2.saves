@@ -9,6 +9,7 @@
 - Fixed property size serialization after variable-length edits
 - Fixed names table cache misses causing duplicate appended names
 - Parse latest ZoneActor and ActorCustomization custom save data tails
+- Rename Unreal property tag GUID fields and split map removed-key data
 
 ## v0.0.18 (12 January 2024)
 - Added GetFirstObjectComponents extenstion method for Actor

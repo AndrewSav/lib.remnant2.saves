@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Parts;
 using lib.remnant2.saves.Model.Properties.Parts;
 using Serilog;
@@ -12,7 +13,8 @@ public class Property : ModelBase
     public required FName Name;
     public uint? Index;
     public uint? Size;
-    public byte? NoRaw;
+    public byte? HasPropertyGuid;
+    public FGuid? PropertyGuid;
     public FName? Type;
     public object? Value;
 
@@ -42,7 +44,8 @@ public class Property : ModelBase
         else
         {
             PropertyValue pv = PropertyValue.ReadPropertyValue(r, ctx, Type.Name, false);
-            NoRaw = pv.NoRawByte;
+            HasPropertyGuid = pv.HasPropertyGuid;
+            PropertyGuid = pv.PropertyGuid;
             Value = pv.Value;
         }
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
@@ -98,11 +101,11 @@ public class Property : ModelBase
         }
         else
         {
-            PropertyValue.WritePropertyValue(w,ctx,Value!,Type.Name, NoRaw??0);
+            PropertyValue.WritePropertyValue(w, ctx, Value!, Type.Name, HasPropertyGuid ?? 0, PropertyGuid);
         }
 
         long endOffset = w.Position;
-        uint newSize = CalculateSize(Name.Name, Type.Name, Value, startOffset, endOffset);
+        uint newSize = CalculateSize(Name.Name, Type.Name, Value, HasPropertyGuid, startOffset, endOffset);
 
         if (newSize != oldSize)
         {
@@ -117,9 +120,9 @@ public class Property : ModelBase
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }
 
-    private static uint CalculateSize(string name, string type, object? value, long startOffset, long endOffset)
+    private static uint CalculateSize(string name, string type, object? value, byte? hasPropertyGuid, long startOffset, long endOffset)
     {
-        long size = endOffset - startOffset - GetSizeOverhead(name, type, value);
+        long size = endOffset - startOffset - GetSizeOverhead(name, type, value, hasPropertyGuid);
         if (size < 0 || size > uint.MaxValue)
         {
             throw new InvalidOperationException($"calculated invalid size {size} for property type {type}");
@@ -128,7 +131,7 @@ public class Property : ModelBase
         return (uint)size;
     }
 
-    private static int GetSizeOverhead(string name, string type, object? value)
+    private static int GetSizeOverhead(string name, string type, object? value, byte? hasPropertyGuid)
     {
         if (name == "FowVisitedCoordinates" && value is byte[])
         {
@@ -141,25 +144,31 @@ public class Property : ModelBase
         {
             "ArrayProperty" => value switch
             {
-                ArrayProperty property => GetFNameWriteLength(property.ElementType) + 1,
-                ArrayStructProperty property => GetFNameWriteLength(property.OuterElementType) + 1,
+                ArrayProperty property => GetFNameWriteLength(property.ElementType) + GetPropertyGuidWriteLength(property.HasPropertyGuid),
+                ArrayStructProperty property => GetFNameWriteLength(property.OuterElementType) + GetPropertyGuidWriteLength(property.HasPropertyGuid),
                 _ => throw new InvalidOperationException($"expected ArrayProperty value got {value.ToTypeString()}")
             },
-            "BoolProperty" => 2,
+            "BoolProperty" => 1 + GetPropertyGuidWriteLength(hasPropertyGuid),
             "ByteProperty" => value is ByteProperty byteProperty
-                ? GetFNameWriteLength(byteProperty.EnumName) + 1
+                ? GetFNameWriteLength(byteProperty.EnumName) + GetPropertyGuidWriteLength(byteProperty.HasPropertyGuid)
                 : throw new InvalidOperationException($"expected ByteProperty value got {value.ToTypeString()}"),
             "EnumProperty" => value is EnumProperty enumProperty
-                ? GetFNameWriteLength(enumProperty.EnumType) + 1
+                ? GetFNameWriteLength(enumProperty.EnumType) + GetPropertyGuidWriteLength(enumProperty.HasPropertyGuid)
                 : throw new InvalidOperationException($"expected EnumProperty value got {value.ToTypeString()}"),
             "MapProperty" => value is MapProperty mapProperty
-                ? mapProperty.Unknown.Length
+                ? GetFNameWriteLength(mapProperty.KeyType) + GetFNameWriteLength(mapProperty.ValueType) +
+                  GetPropertyGuidWriteLength(mapProperty.HasPropertyGuid)
                 : throw new InvalidOperationException($"expected MapProperty value got {value.ToTypeString()}"),
             "StructProperty" => value is StructProperty structProperty
-                ? GetFNameWriteLength(structProperty.Type) + 17
+                ? GetFNameWriteLength(structProperty.Type) + 16 + GetPropertyGuidWriteLength(structProperty.HasPropertyGuid)
                 : throw new InvalidOperationException($"expected StructProperty value got {value.ToTypeString()}"),
-            _ => 1
+            _ => GetPropertyGuidWriteLength(hasPropertyGuid)
         };
+    }
+
+    private static int GetPropertyGuidWriteLength(byte? hasPropertyGuid)
+    {
+        return (hasPropertyGuid ?? 0) == 0 ? 1 : 17;
     }
 
     private static int GetFNameWriteLength(FName name)

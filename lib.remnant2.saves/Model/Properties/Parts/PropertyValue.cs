@@ -8,35 +8,76 @@ namespace lib.remnant2.saves.Model.Properties.Parts;
 public class PropertyValue
 {
     public required object? Value;
-    public byte? NoRawByte;
+    public byte? HasPropertyGuid;
+    public FGuid? PropertyGuid;
 
     // This is also called from MapProperty and ArrayProperty constructor
     public static PropertyValue ReadPropertyValue(Reader r, SerializationContext ctx, string type, bool isRaw = true)
     {
         return type switch
         {
-            "IntProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<int>() },
-            "Int16Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<short>() },
-            "Int64Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<long>() },
-            "UInt64Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<ulong>() },
-            "FloatProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<float>() },
-            "DoubleProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<double>() },
-            "UInt16Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<ushort>() },
-            "UInt32Property" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.Read<uint>() },
-            "StrProperty" or "SoftClassPath" or "SoftObjectProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = r.ReadFString() },
-            "BoolProperty" => new() { Value = r.Read<byte>(), NoRawByte = isRaw ? null : r.Read<byte>() },
-            "NameProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new FName(r, ctx.NamesTable) },
+            "IntProperty" => ReadTaggedProperty(r, isRaw, () => r.Read<int>()),
+            "Int16Property" => ReadTaggedProperty(r, isRaw, () => r.Read<short>()),
+            "Int64Property" => ReadTaggedProperty(r, isRaw, () => r.Read<long>()),
+            "UInt64Property" => ReadTaggedProperty(r, isRaw, () => r.Read<ulong>()),
+            "FloatProperty" => ReadTaggedProperty(r, isRaw, () => r.Read<float>()),
+            "DoubleProperty" => ReadTaggedProperty(r, isRaw, () => r.Read<double>()),
+            "UInt16Property" => ReadTaggedProperty(r, isRaw, () => r.Read<ushort>()),
+            "UInt32Property" => ReadTaggedProperty(r, isRaw, () => r.Read<uint>()),
+            "StrProperty" or "SoftClassPath" or "SoftObjectProperty" => ReadTaggedProperty(r, isRaw, r.ReadFString),
+            "BoolProperty" => ReadBoolProperty(r, isRaw),
+            "NameProperty" => ReadTaggedProperty(r, isRaw, () => new FName(r, ctx.NamesTable)),
 
-            "ByteProperty" => new() { NoRawByte = null, Value = isRaw ? r.Read<byte>() : new ByteProperty(r, ctx) },
-            "StructProperty" => new() { NoRawByte = null, Value = isRaw ? r.Read<FGuid>() : new StructProperty(r, ctx) },
-            "ObjectProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new ObjectProperty(r, ctx) },
-            "EnumProperty" => new() { NoRawByte = null, Value = new EnumProperty(r, ctx) },
+            "ByteProperty" => new() { HasPropertyGuid = null, Value = isRaw ? r.Read<byte>() : new ByteProperty(r, ctx) },
+            "StructProperty" => new() { HasPropertyGuid = null, Value = isRaw ? r.Read<FGuid>() : new StructProperty(r, ctx) },
+            "ObjectProperty" => ReadTaggedProperty(r, isRaw, () => new ObjectProperty(r, ctx)),
+            "EnumProperty" => new() { HasPropertyGuid = null, Value = new EnumProperty(r, ctx) },
             //if (isRaw) { throw new InvalidOperationException("Raw map properties are not supported"); }
-            "MapProperty" => new() { NoRawByte = null, Value = new MapProperty(r, ctx) },
-            "TextProperty" => new() { NoRawByte = isRaw ? null : r.Read<byte>(), Value = new TextProperty(r, ctx) },
-            "ArrayProperty" => new() { NoRawByte = null, Value = ReadArrayProperty(r, ctx) },
+            "MapProperty" => new() { HasPropertyGuid = null, Value = new MapProperty(r, ctx) },
+            "TextProperty" => ReadTaggedProperty(r, isRaw, () => new TextProperty(r, ctx)),
+            "ArrayProperty" => new() { HasPropertyGuid = null, Value = ReadArrayProperty(r, ctx) },
             _ => throw new InvalidOperationException($"unknown property type {type}")
         };
+    }
+
+    public static (byte HasPropertyGuid, FGuid? PropertyGuid) ReadPropertyGuid(Reader r)
+    {
+        byte hasPropertyGuid = r.Read<byte>();
+        FGuid? propertyGuid = hasPropertyGuid == 0 ? null : r.Read<FGuid>();
+        return (hasPropertyGuid, propertyGuid);
+    }
+
+    public static void WritePropertyGuid(Writer w, byte hasPropertyGuid, FGuid? propertyGuid)
+    {
+        w.Write(hasPropertyGuid);
+        if (hasPropertyGuid != 0)
+        {
+            w.Write(propertyGuid ?? default);
+        }
+    }
+
+    private static PropertyValue ReadTaggedProperty(Reader r, bool isRaw, Func<object?> readValue)
+    {
+        (byte? hasPropertyGuid, FGuid? propertyGuid) = ReadOptionalPropertyGuid(r, isRaw);
+        return new() { HasPropertyGuid = hasPropertyGuid, PropertyGuid = propertyGuid, Value = readValue() };
+    }
+
+    private static PropertyValue ReadBoolProperty(Reader r, bool isRaw)
+    {
+        byte value = r.Read<byte>();
+        (byte? hasPropertyGuid, FGuid? propertyGuid) = ReadOptionalPropertyGuid(r, isRaw);
+        return new() { HasPropertyGuid = hasPropertyGuid, PropertyGuid = propertyGuid, Value = value };
+    }
+
+    private static (byte? HasPropertyGuid, FGuid? PropertyGuid) ReadOptionalPropertyGuid(Reader r, bool isRaw)
+    {
+        if (isRaw)
+        {
+            return (null, null);
+        }
+
+        (byte hasPropertyGuid, FGuid? propertyGuid) = ReadPropertyGuid(r);
+        return (hasPropertyGuid, propertyGuid);
     }
 
     private static T Get<T>(object? value)
@@ -51,71 +92,71 @@ public class PropertyValue
     {
         int readOffset = r.Position + ctx.ContainerOffset;
         FName elementType = new(r, ctx.NamesTable);
-        byte unknown = r.Read<byte>();
+        (byte hasPropertyGuid, FGuid? propertyGuid) = ReadPropertyGuid(r);
         uint count = r.Read<uint>();
         return elementType.Name == "StructProperty"
-            ? new ArrayStructProperty(r, ctx, count, unknown, elementType, readOffset)
-            : new ArrayProperty(r, ctx, count, unknown, elementType, readOffset);
+            ? new ArrayStructProperty(r, ctx, count, hasPropertyGuid, propertyGuid, elementType, readOffset)
+            : new ArrayProperty(r, ctx, count, hasPropertyGuid, propertyGuid, elementType, readOffset);
     }
 
-    public static void WritePropertyValue(Writer w, SerializationContext ctx, object? value, string type, byte? noRow = null)
+    public static void WritePropertyValue(Writer w, SerializationContext ctx, object? value, string type, byte? hasPropertyGuid = null, FGuid? propertyGuid = null)
     {
         switch (type)
         {
             case "IntProperty":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.Write(Get<int>(value));
                 break;
             case "Int16Property":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.Write(Get<short>(value));
                 break;
             case "Int64Property":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.Write(Get<long>(value));
                 break;
             case "UInt64Property":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.Write(Get<ulong>(value));
                 break;
             case "FloatProperty":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.Write(Get<float>(value));
                 break;
             case "DoubleProperty":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.Write(Get<double>(value));
                 break;
             case "UInt16Property":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.Write(Get<ushort>(value));
                 break;
             case "UInt32Property":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.Write(Get<uint>(value));
                 break;
             case "SoftClassPath":
             case "SoftObjectProperty":
             case "StrProperty":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 w.WriteFString(value as string);
                 break;
             case "BoolProperty":
                 w.Write(Get<byte>(value));
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 break;
             case "NameProperty":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 ((FName)value!).Write(w, ctx);
                 break;
             case "ByteProperty":
-                if (noRow != null) { ((ByteProperty)value!).Write(w, ctx); } else { w.Write((byte)value!); }
+                if (hasPropertyGuid != null) { ((ByteProperty)value!).Write(w, ctx); } else { w.Write((byte)value!); }
                 break;
             case "StructProperty":
-                if (noRow != null) { ((StructProperty)value!).Write(w, ctx); } else { w.Write((FGuid)value!); }
+                if (hasPropertyGuid != null) { ((StructProperty)value!).Write(w, ctx); } else { w.Write((FGuid)value!); }
                 break;
             case "ObjectProperty":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 ((ObjectProperty)value!).Write(w, ctx);
                 break;
             case "EnumProperty":
@@ -126,7 +167,7 @@ public class PropertyValue
                 ((MapProperty)value!).Write(w, ctx);
                 break;
             case "TextProperty":
-                if (noRow != null) w.Write(noRow.Value);
+                WriteOptionalPropertyGuid(w, hasPropertyGuid, propertyGuid);
                 ((TextProperty)value!).Write(w, ctx);
                 break;
             case "ArrayProperty":
@@ -134,6 +175,14 @@ public class PropertyValue
                 break;
             default:
                 throw new InvalidOperationException($"unknown property type {type}");
+        }
+    }
+
+    private static void WriteOptionalPropertyGuid(Writer w, byte? hasPropertyGuid, FGuid? propertyGuid)
+    {
+        if (hasPropertyGuid != null)
+        {
+            WritePropertyGuid(w, hasPropertyGuid.Value, propertyGuid);
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Parts;
 using lib.remnant2.saves.Model.Properties.Parts;
 using Serilog;
@@ -10,7 +11,10 @@ public class MapProperty : ModelBase
     public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<MapProperty>();
     public required FName KeyType;
     public required FName ValueType;
-    public required byte[] Unknown;
+    public required byte HasPropertyGuid;
+    public FGuid? PropertyGuid;
+    public required int KeysToRemoveCount;
+    public required List<object> KeysToRemove;
     public required List<KeyValuePair<object, object>> Values;
 
     public MapProperty()
@@ -23,11 +27,14 @@ public class MapProperty : ModelBase
         ReadOffset = r.Position + ctx.ContainerOffset;
         KeyType = new(r, ctx.NamesTable);
         ValueType = new(r, ctx.NamesTable);
-        Unknown = r.ReadBytes(5);
-        if (Unknown.Any(x => x != 0))
+        (HasPropertyGuid, PropertyGuid) = PropertyValue.ReadPropertyGuid(r);
+
+        KeysToRemoveCount = r.Read<int>();
+        KeysToRemove = new(KeysToRemoveCount);
+        for (int i = 0; i < KeysToRemoveCount; i++)
         {
-            string debug = BitConverter.ToString(Unknown);
-            Logger.Warning("unexpected non-zero value {value} of an unknown bytes at {Offset}", debug, r.Position);
+            object key = PropertyValue.ReadPropertyValue(r, ctx, KeyType.Name).Value!;
+            KeysToRemove.Add(key);
         }
 
         int len = r.Read<int>();
@@ -46,7 +53,14 @@ public class MapProperty : ModelBase
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
         KeyType.Write(w, ctx);
         ValueType.Write(w, ctx);
-        w.WriteBytes(Unknown);
+        PropertyValue.WritePropertyGuid(w, HasPropertyGuid, PropertyGuid);
+        KeysToRemoveCount = KeysToRemove.Count;
+        w.Write(KeysToRemoveCount);
+        foreach (object keyToRemove in KeysToRemove)
+        {
+            PropertyValue.WritePropertyValue(w, ctx, keyToRemove, KeyType.Name);
+        }
+
         w.Write(Values.Count);
         foreach (KeyValuePair<object, object> keyValuePair in Values)
         {
@@ -57,6 +71,12 @@ public class MapProperty : ModelBase
     }
     public override IEnumerable<(ModelBase obj, int? index)> GetChildren()
     {
+        for (int index = 0; index < KeysToRemove.Count; index++)
+        {
+            if (KeysToRemove[index] is ModelBase keyToRemove)
+                yield return (keyToRemove, index);
+        }
+
         for (int index = 0; index < Values.Count; index++)
         {
             KeyValuePair<object, object> kvp = Values[index];

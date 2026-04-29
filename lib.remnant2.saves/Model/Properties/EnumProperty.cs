@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Parts;
+using lib.remnant2.saves.Model.Properties.Parts;
 using Serilog;
 
 namespace lib.remnant2.saves.Model.Properties;
@@ -8,7 +10,8 @@ public class EnumProperty : ModelBase
 {
     public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<EnumProperty>();
     public required FName EnumType;
-    public required byte Unknown;
+    public required byte HasPropertyGuid;
+    public FGuid? PropertyGuid;
     public required FName EnumValue;
 
     public EnumProperty()
@@ -20,11 +23,7 @@ public class EnumProperty : ModelBase
     {
         ReadOffset = r.Position + ctx.ContainerOffset;
         EnumType = new(r, ctx.NamesTable);
-        Unknown = r.Read<byte>();
-        if (Unknown != 0)
-        {
-            Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
-        }
+        (HasPropertyGuid, PropertyGuid) = PropertyValue.ReadPropertyGuid(r);
         EnumValue = new(r, ctx.NamesTable);
         ReadLength = r.Position + ctx.ContainerOffset - ReadOffset;
     }
@@ -33,7 +32,7 @@ public class EnumProperty : ModelBase
     {
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
         EnumType.Write(w, ctx);
-        w.Write(Unknown);
+        PropertyValue.WritePropertyGuid(w, HasPropertyGuid, PropertyGuid);
         EnumValue.Write(w, ctx);
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;
     }

@@ -80,7 +80,7 @@ internal partial class Example
                     Value = 1,
                     Size = 4,
                     Index = 0,
-                    NoRaw = 0
+                    HasPropertyGuid = 0
                 };
                 props.Properties.Add(new KeyValuePair<string, Property>(p.Name.Name, p));
                 props.RefreshLookup();

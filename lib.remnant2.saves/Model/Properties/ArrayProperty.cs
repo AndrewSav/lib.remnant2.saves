@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Parts;
 using lib.remnant2.saves.Model.Properties.Parts;
 using Serilog;
@@ -11,21 +12,19 @@ public class ArrayProperty : ModelBase
 
     public required FName ElementType;
     public required List<object?> Items;
-    public required byte Unknown;
+    public required byte HasPropertyGuid;
+    public FGuid? PropertyGuid;
 
     public ArrayProperty()
     {
     }
 
     [SetsRequiredMembers]
-    public ArrayProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, int readOffset) 
+    public ArrayProperty(Reader r, SerializationContext ctx, uint count, byte hasPropertyGuid, FGuid? propertyGuid, FName elementType, int readOffset)
     {
         ReadOffset = readOffset;
-        Unknown = unknown;
-        if (Unknown != 0)
-        {
-            Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown,  r.Position);
-        }
+        HasPropertyGuid = hasPropertyGuid;
+        PropertyGuid = propertyGuid;
         ElementType = elementType;
         Items = new((int)count);
         for (int i = 0; i < count; i++)
@@ -40,7 +39,7 @@ public class ArrayProperty : ModelBase
     {
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
         ElementType.Write(w, ctx);
-        w.Write(Unknown);
+        PropertyValue.WritePropertyGuid(w, HasPropertyGuid, PropertyGuid);
         w.Write(Items.Count);
         foreach (object? item in Items) PropertyValue.WritePropertyValue(w, ctx, item, ElementType.Name);
         WriteLength = (int)w.Position + ctx.ContainerOffset - WriteOffset;

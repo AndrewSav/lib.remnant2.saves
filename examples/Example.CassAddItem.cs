@@ -57,7 +57,7 @@ internal partial class Example
                         Value = -1,
                         Size = 4,
                         Index = 0,
-                        NoRaw = 0
+                        HasPropertyGuid = 0
                     })
                 ]
             }
@@ -79,7 +79,7 @@ internal partial class Example
                     Value = 0,
                     Size = 4,
                     Index = 0,
-                    NoRaw = 0
+                    HasPropertyGuid = 0
                 }),
 
                 new("ItemBP", new()
@@ -92,7 +92,7 @@ internal partial class Example
                     },
                     Size = 4,
                     Index = 0,
-                    NoRaw = 0
+                    HasPropertyGuid = 0
                 }),
 
                 new("New", new()
@@ -102,7 +102,7 @@ internal partial class Example
                     Value = 1,
                     Size = 0,
                     Index = 0,
-                    NoRaw = 0
+                    HasPropertyGuid = 0
                 }),
 
                 new("Favorited", new()
@@ -112,7 +112,7 @@ internal partial class Example
                     Value = 0,
                     Size = 0,
                     Index = 0,
-                    NoRaw = 0
+                    HasPropertyGuid = 0
                 }),
 
                 new("Hidden", new()
@@ -122,7 +122,7 @@ internal partial class Example
                     Value = 0,
                     Size = 0,
                     Index = 0,
-                    NoRaw = 0
+                    HasPropertyGuid = 0
                 }),
 
                 new("EquipmentSlotIndex", new()
@@ -132,7 +132,7 @@ internal partial class Example
                     Value = -1,
                     Size = 4,
                     Index = 0,
-                    NoRaw = 0
+                    HasPropertyGuid = 0
                 }),
 
                 new("InstanceData", new()
@@ -145,7 +145,7 @@ internal partial class Example
                     },
                     Size = 4,
                     Index = 0,
-                    NoRaw = 0
+                    HasPropertyGuid = 0
                 })
 
             ]

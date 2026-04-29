@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using lib.remnant2.saves.Model.Memory;
 using lib.remnant2.saves.Model.Parts;
+using lib.remnant2.saves.Model.Properties.Parts;
 using Serilog;
 
 namespace lib.remnant2.saves.Model.Properties;
@@ -9,7 +10,8 @@ public class ArrayStructProperty : ModelBase
 {
     public static ILogger Logger => Log.Logger.ForContext(Log.Category, Log.Parser).ForContext<ArrayStructProperty>();
 
-    public required byte Unknown;
+    public required byte HasPropertyGuid;
+    public FGuid? PropertyGuid;
     public required FName OuterElementType;
     public required ushort NameIndex;
     public required ushort TypeIndex;
@@ -18,7 +20,8 @@ public class ArrayStructProperty : ModelBase
     public required uint Count;
     public required FName ElementType;
     public required FGuid Guid;
-    public required byte Unknown2;
+    public required byte InnerHasPropertyGuid;
+    public FGuid? InnerPropertyGuid;
     public required List<object?> Items;
 
 
@@ -27,14 +30,11 @@ public class ArrayStructProperty : ModelBase
     }
 
     [SetsRequiredMembers]
-    public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte unknown, FName elementType, int readOffset) 
+    public ArrayStructProperty(Reader r, SerializationContext ctx, uint count, byte hasPropertyGuid, FGuid? propertyGuid, FName elementType, int readOffset)
     {
         ReadOffset = readOffset;
-        Unknown = unknown;
-        if (Unknown != 0)
-        {
-            Logger.Warning("unexpected non-zero value {value} of an unknown byte at {Offset}", Unknown, r.Position);
-        }
+        HasPropertyGuid = hasPropertyGuid;
+        PropertyGuid = propertyGuid;
         OuterElementType = elementType;
         NameIndex = r.Read<ushort>();
         TypeIndex = r.Read<ushort>();
@@ -42,11 +42,7 @@ public class ArrayStructProperty : ModelBase
         Index = r.Read<uint>();
         ElementType = new(r, ctx.NamesTable);
         Guid = r.Read<FGuid>();
-        Unknown2 = r.Read<byte>();
-        if (Unknown != 0)
-        {
-            Logger.Warning("unexpected non-zero value {value} of an unknown2 byte at {Offset}", Unknown2, r.Position);
-        }
+        (InnerHasPropertyGuid, InnerPropertyGuid) = PropertyValue.ReadPropertyGuid(r);
 
         Count = count;
         Items = new((int)Count);
@@ -63,7 +59,7 @@ public class ArrayStructProperty : ModelBase
     {
         WriteOffset = (int)w.Position + ctx.ContainerOffset;
         OuterElementType.Write(w, ctx);
-        w.Write(Unknown);
+        PropertyValue.WritePropertyGuid(w, HasPropertyGuid, PropertyGuid);
         w.Write(Items.Count);
         w.Write(NameIndex);
         w.Write(TypeIndex);
@@ -72,7 +68,7 @@ public class ArrayStructProperty : ModelBase
         w.Write(Index);
         ElementType.Write(w,ctx);
         w.Write(Guid);
-        w.Write(Unknown2);
+        PropertyValue.WritePropertyGuid(w, InnerHasPropertyGuid, InnerPropertyGuid);
         long startOffset = w.Position;
         foreach (object? item in Items)
         {

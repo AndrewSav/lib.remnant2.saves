@@ -10,7 +10,8 @@ public static class PropertyExtension
             Name = property.Name,
             Index = property.Index,
             Size = property.Size,
-            NoRaw = property.NoRaw,
+            HasPropertyGuid = property.HasPropertyGuid,
+            PropertyGuid = property.PropertyGuid,
             Type = property.Type,
             Value = property.Value
         };
