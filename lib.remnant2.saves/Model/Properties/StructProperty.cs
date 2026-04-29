@@ -65,12 +65,6 @@ public class StructProperty : ModelBase
                 byte[] extraData = bytes[persistenceReader.Position..];
                 saveData.ExtraData = extraData;
                 saveData.ReadLength += extraLength;
-                if (extraData.Any(x => x != 0))
-                {
-                    string debug = BitConverter.ToString(extraData);
-                    Logger.Warning("unexpected non-zero extra data while reading persistence blob at {Offset:x8}", containerOffset + persistenceReader.Position);
-                    Logger.Debug(debug);
-                }
             }
             return saveData;
         }

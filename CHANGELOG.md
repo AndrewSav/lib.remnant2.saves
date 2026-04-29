@@ -8,6 +8,7 @@
 - Fixed PropertyBag serialization when lookup cache is empty or stale
 - Fixed property size serialization after variable-length edits
 - Fixed names table cache misses causing duplicate appended names
+- Parse latest ZoneActor and ActorCustomization custom save data tails
 
 ## v0.0.18 (12 January 2024)
 - Added GetFirstObjectComponents extenstion method for Actor

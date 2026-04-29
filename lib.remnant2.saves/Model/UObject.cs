@@ -1,4 +1,5 @@
 ﻿using lib.remnant2.saves.Model.Memory;
+using lib.remnant2.saves.Model.Parts;
 using lib.remnant2.saves.Model.Properties;
 using Serilog;
 
@@ -11,6 +12,7 @@ public class UObject : ModelBase
     public string? ObjectPath;
     public UObjectLoadedData? LoadedData;
     public PropertyBag? Properties;
+    public ZoneActorExtraData? ZoneActorExtraData;
     public byte[]? ExtraPropertiesData;
     public List<Component>? Components;
     public byte IsActor;
@@ -40,7 +42,8 @@ public class UObject : ModelBase
     internal void ReadData(Reader r, SerializationContext ctx)
     {
         ObjectIndex = r.Read<int>();
-        (Properties, ExtraPropertiesData) = ReadProperties(r, ctx);
+        (Properties, byte[]? extraPropertiesData, int? extraPropertiesDataOffset) = ReadPropertiesWithExtraOffset(r, ctx);
+        ReadExtraPropertiesData(extraPropertiesData, extraPropertiesDataOffset);
         IsActor = r.Read<byte>();
         if (IsActor != 0)
             Components = ReadComponents(r, ctx);
@@ -48,27 +51,46 @@ public class UObject : ModelBase
 
     public static (PropertyBag?, byte[]?) ReadProperties(Reader r, SerializationContext ctx)
     {
+        (PropertyBag? properties, byte[]? extraData, int? extraDataOffset) = ReadPropertiesWithExtraOffset(r, ctx);
+        LogUnexpectedExtraData(extraData, extraDataOffset, "properties");
+        return (properties, extraData);
+    }
+
+    private static (PropertyBag?, byte[]?, int?) ReadPropertiesWithExtraOffset(Reader r, SerializationContext ctx)
+    {
         byte[]? extraData = null;
+        int? extraDataOffset = null;
         uint len = r.Read<uint>();
         int start = r.Position;
         PropertyBag? result = null;
-        if (len <= 0) return (result, extraData);
+        if (len <= 0) return (result, extraData, extraDataOffset);
         result = new(r, ctx);
         // After each property we can always observe either 4 ot 8 zeroes
-        if (r.Position == (int)(start + len)) return (result, extraData);
+        if (r.Position == (int)(start + len)) return (result, extraData, extraDataOffset);
         if (r.Position > (int)(start + len))
             throw new InvalidOperationException("ReadProperties read too much data unexpectedly");
 
+        extraDataOffset = r.Position + ctx.ContainerOffset;
         extraData = r.ReadBytes((int)(start + len) - r.Position);
 
-        if (extraData.Any(x => x != 0))
+        return (result, extraData, extraDataOffset);
+    }
+
+    private void ReadExtraPropertiesData(byte[]? extraData, int? extraDataOffset)
+    {
+        if (extraData == null)
         {
-            string debug = BitConverter.ToString(extraData);
-            Logger.Warning("unexpected non-zero extra data while reading properties at {Offset:x8}", r.Position);
-            Logger.Debug(debug);
+            return;
         }
 
-        return (result, extraData);
+        if (ObjectPath == "/Script/Remnant.ZoneActor" && ZoneActorExtraData.CanRead(extraData))
+        {
+            ZoneActorExtraData = new(extraData, extraDataOffset ?? 0);
+            return;
+        }
+
+        ExtraPropertiesData = extraData;
+        LogUnexpectedExtraData(extraData, extraDataOffset, "properties");
     }
 
     public static List<Component> ReadComponents(Reader r, SerializationContext ctx)
@@ -106,13 +128,9 @@ public class UObject : ModelBase
             {
                 if (r.Position > start + len)
                     throw new InvalidOperationException("ReadComponents read too much data unexpectedly");
-                c.ExtraComponentsData = r.ReadBytes(start + len - r.Position);
-                if (c.ExtraComponentsData.Any(x => x != 0))
-                {
-                    string debug = BitConverter.ToString(c.ExtraComponentsData);
-                    Logger.Warning("unexpected non-zero extra data while reading components at {Offset:x8}", r.Position);
-                    Logger.Debug(debug);
-                }
+                int extraDataOffset = r.Position + ctx.ContainerOffset;
+                byte[] extraData = r.ReadBytes(start + len - r.Position);
+                ReadExtraComponentsData(c, extraData, extraDataOffset);
             }
 
             result.Add(c);
@@ -120,6 +138,30 @@ public class UObject : ModelBase
         }
 
         return result;
+    }
+
+    private static void ReadExtraComponentsData(Component c, byte[] extraData, int extraDataOffset)
+    {
+        if (c.ComponentKey == "ActorCustomization" && ActorCustomizationExtraData.CanRead(extraData))
+        {
+            c.ActorCustomizationExtraData = new(extraData, extraDataOffset);
+            return;
+        }
+
+        c.ExtraComponentsData = extraData;
+        LogUnexpectedExtraData(extraData, extraDataOffset, "components");
+    }
+
+    private static void LogUnexpectedExtraData(byte[]? extraData, int? extraDataOffset, string section)
+    {
+        if (extraData == null || extraData.All(x => x == 0))
+        {
+            return;
+        }
+
+        string debug = BitConverter.ToString(extraData);
+        Logger.Warning("unexpected non-zero extra data while reading {Section} at {Offset:x8}", section, extraDataOffset ?? 0);
+        Logger.Debug(debug);
     }
 
     internal void Write(Writer w, SerializationContext ctx)
@@ -158,7 +200,11 @@ public class UObject : ModelBase
         }
         long startOffset = w.Position;
         Properties.Write(w, ctx);
-        if (ExtraPropertiesData != null)
+        if (ZoneActorExtraData != null)
+        {
+            ZoneActorExtraData.Write(w, ctx.ContainerOffset);
+        }
+        else if (ExtraPropertiesData != null)
         {
             w.WriteBytes(ExtraPropertiesData);
         }
@@ -193,7 +239,11 @@ public class UObject : ModelBase
                     c.Properties!.Write(w, ctx);
                     break;
             }
-            if (c.ExtraComponentsData != null)
+            if (c.ActorCustomizationExtraData != null)
+            {
+                c.ActorCustomizationExtraData.Write(w, ctx.ContainerOffset);
+            }
+            else if (c.ExtraComponentsData != null)
             {
                 w.WriteBytes(c.ExtraComponentsData);
             }
@@ -246,6 +296,9 @@ public class UObject : ModelBase
     {
         if (Properties != null)
             yield return (Properties,null);
+
+        if (ZoneActorExtraData != null)
+            yield return (ZoneActorExtraData, null);
 
         if (Components != null)
         {
