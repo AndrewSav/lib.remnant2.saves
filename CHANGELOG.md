@@ -1,7 +1,7 @@
 # Changelog
 
 
-## v0.0.19 (Unreleased)
+## v1.0.0 (2 May 2026)
 - Added Decompress example
 - Preserve trailing profile persistence blob data during round-trip writes
 - Fixed Unicode string length serialization
