@@ -2,14 +2,8 @@
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Main()
     {
-        if (args.Length == 1 && args[0] == "tests")
-        {
-            Tests.Run();
-            return;
-        }
-
         Tests.Run();
         Example.Json();
         Example.ReadProfile();
@@ -26,6 +20,13 @@ internal class Program
         RunWithPropertySizeAdjustmentLogging(Example.Alloys);
         Example.ResetOneShots();
         Example.Decompress();
+        Example.PrismRemoveSlot();
+        Example.PrismRemoveRollChance();
+        Example.PrismAddRollChance();
+        Example.PrismSetExperience();
+        Example.PrismSetSeed();
+        Example.PrismSetSegments();
+
     }
 
     private static void RunWithPropertySizeAdjustmentLogging(Action example)

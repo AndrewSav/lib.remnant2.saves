@@ -1,4 +1,4 @@
-using lib.remnant2.saves.Model.Memory;
+﻿using lib.remnant2.saves.Model.Memory;
 
 namespace lib.remnant2.saves.Model.Parts;
 

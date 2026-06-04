@@ -57,17 +57,17 @@ internal partial class Example
 
     private static void AlloysPatch(Navigator navigator, ObjectProperty character, string currencyId, string scrapId, int value)
     {
-        Property? shardItem = navigator.GetProperties("ItemBP", character.Object)
+        Property? currencyItem = navigator.GetProperties("ItemBP", character.Object)
             .SingleOrDefault(x => x.Value!.ToString() == currencyId);
 
         Property scrapItem = navigator.GetProperties("ItemBP", character.Object)
             .Single(x => x.Value!.ToString() == scrapId);
 
 
-        if (shardItem != null)
+        if (currencyItem != null)
         {
             Console.WriteLine($"Your character has {currencyId}");
-            var f = navigator.Lookup(shardItem);
+            var f = navigator.Lookup(currencyItem);
 
             PropertyBag props = navigator.GetProperty("InstanceData", f.Parent!.Object)!.Get<ObjectProperty>().Object!.Properties!;
 
@@ -91,7 +91,7 @@ internal partial class Example
         }
         else
         {
-            Console.WriteLine("Your character does not have shards, adding");
+            Console.WriteLine($"Your character does not have {currencyId}, adding");
 
             UObject itemObject = (scrapItem.Value as ObjectProperty)!.Object!.ShallowCopyObject(navigator);
             itemObject.ObjectPath = currencyId;

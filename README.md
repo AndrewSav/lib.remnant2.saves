@@ -237,6 +237,7 @@ I'm a proponent of a minimal error handling upfront, with adding it as necessary
 This library comes with the following code examples:
 
 - Add Ring - edit save file to ad an arbitrary ring to your character
+- Alloys - set the DLC3 special alloys (Alien, Mythril, Ancient) to 100 on the first character (adding them, cloned from scrap, if absent)
 - Blood Moon - display little information that the save file has about blood moon generation, edit save file to increase the chance of Blood Moon triggering
 - Campaign - display various data from `save_x.sav` file:
   - Time Played with this character
@@ -255,6 +256,12 @@ This library comes with the following code examples:
 - Set corrupted shards number to the maximum of ten
 - JSON - serialize safe file to and deserialize from JSON
 - Loadouts - display characters loadouts
+- Prism editing - five independent, single-purpose edits to a Prism Stone, one per file, each configured in a "CHANGE THESE" block at the top of the method. The reference comment in `Example.PrismAddRollChance.cs` documents the prism profile IDs and the UI-name-to-save-`RowName` mappings for every fragment, fusion and legendary, plus the level/value conversions:
+  - Remove Prism Slot - remove a leveled-up fragment or fusion from the prism (the PRISM block)
+  - Remove Prism Roll Chance - remove a fed fragment (the ROLL CHANCES list)
+  - Add Prism Roll Chance - add a fed fragment at the maximum value (32)
+  - Set Prism Experience - replace the prism's stored pending XP
+  - Set Prism Seed - set the roll seed (random by default; or a fixed value for a specific roll)
 - Read Profile - read profile data:
   - Active character
   - Character's Power level
@@ -265,6 +272,7 @@ This library comes with the following code examples:
   - Inventory
   - Equipped items, skills, consumables
   - Traits and trait levels
+- Reset One Shots - clear the rolled one-shot record in a `save_x.sav` so one-shot events can roll again
 
 ## Dependencies
 
