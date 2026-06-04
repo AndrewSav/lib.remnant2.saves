@@ -68,8 +68,7 @@ internal partial class Example
         newItemBag["EquipmentSlotIndex"].Value = -1; // In case ring we cloned from is equipped
 
         ArrayStructProperty inventoryArray = ringItem.GetParent<PropertyBag>(navigator).GetParent<ArrayStructProperty>(navigator);
-        int maxId = inventoryArray.Items.Select(x => (int)((PropertyBag)x!)["ID"].Value!).Max();
-        newItemBag["ID"].Value = maxId + 1;
+        newItemBag["ID"].Value = NextInventoryId(navigator, inventoryArray);
 
         inventoryArray.Items.Add(newItemBag);
 

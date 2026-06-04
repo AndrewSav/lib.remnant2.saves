@@ -75,8 +75,7 @@ internal partial class Example
             newItemBag["New"].Value = 1; // Just for in-game display
 
             ArrayStructProperty inventoryArray = scrapItem.GetParent<PropertyBag>(navigator).GetParent<ArrayStructProperty>(navigator);
-            int maxId = inventoryArray.Items.Select(x => (int)((PropertyBag)x!)["ID"].Value!).Max();
-            newItemBag["ID"].Value = maxId + 1;
+            newItemBag["ID"].Value = NextInventoryId(navigator, inventoryArray);
 
             inventoryArray.Items.Add(newItemBag);
         }

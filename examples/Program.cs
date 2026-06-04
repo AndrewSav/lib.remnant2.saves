@@ -15,8 +15,10 @@ internal class Program
         Example.EditScrapRaw();
         Example.EditScrap();
         RunWithPropertySizeAdjustmentLogging(Example.AddRing);
+        RunWithPropertySizeAdjustmentLogging(Example.AddRingFromScratch);
         RunWithPropertySizeAdjustmentLogging(Example.CassAddItem);
         RunWithPropertySizeAdjustmentLogging(Example.MaxShards);
+        RunWithPropertySizeAdjustmentLogging(Example.MaxShardsFromScratch);
         RunWithPropertySizeAdjustmentLogging(Example.Alloys);
         Example.ResetOneShots();
         Example.Decompress();
