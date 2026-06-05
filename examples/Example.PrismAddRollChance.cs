@@ -124,10 +124,9 @@ internal partial class Example
         }
         PropertyBag instance = prismItemBp.GetParent<PropertyBag>(navigator)["InstanceData"].Get<ObjectProperty>().Object!.Properties!;
 
-        // The save's names table — needed to resolve/append the FName indices for any property we build
-        // from scratch (a never-fed prism is missing CurrentFeedData, HasBeenFed, etc.).
-        List<string> names = FindNamesTable(navigator.Lookup(prismItemBp))
-                             ?? throw new InvalidOperationException("could not find the save's names table");
+        // The enclosing SaveData — owns the names table we resolve/append FName indices into for any
+        // property we build from scratch (a never-fed prism is missing CurrentFeedData, HasBeenFed, etc.).
+        SaveData saveData = prismItemBp.EnclosingSaveData(navigator);
 
         // Create the CurrentFeedData array from scratch if the prism was never fed. Feeding also gives the
         // prism its HasBeenFed flag and a PendingExperience field (but NOT a Level - feeding doesn't level
@@ -138,13 +137,13 @@ internal partial class Example
             {
                 HasPropertyGuid = 0,
                 PropertyGuid = null,
-                OuterElementType = N("StructProperty"),
-                NameIndex = N("CurrentFeedData").Index,
-                TypeIndex = N("StructProperty").Index,
+                OuterElementType = saveData.MakeFName("StructProperty"),
+                NameIndex = saveData.MakeFName("CurrentFeedData").Index,
+                TypeIndex = saveData.MakeFName("StructProperty").Index,
                 Size = 0,
                 Index = 0,
                 Count = 0,
-                ElementType = N("FeedData"),   // the inner struct type for a fed-fragment entry
+                ElementType = saveData.MakeFName("FeedData"),   // the inner struct type for a fed-fragment entry
                 Guid = default,
                 InnerHasPropertyGuid = 0,
                 InnerPropertyGuid = null,
@@ -152,24 +151,24 @@ internal partial class Example
             };
             instance.Properties.Add(new("CurrentFeedData", new Property
             {
-                Name = N("CurrentFeedData"),
-                Type = N("ArrayProperty"),
+                Name = saveData.MakeFName("CurrentFeedData"),
+                Type = saveData.MakeFName("ArrayProperty"),
                 Index = 0, Size = 0, HasPropertyGuid = null, PropertyGuid = null,
                 Value = newArray
             }));
             if (!instance.Contains("HasBeenFed"))
                 instance.Properties.Add(new("HasBeenFed", new Property
                 {
-                    Name = N("HasBeenFed"),
-                    Type = N("BoolProperty"),
+                    Name = saveData.MakeFName("HasBeenFed"),
+                    Type = saveData.MakeFName("BoolProperty"),
                     Index = 0, Size = 0, HasPropertyGuid = 0, PropertyGuid = null,
                     Value = (byte)1
                 }));
             if (!instance.Contains("PendingExperience"))
                 instance.Properties.Add(new("PendingExperience", new Property
                 {
-                    Name = N("PendingExperience"),
-                    Type = N("FloatProperty"),
+                    Name = saveData.MakeFName("PendingExperience"),
+                    Type = saveData.MakeFName("FloatProperty"),
                     Index = 0, Size = 4, HasPropertyGuid = 0, PropertyGuid = null,
                     Value = 0f
                 }));
@@ -213,21 +212,5 @@ internal partial class Example
         Console.WriteLine($"Writing to {targetFileName}...");
         SaveFile.Write(targetFileName, sf);
         Console.WriteLine($"Copy {targetFileName} over your profile.sav to apply.");
-
-        // Resolve `name` to an FName, appending it to the save's names table if it isn't there yet.
-        FName N(string name)
-        {
-            int i = names.FindIndex(x => x == name);
-            if (i < 0) { names.Add(name); i = names.Count - 1; }
-            return new FName { Index = (ushort)i, Number = null, Name = name };
-        }
-
-        // Walk up the navigation node graph to the enclosing SaveData and return its names table.
-        static List<string>? FindNamesTable(Node? node)
-        {
-            Node? cur = node;
-            while (cur != null && cur.Object.GetType() != typeof(SaveData)) cur = cur.Parent;
-            return ((SaveData?)cur?.Object)?.NamesTable;
-        }
     }
 }

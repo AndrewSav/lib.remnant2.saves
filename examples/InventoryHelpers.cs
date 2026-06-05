@@ -1,5 +1,4 @@
 ﻿using lib.remnant2.saves.Model;
-using lib.remnant2.saves.Model.Parts;
 using lib.remnant2.saves.Model.Properties;
 using lib.remnant2.saves.Navigation;
 
@@ -19,8 +18,7 @@ internal partial class Example
         // (whose Objects list and names table the two new objects must join).
         Property anchor = navigator.GetProperties("ItemBP", character.Object).First();
         ArrayStructProperty inventory = anchor.GetParent<PropertyBag>(navigator).GetParent<ArrayStructProperty>(navigator);
-        SaveData saveData = ((ObjectProperty)anchor.Value!).Object!.GetParent<SaveData>(navigator);
-        List<string> names = saveData.NamesTable;
+        SaveData saveData = anchor.EnclosingSaveData(navigator);
 
         // The item-blueprint reference object: a "loaded" object, just the path.
         UObject itemObject = new() { WasLoadedByte = 1, ObjectPath = itemId };
@@ -35,7 +33,7 @@ internal partial class Example
             WasLoadedByte = 0,
             ObjectPath = $"/Script/GunfireRuntime.{instanceDataType}",
             ExtraPropertiesData = new byte[4],
-            LoadedData = new() { OuterId = 0, Name = N(instanceDataType) },
+            LoadedData = new() { OuterId = 0, Name = saveData.MakeFName(instanceDataType) },
             Properties = new() { Properties = instanceProps }
         };
         instanceData.Properties.RefreshLookup();
@@ -60,22 +58,15 @@ internal partial class Example
         entry.RefreshLookup();
         inventory.Items.Add(entry);
 
-        // ----- local builders (resolve/append FName indices against the save's names table) -----
-        FName N(string name)
-        {
-            int i = names.FindIndex(x => x == name);
-            if (i < 0) { names.Add(name); i = names.Count - 1; }
-            return new FName { Index = (ushort)i, Number = null, Name = name };
-        }
-
+        // ----- local property builders (each tags the new property's FName via saveData.MakeFName) -----
         KeyValuePair<string, Property> MakeInt(string name, int value) =>
-            new(name, new Property { Name = N(name), Type = N("IntProperty"), Index = 0, Size = 4, HasPropertyGuid = 0, PropertyGuid = null, Value = value });
+            new(name, new Property { Name = saveData.MakeFName(name), Type = saveData.MakeFName("IntProperty"), Index = 0, Size = 4, HasPropertyGuid = 0, PropertyGuid = null, Value = value });
 
         KeyValuePair<string, Property> MakeBool(string name, bool value) =>
-            new(name, new Property { Name = N(name), Type = N("BoolProperty"), Index = 0, Size = 0, HasPropertyGuid = 0, PropertyGuid = null, Value = (byte)(value ? 1 : 0) });
+            new(name, new Property { Name = saveData.MakeFName(name), Type = saveData.MakeFName("BoolProperty"), Index = 0, Size = 0, HasPropertyGuid = 0, PropertyGuid = null, Value = (byte)(value ? 1 : 0) });
 
         KeyValuePair<string, Property> MakeObjectRef(string name, int objectIndex) =>
-            new(name, new Property { Name = N(name), Type = N("ObjectProperty"), Index = 0, Size = 4, HasPropertyGuid = 0, PropertyGuid = null, Value = new ObjectProperty { ObjectIndex = objectIndex } });
+            new(name, new Property { Name = saveData.MakeFName(name), Type = saveData.MakeFName("ObjectProperty"), Index = 0, Size = 4, HasPropertyGuid = 0, PropertyGuid = null, Value = new ObjectProperty { ObjectIndex = objectIndex } });
     }
 
     // Allocate the next inventory item ID and advance the inventory's IDGen counter. IDGen is the

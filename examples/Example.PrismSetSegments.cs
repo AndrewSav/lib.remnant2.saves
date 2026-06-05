@@ -66,10 +66,9 @@ internal partial class Example
         }
         PropertyBag instance = prismItemBp.GetParent<PropertyBag>(navigator)["InstanceData"].Get<ObjectProperty>().Object!.Properties!;
 
-        // The save's names table — needed to resolve/append the FName indices for any property we build
-        // from scratch (a never-leveled prism is missing CurrentSegments, Level, etc.).
-        List<string> names = FindNamesTable(navigator.Lookup(prismItemBp))
-                             ?? throw new InvalidOperationException("could not find the save's names table");
+        // The enclosing SaveData — owns the names table we resolve/append FName indices into for any
+        // property we build from scratch (a never-leveled prism is missing CurrentSegments, Level, etc.).
+        SaveData saveData = prismItemBp.EnclosingSaveData(navigator);
 
         // Create the CurrentSegments array from scratch if the prism was never leveled.
         if (!instance.Contains("CurrentSegments"))
@@ -78,13 +77,13 @@ internal partial class Example
             {
                 HasPropertyGuid = 0,
                 PropertyGuid = null,
-                OuterElementType = N("StructProperty"),
-                NameIndex = N("CurrentSegments").Index,
-                TypeIndex = N("StructProperty").Index,
+                OuterElementType = saveData.MakeFName("StructProperty"),
+                NameIndex = saveData.MakeFName("CurrentSegments").Index,
+                TypeIndex = saveData.MakeFName("StructProperty").Index,
                 Size = 0,
                 Index = 0,
                 Count = 0,
-                ElementType = N("PrismSegment"),   // the inner struct type for a slot entry
+                ElementType = saveData.MakeFName("PrismSegment"),   // the inner struct type for a slot entry
                 Guid = default,
                 InnerHasPropertyGuid = 0,
                 InnerPropertyGuid = null,
@@ -92,8 +91,8 @@ internal partial class Example
             };
             instance.Properties.Add(new("CurrentSegments", new Property
             {
-                Name = N("CurrentSegments"),
-                Type = N("ArrayProperty"),
+                Name = saveData.MakeFName("CurrentSegments"),
+                Type = saveData.MakeFName("ArrayProperty"),
                 Index = 0, Size = 0, HasPropertyGuid = null, PropertyGuid = null,
                 Value = newArray
             }));
@@ -127,10 +126,10 @@ internal partial class Example
         else
             instance.Properties.Add(new("Level", new Property
             {
-                Name = N("Level"),
-                Type = N("ByteProperty"),
+                Name = saveData.MakeFName("Level"),
+                Type = saveData.MakeFName("ByteProperty"),
                 Index = 0, Size = 0, HasPropertyGuid = null, PropertyGuid = null,
-                Value = new ByteProperty { EnumName = N("None"), HasPropertyGuid = 0, PropertyGuid = null, EnumByte = level, EnumValue = null }
+                Value = new ByteProperty { EnumName = saveData.MakeFName("None"), HasPropertyGuid = 0, PropertyGuid = null, EnumByte = level, EnumValue = null }
             }));
 
         if (instance.Contains("HasBeenFed"))
@@ -138,8 +137,8 @@ internal partial class Example
         else
             instance.Properties.Add(new("HasBeenFed", new Property
             {
-                Name = N("HasBeenFed"),
-                Type = N("BoolProperty"),
+                Name = saveData.MakeFName("HasBeenFed"),
+                Type = saveData.MakeFName("BoolProperty"),
                 Index = 0, Size = 0, HasPropertyGuid = 0, PropertyGuid = null,
                 Value = (byte)(hasBeenFed ? 1 : 0)
             }));
@@ -149,8 +148,8 @@ internal partial class Example
         else
             instance.Properties.Add(new("PendingExperience", new Property
             {
-                Name = N("PendingExperience"),
-                Type = N("FloatProperty"),
+                Name = saveData.MakeFName("PendingExperience"),
+                Type = saveData.MakeFName("FloatProperty"),
                 Index = 0, Size = 4, HasPropertyGuid = 0, PropertyGuid = null,
                 Value = pendingExperience
             }));
@@ -160,22 +159,6 @@ internal partial class Example
         Console.WriteLine($"Writing to {targetFileName}...");
         SaveFile.Write(targetFileName, sf);
         Console.WriteLine($"Copy {targetFileName} over your profile.sav to apply.");
-
-        // Resolve `name` to an FName, appending it to the save's names table if it isn't there yet.
-        FName N(string name)
-        {
-            int i = names.FindIndex(x => x == name);
-            if (i < 0) { names.Add(name); i = names.Count - 1; }
-            return new FName { Index = (ushort)i, Number = null, Name = name };
-        }
-
-        // Walk up the navigation node graph to the enclosing SaveData and return its names table.
-        static List<string>? FindNamesTable(Node? node)
-        {
-            Node? cur = node;
-            while (cur != null && cur.Object.GetType() != typeof(SaveData)) cur = cur.Parent;
-            return ((SaveData?)cur?.Object)?.NamesTable;
-        }
 
         // A CurrentSegments entry is a struct (PropertyBag) with a RowName (NameProperty) and a Level
         // (IntProperty). Both are tagged properties (HasPropertyGuid = 0); FName indices and the array
