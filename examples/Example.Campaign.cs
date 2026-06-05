@@ -59,10 +59,10 @@ internal partial class Example
             { "Quest_Miniboss_RootCultist", "Legion" },
             { "Quest_Miniboss_RootHorror", "Kaeula's Shadow" },
             { "Quest_Miniboss_Shrewd", "Shrewd" },
-            { "Quest_OverworldPOI_DranOracle", "Dran Orcale" },
+            { "Quest_OverworldPOI_DranOracle", "Dran Oracle" },
             { "Quest_SideD_CathedralOfSeasons", "Cathedral of Omens" },
             { "Quest_SideD_CharnelHouse", "Harvester's Reach" },
-            { "Quest_SideD_CrimsonHarvest", "Butchers Quarter" },
+            { "Quest_SideD_CrimsonHarvest", "Butcher's Quarter" },
             { "Quest_SideD_Extermination", "Dormant N'Erudian Facility" },
             { "Quest_SideD_Extraction", "The Dark Conduit" },
             { "Quest_SideD_FaeCouncil", "Council Chamber" },
@@ -78,7 +78,7 @@ internal partial class Example
             { "Quest_SideD_TownTurnToDust", "Tiller's Rest" },
             { "Quest_SideD_Train", "Terminus Station" },
             { "Quest_SideD_WailingField", "Forgotten Field" },
-            { "Quest_Story_AllFather", "Story - All Father (Beautific Palace)" },
+            { "Quest_Story_AllFather", "Story - All Father (Beatific Palace)" },
             { "Quest_Story_Asylum", "Story - Asylum (Morrow Parish)" },
             { "Quest_Story_Empress", "Story - Empress (Red Throne)" },
             { "Quest_Story_IAmLegend", "Story - I Am Legend (Forgotten Prison)" },
@@ -181,7 +181,7 @@ internal partial class Example
 
         if (inventory != null)
         {
-            Console.WriteLine("  You have following inventory:");
+            Console.WriteLine("  You have the following inventory:");
 
             foreach (object? o in inventory.Items)
             {

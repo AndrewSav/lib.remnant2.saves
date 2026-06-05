@@ -96,7 +96,7 @@ internal partial class Example
             Component inventory = master.Components!.Single(x => x.ComponentKey == "Inventory");
             Property items = inventory.Properties!.Properties.Single(x => x.Key == "Items").Value;
             ArrayStructProperty asp = (ArrayStructProperty)items.Value!;
-            Console.WriteLine("  You have following inventory:");
+            Console.WriteLine("  You have the following inventory:");
 
             foreach (object? o in asp.Items)
             {
@@ -134,7 +134,7 @@ internal partial class Example
             Component traitsComponent = master.Components!.Single(x => x.ComponentKey == "Traits");
             Property traits = traitsComponent.Properties!.Properties.Single(x => x.Key == "Traits").Value;
             ArrayStructProperty aspTraits = (ArrayStructProperty)traits.Value!;
-            Console.WriteLine("  You have following Traits:");
+            Console.WriteLine("  You have the following Traits:");
 
             foreach (object? o in aspTraits.Items)
             {

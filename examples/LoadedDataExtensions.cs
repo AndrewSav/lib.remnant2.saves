@@ -2,7 +2,7 @@
 using lib.remnant2.saves.Model.Parts;
 
 namespace examples;
-public static class LoadedDataExtension
+public static class LoadedDataExtensions
 {
     public static UObjectLoadedData ShallowCopyLoadedData(this UObjectLoadedData data)
     {
@@ -11,7 +11,7 @@ public static class LoadedDataExtension
             Name = new FName()
             {
                 Name = data.Name.Name,
-                Index =  data.Name.Index,
+                Index = data.Name.Index,
                 Number = null
             },
             OuterId = data.OuterId

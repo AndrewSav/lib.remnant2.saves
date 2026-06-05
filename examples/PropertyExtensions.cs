@@ -1,7 +1,7 @@
 ﻿using lib.remnant2.saves.Model.Properties;
 
 namespace examples;
-public static class PropertyExtension
+public static class PropertyExtensions
 {
     public static Property ShallowCopyProperty(this Property property)
     {

@@ -2,7 +2,7 @@
 using lib.remnant2.saves.Navigation;
 
 namespace examples;
-public static class UObjectExtension
+public static class UObjectExtensions
 {
     public static UObject ShallowCopyObject(this UObject obj, Navigator navigator)
     {
@@ -12,7 +12,6 @@ public static class UObjectExtension
             ExtraPropertiesData = obj.ExtraPropertiesData,
             IsActor = obj.IsActor,
             LoadedData = obj.LoadedData,
-            ObjectIndex = obj.ObjectIndex,
             ObjectPath = obj.ObjectPath,
             Properties = obj.Properties,
             WasLoadedByte = obj.WasLoadedByte,

@@ -24,7 +24,7 @@ internal partial class Example
             PropertyBag inventory = inventoryList[0].Properties!;
 
             ArrayStructProperty asp = (ArrayStructProperty)inventory["Items"].Value!;
-            Console.WriteLine("Your Cass has following inventory:");
+            Console.WriteLine("Your Cass has the following inventory:");
 
             foreach (object? o in asp.Items)
             {

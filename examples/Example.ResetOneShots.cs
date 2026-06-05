@@ -19,16 +19,16 @@ internal partial class Example
         Navigator navigator = new(sf);
 
 
-        UObject x = navigator.GetObject("BP_RemnantSaveGame_C")!;
+        UObject saveGame = navigator.GetObject("BP_RemnantSaveGame_C")!;
 
-        if (!x.Properties!.Contains("RolledOneShots"))
+        if (!saveGame.Properties!.Contains("RolledOneShots"))
         {
             Console.WriteLine("This save does not have rolled one shots");
             return;
         }
 
-        x.Properties!.Properties.RemoveAll(y => y.Key == "RolledOneShots");
-        x.Properties!.RefreshLookup();
+        saveGame.Properties!.Properties.RemoveAll(y => y.Key == "RolledOneShots");
+        saveGame.Properties!.RefreshLookup();
 
         Console.WriteLine($"Writing to {targetFileName}...");
         SaveFile.Write(targetFileName, sf);
