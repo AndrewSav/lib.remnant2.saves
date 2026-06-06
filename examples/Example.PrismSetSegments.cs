@@ -12,8 +12,8 @@ internal partial class Example
 {
     // Set the prism's PRISM-block slots (CurrentSegments) to an exact target state: the array is grown
     // or shrunk to match, with any new slot entries built from scratch. Works even on a never-leveled
-    // prism - it creates the CurrentSegments array (and the missing Level/HasBeenFed/PendingExperience
-    // fields) from scratch from the values below.
+    // prism - it creates the CurrentSegments array (and the missing Level / PendingExperience fields)
+    // from scratch from the values below.
     public static void PrismSetSegments()
     {
         Console.WriteLine("Set Prism Segments===========");
@@ -41,8 +41,10 @@ internal partial class Example
         //     ~(2*5 + lvl)  per FUSION slot  (a fusion = two components leveled to +5, then re-leveled)
         // The target above (4 fusions +10, a single +10, a legendary +1)  ->  20*4 + 10 + 1 = 91.
         const int level = 91;                          // raw prism level (byte 0-255; >= the minimum above)
-        const bool hasBeenFed = false;                 // whether the prism has fed ROLL CHANCES
         const float pendingExperience = 0f;            // banked XP toward the next level (0 once maxed)
+        // NOTE: HasBeenFed is deliberately NOT set here — it's the "has the prism ever been fed" flag the
+        // game flips only when a ROLL CHANCE is fed (see Example.PrismAddRollChance); setting slots isn't
+        // feeding, so we leave it untouched.
         // ========================
 
         string path = Path.Combine(Utils.GetSteamSavePath(), "profile.sav");
@@ -119,8 +121,8 @@ internal partial class Example
             Console.WriteLine($"  segment[{i}] = {target[i].row} L{target[i].lvl}");
         }
 
-        // Overall prism state (Level is a ByteProperty, HasBeenFed a BoolProperty stored as a byte,
-        // PendingExperience a float). Set it if present, otherwise create it from scratch.
+        // Overall prism state (Level is a ByteProperty, PendingExperience a float). Set it if present,
+        // otherwise create it from scratch. (HasBeenFed is left alone — see the CHANGE-THESE note above.)
         if (instance.Contains("Level"))
             ((ByteProperty)instance["Level"].Value!).EnumByte = level;
         else
@@ -130,17 +132,6 @@ internal partial class Example
                 Type = saveData.MakeFName("ByteProperty"),
                 Index = 0, Size = 0, HasPropertyGuid = null, PropertyGuid = null,
                 Value = new ByteProperty { EnumName = saveData.MakeFName("None"), HasPropertyGuid = 0, PropertyGuid = null, EnumByte = level, EnumValue = null }
-            }));
-
-        if (instance.Contains("HasBeenFed"))
-            instance["HasBeenFed"].Value = (byte)(hasBeenFed ? 1 : 0);
-        else
-            instance.Properties.Add(new("HasBeenFed", new Property
-            {
-                Name = saveData.MakeFName("HasBeenFed"),
-                Type = saveData.MakeFName("BoolProperty"),
-                Index = 0, Size = 0, HasPropertyGuid = 0, PropertyGuid = null,
-                Value = (byte)(hasBeenFed ? 1 : 0)
             }));
 
         if (instance.Contains("PendingExperience"))
@@ -154,7 +145,7 @@ internal partial class Example
                 Value = pendingExperience
             }));
         instance.RefreshLookup();
-        Console.WriteLine($"Level = {level}, HasBeenFed = {hasBeenFed}, PendingExperience = {pendingExperience}");
+        Console.WriteLine($"Level = {level}, PendingExperience = {pendingExperience}");
 
         Console.WriteLine($"Writing to {targetFileName}...");
         SaveFile.Write(targetFileName, sf);
