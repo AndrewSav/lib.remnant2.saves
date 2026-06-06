@@ -10,6 +10,10 @@ internal partial class Example
     {
         Console.WriteLine("Loadouts ===========");
 
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot to show (or DEBUG_REMNANT_SAVE_INDEX env var)
+        // ========================
+
         string folder = Utils.GetSteamSavePath();
         string path = Path.Combine(folder, "profile.sav");
 
@@ -17,7 +21,7 @@ internal partial class Example
         Navigator navigator = new(sf);
 
         var chars = navigator.GetObjects("SavedCharacter");
-        for (int charIndex = 0; charIndex < chars.Count; charIndex++)
+        for (int charIndex = saveIndex; charIndex <= saveIndex; charIndex++)   // show only the selected character
         {
             var character = chars[charIndex];
             Console.WriteLine($"  Character index {charIndex}");

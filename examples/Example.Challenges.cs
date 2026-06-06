@@ -136,6 +136,10 @@ internal partial class Example
             // ReSharper restore StringLiteralTypo
         };
 
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
+        // ========================
+
         string folder = Utils.GetSteamSavePath();
         string path = Path.Combine(folder, "profile.sav");
 
@@ -147,38 +151,34 @@ internal partial class Example
         ArrayProperty ap = (charactersProp.Value.Value as ArrayProperty)!;
         List<ObjectProperty> op = ap.Items.Select(x => (ObjectProperty)x!).ToList();
 
-        foreach (var character in op)
+        ObjectProperty character = op[saveIndex];
+        Property characterData = character.Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "CharacterData").Value;
+        ArrayStructProperty asp = (ArrayStructProperty)navigator.GetProperty("ObjectiveProgressList", characterData)!.Value!;
+
+        foreach (object? obj in asp.Items)
         {
-            if (character.ObjectIndex < 0) continue;
-            Console.WriteLine("Character starts");
-            Property characterData = character.Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "CharacterData").Value;
-            ArrayStructProperty asp = (ArrayStructProperty)navigator.GetProperty("ObjectiveProgressList", characterData)!.Value!;
+            PropertyBag item = (PropertyBag)obj!;
+            FGuid objectiveId = item["ObjectiveID"].Get<FGuid>();
+            int progress = item["Progress"].Get<int>();
 
-            foreach (object? obj in asp.Items)
+            WriterBase w = new();
+            w.Write(objectiveId);
+
+            uint u1 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[..4]);
+            uint u2 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[4..8]);
+            uint u3 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[8..12]);
+            uint u4 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[12..16]);
+            string uu = $"{u1:X8}-{u2:X8}-{u3:X8}-{u4:X8}";
+
+            //string r1 = BitConverter.ToStringValue(w.ToArray()).Replace("-", "");
+
+            string message = objectives.TryGetValue(uu, out string? objective) ? $"[Challenge] {objective}" : uu;
+            if (achievements.TryGetValue(uu, out string? achievement))
             {
-                PropertyBag item = (PropertyBag)obj!;
-                FGuid objectiveId = item["ObjectiveID"].Get<FGuid>();
-                int progress = item["Progress"].Get<int>();
-
-                WriterBase w = new();
-                w.Write(objectiveId);
-
-                uint u1 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[..4]);
-                uint u2 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[4..8]);
-                uint u3 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[8..12]);
-                uint u4 = BinaryPrimitives.ReadUInt32LittleEndian(w.ToArray().AsSpan()[12..16]);
-                string uu = $"{u1:X8}-{u2:X8}-{u3:X8}-{u4:X8}";
-
-                //string r1 = BitConverter.ToStringValue(w.ToArray()).Replace("-", "");
-
-                string message = objectives.TryGetValue(uu, out string? objective) ? $"[Challenge] {objective}" : uu;
-                if (achievements.TryGetValue(uu, out string? achievement))
-                {
-                    message = $"[Achievement] {achievement}";
-                }
-
-                Console.WriteLine($"{message}: {progress}");
+                message = $"[Achievement] {achievement}";
             }
+
+            Console.WriteLine($"{message}: {progress}");
         }
     }
 }

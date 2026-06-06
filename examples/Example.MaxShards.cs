@@ -10,9 +10,12 @@ internal partial class Example
     {
         Console.WriteLine("Max Shards===========");
 
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
         const string shardId = "/Game/World_Base/Items/Materials/LumeniteCrystal/Material_CorruptedShard.Material_CorruptedShard_C";
         const string scrapId = "/Game/World_Base/Items/Materials/Scraps/Material_Scraps.Material_Scraps_C";
         const string targetFileName = "shards_maxed.sav";
+        // ========================
 
         string folder = Utils.GetSteamSavePath();
         string path = Path.Combine(folder, "profile.sav");
@@ -21,16 +24,8 @@ internal partial class Example
         SaveFile sf = SaveFile.Read(path);
         Navigator navigator = new(sf);
 
-        Console.WriteLine("Looking for existing shards on the first character...");
-
-        Property? characters = navigator.GetProperty("Characters");
-
-        ObjectProperty? character = characters!.GetItems<ObjectProperty>().FirstOrDefault();
-        if (character == null)
-        {
-            Console.WriteLine("Do you have any characters?");
-            return;
-        }
+        Console.WriteLine($"Looking for existing shards on character slot {saveIndex}...");
+        ObjectProperty character = navigator.GetProperty("Characters")!.GetItems<ObjectProperty>()[saveIndex];
 
         Property? shardItem = navigator.GetProperties("ItemBP", character.Object)
             .SingleOrDefault(x => x.Value!.ToString() == shardId);

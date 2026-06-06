@@ -20,9 +20,10 @@ internal class Tests
             .WriteTo.Console()
             .CreateLogger();
 
+        int saveIndex = Utils.GetSaveIndex();          // which world save (save_<index>.sav) to test; or DEBUG_REMNANT_SAVE_INDEX env var
         string folder = Utils.GetSteamSavePath();
         string profilePath = Path.Combine(folder, "profile.sav");
-        string savePath = Path.Combine(folder, Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE") ?? "save_0.sav");
+        string savePath = Utils.GetWorldSavePath(saveIndex);
 
         DoOne(profilePath);
         DoOne(savePath);

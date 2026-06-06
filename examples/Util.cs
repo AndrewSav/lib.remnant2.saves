@@ -36,6 +36,18 @@ public class Utils
         return possiblePaths[0];
     }
 
+    // The save / character SLOT index the examples target, from the DEBUG_REMNANT_SAVE_INDEX env var
+    // (default 0). One index selects BOTH the profile character (profile.sav `Characters[index]`) and the
+    // world/campaign save (`save_<index>.sav`), so an example hits the same slot either way. Each editing
+    // example surfaces it as an editable `saveIndex` in its CHANGE-THESE block; the env var is just the default.
+    // NOTE: this is the save SLOT, not an ordinal. Deleting characters leaves GAPS - if you had slots 0..4 and
+    // deleted 1,2,3, your "second" remaining character is now at slot 4. No validation: a bad value just throws.
+    public static int GetSaveIndex() =>
+        Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE_INDEX") is { } s ? int.Parse(s) : 0;
+
+    // The world/campaign save file for a slot: save_<saveIndex>.sav in the save folder.
+    public static string GetWorldSavePath(int saveIndex) => Path.Combine(GetSteamSavePath(), $"save_{saveIndex}.sav");
+
     public static string GetShortenedAssetPath(string path)
     {
         path = path[(path.LastIndexOfAny("/.".ToCharArray()) + 1)..];

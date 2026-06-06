@@ -23,9 +23,11 @@ internal partial class Example
         };
 
 
-        string folder = Utils.GetSteamSavePath();
-        string savePath =
-            Path.Combine(folder, Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE") ?? "save_0.sav");
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
+        // ========================
+
+        string savePath = Utils.GetWorldSavePath(saveIndex);
 
         SaveFile sf = SaveFile.Read(savePath);
         Navigator navigator = new(sf);

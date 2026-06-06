@@ -11,16 +11,17 @@ internal partial class Example
     {
         Console.WriteLine("Cass add item===========");
 
-        string folder = Utils.GetSteamSavePath();
-        string savePath = Path.Combine(folder, Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE") ?? "save_0.sav");
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
+        // Note: you will only see the item in the Cass shop if your character does not already have it.
+        const string item = @"/Game/World_Jungle/Items/Trinkets/Amulets/FullMoonCirclet/Amulet_FullMoonCirclet.Amulet_FullMoonCirclet_C";
+        const string targetFileName = "cass_changed.sav";
+        // ========================
+
+        string savePath = Utils.GetWorldSavePath(saveIndex);
 
         SaveFile sf = SaveFile.Read(savePath);
         Navigator navigator = new(sf);
-
-
-        // Note that you will only see the character in the Cass shop only if your character does not already have it
-        string item = @"/Game/World_Jungle/Items/Trinkets/Amulets/FullMoonCirclet/Amulet_FullMoonCirclet.Amulet_FullMoonCirclet_C";
-        const string targetFileName = "cass_changed.sav";
 
         Actor cass = navigator.GetActor("Character_NPC_Cass_C")!;
 

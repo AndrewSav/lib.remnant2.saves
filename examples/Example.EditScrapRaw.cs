@@ -9,8 +9,11 @@ internal partial class Example
     {
         Console.WriteLine("Edit Scrap Raw API===========");
 
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
         const int targetScrapValue = 12345;
         const string targetFileName = "scrap_changed_raw.sav";
+        // ========================
 
         string folder = Utils.GetSteamSavePath();
         string path = Path.Combine(folder, "profile.sav");
@@ -18,17 +21,12 @@ internal partial class Example
         Console.WriteLine("Reading profile data...");
         SaveFile sf = SaveFile.Read(path);
 
-        Console.WriteLine("Looking for scrap on the first character...");
+        Console.WriteLine($"Looking for scrap on character slot {saveIndex}...");
         KeyValuePair<string, Property> charactersProp = sf.SaveData.Objects[0].Properties!.Properties.Single(x => x.Key == "Characters");
 
         ArrayProperty ap = (charactersProp.Value.Value as ArrayProperty)!;
         List<ObjectProperty> op = ap.Items.Select(x => (ObjectProperty)x!).ToList();
-        ObjectProperty? character = op.FirstOrDefault(x => x.ObjectIndex >= 0);
-        if (character == null)
-        {
-            Console.WriteLine("Do you have any characters?");
-            return;
-        }
+        ObjectProperty character = op[saveIndex];
 
         Property characterData = sf.SaveData.Objects[character.ObjectIndex].Properties!.Properties.SingleOrDefault(x => x.Key == "CharacterData").Value;
         StructProperty sp = (StructProperty)characterData.Value!;

@@ -96,7 +96,7 @@ internal partial class Example
         Console.WriteLine("Add Prism Roll Chance===========");
 
         // ===== CHANGE THESE =====
-        const int characterIndex = 0;                  // save_0 (first character)
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
         const string prismProfileId = "/Game/Events/Paragon/PrismStone/UniquePrisms/PrismOfVoracity.PrismOfVoracity_C";
         const string fragmentRowName = "SkillDamage";  // fed fragment to add (single RowName)
         const int fedLevel = 32;                        // 32 = max (see conversions above)
@@ -110,16 +110,11 @@ internal partial class Example
         // Locate the prism's PrismStoneInstanceData property bag.
         Navigator navigator = new(sf);
         List<ObjectProperty> characters = navigator.GetProperty("Characters")!.GetItems<ObjectProperty>();
-        if (characterIndex >= characters.Count || characters[characterIndex].Object == null)
-        {
-            Console.WriteLine($"WARNING: character index {characterIndex} (save_{characterIndex}) not found.");
-            return;
-        }
-        Property? prismItemBp = navigator.GetProperties("ItemBP", characters[characterIndex].Object)
+        Property? prismItemBp = navigator.GetProperties("ItemBP", characters[saveIndex].Object)
             .FirstOrDefault(x => x.Value!.ToString() == prismProfileId);
         if (prismItemBp == null)
         {
-            Console.WriteLine($"WARNING: prism not found on save_{characterIndex}.");
+            Console.WriteLine($"WARNING: prism not found on save_{saveIndex}.");
             return;
         }
         PropertyBag instance = prismItemBp.GetParent<PropertyBag>(navigator)["InstanceData"].Get<ObjectProperty>().Object!.Properties!;

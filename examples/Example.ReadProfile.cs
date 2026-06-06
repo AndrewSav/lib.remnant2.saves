@@ -8,6 +8,10 @@ internal partial class Example
     {
         Console.WriteLine("Profile Data===========");
 
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot to show (or DEBUG_REMNANT_SAVE_INDEX env var)
+        // ========================
+
         string folder =  Utils.GetSteamSavePath();
         string path = Path.Combine(folder, "profile.sav");
 
@@ -33,11 +37,11 @@ internal partial class Example
 
         Console.WriteLine($"Your active character's index is {activeIndex}, which means it's the {numbers[activeIndex]} character on the screen");
 
-        for (int i = 0,charCount=0; i < op.Count; i++)
+        for (int i = saveIndex; i <= saveIndex; i++)   // show only the selected save slot
         {
             if (op[i].Object == null) continue;
 
-            Console.WriteLine($"Your {numbers[charCount]} character (save slot {i}) has:");
+            Console.WriteLine($"Character at save slot {i} has:");
             Property traitRank = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "TraitRank").Value;
             Property archetype = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "Archetype").Value;
             Property secondaryArchetype = op[i].Object!.Properties!.Properties.SingleOrDefault(x => x.Key == "SecondaryArchetype").Value;
@@ -159,8 +163,6 @@ internal partial class Example
                 Console.WriteLine($"    {Utils.GetShortenedAssetPath(((ObjectProperty)item.Value!).ClassName!)} level {(int)level.Value!}{message}");
 
             }
-
-            charCount++;
         }
 
     }

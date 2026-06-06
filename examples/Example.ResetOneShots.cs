@@ -8,12 +8,13 @@ internal partial class Example
     public static void ResetOneShots()
     {
         Console.WriteLine("Reset One Shots===========");
-        
-        const string targetFileName = "resetoneshots.sav";
 
-        string folder = Utils.GetSteamSavePath();
-        string file = Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE") ?? "save_0.sav";
-        string savePath = Path.Combine(folder, file);
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
+        const string targetFileName = "resetoneshots.sav";
+        // ========================
+
+        string savePath = Utils.GetWorldSavePath(saveIndex);
 
         SaveFile sf = SaveFile.Read(savePath);
         Navigator navigator = new(sf);
@@ -32,7 +33,7 @@ internal partial class Example
 
         Console.WriteLine($"Writing to {targetFileName}...");
         SaveFile.Write(targetFileName, sf);
-        Console.WriteLine($"You have to copy {targetFileName} over your {file} in '{folder}' folder!");
+        Console.WriteLine($"You have to copy {targetFileName} over your {Path.GetFileName(savePath)} in '{Path.GetDirectoryName(savePath)}' folder!");
 
     }
 }

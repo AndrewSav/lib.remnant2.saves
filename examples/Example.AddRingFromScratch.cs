@@ -16,8 +16,11 @@ internal partial class Example
     {
         Console.WriteLine("Add Ring (from scratch)===========");
 
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
         const string ringId = "/Game/World_Jungle/Items/Trinkets/Rings/ArchersCrest/Ring_ArchersCrest.Ring_ArchersCrest_C";
         const string targetFileName = "ring_added_from_scratch.sav";
+        // ========================
 
         string folder = Utils.GetSteamSavePath();
         string path = Path.Combine(folder, "profile.sav");
@@ -26,13 +29,8 @@ internal partial class Example
         SaveFile sf = SaveFile.Read(path);
         Navigator navigator = new(sf);
 
-        Console.WriteLine("Looking for the ring on the first character...");
-        ObjectProperty? character = navigator.GetProperty("Characters")!.GetItems<ObjectProperty>().FirstOrDefault();
-        if (character == null)
-        {
-            Console.WriteLine("Do you have any characters?");
-            return;
-        }
+        Console.WriteLine($"Looking for the ring on character slot {saveIndex}...");
+        ObjectProperty character = navigator.GetProperty("Characters")!.GetItems<ObjectProperty>()[saveIndex];
 
         Property? ringItem = navigator.GetProperties("ItemBP", character.Object)
             .SingleOrDefault(x => x.Value!.ToString() == ringId);

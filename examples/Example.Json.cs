@@ -8,9 +8,13 @@ internal partial class Example
     {
         Console.WriteLine("Json===========");
 
+        // ===== CHANGE THESE =====
+        int saveIndex = Utils.GetSaveIndex();          // which world save (save_<index>.sav) to round-trip; or DEBUG_REMNANT_SAVE_INDEX env var
+        // ========================
+
         string folder = Utils.GetSteamSavePath();
         string profilePath = Path.Combine(folder, "profile.sav");
-        string savePath = Path.Combine(folder, Environment.GetEnvironmentVariable("DEBUG_REMNANT_SAVE") ?? "save_0.sav");
+        string savePath = Utils.GetWorldSavePath(saveIndex);
 
         RoundtripJson(profilePath);
         RoundtripJson(savePath);
