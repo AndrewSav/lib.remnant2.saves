@@ -12,14 +12,13 @@ internal class Program
         Example.Campaign();
         Example.BloodMoon();
         Example.Challenges();
-        Example.EditScrapRaw();
-        Example.EditScrap();
+        Example.EditCurrencyRaw();
+        Example.EditCurrency();
         RunWithPropertySizeAdjustmentLogging(Example.AddRing);
         RunWithPropertySizeAdjustmentLogging(Example.AddRingFromScratch);
         RunWithPropertySizeAdjustmentLogging(Example.CassAddItem);
-        RunWithPropertySizeAdjustmentLogging(Example.MaxShards);
-        RunWithPropertySizeAdjustmentLogging(Example.MaxShardsFromScratch);
-        RunWithPropertySizeAdjustmentLogging(Example.Alloys);
+        RunWithPropertySizeAdjustmentLogging(Example.EditCurrencyClone);
+        RunWithPropertySizeAdjustmentLogging(Example.EditCurrencyFromScratch);
         Example.ResetOneShots();
         Example.Decompress();
         Example.PrismRemoveSlot();

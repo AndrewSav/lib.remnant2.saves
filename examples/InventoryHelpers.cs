@@ -74,7 +74,7 @@ internal partial class Example
     // invariant (IDGen == highest ID). The Max(maxId, ...) is purely defensive: in every inventory
     // observed across the saves maxId == IDGen, so IDGen + 1 alone would do - the Max() only guards
     // against an IDGen left stale (below maxId) by an earlier max(ID)+1-style edit. Shared by the
-    // from-scratch AddInventoryItem and the clone examples (AddRing / MaxShards) so both keep IDGen in sync.
+    // from-scratch AddInventoryItem and the clone examples (AddRing / EditCurrencyClone) so both keep IDGen in sync.
     private static int NextInventoryId(Navigator navigator, ArrayStructProperty inventory)
     {
         PropertyBag container = inventory.GetParent<Property>(navigator).GetParent<PropertyBag>(navigator);

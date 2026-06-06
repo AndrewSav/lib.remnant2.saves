@@ -5,14 +5,19 @@ namespace examples;
 
 internal partial class Example
 {
-    public static void EditScrapRaw()
+    // Same as EditCurrency (update an existing currency's Quantity) but WITHOUT the Navigator - manual
+    // object traversal. More verbose, but it skips building the Navigator graph, so it does less work.
+    // Errors if the character doesn't have the currency. See the variant guide + currency-id list in
+    // Example.EditCurrency.cs.
+    public static void EditCurrencyRaw()
     {
-        Console.WriteLine("Edit Scrap Raw API===========");
+        Console.WriteLine("Edit Currency Raw API===========");
 
         // ===== CHANGE THESE =====
         int saveIndex = Utils.GetSaveIndex();          // character / save slot (or DEBUG_REMNANT_SAVE_INDEX env var)
-        const int targetScrapValue = 12345;
-        const string targetFileName = "scrap_changed_raw.sav";
+        const string currencyId = "/Game/World_Base/Items/Materials/Scraps/Material_Scraps.Material_Scraps_C";  // paste one from the list in EditCurrency
+        const int quantity = 12345;                    // new amount
+        const string targetFileName = "currency_changed_raw.sav";
         // ========================
 
         string folder = Utils.GetSteamSavePath();
@@ -21,7 +26,7 @@ internal partial class Example
         Console.WriteLine("Reading profile data...");
         SaveFile sf = SaveFile.Read(path);
 
-        Console.WriteLine($"Looking for scrap on character slot {saveIndex}...");
+        Console.WriteLine($"Looking for the currency on character slot {saveIndex}...");
         KeyValuePair<string, Property> charactersProp = sf.SaveData.Objects[0].Properties!.Properties.Single(x => x.Key == "Characters");
 
         ArrayProperty ap = (charactersProp.Value.Value as ArrayProperty)!;
@@ -36,21 +41,19 @@ internal partial class Example
         Property items = inventory.Properties!.Properties.Single(x => x.Key == "Items").Value;
         ArrayStructProperty asp = (ArrayStructProperty)items.Value!;
 
-        const string scrapId = "/Game/World_Base/Items/Materials/Scraps/Material_Scraps.Material_Scraps_C";
-
-        PropertyBag scrapInventory = (PropertyBag)asp.Items.Single(x =>
+        PropertyBag currencyInventory = (PropertyBag)asp.Items.Single(x =>
         {
             return ((PropertyBag)x!).Properties.Any(y =>
                 y.Key == "ItemBP"
-                && inner.Objects[((ObjectProperty)y.Value.Value!).ObjectIndex].ObjectPath == scrapId
+                && inner.Objects[((ObjectProperty)y.Value.Value!).ObjectIndex].ObjectPath == currencyId
                 );
         })!;
 
-        ObjectProperty instanceData = (ObjectProperty)scrapInventory.Properties.Single(x => x.Key == "InstanceData").Value.Value!;
-        Property scrap = inner.Objects[instanceData.ObjectIndex].Properties!.Properties.Single(x => x.Key == "Quantity").Value;
+        ObjectProperty instanceData = (ObjectProperty)currencyInventory.Properties.Single(x => x.Key == "InstanceData").Value.Value!;
+        Property quantityProp = inner.Objects[instanceData.ObjectIndex].Properties!.Properties.Single(x => x.Key == "Quantity").Value;
 
-        Console.WriteLine($"Current scrap value is {scrap.Value}. Changing to {targetScrapValue}...");
-        scrap.Value = targetScrapValue;
+        Console.WriteLine($"Current quantity is {quantityProp.Value}. Changing to {quantity}...");
+        quantityProp.Value = quantity;
 
         Console.WriteLine($"Writing to {targetFileName}...");
         SaveFile.Write(targetFileName, sf);

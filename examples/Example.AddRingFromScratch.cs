@@ -10,7 +10,7 @@ internal partial class Example
     // the ring's item + InstanceData objects from nothing via the shared AddInventoryItem helper (see
     // Example.InventoryHelpers.cs). A ring is equipment, so the InstanceData type is "EquipmentInstanceData"
     // with NO Quantity - real-save equipment carries an empty property bag, so we pass null (materials carry
-    // a real stack count instead - compare Example.MaxShardsFromScratch). Unlike the clone version, no
+    // a real stack count instead - compare Example.EditCurrencyFromScratch). Unlike the clone version, no
     // existing ring is needed to copy from.
     public static void AddRingFromScratch()
     {
