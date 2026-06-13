@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Various performance improvements
+- Improved examples
 
 ## v1.0.0 (2 May 2026)
 - Added Decompress example

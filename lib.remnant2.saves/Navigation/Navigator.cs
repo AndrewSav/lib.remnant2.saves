@@ -1,6 +1,5 @@
 ﻿using lib.remnant2.saves.Model;
 using lib.remnant2.saves.Model.Properties;
-using System.Runtime.InteropServices;
 
 namespace lib.remnant2.saves.Navigation;
 
@@ -18,7 +17,7 @@ public class Navigator
         {
             Node n = q.Dequeue();
             _lookup.Add(n.Object, n);
-            string type = n.Path[^1].Type;
+            string type = n.Segment.Type;
             switch (type)
             {
                 case "Property":
@@ -49,18 +48,22 @@ public class Navigator
     {
         if (parent == null) return items;
 
-        static bool IsParent(Span<Segment> obj, Span<Segment> filter)
+        Node parentNode = _lookup[parent];
+        return items.Where(x => IsDescendantOrSelf(_lookup[x], parentNode));
+    }
+
+    // True when 'node' is 'ancestor' itself, or lies below it in the tree. Equivalent to the
+    // old "ancestor's path is a prefix of node's path" check (paths shared Segment instances,
+    // so a prefix match was ancestry), but walks Parent instead of comparing materialized paths.
+    private static bool IsDescendantOrSelf(Node node, Node ancestor)
+    {
+        if (node.Depth < ancestor.Depth) return false;
+        Node? current = node;
+        while (current != null && current.Depth > ancestor.Depth)
         {
-            if (filter.Length > obj.Length) return false;
-            for (int i = 0; i < filter.Length; i++)
-            {
-                if (obj[i] != filter[i]) return false;
-            }
-
-            return true;
+            current = current.Parent;
         }
-
-        return items.Where(x => IsParent(CollectionsMarshal.AsSpan(_lookup[x].Path), CollectionsMarshal.AsSpan(_lookup[parent].Path)));
+        return ReferenceEquals(current, ancestor);
     }
 
     private IEnumerable<T> GetRegistryItems<T>(string name, ModelBase? parent = null) where T : ModelBase

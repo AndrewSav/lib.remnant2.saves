@@ -7,7 +7,13 @@ public class Node
 {
     private readonly ModelBase _object;
     public Node? Parent { get; set; }
-    public List<Segment> Path { get; set; }
+
+    // This node's own segment (the last element of its path) and its depth from the root.
+    // The full Path is reconstructed on demand by walking Parent, so building the navigator
+    // no longer copies the entire ancestor path into every node - the dominant cost on
+    // large saves.
+    public Segment Segment { get; }
+    public int Depth { get; }
 
     private List<Node>? _children;
     private readonly object _lock = new ();
@@ -35,13 +41,14 @@ public class Node
         return (T)_object;
     }
 
-    public string Name => Path[^1].Name;
+    public string Name => Segment.Name;
 
     public Node(ModelBase obj, Navigator navigator)
     {
         _navigator = navigator;
         _object = obj;
-        Path = [new() { Name = GetName(obj), Type = obj.GetType().Name }];
+        Segment = new() { Name = GetName(obj), Type = obj.GetType().Name };
+        Depth = 0;
     }
 
     public Node(ModelBase obj, int? index, Node parent, Navigator navigator)
@@ -49,7 +56,26 @@ public class Node
         _navigator = navigator;
         _object = obj;
         Parent = parent;
-        Path = [..parent.Path, new() { Name = GetName(obj), Type = obj.GetType().Name, Index = index }];
+        Segment = new() { Name = GetName(obj), Type = obj.GetType().Name, Index = index };
+        Depth = parent.Depth + 1;
+    }
+
+    // The path from the root down to this node, rebuilt by walking Parent. Allocated only
+    // when requested (DisplayPath and external consumers); never materialized during the
+    // navigator's tree walk.
+    public List<Segment> Path
+    {
+        get
+        {
+            Segment[] segments = new Segment[Depth + 1];
+            Node? current = this;
+            for (int i = Depth; i >= 0 && current != null; i--)
+            {
+                segments[i] = current.Segment;
+                current = current.Parent;
+            }
+            return [.. segments];
+        }
     }
 
     private static string GetName(ModelBase item)
@@ -73,12 +99,6 @@ public class Node
 
     private static string? GetUObjectName(UObject o)
     {
-        if (o.Name != o.ObjectPath)
-        {
-            o.ToString();
-        }
-
-        
         if (o.Name == "PersistenceContainer")
         {
             return $"pc:{o.KeySelector}";

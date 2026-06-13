@@ -8,12 +8,12 @@ internal class ItemRegistry
 
     public bool Add(Node item)
     {
-        string type = item.Path[^1].Type;
-        if (string.IsNullOrEmpty(item.Path[^1].Name))
+        string type = item.Segment.Type;
+        if (string.IsNullOrEmpty(item.Segment.Name))
         {
             return false;
         }
-        string name = item.Path[^1].Name;
+        string name = item.Segment.Name;
         if (!_registry.TryGetValue(type, out Dictionary<string, List<Node>>? byType))
         {
             byType = [];
@@ -51,7 +51,7 @@ internal class ItemRegistry
         if (!_registry.TryGetValue(type, out Dictionary<string, List<Node>>? byType)) 
             throw new InvalidOperationException($"Trying to get an object of unknown type {type}");
         return byType.SelectMany(x => x.Value)
-            .Where(x => !string.IsNullOrEmpty(x.Path[^1].Name) && Regex.IsMatch(x.Path[^1].Name, namePattern)).Select(x => (T)x.Object).ToList();
+            .Where(x => !string.IsNullOrEmpty(x.Segment.Name) && Regex.IsMatch(x.Segment.Name, namePattern)).Select(x => (T)x.Object).ToList();
     }
 
     public Dictionary<string,List<string>> GetNames()
