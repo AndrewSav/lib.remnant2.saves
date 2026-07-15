@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.0 (15 July 2026)
+- Upgraded target framework from .NET 8 to .NET 10 (consuming projects must now target net10.0 or later)
+
 ## v1.0.1 (15 July 2026)
 - Various performance improvements
 - New and improved examples
