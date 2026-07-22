@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Save file reads now share delete access, so the game deletes are not blocked
+
 ## v2.0.0 (15 July 2026)
 - Upgraded target framework from .NET 8 to .NET 10 (consuming projects must now target net10.0 or later)
 

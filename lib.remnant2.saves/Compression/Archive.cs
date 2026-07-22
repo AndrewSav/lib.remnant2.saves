@@ -15,7 +15,11 @@ public class Archive
 
     public static byte[] DecompressSave(string saveFile)
     {
-        return DecompressSave(File.ReadAllBytes(saveFile));
+        // FileShare.Delete: when updating a save, the  game writes a temp one, deletes the old one and renames the temp one
+        using FileStream stream = new(saveFile, FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete);
+        using MemoryStream buffer = new();
+        stream.CopyTo(buffer);
+        return DecompressSave(buffer.ToArray());
     }
 
     public static byte[] DecompressSave(byte[] data)
