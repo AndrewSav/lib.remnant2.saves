@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v2.0.1 (25 July 2026)
 - Save file reads now share delete access, so the game deletes are not blocked
 
 ## v2.0.0 (15 July 2026)
